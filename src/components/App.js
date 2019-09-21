@@ -13,10 +13,6 @@ const App = () => {
 
         <Form />
 
-        <div className="ui horizontal divider">
-          <button className="ui huge secondary button">Calculate</button>
-        </div>
-
         <h1
           className="ui header"
           style={{ fontSize: '50px', marginTop: '70px' }}

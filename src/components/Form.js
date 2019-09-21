@@ -185,7 +185,9 @@ const Form = () => {
           </div>
         </div>
       </div>
-      {JSON.stringify(data)}
+      <div className="ui horizontal divider">
+        <button className="ui huge secondary button">Calculate</button>
+      </div>
     </form>
   );
 };
