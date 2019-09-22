@@ -1,15 +1,12 @@
 import React from 'react';
 import Form from './Form';
+import Header from './Header';
 
 const App = () => {
   return (
     <div className="app">
       <div className="ui container">
-        <h1 className="ui left floated header" style={{ paddingTop: '20px' }}>
-          Calorik
-        </h1>
-
-        <div className="ui clearing divider" />
+        <Header />
 
         <Form />
 
