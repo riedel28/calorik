@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from './Form';
 import Header from './Header';
+import Result from './Result';
 
 const App = () => {
   return (
@@ -10,12 +11,7 @@ const App = () => {
 
         <Form />
 
-        <h1
-          className="ui header"
-          style={{ fontSize: '50px', marginTop: '70px' }}
-        >
-          Your calories: 0
-        </h1>
+        <Result calories={1700} />
       </div>
     </div>
   );
