@@ -43,7 +43,7 @@ const Form = props => {
                   name="gender"
                   value="male"
                   checked={formData.gender === 'male'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>Male</label>
@@ -54,7 +54,7 @@ const Form = props => {
                   name="gender"
                   value="female"
                   checked={formData.gender === 'female'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>Female</label>
@@ -92,7 +92,7 @@ const Form = props => {
                   type="radio"
                   name="activityLevel"
                   value="0"
-                  tabindex="0"
+                  tabIndex="0"
                   checked={formData.activityLevel === '0'}
                   onChange={handleChange}
                 />
@@ -106,7 +106,7 @@ const Form = props => {
                   name="activityLevel"
                   value="3"
                   checked={formData.activityLevel === '3'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>3 times a week</label>
@@ -119,7 +119,7 @@ const Form = props => {
                   name="activityLevel"
                   value="4"
                   checked={formData.activityLevel === '4'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>4 times a week</label>
@@ -132,7 +132,7 @@ const Form = props => {
                   name="activityLevel"
                   value="5"
                   checked={formData.activityLevel === '5'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>5 times a week</label>
@@ -153,7 +153,7 @@ const Form = props => {
                   name="goal"
                   value="cut"
                   checked={formData.goal === 'cut'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>Cut</label>
@@ -167,7 +167,7 @@ const Form = props => {
                   name="goal"
                   value="maintain"
                   checked={formData.goal === 'maintain'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>Maintain</label>
@@ -181,7 +181,7 @@ const Form = props => {
                   name="goal"
                   value="gain"
                   checked={formData.goal === 'gain'}
-                  tabindex="0"
+                  tabIndex="0"
                   onChange={handleChange}
                 />
                 <label>Gain</label>
