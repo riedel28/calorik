@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
-const Form = () => {
-  const [data, setData] = useState({
+const Form = props => {
+  const [formData, setFormData] = useState({
     age: 30,
     gender: 'male',
     weight: 85,
@@ -11,7 +11,7 @@ const Form = () => {
   });
 
   const handleChange = e =>
-    setData({ ...data, [e.target.name]: e.target.value });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
 
   return (
     <form className="ui large form">
@@ -24,7 +24,7 @@ const Form = () => {
             <input
               type="text"
               name="age"
-              value={data.age}
+              value={formData.age}
               onChange={handleChange}
             />
           </div>
@@ -37,7 +37,7 @@ const Form = () => {
                   type="radio"
                   name="gender"
                   value="male"
-                  checked={data.gender === 'male'}
+                  checked={formData.gender === 'male'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -48,7 +48,7 @@ const Form = () => {
                   type="radio"
                   name="gender"
                   value="female"
-                  checked={data.gender === 'female'}
+                  checked={formData.gender === 'female'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -61,7 +61,7 @@ const Form = () => {
             <input
               type="text"
               name="weight"
-              value={data.weight}
+              value={formData.weight}
               onChange={handleChange}
             />
           </div>
@@ -70,7 +70,7 @@ const Form = () => {
             <input
               type="text"
               name="height"
-              value={data.height}
+              value={formData.height}
               onChange={handleChange}
             />
           </div>
@@ -88,7 +88,7 @@ const Form = () => {
                   name="activityLevel"
                   value="0"
                   tabindex="0"
-                  checked={data.activityLevel === '0'}
+                  checked={formData.activityLevel === '0'}
                   onChange={handleChange}
                 />
                 <label>Little / No exercise</label>
@@ -100,7 +100,7 @@ const Form = () => {
                   type="radio"
                   name="activityLevel"
                   value="3"
-                  checked={data.activityLevel === '3'}
+                  checked={formData.activityLevel === '3'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -113,7 +113,7 @@ const Form = () => {
                   type="radio"
                   name="activityLevel"
                   value="4"
-                  checked={data.activityLevel === '4'}
+                  checked={formData.activityLevel === '4'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -126,7 +126,7 @@ const Form = () => {
                   type="radio"
                   name="activityLevel"
                   value="5"
-                  checked={data.activityLevel === '5'}
+                  checked={formData.activityLevel === '5'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -147,7 +147,7 @@ const Form = () => {
                   type="radio"
                   name="goal"
                   value="cut"
-                  checked={data.goal === 'cut'}
+                  checked={formData.goal === 'cut'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -161,7 +161,7 @@ const Form = () => {
                   type="radio"
                   name="goal"
                   value="maintain"
-                  checked={data.goal === 'maintain'}
+                  checked={formData.goal === 'maintain'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -175,7 +175,7 @@ const Form = () => {
                   type="radio"
                   name="goal"
                   value="gain"
-                  checked={data.goal === 'gain'}
+                  checked={formData.goal === 'gain'}
                   tabindex="0"
                   onChange={handleChange}
                 />
@@ -186,7 +186,12 @@ const Form = () => {
         </div>
       </div>
       <div className="ui horizontal divider">
-        <button className="ui huge secondary button">Calculate</button>
+        <button
+          className="ui huge secondary button"
+          onClick={props.onCalculateCals(formData)}
+        >
+          Calculate
+        </button>
       </div>
     </form>
   );
