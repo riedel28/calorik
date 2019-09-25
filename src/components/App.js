@@ -7,12 +7,14 @@ import { calculateCalories } from './../helpers';
 const App = () => {
   const [userData, setUserData] = useState({});
 
+  console.log(userData);
+
   return (
     <div className="app">
       <div className="ui container">
         <Header />
 
-        <Form onCalculateCals={setUserData} />
+        <Form onSubmitData={setUserData} />
 
         <Result calories={calculateCalories(userData)} />
       </div>

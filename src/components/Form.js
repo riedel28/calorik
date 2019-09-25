@@ -4,7 +4,7 @@ const Form = props => {
   const [formData, setFormData] = useState({
     age: 30,
     gender: 'male',
-    weight: 85,
+    weight: 80,
     height: 180,
     activityLevel: '0',
     goal: 'cut'
@@ -13,8 +13,13 @@ const Form = props => {
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
+  const handleSubmit = e => {
+    e.preventDefault();
+    props.onSubmitData(formData);
+  };
+
   return (
-    <form className="ui large form">
+    <form className="ui large form" onSubmit={handleSubmit}>
       <div className="ui three column doubling stackable grid">
         <div className="column">
           <h3 className="ui header">Personal data</h3>
@@ -186,10 +191,7 @@ const Form = props => {
         </div>
       </div>
       <div className="ui horizontal divider">
-        <button
-          className="ui huge secondary button"
-          onClick={props.onCalculateCals(formData)}
-        >
+        <button className="ui huge secondary button" onClick={handleSubmit}>
           Calculate
         </button>
       </div>
