@@ -5,9 +5,19 @@ import Result from './Result';
 import { calculateCalories } from './../helpers';
 
 const App = () => {
+  /**
+   * TODO:
+   *
+   * [ ] Add further formulas for calculating calories
+   * [ ] Storing data to localStorage
+   * [ ] Internationalization
+   * [ ] Add tests
+   * [ ] Change design
+   * [x] Display calories from 0 to caloriesCount
+   */
   const [userData, setUserData] = useState({});
 
-  console.log(userData);
+  console.table(userData);
 
   return (
     <div className="app">
