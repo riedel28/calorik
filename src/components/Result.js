@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 export default ({ calories }) => {
   const [counter, setCounter] = useState(1000);
 
-  console.log(calories);
-
   useEffect(() => {
     if (counter < calories) {
       setCounter(counter => counter + 1);

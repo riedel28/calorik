@@ -8,16 +8,16 @@ const App = () => {
   /**
    * TODO:
    *
-   * [ ] Add further formulas for calculating calories
-   * [ ] Storing data to localStorage
+   
+   * [ ] Store data to localStorage
+   * [ ] Add propTypes
    * [ ] Internationalization
    * [ ] Add tests
    * [ ] Change design
    * [x] Display calories from 0 to caloriesCount
+   * [x] Add further formulas for calculating calories
    */
   const [userData, setUserData] = useState({});
-
-  console.table(userData);
 
   return (
     <div className="app">

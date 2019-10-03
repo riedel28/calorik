@@ -6,8 +6,9 @@ const Form = props => {
     gender: 'male',
     weight: 80,
     height: 180,
-    activityLevel: '0',
-    goal: 'cut'
+    activityLevel: 'no-exercise',
+    goal: 'cut',
+    formula: 'harris-benedict'
   });
 
   const handleChange = e =>
@@ -20,7 +21,7 @@ const Form = props => {
 
   return (
     <form className="ui large form" onSubmit={handleSubmit}>
-      <div className="ui three column doubling stackable grid">
+      <div className="ui four column doubling stackable grid">
         <div className="column">
           <h3 className="ui header">Personal data</h3>
 
@@ -91,9 +92,9 @@ const Form = props => {
                 <input
                   type="radio"
                   name="activityLevel"
-                  value="0"
+                  value="no-exercise"
                   tabIndex="0"
-                  checked={formData.activityLevel === '0'}
+                  checked={formData.activityLevel === 'no-exercise'}
                   onChange={handleChange}
                 />
                 <label>Little / No exercise</label>
@@ -104,12 +105,12 @@ const Form = props => {
                 <input
                   type="radio"
                   name="activityLevel"
-                  value="3"
-                  checked={formData.activityLevel === '3'}
+                  value="light"
+                  checked={formData.activityLevel === 'light'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>3 times a week</label>
+                <label>Light exercise (1–3 days per week)</label>
               </div>
             </div>
             <div className="field">
@@ -117,12 +118,12 @@ const Form = props => {
                 <input
                   type="radio"
                   name="activityLevel"
-                  value="4"
-                  checked={formData.activityLevel === '4'}
+                  value="moderate"
+                  checked={formData.activityLevel === 'moderate'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>4 times a week</label>
+                <label>Moderate exercise (3–5 days per week)</label>
               </div>
             </div>
             <div className="field">
@@ -130,12 +131,27 @@ const Form = props => {
                 <input
                   type="radio"
                   name="activityLevel"
-                  value="5"
-                  checked={formData.activityLevel === '5'}
+                  value="heavy"
+                  checked={formData.activityLevel === 'heavy'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>5 times a week</label>
+                <label>Heavy exercise (6–7 days per week)</label>
+              </div>
+            </div>
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="activityLevel"
+                  value="very-heavy"
+                  checked={formData.activityLevel === 'very-heavy'}
+                  tabIndex="0"
+                  onChange={handleChange}
+                />
+                <label>
+                  Very heavy exercise (twice per day, extra heavy workouts)
+                </label>
               </div>
             </div>
           </div>
@@ -189,11 +205,45 @@ const Form = props => {
             </div>
           </div>
         </div>
-      </div>
-      <div className="ui horizontal divider">
-        <button className="ui huge secondary button" onClick={handleSubmit}>
-          Calculate
-        </button>
+        <div className="column">
+          <h3 className="ui header">Formula</h3>
+          <div className="grouped fields">
+            <label>Select the formula:</label>
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="formula"
+                  value="harris-benedict"
+                  checked={formData.formula === 'harris-benedict'}
+                  tabIndex="0"
+                  onChange={handleChange}
+                />
+                <label>The Original Harris-Benedict Equation</label>
+              </div>
+            </div>
+
+            <div className="field">
+              <div className="ui radio checkbox">
+                <input
+                  type="radio"
+                  name="formula"
+                  value="mifflin-st-jeor"
+                  checked={formData.formula === 'mifflin-st-jeor'}
+                  tabIndex="0"
+                  onChange={handleChange}
+                />
+                <label>The Mifflin St Jeor Equation</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="ui horizontal divider">
+          <button className="ui huge secondary button" onClick={handleSubmit}>
+            Calculate
+          </button>
+        </div>
       </div>
     </form>
   );
