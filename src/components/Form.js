@@ -172,7 +172,7 @@ const Form = props => {
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Cut</label>
+                <label>Cut (-20%)</label>
               </div>
             </div>
 
@@ -200,7 +200,7 @@ const Form = props => {
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Gain</label>
+                <label>Gain (+15%)</label>
               </div>
             </div>
           </div>

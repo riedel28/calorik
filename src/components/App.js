@@ -26,7 +26,7 @@ const App = () => {
 
         <Form onSubmitData={setUserData} />
 
-        <Result calories={calculateCalories(userData)} />
+        <Result data={userData} />
       </div>
     </div>
   );

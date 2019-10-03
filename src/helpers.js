@@ -1,5 +1,5 @@
 export const calculateCalories = data => {
-  const { activityLevel, formula } = data;
+  const { activityLevel, formula, goal } = data;
 
   const activityFactors = {
     'no-exercise': 1.2,
@@ -9,9 +9,22 @@ export const calculateCalories = data => {
     'very-heavy': 1.9
   };
 
-  return formula === 'harris-benedict'
-    ? Math.round(harrisBenedictBMR(data) * activityFactors[activityLevel])
-    : Math.round(mifflinStJeorBMR(data) * activityFactors[activityLevel]);
+  const goalFactors = {
+    cut: 0.8,
+    maintain: 1,
+    gain: 1.15
+  };
+
+  const calories =
+    formula === 'harris-benedict'
+      ? Math.round(harrisBenedictBMR(data) * activityFactors[activityLevel])
+      : Math.round(mifflinStJeorBMR(data) * activityFactors[activityLevel]);
+
+  return {
+    toCut: Math.round(calories * goalFactors.cut),
+    toMaintain: Math.round(calories * goalFactors.maintain),
+    toGain: Math.round(calories * goalFactors.gain)
+  };
 };
 
 // The Original Harris-Benedict Equation
