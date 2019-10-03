@@ -28,7 +28,7 @@ const Form = props => {
           <div className="six wide field">
             <label>Age:</label>
             <input
-              type="text"
+              type="number"
               name="age"
               value={formData.age}
               onChange={handleChange}
@@ -65,7 +65,7 @@ const Form = props => {
           <div className="six wide field">
             <label>Weight:</label>
             <input
-              type="text"
+              type="number"
               name="weight"
               value={formData.weight}
               onChange={handleChange}
@@ -74,7 +74,7 @@ const Form = props => {
           <div className="six wide field">
             <label>Height:</label>
             <input
-              type="text"
+              type="number"
               name="height"
               value={formData.height}
               onChange={handleChange}
