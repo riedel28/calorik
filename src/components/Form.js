@@ -22,10 +22,10 @@ const Form = props => {
   return (
     <form className="ui large form" onSubmit={handleSubmit}>
       <div className="ui four column doubling stackable grid">
-        <div className="column">
+        <div className="three wide column">
           <h3 className="ui header">Personal data</h3>
 
-          <div className="six wide field">
+          <div className="eight wide field">
             <label>Age:</label>
             <input
               type="number"
@@ -35,7 +35,7 @@ const Form = props => {
             />
           </div>
 
-          <div className="inline fields">
+          <div className="grouped fields">
             <label htmlFor="gender">Gender:</label>
             <div className="field">
               <div className="ui radio checkbox">
@@ -49,6 +49,8 @@ const Form = props => {
                 />
                 <label>Male</label>
               </div>
+            </div>
+            <div className="field">
               <div className="ui radio checkbox">
                 <input
                   type="radio"
@@ -62,7 +64,7 @@ const Form = props => {
               </div>
             </div>
           </div>
-          <div className="six wide field">
+          <div className="eight wide field">
             <label>Weight:</label>
             <input
               type="number"
@@ -71,7 +73,7 @@ const Form = props => {
               onChange={handleChange}
             />
           </div>
-          <div className="six wide field">
+          <div className="eight wide field">
             <label>Height:</label>
             <input
               type="number"
@@ -82,7 +84,7 @@ const Form = props => {
           </div>
         </div>
 
-        <div className="column">
+        <div className="six wide column">
           <h3 className="ui header">Activity level</h3>
 
           <div className="grouped fields">
@@ -113,6 +115,7 @@ const Form = props => {
                 <label>Light exercise (1–3 days per week)</label>
               </div>
             </div>
+
             <div className="field">
               <div className="ui radio checkbox">
                 <input
@@ -157,7 +160,7 @@ const Form = props => {
           </div>
         </div>
 
-        <div className="column">
+        <div className="three wide column">
           <h3 className="ui header">Your goal</h3>
 
           <div className="grouped fields">
@@ -205,7 +208,7 @@ const Form = props => {
             </div>
           </div>
         </div>
-        <div className="column">
+        <div className="four wide column">
           <h3 className="ui header">Formula</h3>
           <div className="grouped fields">
             <label>Select the formula:</label>
@@ -238,12 +241,11 @@ const Form = props => {
             </div>
           </div>
         </div>
-
-        <div className="ui horizontal divider">
-          <button className="ui huge secondary button" onClick={handleSubmit}>
-            Calculate
-          </button>
-        </div>
+      </div>
+      <div className="ui horizontal divider">
+        <button className="ui huge secondary button" onClick={handleSubmit}>
+          Calculate
+        </button>
       </div>
     </form>
   );

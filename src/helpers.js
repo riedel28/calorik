@@ -1,5 +1,5 @@
 export const calculateCalories = data => {
-  const { activityLevel, formula, goal } = data;
+  const { activityLevel, formula } = data;
 
   const activityFactors = {
     'no-exercise': 1.2,
