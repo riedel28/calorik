@@ -8,12 +8,12 @@ const App = () => {
    * TODO:
    *
    * [ ] Store data to localStorage
-   * [ ] Add propTypes
    * [ ] Add tests
    * [ ] Internationalization
    * [ ] Change design
    * [x] Display calories from 0 to caloriesCount
    * [x] Add further formulas for calculating calories
+   * [x] Add propTypes
    */
   const [userData, setUserData] = useState({});
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default props => {
+export default () => {
   return (
     <>
       <h2 className="ui left floated header" style={{ paddingTop: '20px' }}>

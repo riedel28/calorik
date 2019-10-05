@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 const Form = props => {
   const [formData, setFormData] = useState({
@@ -249,6 +250,10 @@ const Form = props => {
       </div>
     </form>
   );
+};
+
+Form.propTypes = {
+  onSubmitData: PropTypes.func.isRequired
 };
 
 export default Form;
