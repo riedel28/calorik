@@ -27,10 +27,11 @@ const Form = props => {
           <h3 className="ui header">Personal data</h3>
 
           <div className="eight wide field">
-            <label>Age:</label>
+            <label htmlFor="age">Age:</label>
             <input
               type="number"
               name="age"
+              id="age"
               value={formData.age}
               onChange={handleChange}
             />
@@ -44,11 +45,12 @@ const Form = props => {
                   type="radio"
                   name="gender"
                   value="male"
+                  id="male"
                   checked={formData.gender === 'male'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Male</label>
+                <label htmlFor="male">Male</label>
               </div>
             </div>
             <div className="field">
@@ -57,28 +59,31 @@ const Form = props => {
                   type="radio"
                   name="gender"
                   value="female"
+                  id="female"
                   checked={formData.gender === 'female'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Female</label>
+                <label htmlFor="female">Female</label>
               </div>
             </div>
           </div>
           <div className="eight wide field">
-            <label>Weight:</label>
+            <label htmlFor="weight">Weight:</label>
             <input
               type="number"
               name="weight"
+              id="weight"
               value={formData.weight}
               onChange={handleChange}
             />
           </div>
           <div className="eight wide field">
-            <label>Height:</label>
+            <label htmlFor="height">Height:</label>
             <input
               type="number"
               name="height"
+              id="height"
               value={formData.height}
               onChange={handleChange}
             />
@@ -97,10 +102,11 @@ const Form = props => {
                   name="activityLevel"
                   value="no-exercise"
                   tabIndex="0"
+                  id="no-exercise"
                   checked={formData.activityLevel === 'no-exercise'}
                   onChange={handleChange}
                 />
-                <label>Little / No exercise</label>
+                <label htmlFor="no-exercise">Little / No exercise</label>
               </div>
             </div>
             <div className="field">
@@ -109,11 +115,14 @@ const Form = props => {
                   type="radio"
                   name="activityLevel"
                   value="light"
+                  id="light"
                   checked={formData.activityLevel === 'light'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Light exercise (1–3 days per week)</label>
+                <label htmlFor="light">
+                  Light exercise (1–3 days per week)
+                </label>
               </div>
             </div>
 
@@ -123,11 +132,14 @@ const Form = props => {
                   type="radio"
                   name="activityLevel"
                   value="moderate"
+                  id="moderate"
                   checked={formData.activityLevel === 'moderate'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Moderate exercise (3–5 days per week)</label>
+                <label htmlFor="moderate">
+                  Moderate exercise (3–5 days per week)
+                </label>
               </div>
             </div>
             <div className="field">
@@ -136,11 +148,14 @@ const Form = props => {
                   type="radio"
                   name="activityLevel"
                   value="heavy"
+                  id="heavy"
                   checked={formData.activityLevel === 'heavy'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Heavy exercise (6–7 days per week)</label>
+                <label htmlFor="heavy">
+                  Heavy exercise (6–7 days per week)
+                </label>
               </div>
             </div>
             <div className="field">
@@ -149,11 +164,12 @@ const Form = props => {
                   type="radio"
                   name="activityLevel"
                   value="very-heavy"
+                  id="very-heavy"
                   checked={formData.activityLevel === 'very-heavy'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>
+                <label htmlFor="very-heavy">
                   Very heavy exercise (twice per day, extra heavy workouts)
                 </label>
               </div>
@@ -172,11 +188,12 @@ const Form = props => {
                   type="radio"
                   name="goal"
                   value="cut"
+                  id="cut"
                   checked={formData.goal === 'cut'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Cut (-20%)</label>
+                <label htmlFor="cut">Cut (-20%)</label>
               </div>
             </div>
 
@@ -186,11 +203,12 @@ const Form = props => {
                   type="radio"
                   name="goal"
                   value="maintain"
+                  id="maintain"
                   checked={formData.goal === 'maintain'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Maintain</label>
+                <label htmlFor="maintain">Maintain</label>
               </div>
             </div>
 
@@ -200,11 +218,12 @@ const Form = props => {
                   type="radio"
                   name="goal"
                   value="gain"
+                  id="gain"
                   checked={formData.goal === 'gain'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>Gain (+15%)</label>
+                <label htmlFor="gain">Gain (+15%)</label>
               </div>
             </div>
           </div>
@@ -219,11 +238,14 @@ const Form = props => {
                   type="radio"
                   name="formula"
                   value="harris-benedict"
+                  id="harris-benedict"
                   checked={formData.formula === 'harris-benedict'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>The Original Harris-Benedict Equation</label>
+                <label htmlFor="harris-benedict">
+                  The Original Harris-Benedict Equation
+                </label>
               </div>
             </div>
 
@@ -233,11 +255,14 @@ const Form = props => {
                   type="radio"
                   name="formula"
                   value="mifflin-st-jeor"
+                  id="mifflin-st-jeor"
                   checked={formData.formula === 'mifflin-st-jeor'}
                   tabIndex="0"
                   onChange={handleChange}
                 />
-                <label>The Mifflin St Jeor Equation</label>
+                <label htmlFor="mifflin-st-jeor">
+                  The Mifflin St Jeor Equation
+                </label>
               </div>
             </div>
           </div>
