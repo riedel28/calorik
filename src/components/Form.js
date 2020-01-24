@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
+import useLocalStorage from "./../hooks/useLocalStorage";
 
-const Form = props => {
-  const [formData, setFormData] = useState({
-    age: 30,
-    gender: 'male',
-    weight: 80,
-    height: 180,
-    activityLevel: 'no-exercise',
-    goal: 'cut',
-    formula: 'harris-benedict'
-  });
+const Form = ({ onSubmitData }) => {
+  const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
+  const [formData, setFormData] = useState(persistentData);
+
+  useEffect(() => {
+    setPersistentData(formData);
+  }, [formData, setPersistentData]);
 
   const handleChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = e => {
     e.preventDefault();
-    props.onSubmitData(formData);
+    onSubmitData(formData);
   };
 
   return (
@@ -46,7 +44,7 @@ const Form = props => {
                   name="gender"
                   value="male"
                   id="male"
-                  checked={formData.gender === 'male'}
+                  checked={formData.gender === "male"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -60,7 +58,7 @@ const Form = props => {
                   name="gender"
                   value="female"
                   id="female"
-                  checked={formData.gender === 'female'}
+                  checked={formData.gender === "female"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -103,7 +101,7 @@ const Form = props => {
                   value="no-exercise"
                   tabIndex="0"
                   id="no-exercise"
-                  checked={formData.activityLevel === 'no-exercise'}
+                  checked={formData.activityLevel === "no-exercise"}
                   onChange={handleChange}
                 />
                 <label htmlFor="no-exercise">Little / No exercise</label>
@@ -116,7 +114,7 @@ const Form = props => {
                   name="activityLevel"
                   value="light"
                   id="light"
-                  checked={formData.activityLevel === 'light'}
+                  checked={formData.activityLevel === "light"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -133,7 +131,7 @@ const Form = props => {
                   name="activityLevel"
                   value="moderate"
                   id="moderate"
-                  checked={formData.activityLevel === 'moderate'}
+                  checked={formData.activityLevel === "moderate"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -149,7 +147,7 @@ const Form = props => {
                   name="activityLevel"
                   value="heavy"
                   id="heavy"
-                  checked={formData.activityLevel === 'heavy'}
+                  checked={formData.activityLevel === "heavy"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -165,7 +163,7 @@ const Form = props => {
                   name="activityLevel"
                   value="very-heavy"
                   id="very-heavy"
-                  checked={formData.activityLevel === 'very-heavy'}
+                  checked={formData.activityLevel === "very-heavy"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -189,7 +187,7 @@ const Form = props => {
                   name="goal"
                   value="cut"
                   id="cut"
-                  checked={formData.goal === 'cut'}
+                  checked={formData.goal === "cut"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -204,7 +202,7 @@ const Form = props => {
                   name="goal"
                   value="maintain"
                   id="maintain"
-                  checked={formData.goal === 'maintain'}
+                  checked={formData.goal === "maintain"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -219,7 +217,7 @@ const Form = props => {
                   name="goal"
                   value="gain"
                   id="gain"
-                  checked={formData.goal === 'gain'}
+                  checked={formData.goal === "gain"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -239,7 +237,7 @@ const Form = props => {
                   name="formula"
                   value="harris-benedict"
                   id="harris-benedict"
-                  checked={formData.formula === 'harris-benedict'}
+                  checked={formData.formula === "harris-benedict"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
@@ -256,7 +254,7 @@ const Form = props => {
                   name="formula"
                   value="mifflin-st-jeor"
                   id="mifflin-st-jeor"
-                  checked={formData.formula === 'mifflin-st-jeor'}
+                  checked={formData.formula === "mifflin-st-jeor"}
                   tabIndex="0"
                   onChange={handleChange}
                 />
