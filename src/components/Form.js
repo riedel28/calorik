@@ -1,4 +1,13 @@
 import React, { useState, useEffect } from "react";
+import {
+  Form as FormX,
+  Grid,
+  Header,
+  Input,
+  Radio,
+  Divider,
+  Button
+} from "semantic-ui-react";
 import PropTypes from "prop-types";
 import useLocalStorage from "./../hooks/useLocalStorage";
 
@@ -19,259 +28,165 @@ const Form = ({ onSubmitData }) => {
   };
 
   return (
-    <form className="ui large form" onSubmit={handleSubmit}>
-      <div className="ui four column doubling stackable grid">
-        <div className="three wide column">
-          <h3 className="ui header">Personal data</h3>
+    <FormX onSubmit={handleSubmit}>
+      <Grid columns={4} stackable>
+        <Grid.Row>
+          <Grid.Column width={3}>
+            <Header as="h3">Personal data</Header>
 
-          <div className="eight wide field">
-            <label htmlFor="age">Age:</label>
-            <input
+            <FormX.Field
+              width={8}
+              control={Input}
+              label="Age:"
               type="number"
-              name="age"
-              id="age"
               value={formData.age}
               onChange={handleChange}
             />
-          </div>
 
-          <div className="grouped fields">
-            <label htmlFor="gender">Gender:</label>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="male"
-                  id="male"
-                  checked={formData.gender === "male"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="male">Male</label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="gender"
-                  value="female"
-                  id="female"
-                  checked={formData.gender === "female"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="female">Female</label>
-              </div>
-            </div>
-          </div>
-          <div className="eight wide field">
-            <label htmlFor="weight">Weight:</label>
-            <input
-              type="number"
-              name="weight"
-              id="weight"
+            <FormX.Group grouped>
+              <label>Gender: </label>
+              <FormX.Field
+                width={6}
+                control={Radio}
+                label="Male"
+                value={formData.gender}
+                checked={formData.gender === "male"}
+                onChange={handleChange}
+              />
+
+              <FormX.Field
+                width={6}
+                control={Radio}
+                label="Female"
+                value={formData.gender}
+                checked={formData.gender === "female"}
+                onChange={handleChange}
+              />
+            </FormX.Group>
+
+            <FormX.Field
+              width={8}
+              control={Input}
+              label="Weight:"
               value={formData.weight}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="eight wide field">
-            <label htmlFor="height">Height:</label>
-            <input
               type="number"
-              name="height"
-              id="height"
-              value={formData.height}
               onChange={handleChange}
             />
-          </div>
-        </div>
 
-        <div className="six wide column">
-          <h3 className="ui header">Activity level</h3>
+            <FormX.Field
+              width={8}
+              control={Input}
+              label="Height:"
+              value={formData.height}
+              type="number"
+              onChange={handleChange}
+            />
+          </Grid.Column>
 
-          <div className="grouped fields">
-            <label>Select your activity level:</label>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="activityLevel"
-                  value="no-exercise"
-                  tabIndex="0"
-                  id="no-exercise"
-                  checked={formData.activityLevel === "no-exercise"}
-                  onChange={handleChange}
-                />
-                <label htmlFor="no-exercise">Little / No exercise</label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="activityLevel"
-                  value="light"
-                  id="light"
-                  checked={formData.activityLevel === "light"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="light">
-                  Light exercise (1–3 days per week)
-                </label>
-              </div>
-            </div>
+          <Grid.Column width={5}>
+            <Header as="h3">Activity level</Header>
 
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="activityLevel"
-                  value="moderate"
-                  id="moderate"
-                  checked={formData.activityLevel === "moderate"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="moderate">
-                  Moderate exercise (3–5 days per week)
-                </label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="activityLevel"
-                  value="heavy"
-                  id="heavy"
-                  checked={formData.activityLevel === "heavy"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="heavy">
-                  Heavy exercise (6–7 days per week)
-                </label>
-              </div>
-            </div>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="activityLevel"
-                  value="very-heavy"
-                  id="very-heavy"
-                  checked={formData.activityLevel === "very-heavy"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="very-heavy">
-                  Very heavy exercise (twice per day, extra heavy workouts)
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
+            <FormX.Field
+              control={Radio}
+              name="activityLevel"
+              label="Little / No exercise"
+              value="no-exercise"
+              checked={formData.activityLevel === "no-exercise"}
+              onChange={handleChange}
+            />
 
-        <div className="three wide column">
-          <h3 className="ui header">Your goal</h3>
+            <FormX.Field
+              control={Radio}
+              name="activityLevel"
+              label="Light exercise (1–3 days per week)"
+              value="light"
+              checked={formData.activityLevel === "light"}
+              onChange={handleChange}
+            />
+            <FormX.Field
+              control={Radio}
+              name="activityLevel"
+              label="Moderate exercise (3–5 days per week)"
+              value="moderate"
+              checked={formData.activityLevel === "moderate"}
+              onChange={handleChange}
+            />
 
-          <div className="grouped fields">
-            <label>Select your goal:</label>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="goal"
-                  value="cut"
-                  id="cut"
-                  checked={formData.goal === "cut"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="cut">Cut (-20%)</label>
-              </div>
-            </div>
+            <FormX.Field
+              control={Radio}
+              name="activityLevel"
+              label="Heavy exercise (6–7 days per week)"
+              value="heavy"
+              checked={formData.activityLevel === "heavy"}
+              onChange={handleChange}
+            />
 
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="goal"
-                  value="maintain"
-                  id="maintain"
-                  checked={formData.goal === "maintain"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="maintain">Maintain</label>
-              </div>
-            </div>
+            <FormX.Field
+              control={Radio}
+              name="activityLevel"
+              label="Very heavy exercise (twice per day, extra heavy workouts)"
+              value="very-heavy"
+              checked={formData.activityLevel === "very-heavy"}
+              onChange={handleChange}
+            />
+          </Grid.Column>
 
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="goal"
-                  value="gain"
-                  id="gain"
-                  checked={formData.goal === "gain"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="gain">Gain (+15%)</label>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="four wide column">
-          <h3 className="ui header">Formula</h3>
-          <div className="grouped fields">
-            <label>Select the formula:</label>
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="formula"
-                  value="harris-benedict"
-                  id="harris-benedict"
-                  checked={formData.formula === "harris-benedict"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="harris-benedict">
-                  The Original Harris-Benedict Equation
-                </label>
-              </div>
-            </div>
+          <Grid.Column width={3}>
+            <Header as="h3">Your goal</Header>
 
-            <div className="field">
-              <div className="ui radio checkbox">
-                <input
-                  type="radio"
-                  name="formula"
-                  value="mifflin-st-jeor"
-                  id="mifflin-st-jeor"
-                  checked={formData.formula === "mifflin-st-jeor"}
-                  tabIndex="0"
-                  onChange={handleChange}
-                />
-                <label htmlFor="mifflin-st-jeor">
-                  The Mifflin St Jeor Equation
-                </label>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className="ui horizontal divider">
-        <button className="ui huge secondary button" onClick={handleSubmit}>
+            <FormX.Field
+              control={Radio}
+              name="goal"
+              label="Cut (-20%)"
+              value="cut"
+              checked={formData.goal === "cut"}
+              onChange={handleChange}
+            />
+            <FormX.Field
+              control={Radio}
+              name="goal"
+              label="Maintain"
+              value="maintain"
+              checked={formData.goal === "maintain"}
+              onChange={handleChange}
+            />
+            <FormX.Field
+              control={Radio}
+              name="goal"
+              label="Gain (+15%)"
+              value="gain"
+              checked={formData.goal === "gain"}
+              onChange={handleChange}
+            />
+          </Grid.Column>
+          <Grid.Column width={4}>
+            <Header as="h3">Formula</Header>
+
+            <FormX.Field
+              control={Radio}
+              name="formula"
+              label="The Original Harris-Benedict Equation"
+              value="harris-benedict"
+              checked={formData.formula === "harris-benedict"}
+              onChange={handleChange}
+            />
+            <FormX.Field
+              control={Radio}
+              name="formula"
+              label="The Mifflin St Jeor Equation"
+              value="mifflin-st-jeor"
+              checked={formData.formula === "mifflin-st-jeor"}
+              onChange={handleChange}
+            />
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+      <Divider horizontal>
+        <Button onClick={handleSubmit} size="huge" secondary>
           Calculate
-        </button>
-      </div>
-    </form>
+        </Button>
+      </Divider>
+    </FormX>
   );
 };
 

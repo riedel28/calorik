@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Container } from "semantic-ui-react";
 import Form from "./Form";
 import Header from "./Header";
 import Result from "./Result";
@@ -19,15 +20,13 @@ const App = () => {
   const [userData, setUserData] = useState({});
 
   return (
-    <div className="app">
-      <div className="ui container">
-        <Header />
+    <Container>
+      <Header />
 
-        <Form onSubmitData={setUserData} />
+      <Form onSubmitData={setUserData} />
 
-        <Result data={userData} />
-      </div>
-    </div>
+      <Result data={userData} />
+    </Container>
   );
 };
 
