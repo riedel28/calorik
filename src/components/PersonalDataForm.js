@@ -19,8 +19,12 @@ const PersonalDataForm = ({ onSubmitData }) => {
     setPersistentData(formData);
   }, [formData, setPersistentData]);
 
-  const handleChange = e =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = (e, { name, value }) => {
+    setFormData({
+      ...formData,
+      [name]: isNaN(value) ? value : Number(value)
+    });
+  };
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -37,6 +41,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             <Form.Field
               width={8}
               control={Input}
+              name="age"
               label="Age:"
               type="number"
               value={formData.age}
@@ -45,28 +50,31 @@ const PersonalDataForm = ({ onSubmitData }) => {
 
             <Form.Group grouped>
               <label>Gender: </label>
-              <Form.Field
-                width={6}
-                control={Radio}
-                label="Male"
-                value={formData.gender}
-                checked={formData.gender === "male"}
-                onChange={handleChange}
-              />
+              <Form.Field width={8}>
+                <Radio
+                  name="gender"
+                  label="Male"
+                  value="male"
+                  checked={formData.gender === "male"}
+                  onChange={handleChange}
+                />
+              </Form.Field>
 
-              <Form.Field
-                width={6}
-                control={Radio}
-                label="Female"
-                value={formData.gender}
-                checked={formData.gender === "female"}
-                onChange={handleChange}
-              />
+              <Form.Field width={8}>
+                <Radio
+                  name="gender"
+                  label="Female"
+                  value="female"
+                  checked={formData.gender === "female"}
+                  onChange={handleChange}
+                />
+              </Form.Field>
             </Form.Group>
 
             <Form.Field
               width={8}
               control={Input}
+              name="weight"
               label="Weight:"
               value={formData.weight}
               type="number"
@@ -76,6 +84,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             <Form.Field
               width={8}
               control={Input}
+              name="height"
               label="Height:"
               value={formData.height}
               type="number"
@@ -194,7 +203,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
   );
 };
 
-Form.propTypes = {
+PersonalDataForm.propTypes = {
   onSubmitData: PropTypes.func.isRequired
 };
 
