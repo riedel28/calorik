@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import {
-  Form as FormX,
+  Form,
   Grid,
   Header,
   Input,
@@ -8,10 +9,9 @@ import {
   Divider,
   Button
 } from "semantic-ui-react";
-import PropTypes from "prop-types";
-import useLocalStorage from "./../hooks/useLocalStorage";
+import useLocalStorage from "../hooks/useLocalStorage";
 
-const Form = ({ onSubmitData }) => {
+const PersonalDataForm = ({ onSubmitData }) => {
   const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
   const [formData, setFormData] = useState(persistentData);
 
@@ -28,13 +28,13 @@ const Form = ({ onSubmitData }) => {
   };
 
   return (
-    <FormX onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <Grid columns={4} stackable>
         <Grid.Row>
           <Grid.Column width={3}>
             <Header as="h3">Personal data</Header>
 
-            <FormX.Field
+            <Form.Field
               width={8}
               control={Input}
               label="Age:"
@@ -43,9 +43,9 @@ const Form = ({ onSubmitData }) => {
               onChange={handleChange}
             />
 
-            <FormX.Group grouped>
+            <Form.Group grouped>
               <label>Gender: </label>
-              <FormX.Field
+              <Form.Field
                 width={6}
                 control={Radio}
                 label="Male"
@@ -54,7 +54,7 @@ const Form = ({ onSubmitData }) => {
                 onChange={handleChange}
               />
 
-              <FormX.Field
+              <Form.Field
                 width={6}
                 control={Radio}
                 label="Female"
@@ -62,9 +62,9 @@ const Form = ({ onSubmitData }) => {
                 checked={formData.gender === "female"}
                 onChange={handleChange}
               />
-            </FormX.Group>
+            </Form.Group>
 
-            <FormX.Field
+            <Form.Field
               width={8}
               control={Input}
               label="Weight:"
@@ -73,7 +73,7 @@ const Form = ({ onSubmitData }) => {
               onChange={handleChange}
             />
 
-            <FormX.Field
+            <Form.Field
               width={8}
               control={Input}
               label="Height:"
@@ -86,7 +86,7 @@ const Form = ({ onSubmitData }) => {
           <Grid.Column width={5}>
             <Header as="h3">Activity level</Header>
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="activityLevel"
               label="Little / No exercise"
@@ -95,7 +95,7 @@ const Form = ({ onSubmitData }) => {
               onChange={handleChange}
             />
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="activityLevel"
               label="Light exercise (1–3 days per week)"
@@ -103,7 +103,8 @@ const Form = ({ onSubmitData }) => {
               checked={formData.activityLevel === "light"}
               onChange={handleChange}
             />
-            <FormX.Field
+
+            <Form.Field
               control={Radio}
               name="activityLevel"
               label="Moderate exercise (3–5 days per week)"
@@ -112,7 +113,7 @@ const Form = ({ onSubmitData }) => {
               onChange={handleChange}
             />
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="activityLevel"
               label="Heavy exercise (6–7 days per week)"
@@ -121,7 +122,7 @@ const Form = ({ onSubmitData }) => {
               onChange={handleChange}
             />
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="activityLevel"
               label="Very heavy exercise (twice per day, extra heavy workouts)"
@@ -134,7 +135,7 @@ const Form = ({ onSubmitData }) => {
           <Grid.Column width={3}>
             <Header as="h3">Your goal</Header>
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="goal"
               label="Cut (-20%)"
@@ -142,7 +143,8 @@ const Form = ({ onSubmitData }) => {
               checked={formData.goal === "cut"}
               onChange={handleChange}
             />
-            <FormX.Field
+
+            <Form.Field
               control={Radio}
               name="goal"
               label="Maintain"
@@ -150,7 +152,8 @@ const Form = ({ onSubmitData }) => {
               checked={formData.goal === "maintain"}
               onChange={handleChange}
             />
-            <FormX.Field
+
+            <Form.Field
               control={Radio}
               name="goal"
               label="Gain (+15%)"
@@ -162,7 +165,7 @@ const Form = ({ onSubmitData }) => {
           <Grid.Column width={4}>
             <Header as="h3">Formula</Header>
 
-            <FormX.Field
+            <Form.Field
               control={Radio}
               name="formula"
               label="The Original Harris-Benedict Equation"
@@ -170,7 +173,8 @@ const Form = ({ onSubmitData }) => {
               checked={formData.formula === "harris-benedict"}
               onChange={handleChange}
             />
-            <FormX.Field
+
+            <Form.Field
               control={Radio}
               name="formula"
               label="The Mifflin St Jeor Equation"
@@ -186,7 +190,7 @@ const Form = ({ onSubmitData }) => {
           Calculate
         </Button>
       </Divider>
-    </FormX>
+    </Form>
   );
 };
 
@@ -194,4 +198,4 @@ Form.propTypes = {
   onSubmitData: PropTypes.func.isRequired
 };
 
-export default Form;
+export default PersonalDataForm;
