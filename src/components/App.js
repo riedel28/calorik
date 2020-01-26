@@ -15,9 +15,20 @@ const App = () => {
    * [x] Add further formulas for calculating calories
    * [x] Add propTypes
    * [x] Store data to localStorage
+   * [x] Add semantic-react-ui
    */
 
-  const [userData, setUserData] = useState({});
+  const initialState = {
+    age: 30,
+    gender: "male",
+    height: 180,
+    weight: 80,
+    activityLevel: "no-exercise",
+    goal: "cut",
+    formula: "harris-benedict"
+  };
+
+  const [userData, setUserData] = useState(initialState);
 
   return (
     <Container>
