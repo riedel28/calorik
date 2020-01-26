@@ -1,13 +1,14 @@
-import React from 'react';
+import React from "react";
+import { Header, Divider } from "semantic-ui-react";
 
 export default () => {
   return (
     <>
-      <h2 className="ui left floated header" style={{ paddingTop: '20px' }}>
+      <Header as="h2" style={{ paddingTop: "20px" }}>
         Calorik
-      </h2>
+      </Header>
 
-      <div className="ui clearing divider" />
+      <Divider clearing />
     </>
   );
 };
