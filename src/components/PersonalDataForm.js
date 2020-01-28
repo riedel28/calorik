@@ -32,25 +32,26 @@ const PersonalDataForm = ({ onSubmitData }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit} size="large">
       <Grid columns={4} stackable>
         <Grid.Row>
           <Grid.Column width={3}>
             <Header as="h3">Personal data</Header>
 
             <Form.Field
-              width={8}
+              width={10}
               control={Input}
               name="age"
               label="Age:"
-              type="number"
+              type="text"
+              pattern="[0-9]*"
               value={formData.age}
               onChange={handleChange}
             />
 
             <Form.Group grouped>
               <label>Gender: </label>
-              <Form.Field width={8}>
+              <Form.Field width={10}>
                 <Radio
                   name="gender"
                   label="Male"
@@ -60,7 +61,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
                 />
               </Form.Field>
 
-              <Form.Field width={8}>
+              <Form.Field width={10}>
                 <Radio
                   name="gender"
                   label="Female"
@@ -72,22 +73,24 @@ const PersonalDataForm = ({ onSubmitData }) => {
             </Form.Group>
 
             <Form.Field
-              width={8}
+              width={10}
               control={Input}
               name="weight"
               label="Weight:"
+              type="text"
+              pattern="[0-9]*"
               value={formData.weight}
-              type="number"
               onChange={handleChange}
             />
 
             <Form.Field
-              width={8}
+              width={10}
               control={Input}
               name="height"
               label="Height:"
+              type="text"
+              pattern="[0-9]*"
               value={formData.height}
-              type="number"
               onChange={handleChange}
             />
           </Grid.Column>
@@ -186,7 +189,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             <Form.Field
               control={Radio}
               name="formula"
-              label="The Mifflin St Jeor Equation"
+              label="The Mifflin St. Jeor Equation"
               value="mifflin-st-jeor"
               checked={formData.formula === "mifflin-st-jeor"}
               onChange={handleChange}
