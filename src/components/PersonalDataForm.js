@@ -43,7 +43,8 @@ const PersonalDataForm = ({ onSubmitData }) => {
               control={Input}
               name="age"
               label="Age:"
-              type="number"
+              type="text"
+              pattern="[0-9]*"
               value={formData.age}
               onChange={handleChange}
             />
@@ -76,8 +77,9 @@ const PersonalDataForm = ({ onSubmitData }) => {
               control={Input}
               name="weight"
               label="Weight:"
+              type="text"
+              pattern="[0-9]*"
               value={formData.weight}
-              type="number"
               onChange={handleChange}
             />
 
@@ -86,8 +88,9 @@ const PersonalDataForm = ({ onSubmitData }) => {
               control={Input}
               name="height"
               label="Height:"
+              type="text"
+              pattern="[0-9]*"
               value={formData.height}
-              type="number"
               onChange={handleChange}
             />
           </Grid.Column>
