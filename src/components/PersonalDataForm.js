@@ -9,6 +9,7 @@ import {
   Divider,
   Button
 } from "semantic-ui-react";
+import { scroller } from "react-scroll";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const PersonalDataForm = ({ onSubmitData }) => {
@@ -26,9 +27,18 @@ const PersonalDataForm = ({ onSubmitData }) => {
     });
   };
 
+  const scrollToBottom = element => {
+    scroller.scrollTo(element, {
+      duration: 1000,
+      delay: 100,
+      smooth: true
+    });
+  };
+
   const handleSubmit = e => {
     e.preventDefault();
     onSubmitData(formData);
+    scrollToBottom("result");
   };
 
   return (

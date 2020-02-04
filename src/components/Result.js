@@ -8,7 +8,7 @@ const Result = ({ data }) => {
   const { toCut, toGain, toMaintain } = calculateCalories(data);
 
   return (
-    <div style={{ paddingTop: "30px" }}>
+    <div style={{ padding: "30px 30px" }}>
       <Table celled fixed>
         <Table.Header>
           <Table.Row>
