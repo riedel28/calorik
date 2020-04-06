@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
-import { Element } from "react-scroll";
 import PersonalDataForm from "./PersonalDataForm";
 import Header from "./Header";
 import Result from "./Result";
@@ -26,7 +25,7 @@ const App = () => {
     weight: 80,
     activityLevel: "no-exercise",
     goal: "cut",
-    formula: "harris-benedict"
+    formula: "harris-benedict",
   };
 
   const [userData, setUserData] = useState(initialState);
@@ -36,9 +35,7 @@ const App = () => {
       <Header />
 
       <PersonalDataForm onSubmitData={setUserData} />
-      <Element name="result">
-        <Result data={userData} />
-      </Element>
+      <Result data={userData} />
     </Container>
   );
 };

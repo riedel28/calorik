@@ -7,9 +7,8 @@ import {
   Input,
   Radio,
   Divider,
-  Button
+  Button,
 } from "semantic-ui-react";
-import { scroller } from "react-scroll";
 import useLocalStorage from "../hooks/useLocalStorage";
 
 const PersonalDataForm = ({ onSubmitData }) => {
@@ -23,22 +22,13 @@ const PersonalDataForm = ({ onSubmitData }) => {
   const handleChange = (e, { name, value }) => {
     setFormData({
       ...formData,
-      [name]: isNaN(value) ? value : Number(value)
+      [name]: isNaN(value) ? value : Number(value),
     });
   };
 
-  const scrollToBottom = element => {
-    scroller.scrollTo(element, {
-      duration: 1000,
-      delay: 100,
-      smooth: true
-    });
-  };
-
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onSubmitData(formData);
-    scrollToBottom("result");
   };
 
   return (
@@ -217,7 +207,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
 };
 
 PersonalDataForm.propTypes = {
-  onSubmitData: PropTypes.func.isRequired
+  onSubmitData: PropTypes.func.isRequired,
 };
 
 export default PersonalDataForm;
