@@ -18,17 +18,7 @@ const App = () => {
    * [x] Add semantic-react-ui
    */
 
-  const initialState = {
-    age: 30,
-    gender: "male",
-    height: 180,
-    weight: 80,
-    activityLevel: "no-exercise",
-    goal: "cut",
-    formula: "harris-benedict",
-  };
-
-  const [userData, setUserData] = useState(initialState);
+  const [userData, setUserData] = useState({});
 
   return (
     <Container>

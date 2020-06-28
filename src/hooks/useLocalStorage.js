@@ -1,6 +1,16 @@
 import { useState, useEffect } from "react";
 
-export default (key, initialValue = {}) => {
+const initialState = {
+  age: 30,
+  gender: "male",
+  height: 180,
+  weight: 80,
+  activityLevel: "no-exercise",
+  goal: "cut",
+  formula: "harris-benedict",
+};
+
+export default (key, initialValue = initialState) => {
   const [value, setValue] = useState(() => {
     return JSON.parse(localStorage.getItem(key)) || initialValue;
   });
