@@ -32,7 +32,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit} size="large">
+    <Form onSubmit={handleSubmit} size="large" style={{ marginTop: "20px" }}>
       <Grid columns={4} stackable>
         <Grid.Row>
           <Grid.Column width={3}>

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
 import PersonalDataForm from "./PersonalDataForm";
-import Header from "./Header";
 import Result from "./Result";
 
 const App = () => {
@@ -22,8 +21,6 @@ const App = () => {
 
   return (
     <Container>
-      <Header />
-
       <PersonalDataForm onSubmitData={setUserData} />
       <Result data={userData} />
     </Container>
