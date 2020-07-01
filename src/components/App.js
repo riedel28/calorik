@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
 import PersonalDataForm from "./PersonalDataForm";
-import Header from "./Header";
 import Result from "./Result";
 
 const App = () => {
@@ -18,24 +17,11 @@ const App = () => {
    * [x] Add semantic-react-ui
    */
 
-  const initialState = {
-    age: 30,
-    gender: "male",
-    height: 180,
-    weight: 80,
-    activityLevel: "no-exercise",
-    goal: "cut",
-    formula: "harris-benedict"
-  };
-
-  const [userData, setUserData] = useState(initialState);
+  const [userData, setUserData] = useState({});
 
   return (
     <Container>
-      <Header />
-
       <PersonalDataForm onSubmitData={setUserData} />
-
       <Result data={userData} />
     </Container>
   );
