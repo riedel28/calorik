@@ -30,10 +30,16 @@ export const harrisBenedictBMR = (data) => {
   const { age, gender, weight, height } = data;
 
   const forMale = Math.round(
-    66.473 + 13.7516 * weight + 5.0033 * height - 6.755 * age
+    66.473 +
+      13.7516 * Number(weight) +
+      5.0033 * Number(height) -
+      6.755 * Number(age)
   );
   const forFemale = Math.round(
-    655.0955 + 9.5634 * weight + 1.8496 * height - 4.6756 * age
+    655.0955 +
+      9.5634 * Number(weight) +
+      1.8496 * Number(height) -
+      4.6756 * Number(age)
   );
 
   return gender === "male" ? forMale : forFemale;
