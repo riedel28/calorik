@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container } from "semantic-ui-react";
-import PersonalDataForm from "./PersonalDataForm";
-import Result from "./Result";
+import PersonalDataForm from "../PersonalDataForm/PersonalDataForm";
+import Result from "../Result/Result";
 
 const App = () => {
   /**

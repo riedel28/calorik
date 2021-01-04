@@ -11,8 +11,8 @@ import {
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 
-import useLocalStorage from "../hooks/useLocalStorage";
-import validationSchema from "./../validationSchema";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import validationSchema from "../../validationSchema";
 
 const PersonalDataForm = ({ onSubmitData }) => {
   const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
