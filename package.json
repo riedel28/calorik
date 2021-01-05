@@ -45,7 +45,9 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/index.js",
-      "!src/serviceWorker.js"
+      "!src/serviceWorker.js",
+      "!src/reportWebVitals.js",
+      "!src/validationSchema.js"
     ]
   }
 }
