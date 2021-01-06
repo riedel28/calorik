@@ -11,8 +11,8 @@ import {
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 
-import useLocalStorage from "../hooks/useLocalStorage";
-import validationSchema from "./../validationSchema";
+import useLocalStorage from "../../hooks/useLocalStorage";
+import validationSchema from "../../validationSchema";
 
 const PersonalDataForm = ({ onSubmitData }) => {
   const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
@@ -34,6 +34,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
       onSubmit={formik.handleSubmit}
       size="large"
       style={{ marginTop: "20px" }}
+      data-testid="form"
     >
       <Grid columns={4} stackable>
         <Grid.Row>
@@ -49,6 +50,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
                 pattern="[0-9]*"
                 value={formik.values.age}
                 onChange={formik.handleChange}
+                data-testid="age"
               />
               {formik.touched.age && formik.errors.age ? (
                 <Label basic color="red" pointing>
@@ -68,11 +70,6 @@ const PersonalDataForm = ({ onSubmitData }) => {
                   checked={formik.values.gender === "male"}
                   onChange={formik.handleChange}
                 />
-                {formik.touched.gender && formik.errors.gender ? (
-                  <Label basic color="red" pointing>
-                    {formik.errors.gender}
-                  </Label>
-                ) : null}
               </Form.Field>
 
               <Form.Field width={10}>
@@ -96,6 +93,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
                 pattern="[0-9]*"
                 value={formik.values.weight}
                 onChange={formik.handleChange}
+                data-testid="weight"
               />
               {formik.touched.weight && formik.errors.weight ? (
                 <Label basic color="red" pointing>
@@ -113,6 +111,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
                 pattern="[0-9]*"
                 value={formik.values.height}
                 onChange={formik.handleChange}
+                data-testid="height"
               />
               {formik.touched.height && formik.errors.height ? (
                 <Label basic color="red" pointing>
@@ -240,6 +239,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           onClick={formik.handleSubmit}
           size="huge"
           secondary
+          data-testid="submit-button"
         >
           Calculate
         </Button>

@@ -3,7 +3,7 @@ import { Header } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 
-import { calculateCalories } from "./../helpers";
+import { calculateCalories } from "../../helpers";
 
 const Result = ({ data }) => {
   const resultCalories = calculateCalories(data);
