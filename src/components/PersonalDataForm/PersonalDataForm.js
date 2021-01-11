@@ -10,11 +10,13 @@ import {
   Label,
 } from "semantic-ui-react";
 import { useFormik } from "formik";
+import { useTranslation } from "react-i18next";
 
 import useLocalStorage from "../../hooks/useLocalStorage";
 import validationSchema from "../../validationSchema";
 
 const PersonalDataForm = ({ onSubmitData }) => {
+  const { t } = useTranslation();
   const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
 
   const formik = useFormik({
@@ -39,10 +41,10 @@ const PersonalDataForm = ({ onSubmitData }) => {
       <Grid columns={4} stackable>
         <Grid.Row>
           <Grid.Column width={3}>
-            <Header as="h3">Personal data</Header>
+            <Header as="h3">{t("Personal data")}</Header>
 
             <Form.Field width={10}>
-              <label>Age:</label>
+              <label>{t("Age")}:</label>
               <input
                 name="age"
                 label="Age:"
@@ -60,12 +62,12 @@ const PersonalDataForm = ({ onSubmitData }) => {
             </Form.Field>
 
             <Form.Group grouped>
-              <label>Gender: </label>
+              <label>{t("Gender")}:</label>
               <Form.Field width={8}>
                 <Form.Radio
                   id="male"
                   name="gender"
-                  label="Male"
+                  label={t("Male")}
                   value="male"
                   checked={formik.values.gender === "male"}
                   onChange={formik.handleChange}
@@ -76,7 +78,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
                 <Form.Radio
                   id="female"
                   name="gender"
-                  label="Female"
+                  label={t("Female")}
                   value="female"
                   checked={formik.values.gender === "female"}
                   onChange={formik.handleChange}
@@ -85,7 +87,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             </Form.Group>
 
             <Form.Field width={10}>
-              <label>Weight:</label>
+              <label>{t("Weight")}:</label>
               <input
                 name="weight"
                 label="Weight:"
@@ -103,7 +105,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             </Form.Field>
 
             <Form.Field width={10}>
-              <label>Height:</label>
+              <label>{t("Height")}:</label>
               <input
                 name="height"
                 label="Height:"
