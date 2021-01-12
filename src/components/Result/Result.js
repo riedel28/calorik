@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { Header } from "semantic-ui-react";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
+import { useTranslation } from "react-i18next";
 
 import { calculateCalories } from "../../helpers";
 
 const Result = ({ data }) => {
   const resultCalories = calculateCalories(data);
+  const { t } = useTranslation();
 
   const animation = useSpring({
     from: { value: 0 },
@@ -19,7 +21,7 @@ const Result = ({ data }) => {
     if (!resultCalories) {
       document.title = title;
     } else {
-      document.title = `${title} | ${resultCalories} kcal`;
+      document.title = `${title} | ${resultCalories}`;
     }
   }, [resultCalories]);
 
@@ -27,11 +29,11 @@ const Result = ({ data }) => {
     resultCalories > 0 && (
       <div style={{ textAlign: "center", paddingTop: "30px" }}>
         <Header as="h1">
-          You will need{" "}
+          {t("You will need")}{" "}
           <animated.span>
             {animation.value.interpolate((val) => Math.floor(val))}
           </animated.span>{" "}
-          kcal to {data.goal}
+          {t("kcal to")} {t(data.goal)}
         </Header>
       </div>
     )

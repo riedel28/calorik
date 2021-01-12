@@ -18,16 +18,16 @@ const Header = () => {
       <header>
         <Menu text secondary style={{ margin: "5px 0px" }}>
           <Menu.Menu position="right">
-            {locales.map((l) => (
+            {locales.map((locale) => (
               <Menu.Item
-                key={l}
-                active={activeItem === l}
+                key={locale}
+                active={activeItem === locale}
                 onClick={() => {
-                  setActiveItem(l);
-                  changeLanguage(l.toLowerCase());
+                  setActiveItem(locale);
+                  changeLanguage(locale.toLowerCase());
                 }}
               >
-                {l}
+                {locale}
               </Menu.Item>
             ))}
           </Menu.Menu>

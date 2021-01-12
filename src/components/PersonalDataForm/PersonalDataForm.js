@@ -124,13 +124,13 @@ const PersonalDataForm = ({ onSubmitData }) => {
           </Grid.Column>
 
           <Grid.Column width={5}>
-            <Header as="h3">Activity level</Header>
+            <Header as="h3">{t("Activity Level")}</Header>
 
             <Form.Field
               id="no-exercise"
               control={Radio}
               name="activityLevel"
-              label="Little / No exercise"
+              label={t("Little / No exercise")}
               value="no-exercise"
               checked={formik.values.activityLevel === "no-exercise"}
               onChange={formik.handleChange}
@@ -140,7 +140,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="light"
               control={Radio}
               name="activityLevel"
-              label="Light exercise (1–3 days per week)"
+              label={t("Light exercise (1–3 days per week)")}
               value="light"
               checked={formik.values.activityLevel === "light"}
               onChange={formik.handleChange}
@@ -150,7 +150,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="moderate"
               control={Radio}
               name="activityLevel"
-              label="Moderate exercise (3–5 days per week)"
+              label={t("Moderate exercise (3–5 days per week)")}
               value="moderate"
               checked={formik.values.activityLevel === "moderate"}
               onChange={formik.handleChange}
@@ -160,7 +160,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="heavy"
               control={Radio}
               name="activityLevel"
-              label="Heavy exercise (6–7 days per week)"
+              label={t("Heavy exercise (6–7 days per week)")}
               value="heavy"
               checked={formik.values.activityLevel === "heavy"}
               onChange={formik.handleChange}
@@ -170,7 +170,9 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="very-heavy"
               control={Radio}
               name="activityLevel"
-              label="Very heavy exercise (twice per day, extra heavy workouts)"
+              label={t(
+                "Very heavy exercise (twice per day, extra heavy workouts)"
+              )}
               value="very-heavy"
               checked={formik.values.activityLevel === "very-heavy"}
               onChange={formik.handleChange}
@@ -178,13 +180,13 @@ const PersonalDataForm = ({ onSubmitData }) => {
           </Grid.Column>
 
           <Grid.Column width={3}>
-            <Header as="h3">Your goal</Header>
+            <Header as="h3">{t("Your goal")}</Header>
 
             <Form.Field
               id="cut"
               control={Radio}
               name="goal"
-              label="Cut (-20%)"
+              label={t("Cut (-20%)")}
               value="cut"
               checked={formik.values.goal === "cut"}
               onChange={formik.handleChange}
@@ -194,7 +196,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="maintain"
               control={Radio}
               name="goal"
-              label="Maintain"
+              label={t("Maintain")}
               value="maintain"
               checked={formik.values.goal === "maintain"}
               onChange={formik.handleChange}
@@ -204,20 +206,20 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="gain"
               control={Radio}
               name="goal"
-              label="Gain (+15%)"
+              label={t("Gain (+15%)")}
               value="gain"
               checked={formik.values.goal === "gain"}
               onChange={formik.handleChange}
             />
           </Grid.Column>
           <Grid.Column width={4}>
-            <Header as="h3">Formula</Header>
+            <Header as="h3">{t("Formula")}</Header>
 
             <Form.Field
               id="harris-benedict"
               control={Radio}
               name="formula"
-              label="The Original Harris-Benedict Equation"
+              label={t("The Original Harris-Benedict Equation")}
               value="harris-benedict"
               checked={formik.values.formula === "harris-benedict"}
               onChange={formik.handleChange}
@@ -227,7 +229,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               id="mifflin-st-jeor"
               control={Radio}
               name="formula"
-              label="The Mifflin St. Jeor Equation"
+              label={t("The Mifflin St. Jeor Equation")}
               value="mifflin-st-jeor"
               checked={formik.values.formula === "mifflin-st-jeor"}
               onChange={formik.handleChange}
@@ -243,7 +245,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           secondary
           data-testid="submit-button"
         >
-          Calculate
+          {t("Calculate")}
         </Button>
       </Divider>
     </Form>
