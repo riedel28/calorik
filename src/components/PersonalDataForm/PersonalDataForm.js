@@ -17,7 +17,7 @@ import validationSchema from "../../validationSchema";
 
 const PersonalDataForm = ({ onSubmitData }) => {
   const { t } = useTranslation();
-  const [persistentData, setPersistentData] = useLocalStorage("calorik-data");
+  const [persistentData, setPersistentData] = useLocalStorage("calorikData");
 
   const formik = useFormik({
     initialValues: { ...persistentData },

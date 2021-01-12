@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import { Menu, Divider } from "semantic-ui-react";
-import { useTranslation } from "react-i18next";
 
-const locales = ["En", "Ru", "De"];
+const locales = ["en", "ru", "de"];
 
-const Header = () => {
-  const [activeItem, setActiveItem] = useState("En");
-
-  const { i18n } = useTranslation(["translation", "welcome"]);
-
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-  };
+const Header = ({ onLanguageSelect, language }) => {
+  const [activeItem, setActiveItem] = useState(language);
 
   return (
     <>
@@ -24,10 +17,10 @@ const Header = () => {
                 active={activeItem === locale}
                 onClick={() => {
                   setActiveItem(locale);
-                  changeLanguage(locale.toLowerCase());
+                  onLanguageSelect(locale);
                 }}
               >
-                {locale}
+                {locale.toUpperCase()}
               </Menu.Item>
             ))}
           </Menu.Menu>

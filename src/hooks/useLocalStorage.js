@@ -10,7 +10,7 @@ const initialState = {
   formula: "harris-benedict",
 };
 
-export default (key, initialValue = initialState) => {
+const useLocalStorage = (key, initialValue = initialState) => {
   const [value, setValue] = useState(() => {
     return JSON.parse(localStorage.getItem(key)) || initialValue;
   });
@@ -21,3 +21,5 @@ export default (key, initialValue = initialState) => {
 
   return [value, setValue];
 };
+
+export default useLocalStorage;
