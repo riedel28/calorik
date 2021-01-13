@@ -41,7 +41,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
       <Grid columns={4} stackable>
         <Grid.Row>
           <Grid.Column width={3}>
-            <Header as="h3">{t("Personal data")}</Header>
+            <Header as="h3">{t("Your data")}</Header>
 
             <Form.Field width={10}>
               <label>{t("Age")}:</label>

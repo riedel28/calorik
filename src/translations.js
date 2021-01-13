@@ -1,7 +1,7 @@
 const translations = {
   en: {
     translation: {
-      "Personal data": "Your data",
+      "Your data": "Your data",
       Age: "Age",
       Gender: "Gender",
       Male: "Male",
@@ -10,7 +10,7 @@ const translations = {
       Height: "Height",
       "Activity Level": "Activity level",
       "Little / No exercise": "Little / No exercise",
-      "Light exercise (1-3 days per week)":
+      "Light exercise (1–3 days per week)":
         "Light exercise (1-3 days per week)",
       "Moderate exercise (3–5 days per week)":
         "Moderate exercise (3-5 days per week)",
@@ -36,7 +36,7 @@ const translations = {
   },
   ru: {
     translation: {
-      "Personal data": "Ваши данные",
+      "Your data": "Ваши данные",
       Age: "Возраст",
       Gender: "Пол",
       Male: "Мужской",
@@ -51,7 +51,7 @@ const translations = {
       "Very heavy exercise (twice per day, extra heavy workouts)":
         "Очень высокий (дважды в день, тяжелые упражения)",
       "Your goal": "Ваша цель",
-      "Cut (-20%)": "Покудеть (-20%)",
+      "Cut (-20%)": "Похудеть (-20%)",
       Maintain: "Сохранить вес",
       "Gain (+15%)": "Набрать вес (+15%)",
       Formula: "Формула",
@@ -67,7 +67,7 @@ const translations = {
   },
   de: {
     translation: {
-      "Personal data": "Ihre Daten",
+      "Your data": "Ihre Daten",
       Age: "Alter",
       Gender: "Geschlecht",
       Male: "Männlich",
@@ -83,7 +83,7 @@ const translations = {
       "Heavy exercise (6–7 days per week)":
         "Hartes Training (6-7 mal pro Woche)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Sehr hartes Training (zwei mal täglich, schwere Üebungen)",
+        "Sehr hartes Training (zwei mal täglich, schwere Übungen)",
       "Your goal": "Ziel",
       "Cut (-20%)": "Abnehmen (-20%)",
       Maintain: "Gewicht halten",

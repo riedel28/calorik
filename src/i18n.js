@@ -6,7 +6,6 @@ import translations from "./translations";
 i18n.use(initReactI18next).init({
   resources: translations,
   lng: "en",
-  debug: true,
   keySeparator: false,
   interpolation: {
     escapeValue: false,
