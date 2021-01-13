@@ -3,6 +3,15 @@ import { render, fireEvent, waitFor } from "@testing-library/react";
 
 import PersonalDataForm from "./PersonalDataForm";
 
+jest.mock("react-i18next", () => ({
+  // this mock makes sure any components using the translate hook can use it without a warning being shown
+  useTranslation: () => {
+    return {
+      t: (str) => str,
+    };
+  },
+}));
+
 describe("PersonalDataForm", () => {
   test("should render PersonalDataForm component", () => {
     const handleSubmit = jest.fn();
