@@ -71,6 +71,35 @@ const resources = {
   de: {
     translation: {
       "Personal data": "Ihre Daten",
+      Age: "Alter",
+      Gender: "Geschlecht",
+      Male: "Männlich",
+      Female: "Weiblich",
+      Weight: "Gewicht",
+      Height: "Größe",
+      "Activity Level": "Körperliche Aktivität",
+      "Little / No exercise": "Sitzende Tätigkeit / Kein Training",
+      "Light exercise (1–3 days per week)":
+        "Leichtes Training (1-3 mal pro Woche)",
+      "Moderate exercise (3–5 days per week)":
+        "Moderates Training (3-5 mal pro Woche)",
+      "Heavy exercise (6–7 days per week)":
+        "Hartes Training (6-7 mal pro Woche)",
+      "Very heavy exercise (twice per day, extra heavy workouts)":
+        "Sehr hartes Training (zwei mal täglich, schwere Üebungen)",
+      "Your goal": "Ziel",
+      "Cut (-20%)": "Abnehmen (-20%)",
+      Maintain: "Gewicht halten",
+      "Gain (+15%)": "Zunehmen (+15%)",
+      Formula: "Formel",
+      "The Original Harris-Benedict Equation": "Harris-Benedict-Formel",
+      "The Mifflin St. Jeor Equation": "Mifflin-St.Jeor-Formel",
+      Calculate: "Berechnen",
+      "You will need": "Sie brauchen",
+      "kcal to": "kalorien, um",
+      cut: "abzunehmen",
+      maintain: "ihr Gewicht zu halten",
+      gain: "zuzunehem",
     },
   },
 };
