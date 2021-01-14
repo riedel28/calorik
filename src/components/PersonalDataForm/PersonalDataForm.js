@@ -48,7 +48,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               <input
                 name="age"
                 label="Age:"
-                type="text"
+                type="number"
                 pattern="[0-9]*"
                 value={formik.values.age}
                 onChange={formik.handleChange}
@@ -91,7 +91,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               <input
                 name="weight"
                 label="Weight:"
-                type="text"
+                type="number"
                 pattern="[0-9]*"
                 value={formik.values.weight}
                 onChange={formik.handleChange}
@@ -109,7 +109,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               <input
                 name="height"
                 label="Height:"
-                type="text"
+                type="number"
                 pattern="[0-9]*"
                 value={formik.values.height}
                 onChange={formik.handleChange}

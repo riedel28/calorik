@@ -42,10 +42,10 @@ const Result = ({ data }) => {
 
 Result.propTypes = {
   data: PropTypes.shape({
-    age: PropTypes.string,
+    age: PropTypes.number,
     gender: PropTypes.oneOf(["male", "female"]),
-    weight: PropTypes.string,
-    height: PropTypes.string,
+    weight: PropTypes.number,
+    height: PropTypes.number,
     formula: PropTypes.oneOf(["harris-benedict", "mifflin-st-jeor"]),
     activityLevel: PropTypes.oneOf([
       "no-exercise",
