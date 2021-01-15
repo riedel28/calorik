@@ -27,7 +27,7 @@ const Result = ({ data }) => {
 
   return (
     resultCalories > 0 && (
-      <div style={{ textAlign: "center", paddingTop: "30px" }}>
+      <div style={{ textAlign: "center", paddingTop: 30, paddingBottom: 30 }}>
         <Header as="h1">
           {t("You will need")}{" "}
           <animated.span>

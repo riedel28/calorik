@@ -35,7 +35,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
     <Form
       onSubmit={formik.handleSubmit}
       size="large"
-      style={{ marginTop: "20px" }}
+      style={{ marginTop: 20 }}
       data-testid="form"
     >
       <Grid columns={4} stackable>
@@ -237,7 +237,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           </Grid.Column>
         </Grid.Row>
       </Grid>
-      <Divider horizontal>
+      <Divider horizontal style={{ marginTop: 30 }}>
         <Button
           type="submit"
           onClick={formik.handleSubmit}
