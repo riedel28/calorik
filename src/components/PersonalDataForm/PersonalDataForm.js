@@ -56,7 +56,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               />
               {formik.touched.age && formik.errors.age ? (
                 <Label basic color="red" pointing>
-                  {formik.errors.age}
+                  {t(formik.errors.age)}
                 </Label>
               ) : null}
             </Form.Field>
@@ -99,7 +99,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               />
               {formik.touched.weight && formik.errors.weight ? (
                 <Label basic color="red" pointing>
-                  {formik.errors.weight}
+                  {t(formik.errors.weight)}
                 </Label>
               ) : null}
             </Form.Field>
@@ -117,7 +117,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
               />
               {formik.touched.height && formik.errors.height ? (
                 <Label basic color="red" pointing>
-                  {formik.errors.height}
+                  {t(formik.errors.height)}
                 </Label>
               ) : null}
             </Form.Field>
