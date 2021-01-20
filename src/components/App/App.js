@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { Container } from "semantic-ui-react";
 import { useTranslation } from "react-i18next";
 
 import Header from "../Header/Header";
@@ -32,11 +31,11 @@ const App = () => {
   };
 
   return (
-    <Container>
+    <>
       <Header language={language} onLanguageSelect={changeLanguage} />
       <PersonalDataForm onSubmitData={setUserData} />
       <Result data={userData} />
-    </Container>
+    </>
   );
 };
 

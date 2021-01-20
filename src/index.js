@@ -1,13 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./index.css";
-import "./i18n";
-import App from "./components/App/App";
 import reportWebVitals from "./reportWebVitals";
+import "./i18n";
+
+import "./index.css";
+import ThemeProvider from "./ThemeProvider";
+import App from "./components/App/App";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -115,7 +115,7 @@ const translations = {
       "The Mifflin St. Jeor Equation": "Mifflin-St.Jeor-Formel",
       Calculate: "Berechnen",
       "You will need": "Sie brauchen",
-      "kcal to": "kalorien, um",
+      "kcal to": "Kalorien, um",
       cut: "abzunehmen",
       maintain: "ihr Gewicht zu halten",
       gain: "zuzunehem",

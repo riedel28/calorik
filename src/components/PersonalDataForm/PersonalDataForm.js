@@ -1,14 +1,7 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
-import {
-  Form,
-  Grid,
-  Header,
-  Radio,
-  Divider,
-  Button,
-  Label,
-} from "semantic-ui-react";
+import { Flex, Box, Text, Button } from "rebass";
+import { Label, Input, Radio } from "@rebass/forms";
 import { useFormik } from "formik";
 import { useTranslation } from "react-i18next";
 
@@ -32,223 +25,250 @@ const PersonalDataForm = ({ onSubmitData }) => {
   }, [formik.values, setPersistentData]);
 
   return (
-    <Form
-      onSubmit={formik.handleSubmit}
-      size="large"
-      style={{ marginTop: 20 }}
-      data-testid="form"
+    <Box
+      sx={{
+        maxWidth: 1200,
+        mx: "auto",
+      }}
     >
-      <Grid columns={4} stackable>
-        <Grid.Row>
-          <Grid.Column width={3}>
-            <Header as="h3">{t("Your data")}</Header>
-
-            <Form.Field width={10}>
-              <label>{t("Age")}:</label>
-              <input
-                name="age"
-                label="Age:"
-                type="number"
-                pattern="[0-9]*"
-                value={formik.values.age}
+      <Flex as="form" onSubmit={formik.handleSubmit} data-testid="form">
+        <Box width={1 / 5}>
+          <Text fontSize={[2, 3, 4]} fontWeight="bold" color="primary" mb={3}>
+            {t("Your data")}
+          </Text>
+          <Box width={3 / 4} mb={3}>
+            <Label htmlFor="age" fontWeight="bold" mb="1">
+              {t("Age")}:
+            </Label>
+            <Input
+              id="age"
+              name="age"
+              label="Age:"
+              type="number"
+              pattern="[0-9]*"
+              value={formik.values.age}
+              onChange={formik.handleChange}
+              data-testid="age"
+            />
+            {formik.touched.age && formik.errors.age ? (
+              <Text color="red" py={1}>
+                {formik.errors.age}
+              </Text>
+            ) : null}
+          </Box>
+          <Box width={3 / 4} mb={3}>
+            <Text fontWeight="bold" mb={2}>
+              Gender:{" "}
+            </Text>
+            <Label>
+              <Radio
+                id="male"
+                name="gender"
+                value="male"
+                checked={formik.values.gender === "male"}
                 onChange={formik.handleChange}
-                data-testid="age"
               />
-              {formik.touched.age && formik.errors.age ? (
-                <Label basic color="red" pointing>
-                  {t(formik.errors.age)}
-                </Label>
-              ) : null}
-            </Form.Field>
-
-            <Form.Group grouped>
-              <label>{t("Gender")}:</label>
-              <Form.Field width={8}>
-                <Form.Radio
-                  id="male"
-                  name="gender"
-                  label={t("Male")}
-                  value="male"
-                  checked={formik.values.gender === "male"}
-                  onChange={formik.handleChange}
-                />
-              </Form.Field>
-
-              <Form.Field width={10}>
-                <Form.Radio
-                  id="female"
-                  name="gender"
-                  label={t("Female")}
-                  value="female"
-                  checked={formik.values.gender === "female"}
-                  onChange={formik.handleChange}
-                />
-              </Form.Field>
-            </Form.Group>
-
-            <Form.Field width={10}>
-              <label>{t("Weight")}:</label>
-              <input
-                name="weight"
-                label="Weight:"
-                type="number"
-                pattern="[0-9]*"
-                value={formik.values.weight}
+              {t("Male")}
+            </Label>
+            <Label>
+              <Radio
+                id="female"
+                name="gender"
+                value="female"
+                checked={formik.values.gender === "female"}
                 onChange={formik.handleChange}
-                data-testid="weight"
               />
-              {formik.touched.weight && formik.errors.weight ? (
-                <Label basic color="red" pointing>
-                  {t(formik.errors.weight)}
-                </Label>
-              ) : null}
-            </Form.Field>
+              {t("Female")}
+            </Label>
+          </Box>
 
-            <Form.Field width={10}>
-              <label>{t("Height")}:</label>
-              <input
-                name="height"
-                label="Height:"
-                type="number"
-                pattern="[0-9]*"
-                value={formik.values.height}
+          <Box width={3 / 4} mb={3}>
+            <Label htmlFor="weight" fontWeight="bold" mb="1">
+              {t("Weight")}:
+            </Label>
+            <Input
+              id="weight"
+              name="weight"
+              type="number"
+              pattern="[0-9]*"
+              value={formik.values.weight}
+              onChange={formik.handleChange}
+              data-testid="weight"
+            />
+            {formik.touched.weight && formik.errors.weight ? (
+              <Text color="red" py={1}>
+                {formik.errors.weight}
+              </Text>
+            ) : null}
+          </Box>
+
+          <Box width={3 / 4} mb={3}>
+            <Label htmlFor="weight" fontWeight="bold" mb="1">
+              {t("Height")}:
+            </Label>
+            <Input
+              id="height"
+              name="height"
+              type="number"
+              pattern="[0-9]*"
+              value={formik.values.height}
+              onChange={formik.handleChange}
+              data-testid="height"
+            />
+            {formik.touched.height && formik.errors.height ? (
+              <Text color="red" py={1}>
+                {formik.errors.height}
+              </Text>
+            ) : null}
+          </Box>
+        </Box>
+        <Box width={1 / 3}>
+          <Text fontSize={[2, 3, 4]} fontWeight="bold" color="primary" mb={3}>
+            {t("Activity Level")}
+          </Text>
+          <Box mb={3}>
+            <Label htmlFor="no-exercise" mb={3}>
+              <Radio
+                id="no-exercise"
+                name="activityLevel"
+                value="no-exercise"
+                checked={formik.values.activityLevel === "no-exercise"}
                 onChange={formik.handleChange}
-                data-testid="height"
               />
-              {formik.touched.height && formik.errors.height ? (
-                <Label basic color="red" pointing>
-                  {t(formik.errors.height)}
-                </Label>
-              ) : null}
-            </Form.Field>
-          </Grid.Column>
+              {t("Little / No exercise")}
+            </Label>
+            <Label htmlFor="light" mb={3}>
+              <Radio
+                id="light"
+                name="activityLevel"
+                value="light"
+                checked={formik.values.activityLevel === "light"}
+                onChange={formik.handleChange}
+              />
+              {t("Light exercise (1–3 days per week)")}
+            </Label>
+            <Label htmlFor="moderate" mb={3}>
+              <Radio
+                id="moderate"
+                name="activityLevel"
+                value="moderate"
+                checked={formik.values.activityLevel === "moderate"}
+                onChange={formik.handleChange}
+              />
+              {t("Moderate exercise (3–5 days per week)")}
+            </Label>
 
-          <Grid.Column width={5}>
-            <Header as="h3">{t("Activity Level")}</Header>
+            <Label htmlFor="heavy" mb={3}>
+              <Radio
+                id="heavy"
+                name="activityLevel"
+                value="heavy"
+                checked={formik.values.activityLevel === "heavy"}
+                onChange={formik.handleChange}
+              />
+              {t("Heavy exercise (6–7 days per week)")}
+            </Label>
 
-            <Form.Field
-              id="no-exercise"
-              control={Radio}
-              name="activityLevel"
-              label={t("Little / No exercise")}
-              value="no-exercise"
-              checked={formik.values.activityLevel === "no-exercise"}
-              onChange={formik.handleChange}
-            />
+            <Label htmlFor="very-heavy" mb={3}>
+              <Radio
+                id="very-heavy"
+                name="activityLevel"
+                value="very-heavy"
+                checked={formik.values.activityLevel === "very-heavy"}
+                onChange={formik.handleChange}
+              />
+              {t("Very heavy exercise (twice per day, extra heavy workouts)")}
+            </Label>
+          </Box>
+        </Box>
+        <Box width={1 / 5}>
+          <Text fontSize={[2, 3, 4]} fontWeight="bold" color="primary" mb={3}>
+            {t("Your goal")}
+          </Text>
 
-            <Form.Field
-              id="light"
-              control={Radio}
-              name="activityLevel"
-              label={t("Light exercise (1–3 days per week)")}
-              value="light"
-              checked={formik.values.activityLevel === "light"}
-              onChange={formik.handleChange}
-            />
-
-            <Form.Field
-              id="moderate"
-              control={Radio}
-              name="activityLevel"
-              label={t("Moderate exercise (3–5 days per week)")}
-              value="moderate"
-              checked={formik.values.activityLevel === "moderate"}
-              onChange={formik.handleChange}
-            />
-
-            <Form.Field
-              id="heavy"
-              control={Radio}
-              name="activityLevel"
-              label={t("Heavy exercise (6–7 days per week)")}
-              value="heavy"
-              checked={formik.values.activityLevel === "heavy"}
-              onChange={formik.handleChange}
-            />
-
-            <Form.Field
-              id="very-heavy"
-              control={Radio}
-              name="activityLevel"
-              label={t(
-                "Very heavy exercise (twice per day, extra heavy workouts)"
-              )}
-              value="very-heavy"
-              checked={formik.values.activityLevel === "very-heavy"}
-              onChange={formik.handleChange}
-            />
-          </Grid.Column>
-
-          <Grid.Column width={3}>
-            <Header as="h3">{t("Your goal")}</Header>
-
-            <Form.Field
+          <Label htmlFor="cut" mb={3}>
+            <Radio
               id="cut"
-              control={Radio}
               name="goal"
               label={t("Cut (-20%)")}
               value="cut"
               checked={formik.values.goal === "cut"}
               onChange={formik.handleChange}
             />
+            {t("Cut (-20%)")}
+          </Label>
 
-            <Form.Field
+          <Label htmlFor="maintain" mb={3}>
+            <Radio
               id="maintain"
-              control={Radio}
               name="goal"
-              label={t("Maintain")}
               value="maintain"
               checked={formik.values.goal === "maintain"}
               onChange={formik.handleChange}
             />
+            {t("Maintain")}
+          </Label>
 
-            <Form.Field
+          <Label htmlFor="gain" mb={3}>
+            <Radio
               id="gain"
               control={Radio}
               name="goal"
-              label={t("Gain (+15%)")}
               value="gain"
               checked={formik.values.goal === "gain"}
               onChange={formik.handleChange}
             />
-          </Grid.Column>
-          <Grid.Column width={4}>
-            <Header as="h3">{t("Formula")}</Header>
+            {t("Gain (+15%)")}
+          </Label>
+        </Box>
+        <Box width={1 / 4}>
+          <Text fontSize={[2, 3, 4]} fontWeight="bold" color="primary" mb={3}>
+            {t("Formula")}
+          </Text>
 
-            <Form.Field
+          <Label htmlFor="harris-benedict" mb={3}>
+            <Radio
               id="harris-benedict"
-              control={Radio}
               name="formula"
               label={t("The Original Harris-Benedict Equation")}
               value="harris-benedict"
               checked={formik.values.formula === "harris-benedict"}
               onChange={formik.handleChange}
             />
+            {t("The Original Harris-Benedict Equation")}
+          </Label>
 
-            <Form.Field
+          <Label htmlFor="mifflin-st-jeor" mb={3}>
+            <Radio
               id="mifflin-st-jeor"
-              control={Radio}
               name="formula"
-              label={t("The Mifflin St. Jeor Equation")}
               value="mifflin-st-jeor"
               checked={formik.values.formula === "mifflin-st-jeor"}
               onChange={formik.handleChange}
             />
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-      <Divider horizontal style={{ marginTop: 30 }}>
+            {t("The Mifflin St. Jeor Equation")}
+          </Label>
+        </Box>
+      </Flex>
+
+      <Flex justifyContent="center">
         <Button
           type="submit"
           onClick={formik.handleSubmit}
           size="huge"
-          secondary
+          variant="outline"
+          bg="primary"
+          px={5}
+          py={3}
+          sx={{
+            letterSpacing: 2,
+          }}
           data-testid="submit-button"
         >
-          {t("Calculate")}
+          <Text fontSize={4}>{t("Calculate")}</Text>
         </Button>
-      </Divider>
-    </Form>
+      </Flex>
+    </Box>
   );
 };
 

@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Header } from "semantic-ui-react";
+import { Flex, Text } from "rebass";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { useTranslation } from "react-i18next";
@@ -27,15 +27,15 @@ const Result = ({ data }) => {
 
   return (
     resultCalories > 0 && (
-      <div style={{ textAlign: "center", paddingTop: 30, paddingBottom: 30 }}>
-        <Header as="h1">
+      <Flex py={4} justifyContent="center">
+        <Text as="h1">
           {t("You will need")}{" "}
           <animated.span>
             {animation.value.interpolate((val) => Math.floor(val))}
           </animated.span>{" "}
           {t("kcal to")} {t(data.goal)}
-        </Header>
-      </div>
+        </Text>
+      </Flex>
     )
   );
 };

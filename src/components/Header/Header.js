@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Menu, Divider } from "semantic-ui-react";
+import { Flex, Box, Link, Text } from "rebass";
 
 const locales = ["en", "ru", "de"];
 
@@ -7,27 +7,40 @@ const Header = ({ onLanguageSelect, language }) => {
   const [activeItem, setActiveItem] = useState(language);
 
   return (
-    <>
-      <header>
-        <Menu text secondary style={{ margin: "5px 0px" }}>
-          <Menu.Menu position="right">
-            {locales.map((locale) => (
-              <Menu.Item
-                key={locale}
-                active={activeItem === locale}
-                onClick={() => {
-                  setActiveItem(locale);
-                  onLanguageSelect(locale);
-                }}
-              >
+    <Box
+      sx={{
+        maxWidth: 1200,
+        mx: "auto",
+      }}
+    >
+      <Flex p={3} mb={2}>
+        <Flex w={1 / 3} color="white" ml="auto">
+          {locales.map((locale) => (
+            <Link
+              key={locale}
+              href="#!"
+              active={activeItem === locale}
+              onClick={() => {
+                setActiveItem(locale);
+                onLanguageSelect(locale);
+              }}
+              variant="nav"
+              mr={1}
+              sx={{
+                px: 1,
+                py: 1,
+                color: "black",
+                textDecoration: "none",
+              }}
+            >
+              <Text fontWeight={activeItem === locale ? "bold" : ""}>
                 {locale.toUpperCase()}
-              </Menu.Item>
-            ))}
-          </Menu.Menu>
-        </Menu>
-      </header>
-      <Divider />
-    </>
+              </Text>
+            </Link>
+          ))}
+        </Flex>
+      </Flex>
+    </Box>
   );
 };
 
