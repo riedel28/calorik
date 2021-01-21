@@ -62,8 +62,13 @@ const PersonalDataForm = ({ onSubmitData }) => {
 
   return (
     <Container>
-      <Flex as="form" onSubmit={formik.handleSubmit} data-testid="form">
-        <Column width={[1, 1, 1 / 5]}>
+      <Flex
+        as="form"
+        onSubmit={formik.handleSubmit}
+        data-testid="form"
+        flexWrap="wrap"
+      >
+        <Column width={["100%", "50%", "25%"]}>
           <Heading>{t("Your data")}</Heading>
           <Box width={3 / 4} mb={3}>
             <Text fontWeight="bold" mb={2}>
@@ -92,6 +97,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Box width={3 / 4} mb={3}>
             {coreData.map(({ id, description }) => (
               <InputWithLabel
+                key={id}
                 id={id}
                 label={`${t(description)}:`}
                 value={formik.values[id]}
@@ -113,11 +119,12 @@ const PersonalDataForm = ({ onSubmitData }) => {
           </Box>
         </Column>
 
-        <Column width={[1, 1 / 3]}>
+        <Column width={[1, 1 / 2, 1 / 3]}>
           <Heading>{t("Activity Level")}</Heading>
           <Box mb={3}>
             {activityLevelData.map(({ id, description }) => (
               <RadioWithLabel
+                key={id}
                 id={id}
                 name="activityLevel"
                 value={id}
@@ -130,10 +137,11 @@ const PersonalDataForm = ({ onSubmitData }) => {
           </Box>
         </Column>
 
-        <Column width={[1, 1 / 5]}>
+        <Column width={[1, 1 / 2, 1 / 5]}>
           <Heading>{t("Your goal")}</Heading>
           {goalData.map(({ id, description }) => (
             <RadioWithLabel
+              key={id}
               id={id}
               name="goal"
               value={id}
@@ -145,10 +153,11 @@ const PersonalDataForm = ({ onSubmitData }) => {
           ))}
         </Column>
 
-        <Column width={[1, 1 / 4]}>
+        <Column width={[1, 1 / 2, 1 / 4]}>
           <Heading>{t("Formula")}</Heading>
           {formulaeData.map(({ id, description }) => (
             <RadioWithLabel
+              key={id}
               id={id}
               name="formula"
               value={id}
