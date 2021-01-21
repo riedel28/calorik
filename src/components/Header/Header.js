@@ -27,10 +27,14 @@ const Header = ({ onLanguageSelect, language }) => {
               variant="nav"
               mr={1}
               sx={{
-                px: 1,
+                px: 2,
                 py: 1,
                 color: "black",
                 textDecoration: "none",
+                ":hover": {
+                  color: "#333eee",
+                  fontWeight: "bold",
+                },
               }}
             >
               <Text fontWeight={activeItem === locale ? "bold" : ""}>
