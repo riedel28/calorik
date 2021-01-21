@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { useTranslation } from "react-i18next";
 
+import Container from "../shared/Container";
 import { calculateCalories } from "../../helpers";
 
 const Result = ({ data }) => {
@@ -27,15 +28,17 @@ const Result = ({ data }) => {
 
   return (
     resultCalories > 0 && (
-      <Flex py={4} justifyContent="center">
-        <Text as="h1">
-          {t("You will need")}{" "}
-          <animated.span>
-            {animation.value.interpolate((val) => Math.floor(val))}
-          </animated.span>{" "}
-          {t("kcal to")} {t(data.goal)}
-        </Text>
-      </Flex>
+      <Container>
+        <Flex py={4} justifyContent="center">
+          <Text as="h1" fontSize={[4, 4, 5]} sx={{ textAlign: "center" }}>
+            {t("You will need")}{" "}
+            <animated.span>
+              {animation.value.interpolate((val) => Math.floor(val))}
+            </animated.span>{" "}
+            {t("kcal to")} {t(data.goal)}
+          </Text>
+        </Flex>
+      </Container>
     )
   );
 };
