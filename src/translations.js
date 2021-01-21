@@ -17,7 +17,7 @@ const translations = {
       "Heavy exercise (6–7 days per week)":
         "Heavy exercise (6-7 days per week)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Very heavy exercise (twice per day, extra heavy workouts)",
+        "Very heavy exercise (twice per day)",
       "Your goal": "Your goal",
       "Cut (-20%)": "Cut (-20%)",
       Maintain: "Maintain",
@@ -60,7 +60,7 @@ const translations = {
       "Moderate exercise (3–5 days per week)": "Средний (3-5 раза в неделю)",
       "Heavy exercise (6–7 days per week)": "Высокий (6-7 раз в неделю)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Очень высокий (дважды в день, тяжелые упражения)",
+        "Очень высокий (дважды в день)",
       "Your goal": "Ваша цель",
       "Cut (-20%)": "Похудеть (-20%)",
       Maintain: "Сохранить вес",
@@ -105,7 +105,7 @@ const translations = {
       "Heavy exercise (6–7 days per week)":
         "Hartes Training (6-7 mal pro Woche)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Sehr hartes Training (zwei mal täglich, schwere Übungen)",
+        "Sehr hartes Training (zwei mal täglich)",
       "Your goal": "Ziel",
       "Cut (-20%)": "Abnehmen (-20%)",
       Maintain: "Gewicht halten",
