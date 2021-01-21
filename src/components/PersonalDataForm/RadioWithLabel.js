@@ -10,6 +10,9 @@ const RadioWithLabel = ({ id, name, value, checked, onChange, children }) => {
         value={value}
         checked={checked}
         onChange={onChange}
+        sx={{
+          color: "#333eee",
+        }}
       />
       {children}
     </Label>

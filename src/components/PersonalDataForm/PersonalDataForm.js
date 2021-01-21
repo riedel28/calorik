@@ -67,7 +67,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Heading>{t("Your data")}</Heading>
           <Box width={3 / 4} mb={3}>
             <Text fontWeight="bold" mb={2}>
-              {t("Gender")}
+              {t("Gender")}:
             </Text>
             <RadioWithLabel
               id="male"
@@ -93,7 +93,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
             {coreData.map(({ id, description }) => (
               <InputWithLabel
                 id={id}
-                label={t(description)}
+                label={`${t(description)}:`}
                 value={formik.values[id]}
                 onChange={formik.handleChange}
               >
