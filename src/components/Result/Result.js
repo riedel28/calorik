@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Header } from "semantic-ui-react";
+import { Flex, Text } from "rebass";
 import PropTypes from "prop-types";
 import { useSpring, animated } from "react-spring";
 import { useTranslation } from "react-i18next";
 
+import Container from "../shared/Container";
 import { calculateCalories } from "../../helpers";
 
 const Result = ({ data }) => {
@@ -27,25 +28,27 @@ const Result = ({ data }) => {
 
   return (
     resultCalories > 0 && (
-      <div style={{ textAlign: "center", paddingTop: "30px" }}>
-        <Header as="h1">
-          {t("You will need")}{" "}
-          <animated.span>
-            {animation.value.interpolate((val) => Math.floor(val))}
-          </animated.span>{" "}
-          {t("kcal to")} {t(data.goal)}
-        </Header>
-      </div>
+      <Container>
+        <Flex py={4} justifyContent="center">
+          <Text as="h1" fontSize={[4, 4, 5]} sx={{ textAlign: "center" }}>
+            {t("You will need")}{" "}
+            <animated.span>
+              {animation.value.interpolate((val) => Math.floor(val))}
+            </animated.span>{" "}
+            {t("kcal to")} {t(data.goal)}
+          </Text>
+        </Flex>
+      </Container>
     )
   );
 };
 
 Result.propTypes = {
   data: PropTypes.shape({
-    age: PropTypes.number,
+    age: PropTypes.string,
     gender: PropTypes.oneOf(["male", "female"]),
-    weight: PropTypes.number,
-    height: PropTypes.number,
+    weight: PropTypes.string,
+    height: PropTypes.string,
     formula: PropTypes.oneOf(["harris-benedict", "mifflin-st-jeor"]),
     activityLevel: PropTypes.oneOf([
       "no-exercise",

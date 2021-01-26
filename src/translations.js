@@ -17,7 +17,7 @@ const translations = {
       "Heavy exercise (6–7 days per week)":
         "Heavy exercise (6-7 days per week)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Very heavy exercise (twice per day, extra heavy workouts)",
+        "Very heavy exercise (twice per day)",
       "Your goal": "Your goal",
       "Cut (-20%)": "Cut (-20%)",
       Maintain: "Maintain",
@@ -32,6 +32,17 @@ const translations = {
       cut: "cut",
       maintain: "maintain",
       gain: "gain",
+      "Please enter valid age": "Please enter valid age",
+      "Please enter your age": "Please enter your age",
+      "Please enter valid weight": "Please enter valid weight",
+      "Please enter your weight": "Please enter your weight",
+      "Please enter valid height": "Please enter valid height",
+      "Please enter your height": "Please enter your height",
+      "Please choose your gender": "Please choose your gender",
+      "Please choose your activity level": "Please choose your activity level",
+      "Please choose your goal": "Please choose your goal",
+      "Please choose your formula to calculate your calories":
+        "Please choose your formula to calculate your calories",
     },
   },
   ru: {
@@ -49,7 +60,7 @@ const translations = {
       "Moderate exercise (3–5 days per week)": "Средний (3-5 раза в неделю)",
       "Heavy exercise (6–7 days per week)": "Высокий (6-7 раз в неделю)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Очень высокий (дважды в день, тяжелые упражения)",
+        "Очень высокий (дважды в день)",
       "Your goal": "Ваша цель",
       "Cut (-20%)": "Похудеть (-20%)",
       Maintain: "Сохранить вес",
@@ -63,6 +74,17 @@ const translations = {
       cut: "похудеть",
       maintain: "сохранить вес",
       gain: "набрать вес",
+      "Please enter valid age": "Пожалуйста введите корректный возраст",
+      "Please enter your age": "Пожалуйста укажите ваш возраст",
+      "Please enter valid weight": "Пожалуйста введите корректный вес",
+      "Please enter your weight": "Пожалуйста укажите ваш вес",
+      "Please enter valid height": "Пожалуйста введите корректный рост",
+      "Please enter your height": "Пожалуйста укажите ваш рост",
+      "Please choose your gender": "Пожалуйста укажите ваш пол",
+      "Please choose your activity level": "Please choose your activity level",
+      "Please choose your goal": "Пожалуйста укажите вашу цель",
+      "Please choose your formula to calculate your calories":
+        "Пожалуйста укажите формулу для подсчета калорий",
     },
   },
   de: {
@@ -83,7 +105,7 @@ const translations = {
       "Heavy exercise (6–7 days per week)":
         "Hartes Training (6-7 mal pro Woche)",
       "Very heavy exercise (twice per day, extra heavy workouts)":
-        "Sehr hartes Training (zwei mal täglich, schwere Übungen)",
+        "Sehr hartes Training (zwei mal täglich)",
       "Your goal": "Ziel",
       "Cut (-20%)": "Abnehmen (-20%)",
       Maintain: "Gewicht halten",
@@ -93,10 +115,22 @@ const translations = {
       "The Mifflin St. Jeor Equation": "Mifflin-St.Jeor-Formel",
       Calculate: "Berechnen",
       "You will need": "Sie brauchen",
-      "kcal to": "kalorien, um",
+      "kcal to": "Kalorien, um",
       cut: "abzunehmen",
       maintain: "ihr Gewicht zu halten",
       gain: "zuzunehem",
+      "Please enter valid age": "Bitte geben Sie korrektes Alter an",
+      "Please enter your age": "Bitte geben Sie ihr Alter ein",
+      "Please enter valid weight": "Bitte geben Sie korrektes Gewicht an",
+      "Please enter your weight": "Bitte geben Sie ihr Gewicht ein",
+      "Please enter valid height": "Bitte geben Sie korrekte Größe an",
+      "Please enter your height": "Bitte geben Sie ihr Größe ein",
+      "Please choose your gender": "Bitte wählen Sie ihr Geschlecht",
+      "Please choose your activity level":
+        "Bitte wählen Sie ihr Aktivitätsniveau",
+      "Please choose your goal": "Bitte wählen Sie ihr Ziel",
+      "Please choose your formula to calculate your calories":
+        "Bitte wählen Sie ihre Formel für die Kalorienrechnung",
     },
   },
 };
