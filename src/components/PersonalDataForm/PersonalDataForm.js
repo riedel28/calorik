@@ -68,7 +68,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
         data-testid="form"
         flexWrap="wrap"
       >
-        <Column width={["100%", "50%", "25%"]}>
+        <Column width={[1, 1 / 2, 1 / 5]}>
           <Heading>{t("Your data")}</Heading>
           <Box width={3 / 4} mb={3}>
             <Text fontWeight="bold" mb={2}>
