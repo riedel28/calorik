@@ -17,6 +17,13 @@ const App = () => {
   const { i18n } = useTranslation(["translation"]);
 
   useEffect(() => {
+    window.scroll({
+      top: document.body.scrollHeight,
+      behavior: "smooth",
+    });
+  }, [userData]);
+
+  useEffect(() => {
     if (!persistedLang) {
       return;
     }
