@@ -1,6 +1,6 @@
 # Calorik
 
-_Simple calorie counter app_
+_Simple calorie counter app_</br>
 You can calculate your calorie needs based on your goal.
 
 ![Screenshot](https://abload.de/img/screenshot2021-02-04axtkke.png)
@@ -22,6 +22,8 @@ To get started with the app locally run following commands:
 
 ```
 git clone https://github.com/riedel28/calorik.git
+
 cd calorik
+
 npm install
 ```
