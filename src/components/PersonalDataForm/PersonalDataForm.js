@@ -67,6 +67,14 @@ const PersonalDataForm = ({ onSubmitData }) => {
         onSubmit={formik.handleSubmit}
         data-testid="form"
         flexWrap="wrap"
+        sx={{
+          px: 2,
+          paddingTop: 4,
+          paddingBottom: 3,
+          marginBottom: 4,
+          borderTop: "2px solid #333eee",
+          borderBottom: "2px solid #333eee",
+        }}
       >
         <Column width={[1, 1 / 2, 1 / 5]}>
           <Heading>{t("Your data")}</Heading>

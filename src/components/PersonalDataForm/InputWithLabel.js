@@ -17,10 +17,10 @@ const InputWithLabel = ({ id, label, value, type, onChange, children }) => {
         onChange={onChange}
         data-testid={id}
         sx={{
-          border: "3px solid #333eee",
+          border: "2px solid #333eee",
           borderRadius: "5px",
-          p: "8px 10px",
-          fontSize: "2",
+          padding: "8px 10px",
+          fontSize: 2,
           fontFamily: "system-ui, sans-serif",
         }}
       />
