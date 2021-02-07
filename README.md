@@ -3,7 +3,7 @@
 _Simple calorie counter app_</br>
 You can calculate your calorie needs based on your goal.
 
-![Screenshot](https://abload.de/img/screenshot2021-02-04axtkke.png)
+![Screenshot](https://abload.de/img/screenshot2021-02-07a5qjoj.png)
 
 ## The project is powered by:
 
