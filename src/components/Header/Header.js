@@ -11,9 +11,10 @@ const Header = ({ onLanguageSelect, language }) => {
       sx={{
         maxWidth: 1200,
         mx: "auto",
+        px: 2,
       }}
     >
-      <Flex p={3} mb={2}>
+      <Flex p={2}>
         <Flex w={1 / 3} color="white" ml="auto">
           {locales.map((locale) => (
             <Link
