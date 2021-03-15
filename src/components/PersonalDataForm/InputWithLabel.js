@@ -1,6 +1,6 @@
-import React from "react";
-import { Box } from "rebass";
-import { Label, Input } from "@rebass/forms";
+import React from 'react';
+import { Box } from 'rebass';
+import { Label, Input } from '@rebass/forms';
 
 const InputWithLabel = ({ id, label, value, type, onChange, children }) => {
   return (
@@ -17,11 +17,11 @@ const InputWithLabel = ({ id, label, value, type, onChange, children }) => {
         onChange={onChange}
         data-testid={id}
         sx={{
-          border: "2px solid #333eee",
-          borderRadius: "5px",
-          padding: "8px 10px",
+          border: '2px solid #333eee',
+          borderRadius: '5px',
+          padding: '8px 10px',
           fontSize: 2,
-          fontFamily: "system-ui, sans-serif",
+          fontFamily: 'system-ui, sans-serif',
         }}
       />
       {children}

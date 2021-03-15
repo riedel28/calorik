@@ -1,7 +1,7 @@
-import React from "react";
-import { Text, Button as RebassButton } from "rebass";
+import React from 'react';
+import { Text, Button as RebassButton } from 'rebass';
 
-const Button = ({ type = "submit", onClick, children }) => {
+const Button = ({ type = 'submit', onClick, children }) => {
   return (
     <RebassButton
       variant="outline"
@@ -13,7 +13,7 @@ const Button = ({ type = "submit", onClick, children }) => {
       py={3}
       sx={{
         letterSpacing: 2,
-        bg: "#333eee",
+        bg: '#333eee',
       }}
       data-testid="submit-button"
     >

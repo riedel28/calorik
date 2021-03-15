@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { useTranslation } from "react-i18next";
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 
-import Header from "../Header/Header";
-import PersonalDataForm from "../PersonalDataForm/PersonalDataForm";
-import Result from "../Result/Result";
+import Header from '../Header/Header';
+import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
+import Result from '../Result/Result';
 
-import useLocalStorage from "../../hooks/useLocalStorage";
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const App = () => {
   const [userData, setUserData] = useState({});
   const [persistedLang, setPersistedLang] = useLocalStorage(
-    "calorikLang",
-    "en"
+    'calorikLang',
+    'en'
   );
-  const [language, setLanguage] = useState(() => persistedLang || "en");
-  const { i18n } = useTranslation(["translation"]);
+  const [language, setLanguage] = useState(() => persistedLang || 'en');
+  const { i18n } = useTranslation(['translation']);
 
   useEffect(() => {
     window.scroll({
       top: document.body.scrollHeight,
-      behavior: "smooth",
+      behavior: 'smooth',
     });
   }, [userData]);
 

@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
-import { Flex, Text } from "rebass";
-import PropTypes from "prop-types";
-import { useSpring, animated } from "react-spring";
-import { useTranslation } from "react-i18next";
+import React, { useEffect } from 'react';
+import { Flex, Text } from 'rebass';
+import PropTypes from 'prop-types';
+import { useSpring, animated } from 'react-spring';
+import { useTranslation } from 'react-i18next';
 
-import Container from "../shared/Container";
-import { calculateCalories } from "../../helpers";
+import Container from '../shared/Container';
+import { calculateCalories } from '../../helpers';
 
 const Result = ({ data }) => {
   const resultCalories = calculateCalories(data);
@@ -17,7 +17,7 @@ const Result = ({ data }) => {
   });
 
   useEffect(() => {
-    const title = "Calorik";
+    const title = 'Calorik';
 
     if (!resultCalories) {
       document.title = title;
@@ -30,12 +30,12 @@ const Result = ({ data }) => {
     resultCalories > 0 && (
       <Container>
         <Flex py={4} justifyContent="center">
-          <Text as="h1" fontSize={[4, 4, 5]} sx={{ textAlign: "center" }}>
-            {t("You will need")}{" "}
+          <Text as="h1" fontSize={[4, 4, 5]} sx={{ textAlign: 'center' }}>
+            {t('You will need')}{' '}
             <animated.span>
               {animation.value.interpolate((val) => Math.floor(val))}
-            </animated.span>{" "}
-            {t("kcal to")} {t(data.goal)}
+            </animated.span>{' '}
+            {t('kcal to')} {t(data.goal)}
           </Text>
         </Flex>
       </Container>
@@ -46,18 +46,18 @@ const Result = ({ data }) => {
 Result.propTypes = {
   data: PropTypes.shape({
     age: PropTypes.string,
-    gender: PropTypes.oneOf(["male", "female"]),
+    gender: PropTypes.oneOf(['male', 'female']),
     weight: PropTypes.string,
     height: PropTypes.string,
-    formula: PropTypes.oneOf(["harris-benedict", "mifflin-st-jeor"]),
+    formula: PropTypes.oneOf(['harris-benedict', 'mifflin-st-jeor']),
     activityLevel: PropTypes.oneOf([
-      "no-exercise",
-      "light",
-      "moderate",
-      "heavy",
-      "very-heavy",
+      'no-exercise',
+      'light',
+      'moderate',
+      'heavy',
+      'very-heavy',
     ]),
-    goal: PropTypes.oneOf(["cut", "maintain", "gain"]),
+    goal: PropTypes.oneOf(['cut', 'maintain', 'gain']),
   }),
 };
 

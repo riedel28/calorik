@@ -1,5 +1,5 @@
-import React from "react";
-import { Text } from "rebass";
+import React from 'react';
+import { Text } from 'rebass';
 
 const Heading = ({ children }) => {
   return (

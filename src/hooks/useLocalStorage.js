@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
 const initialState = {
-  age: "30",
-  gender: "male",
-  height: "180",
-  weight: "80",
-  activityLevel: "no-exercise",
-  goal: "cut",
-  formula: "harris-benedict",
+  age: '30',
+  gender: 'male',
+  height: '180',
+  weight: '80',
+  activityLevel: 'no-exercise',
+  goal: 'cut',
+  formula: 'harris-benedict',
 };
 
 const useLocalStorage = (key, initialValue = initialState) => {

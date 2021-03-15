@@ -1,13 +1,13 @@
-import React from "react";
-import { Box } from "rebass";
+import React from 'react';
+import { Box } from 'rebass';
 
 const Container = ({ children }) => {
   return (
     <Box
       sx={{
         maxWidth: 1200,
-        mx: "auto",
-        px: "20px",
+        mx: 'auto',
+        px: '20px',
       }}
     >
       {children}

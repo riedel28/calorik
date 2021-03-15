@@ -2,11 +2,11 @@ export const calculateCalories = (data) => {
   const { activityLevel, formula, goal } = data;
 
   const activityFactors = {
-    "no-exercise": 1.2,
+    'no-exercise': 1.2,
     light: 1.375,
     moderate: 1.55,
     heavy: 1.725,
-    "very-heavy": 1.9,
+    'very-heavy': 1.9,
   };
 
   const goalFactors = {
@@ -16,7 +16,7 @@ export const calculateCalories = (data) => {
   };
 
   const calories =
-    formula === "harris-benedict"
+    formula === 'harris-benedict'
       ? Math.round(harrisBenedictBMR(data) * activityFactors[activityLevel])
       : Math.round(mifflinStJeorBMR(data) * activityFactors[activityLevel]);
 
@@ -42,7 +42,7 @@ export const harrisBenedictBMR = (data) => {
       4.6756 * Number(age)
   );
 
-  return gender === "male" ? forMale : forFemale;
+  return gender === 'male' ? forMale : forFemale;
 };
 
 // The Mifflin St Jeor Equation
@@ -54,5 +54,5 @@ export const mifflinStJeorBMR = (data) => {
   const forMale = Math.round(10 * weight + 6.25 * height - 5 * age + 5);
   const forFemale = Math.round(10 * weight + 6.25 * height - 5 * age - 161);
 
-  return gender === "male" ? forMale : forFemale;
+  return gender === 'male' ? forMale : forFemale;
 };

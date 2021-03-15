@@ -1,5 +1,5 @@
-import React from "react";
-import { Label, Radio } from "@rebass/forms";
+import React from 'react';
+import { Label, Radio } from '@rebass/forms';
 
 const RadioWithLabel = ({ id, name, value, checked, onChange, children }) => {
   return (
@@ -11,7 +11,7 @@ const RadioWithLabel = ({ id, name, value, checked, onChange, children }) => {
         checked={checked}
         onChange={onChange}
         sx={{
-          color: "#333eee",
+          color: '#333eee',
         }}
       />
       {children}

@@ -1,11 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import reportWebVitals from "./reportWebVitals";
-import "./i18n";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reportWebVitals from './reportWebVitals';
+import './i18n';
 
-import "./index.css";
-import ThemeProvider from "./ThemeProvider";
-import App from "./components/App/App";
+import './index.css';
+import ThemeProvider from './ThemeProvider';
+import App from './components/App/App';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -13,7 +13,7 @@ ReactDOM.render(
       <App />
     </ThemeProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

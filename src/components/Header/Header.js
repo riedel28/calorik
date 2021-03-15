@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { Flex, Box, Link, Text } from "rebass";
+import React, { useState } from 'react';
+import { Flex, Box, Link, Text } from 'rebass';
 
-const locales = ["en", "ru", "de"];
+const locales = ['en', 'ru', 'de'];
 
 const Header = ({ onLanguageSelect, language }) => {
   const [activeItem, setActiveItem] = useState(language);
@@ -10,7 +10,7 @@ const Header = ({ onLanguageSelect, language }) => {
     <Box
       sx={{
         maxWidth: 1200,
-        mx: "auto",
+        mx: 'auto',
         px: 2,
       }}
     >
@@ -30,15 +30,15 @@ const Header = ({ onLanguageSelect, language }) => {
               sx={{
                 px: 2,
                 py: 1,
-                color: "black",
-                textDecoration: "none",
-                ":hover": {
-                  color: "#333eee",
-                  fontWeight: "bold",
+                color: 'black',
+                textDecoration: 'none',
+                ':hover': {
+                  color: '#333eee',
+                  fontWeight: 'bold',
                 },
               }}
             >
-              <Text fontWeight={activeItem === locale ? "bold" : ""}>
+              <Text fontWeight={activeItem === locale ? 'bold' : ''}>
                 {locale.toUpperCase()}
               </Text>
             </Link>

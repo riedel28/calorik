@@ -1,9 +1,9 @@
-import React from "react";
-import { render } from "@testing-library/react";
+import React from 'react';
+import { render } from '@testing-library/react';
 
-import App from "./App";
+import App from './App';
 
-jest.mock("react-i18next", () => ({
+jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => {
     return {
@@ -15,8 +15,8 @@ jest.mock("react-i18next", () => ({
   },
 }));
 
-describe("App", () => {
-  test("should render App component", () => {
+describe('App', () => {
+  test('should render App component', () => {
     render(<App />);
   });
 });
