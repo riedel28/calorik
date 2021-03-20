@@ -118,7 +118,7 @@ const translations = {
       'kcal to': 'Kalorien, um',
       cut: 'abzunehmen',
       maintain: 'ihr Gewicht zu halten',
-      gain: 'zuzunehem',
+      gain: 'zuzunehmen',
       'Please enter valid age': 'Bitte geben Sie korrektes Alter an',
       'Please enter your age': 'Bitte geben Sie ihr Alter ein',
       'Please enter valid weight': 'Bitte geben Sie korrektes Gewicht an',
