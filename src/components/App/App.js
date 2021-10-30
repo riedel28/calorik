@@ -5,6 +5,7 @@ import Header from 'components/Header/Header';
 import PersonalDataForm from 'components/PersonalDataForm/PersonalDataForm';
 import Result from 'components/Result/Result';
 
+import ThemeProvider from 'ThemeProvider';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 const App = () => {
@@ -38,11 +39,11 @@ const App = () => {
   };
 
   return (
-    <>
+    <ThemeProvider>
       <Header language={language} onLanguageSelect={changeLanguage} />
       <PersonalDataForm onSubmitData={setUserData} />
       <Result data={userData} />
-    </>
+    </ThemeProvider>
   );
 };
 

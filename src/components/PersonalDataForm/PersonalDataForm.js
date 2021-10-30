@@ -91,23 +91,11 @@ const PersonalDataForm = ({ onSubmitData }) => {
               {t('Gender')}
             </Text>
             <Label mb={3}>
-              <Radio
-                value="male"
-                {...register('gender')}
-                sx={{
-                  color: '#333eee',
-                }}
-              />
+              <Radio value="male" {...register('gender')} />
               {t('Male')}
             </Label>
             <Label mb={3}>
-              <Radio
-                value="female"
-                {...register('gender')}
-                sx={{
-                  color: '#333eee',
-                }}
-              />
+              <Radio value="female" {...register('gender')} />
               {t('Female')}
             </Label>
           </Box>
@@ -124,7 +112,6 @@ const PersonalDataForm = ({ onSubmitData }) => {
                   data-testid={id}
                   {...register(id)}
                   sx={{
-                    border: '2px solid #333eee',
                     borderRadius: '5px',
                     padding: '8px 10px',
                     fontSize: 2,
@@ -152,13 +139,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Box mb={3}>
             {activityLevelData.map(({ id, description }) => (
               <Label key={id} mb={3}>
-                <Radio
-                  value={id}
-                  {...register('activityLevel')}
-                  sx={{
-                    color: '#333eee',
-                  }}
-                />
+                <Radio value={id} {...register('activityLevel')} />
                 {t(description)}
               </Label>
             ))}
@@ -169,13 +150,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Heading>{t('Your goal')}</Heading>
           {goalData.map(({ id, description }) => (
             <Label key={id} mb={3}>
-              <Radio
-                value={id}
-                {...register('goal')}
-                sx={{
-                  color: '#333eee',
-                }}
-              />
+              <Radio value={id} {...register('goal')} />
               {t(description)}
             </Label>
           ))}
@@ -185,13 +160,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Heading>{t('Formula')}</Heading>
           {formulaeData.map(({ id, description }) => (
             <Label key={id} mb={3}>
-              <Radio
-                value={id}
-                {...register('formula')}
-                sx={{
-                  color: '#333eee',
-                }}
-              />
+              <Radio value={id} {...register('formula')} />
               {t(description)}
             </Label>
           ))}
