@@ -53,16 +53,12 @@ const PersonalDataForm = () => {
   const {
     register,
     handleSubmit,
-    // getValues,
     control,
     formState: { errors },
   } = useForm({
     defaultValues: persistentData,
     resolver: yupResolver(validationSchema),
   });
-
-  // useEffect(() => {
-  // }, [getValues, setPersistentData]);
 
   const onSubmit = (values) => {
     setPersistentData(values);
@@ -169,7 +165,7 @@ const PersonalDataForm = () => {
       </Flex>
 
       <Flex justifyContent="center">
-        <Button type="submit" onClick={handleSubmit(setUserData)}>
+        <Button type="submit" onClick={handleSubmit(onSubmit)}>
           {t('Calculate')}
         </Button>
       </Flex>
