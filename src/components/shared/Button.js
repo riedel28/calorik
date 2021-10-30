@@ -14,6 +14,9 @@ const Button = ({ type = 'submit', onClick, children }) => {
       sx={{
         letterSpacing: 2,
         bg: '#333eee',
+        ':hover': {
+          cursor: 'pointer',
+        },
       }}
       data-testid="submit-button"
     >

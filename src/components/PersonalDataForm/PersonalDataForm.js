@@ -1,70 +1,78 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Flex, Box, Text } from 'rebass';
-import { useFormik } from 'formik';
+import { Label, Radio, Input } from '@rebass/forms';
+import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { DevTool } from '@hookform/devtools';
+
 import { useTranslation } from 'react-i18next';
 
 import Container from '../shared/Container';
 import Column from '../shared/Column';
 import Heading from '../shared/Heading';
-import InputWithLabel from './InputWithLabel';
-import RadioWithLabel from './RadioWithLabel';
 import Button from '../shared/Button';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import validationSchema from '../../validationSchema';
 
+const coreData = [
+  { id: 'age', description: 'Age' },
+  { id: 'height', description: 'Height' },
+  { id: 'weight', description: 'Weight' },
+];
+
+const activityLevelData = [
+  { id: 'no-exercise', description: 'Little / No exercise' },
+  { id: 'light', description: 'Light exercise (1–3 days per week)' },
+  { id: 'moderate', description: 'Moderate exercise (3–5 days per week)' },
+  { id: 'heavy', description: 'Heavy exercise (6–7 days per week)' },
+  {
+    id: 'very-heavy',
+    description: 'Very heavy exercise (twice per day, extra heavy workouts)',
+  },
+];
+
+const goalData = [
+  { id: 'cut', description: 'Cut (-20%)' },
+  { id: 'maintain', description: 'Maintain' },
+  { id: 'gain', description: 'Gain (+15%)' },
+];
+
+const formulaeData = [
+  {
+    id: 'harris-benedict',
+    description: 'The Original Harris-Benedict Equation',
+  },
+  { id: 'mifflin-st-jeor', description: 'The Mifflin St. Jeor Equation' },
+];
+
 const PersonalDataForm = ({ onSubmitData }) => {
   const { t } = useTranslation();
   const [persistentData, setPersistentData] = useLocalStorage('calorikData');
-
-  const formik = useFormik({
-    initialValues: { ...persistentData },
-    validationSchema,
-    onSubmit: (values) => {
-      onSubmitData(values);
-    },
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: persistentData,
+    resolver: yupResolver(validationSchema),
   });
 
   useEffect(() => {
-    setPersistentData(formik.values);
-  }, [formik.values, setPersistentData]);
+    setPersistentData(getValues());
+  }, [getValues]);
 
-  const coreData = [
-    { id: 'age', description: 'Age' },
-    { id: 'height', description: 'Height' },
-    { id: 'weight', description: 'Weight' },
-  ];
-
-  const activityLevelData = [
-    { id: 'no-exercise', description: 'Little / No exercise' },
-    { id: 'light', description: 'Light exercise (1–3 days per week)' },
-    { id: 'moderate', description: 'Moderate exercise (3–5 days per week)' },
-    { id: 'heavy', description: 'Heavy exercise (6–7 days per week)' },
-    {
-      id: 'very-heavy',
-      description: 'Very heavy exercise (twice per day, extra heavy workouts)',
-    },
-  ];
-
-  const goalData = [
-    { id: 'cut', description: 'Cut (-20%)' },
-    { id: 'maintain', description: 'Maintain' },
-    { id: 'gain', description: 'Gain (+15%)' },
-  ];
-
-  const formulaeData = [
-    {
-      id: 'harris-benedict',
-      description: 'The Original Harris-Benedict Equation',
-    },
-    { id: 'mifflin-st-jeor', description: 'The Mifflin St. Jeor Equation' },
-  ];
+  const onSubmit = (values) => {
+    onSubmitData(values);
+  };
 
   return (
     <Container>
       <Flex
         as="form"
-        onSubmit={formik.handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         data-testid="form"
         flexWrap="wrap"
         sx={{
@@ -72,46 +80,58 @@ const PersonalDataForm = ({ onSubmitData }) => {
           paddingTop: 4,
           paddingBottom: 3,
           marginBottom: 4,
-          borderTop: '2px solid #333eee',
-          borderBottom: '2px solid #333eee',
+          borderTop: '1px solid rgba(51, 62, 238, 0.2)',
+          borderBottom: '1px solid rgba(51, 62, 238, 0.2)',
         }}
       >
         <Column width={[1, 1 / 2, 1 / 5]}>
           <Heading>{t('Your data')}</Heading>
           <Box width={3 / 4} mb={3}>
             <Text fontWeight="bold" mb={2}>
-              {t('Gender')}:
+              {t('Gender')}
             </Text>
-            <RadioWithLabel
-              id="male"
-              name="gender"
-              value="male"
-              checked={formik.values.gender === 'male'}
-              onChange={formik.handleChange}
-            >
+            <Label mb={3}>
+              <Radio
+                value="male"
+                {...register('gender')}
+                sx={{
+                  color: '#333eee',
+                }}
+              />
               {t('Male')}
-            </RadioWithLabel>
-
-            <RadioWithLabel
-              id="female"
-              name="gender"
-              value="female"
-              checked={formik.values.gender === 'female'}
-              onChange={formik.handleChange}
-            >
+            </Label>
+            <Label mb={3}>
+              <Radio
+                value="female"
+                {...register('gender')}
+                sx={{
+                  color: '#333eee',
+                }}
+              />
               {t('Female')}
-            </RadioWithLabel>
+            </Label>
           </Box>
+          <Box width={3 / 4} mb={3}></Box>
           <Box width={3 / 4} mb={3}>
             {coreData.map(({ id, description }) => (
-              <InputWithLabel
-                key={id}
-                id={id}
-                label={`${t(description)}:`}
-                value={formik.values[id]}
-                onChange={formik.handleChange}
-              >
-                {formik.touched[id] && formik.errors[id] ? (
+              <Box mb={3} key={id}>
+                <Label htmlFor={id} fontWeight="bold" mb="1">
+                  {t(description)}
+                </Label>
+                <Input
+                  type="number"
+                  min={0}
+                  data-testid={id}
+                  {...register(id)}
+                  sx={{
+                    border: '2px solid #333eee',
+                    borderRadius: '5px',
+                    padding: '8px 10px',
+                    fontSize: 2,
+                    fontFamily: 'system-ui, sans-serif',
+                  }}
+                />
+                {errors[id] ? (
                   <Text
                     sx={{
                       color: 'deeppink',
@@ -119,10 +139,10 @@ const PersonalDataForm = ({ onSubmitData }) => {
                     }}
                     py={1}
                   >
-                    {t(formik.errors[id])}
+                    {t(errors[id].message)}
                   </Text>
                 ) : null}
-              </InputWithLabel>
+              </Box>
             ))}
           </Box>
         </Column>
@@ -131,16 +151,16 @@ const PersonalDataForm = ({ onSubmitData }) => {
           <Heading>{t('Activity Level')}</Heading>
           <Box mb={3}>
             {activityLevelData.map(({ id, description }) => (
-              <RadioWithLabel
-                key={id}
-                id={id}
-                name="activityLevel"
-                value={id}
-                checked={formik.values.activityLevel === id}
-                onChange={formik.handleChange}
-              >
+              <Label key={id} mb={3}>
+                <Radio
+                  value={id}
+                  {...register('activityLevel')}
+                  sx={{
+                    color: '#333eee',
+                  }}
+                />
                 {t(description)}
-              </RadioWithLabel>
+              </Label>
             ))}
           </Box>
         </Column>
@@ -148,39 +168,43 @@ const PersonalDataForm = ({ onSubmitData }) => {
         <Column width={[1, 1 / 2, 1 / 5]}>
           <Heading>{t('Your goal')}</Heading>
           {goalData.map(({ id, description }) => (
-            <RadioWithLabel
-              key={id}
-              id={id}
-              name="goal"
-              value={id}
-              checked={formik.values.goal === id}
-              onChange={formik.handleChange}
-            >
+            <Label key={id} mb={3}>
+              <Radio
+                value={id}
+                {...register('goal')}
+                sx={{
+                  color: '#333eee',
+                }}
+              />
               {t(description)}
-            </RadioWithLabel>
+            </Label>
           ))}
         </Column>
 
         <Column width={[1, 1 / 2, 1 / 4]}>
           <Heading>{t('Formula')}</Heading>
           {formulaeData.map(({ id, description }) => (
-            <RadioWithLabel
-              key={id}
-              id={id}
-              name="formula"
-              value={id}
-              checked={formik.values.formula === id}
-              onChange={formik.handleChange}
-            >
+            <Label key={id} mb={3}>
+              <Radio
+                value={id}
+                {...register('formula')}
+                sx={{
+                  color: '#333eee',
+                }}
+              />
               {t(description)}
-            </RadioWithLabel>
+            </Label>
           ))}
         </Column>
       </Flex>
 
       <Flex justifyContent="center">
-        <Button onClick={formik.handleSubmit}>{t('Calculate')}</Button>
+        <Button type="submit" onClick={handleSubmit(onSubmitData)}>
+          {t('Calculate')}
+        </Button>
       </Flex>
+
+      <DevTool control={control} />
     </Container>
   );
 };
