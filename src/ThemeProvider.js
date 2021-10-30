@@ -1,9 +1,25 @@
 import React from 'react';
-import { ThemeProvider as EmotionThemeProvider } from '@emotion/react';
-import theme from '@rebass/preset';
+import { ThemeProvider as ThemeUIProvider } from 'theme-ui';
 
-const ThemeProvider = (props) => (
-  <EmotionThemeProvider theme={theme}>{props.children}</EmotionThemeProvider>
+const theme = {
+  config: {
+    initialColorModeName: 'light',
+  },
+  colors: {
+    text: '#000',
+    background: '#fff',
+    primary: '#333eee',
+    modes: {
+      dark: {
+        text: '#fff',
+        background: '#000',
+      },
+    },
+  },
+};
+
+const ThemeProvider = ({ children }) => (
+  <ThemeUIProvider theme={theme}>{children}</ThemeUIProvider>
 );
 
 export default ThemeProvider;

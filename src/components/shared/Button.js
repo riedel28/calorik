@@ -4,9 +4,6 @@ import { Text, Button as RebassButton } from 'rebass';
 const Button = ({ type = 'submit', onClick, children }) => {
   return (
     <RebassButton
-      variant="outline"
-      bg="primary"
-      color="primary"
       type={type}
       onClick={onClick}
       px={4}
@@ -14,6 +11,9 @@ const Button = ({ type = 'submit', onClick, children }) => {
       sx={{
         letterSpacing: 2,
         bg: '#333eee',
+        ':hover': {
+          cursor: 'pointer',
+        },
       }}
       data-testid="submit-button"
     >

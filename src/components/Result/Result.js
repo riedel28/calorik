@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react';
 import { Flex, Text } from 'rebass';
-import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 
-import Container from '../shared/Container';
-import { calculateCalories } from '../../helpers';
+import Container from 'components/shared/Container';
+import { calculateCalories } from 'helpers';
+import { useUserData } from 'context/UserDataContext';
 
-const Result = ({ data }) => {
-  const resultCalories = calculateCalories(data);
+const Result = () => {
   const { t } = useTranslation();
+  const { userData } = useUserData();
+  const resultCalories = calculateCalories(userData);
 
   const animation = useSpring({
     from: { value: 0 },
@@ -26,6 +27,13 @@ const Result = ({ data }) => {
     }
   }, [resultCalories]);
 
+  useEffect(() => {
+    window.scroll({
+      top: document.body.scrollHeight,
+      behavior: 'smooth',
+    });
+  }, [userData]);
+
   return (
     resultCalories > 0 && (
       <Container>
@@ -35,30 +43,12 @@ const Result = ({ data }) => {
             <animated.span>
               {animation.value.interpolate((val) => Math.floor(val))}
             </animated.span>{' '}
-            {t('kcal to')} {t(data.goal)}
+            {t('kcal to')} {t(userData.goal)}
           </Text>
         </Flex>
       </Container>
     )
   );
-};
-
-Result.propTypes = {
-  data: PropTypes.shape({
-    age: PropTypes.string,
-    gender: PropTypes.oneOf(['male', 'female']),
-    weight: PropTypes.string,
-    height: PropTypes.string,
-    formula: PropTypes.oneOf(['harris-benedict', 'mifflin-st-jeor']),
-    activityLevel: PropTypes.oneOf([
-      'no-exercise',
-      'light',
-      'moderate',
-      'heavy',
-      'very-heavy',
-    ]),
-    goal: PropTypes.oneOf(['cut', 'maintain', 'gain']),
-  }),
 };
 
 export default Result;
