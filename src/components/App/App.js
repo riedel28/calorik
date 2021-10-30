@@ -6,23 +6,16 @@ import PersonalDataForm from 'components/PersonalDataForm/PersonalDataForm';
 import Result from 'components/Result/Result';
 
 import ThemeProvider from 'ThemeProvider';
+import { UserDataProvider } from 'context/UserDataContext';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 const App = () => {
-  const [userData, setUserData] = useState({});
   const [persistedLang, setPersistedLang] = useLocalStorage(
     'calorikLang',
     'en'
   );
   const [language, setLanguage] = useState(() => persistedLang || 'en');
   const { i18n } = useTranslation(['translation']);
-
-  useEffect(() => {
-    window.scroll({
-      top: document.body.scrollHeight,
-      behavior: 'smooth',
-    });
-  }, [userData]);
 
   useEffect(() => {
     if (!persistedLang) {
@@ -40,9 +33,11 @@ const App = () => {
 
   return (
     <ThemeProvider>
-      <Header language={language} onLanguageSelect={changeLanguage} />
-      <PersonalDataForm onSubmitData={setUserData} />
-      <Result data={userData} />
+      <UserDataProvider>
+        <Header language={language} onLanguageSelect={changeLanguage} />
+        <PersonalDataForm />
+        <Result />
+      </UserDataProvider>
     </ThemeProvider>
   );
 };

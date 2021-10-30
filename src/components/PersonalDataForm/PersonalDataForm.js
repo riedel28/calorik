@@ -1,11 +1,9 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { Flex, Box, Text } from 'rebass';
 import { Label, Radio, Input } from '@rebass/forms';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { DevTool } from '@hookform/devtools';
-
 import { useTranslation } from 'react-i18next';
 
 import Container from 'components/shared/Container';
@@ -14,6 +12,8 @@ import Heading from 'components/shared/Heading';
 import Button from 'components/shared/Button';
 import useLocalStorage from 'hooks/useLocalStorage';
 import validationSchema from 'validationSchema';
+
+import { useUserData } from 'context/UserDataContext';
 
 const coreData = [
   { id: 'age', description: 'Age' },
@@ -46,13 +46,14 @@ const formulaeData = [
   { id: 'mifflin-st-jeor', description: 'The Mifflin St. Jeor Equation' },
 ];
 
-const PersonalDataForm = ({ onSubmitData }) => {
+const PersonalDataForm = () => {
   const { t } = useTranslation();
   const [persistentData, setPersistentData] = useLocalStorage('calorikData');
+  const { setUserData } = useUserData();
   const {
     register,
     handleSubmit,
-    getValues,
+    // getValues,
     control,
     formState: { errors },
   } = useForm({
@@ -60,12 +61,12 @@ const PersonalDataForm = ({ onSubmitData }) => {
     resolver: yupResolver(validationSchema),
   });
 
-  useEffect(() => {
-    setPersistentData(getValues());
-  }, [getValues, setPersistentData]);
+  // useEffect(() => {
+  // }, [getValues, setPersistentData]);
 
   const onSubmit = (values) => {
-    onSubmitData(values);
+    setPersistentData(values);
+    setUserData(values);
   };
 
   return (
@@ -168,7 +169,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
       </Flex>
 
       <Flex justifyContent="center">
-        <Button type="submit" onClick={handleSubmit(onSubmitData)}>
+        <Button type="submit" onClick={handleSubmit(setUserData)}>
           {t('Calculate')}
         </Button>
       </Flex>
@@ -176,10 +177,6 @@ const PersonalDataForm = ({ onSubmitData }) => {
       <DevTool control={control} />
     </Container>
   );
-};
-
-PersonalDataForm.propTypes = {
-  onSubmitData: PropTypes.func.isRequired,
 };
 
 export default PersonalDataForm;
