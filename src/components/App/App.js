@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import Header from '../Header/Header';
-import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
-import Result from '../Result/Result';
+import Header from 'components/Header/Header';
+import PersonalDataForm from 'components/PersonalDataForm/PersonalDataForm';
+import Result from 'components/Result/Result';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from 'hooks/useLocalStorage';
 
 const App = () => {
   const [userData, setUserData] = useState({});

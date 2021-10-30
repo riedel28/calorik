@@ -8,12 +8,12 @@ import { DevTool } from '@hookform/devtools';
 
 import { useTranslation } from 'react-i18next';
 
-import Container from '../shared/Container';
-import Column from '../shared/Column';
-import Heading from '../shared/Heading';
-import Button from '../shared/Button';
-import useLocalStorage from '../../hooks/useLocalStorage';
-import validationSchema from '../../validationSchema';
+import Container from 'components/shared/Container';
+import Column from 'components/shared/Column';
+import Heading from 'components/shared/Heading';
+import Button from 'components/shared/Button';
+import useLocalStorage from 'hooks/useLocalStorage';
+import validationSchema from 'validationSchema';
 
 const coreData = [
   { id: 'age', description: 'Age' },
@@ -62,7 +62,7 @@ const PersonalDataForm = ({ onSubmitData }) => {
 
   useEffect(() => {
     setPersistentData(getValues());
-  }, [getValues]);
+  }, [getValues, setPersistentData]);
 
   const onSubmit = (values) => {
     onSubmitData(values);

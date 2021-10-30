@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
 
-import Container from '../shared/Container';
-import { calculateCalories } from '../../helpers';
+import Container from 'components/shared/Container';
+import { calculateCalories } from 'helpers';
 
 const Result = ({ data }) => {
   const resultCalories = calculateCalories(data);

@@ -5,7 +5,7 @@ import './i18n';
 
 import './index.css';
 import ThemeProvider from './ThemeProvider';
-import App from './components/App/App';
+import App from 'components/App/App';
 
 ReactDOM.render(
   <React.StrictMode>
