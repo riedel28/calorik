@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom';
 import reportWebVitals from './reportWebVitals';
 import './i18n';
 
+import { MantineProvider } from '@mantine/core';
+
 import './index.css';
 import App from 'components/App/App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MantineProvider>
+      <App />
+    </MantineProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
