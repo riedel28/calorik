@@ -15,7 +15,7 @@ export default Yup.object({
   height: Yup.number()
     .typeError('Height must be a number')
     .min(0, 'Please enter valid height')
-    .max(250, 'Please enter valid height')
+    .max(300, 'Please enter valid height')
     .required('Please enter your height'),
   activityLevel: Yup.string().required('Please choose your activity level'),
   goal: Yup.string().required('Please choose your goal'),

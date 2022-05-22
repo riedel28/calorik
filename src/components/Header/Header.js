@@ -1,77 +1,62 @@
-import React, { useState } from 'react';
-import { Flex, Box, Text } from 'rebass';
+import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import {
+  ActionIcon,
+  Group,
+  Header as MantineHeader,
+  Button,
+  useMantineColorScheme,
+} from '@mantine/core';
 import { FiMoon, FiSun } from 'react-icons/fi';
-import { useColorMode } from 'theme-ui';
 
-const locales = ['en', 'ru', 'de'];
+import useLocalStorage from 'hooks/useLocalStorage';
 
-const Header = ({ onLanguageSelect, language }) => {
-  const [activeItem, setActiveItem] = useState(language);
-  const [colorMode, setColorMode] = useColorMode();
+const languages = ['en', 'ru', 'de'];
 
-  const handleChangeLanguage = (locale) => {
-    setActiveItem(locale);
-    onLanguageSelect(locale);
+const Header = ({ onLanguageSelect, language, ...props }) => {
+  const { i18n } = useTranslation(['translation']);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const isDark = colorScheme === 'dark';
+
+  const [persistedLang, setPersistedLang] = useLocalStorage(
+    'calorikLang',
+    'en'
+  );
+  const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
+
+  useEffect(() => {
+    if (!persistedLang) {
+      return;
+    }
+
+    i18n.changeLanguage(persistedLang);
+  }, [persistedLang, i18n]);
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+    setLanguage(lang);
+    setPersistedLang(lang);
   };
 
   return (
-    <Box
-      sx={{
-        maxWidth: 1200,
-        mx: 'auto',
-        px: 2,
-      }}
-    >
-      <Flex p={2}>
-        <Flex w={1 / 3} ml="auto">
-          {locales.map((locale) => (
-            <Text
-              key={locale}
-              active={activeItem === locale}
-              onClick={() => handleChangeLanguage(locale)}
-              mr={1}
-              sx={{
-                px: 2,
-                py: 1,
-                textDecoration: 'none',
-                fontWeight: activeItem === locale ? 'bold' : 'normal',
-                ':hover': {
-                  cursor: 'pointer',
-                  color: '#333eee',
-                },
-              }}
-            >
-              {locale.toUpperCase()}
-            </Text>
-          ))}
-          <Text
-            onClick={() => {
-              setColorMode(colorMode === 'default' ? 'dark' : 'default');
-            }}
-            sx={{
-              px: 2,
-              py: 1,
-              marginLeft: 2,
-              textDecoration: 'none',
-              ':hover': {
-                cursor: 'pointer',
-              },
-            }}
+    <MantineHeader height={56} p="xs" {...props}>
+      <Group position="right" spacing="xs">
+        {languages.map((lang) => (
+          <Button
+            key={lang}
+            size="xs"
+            color="indigo"
+            variant={selectedLanguage === lang ? 'light' : 'subtle'}
+            onClick={() => changeLanguage(lang)}
           >
-            <Text
-              sx={{
-                ':hover': {
-                  cursor: 'pointer',
-                  color: '#333eee',
-                },
-              }}
-            >
-              {colorMode === 'default' ? <FiMoon /> : <FiSun />}
-            </Text>
-          </Text>
-        </Flex>
-      </Flex>
-    </Box>
+            {lang.toUpperCase()}
+          </Button>
+        ))}
+        <ActionIcon color="indigo" onClick={() => toggleColorScheme()}>
+          {isDark ? <FiMoon /> : <FiSun />}
+        </ActionIcon>
+      </Group>
+    </MantineHeader>
   );
 };
 

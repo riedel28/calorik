@@ -1,7 +1,8 @@
 import React from 'react';
-import { render, fireEvent, waitFor } from '@testing-library/react';
+import { screen, render, fireEvent } from '@testing-library/react';
 
 import PersonalDataForm from './PersonalDataForm';
+import { UserDataProvider } from 'context/UserDataContext';
 
 jest.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
@@ -15,20 +16,25 @@ jest.mock('react-i18next', () => ({
 describe('PersonalDataForm', () => {
   test('should render PersonalDataForm component', () => {
     const handleSubmit = jest.fn();
-    const { getByTestId } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const form = getByTestId('form');
+    const form = screen.getByTestId('form');
 
     expect(form).toBeInTheDocument();
   });
 
   test('should be able to enter an age', () => {
     const handleSubmit = jest.fn();
-    const { getByTestId } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const ageInput = getByTestId('age');
+
+    const ageInput = screen.getByTestId('age');
     fireEvent.change(ageInput, { target: { value: '35' } });
 
     expect(ageInput.value).toBe('35');
@@ -36,11 +42,13 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter a gender', () => {
     const handleSubmit = jest.fn();
-    const { getByLabelText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
 
-    const radio = getByLabelText('Male');
+    const radio = screen.getByLabelText('Male');
     fireEvent.change(radio, { target: { value: 'male' } });
 
     expect(radio.value).toBe('male');
@@ -48,10 +56,12 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter a weight', () => {
     const handleSubmit = jest.fn();
-    const { getByTestId } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const weightInput = getByTestId('weight');
+    const weightInput = screen.getByTestId('weight');
     fireEvent.change(weightInput, { target: { value: '90' } });
 
     expect(weightInput.value).toBe('90');
@@ -59,10 +69,13 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter a height', () => {
     const handleSubmit = jest.fn();
-    const { getByTestId } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const heightInput = getByTestId('weight');
+
+    const heightInput = screen.getByTestId('weight');
     fireEvent.change(heightInput, { target: { value: '180' } });
 
     expect(heightInput.value).toBe('180');
@@ -70,10 +83,12 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter an activity level', () => {
     const handleSubmit = jest.fn();
-    const { getByLabelText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const radio = getByLabelText(/no exercise/i);
+    const radio = screen.getByLabelText(/no exercise/i);
     fireEvent.change(radio, { target: { value: 'no-exercise' } });
 
     expect(radio.value).toBe('no-exercise');
@@ -81,10 +96,12 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter a goal', () => {
     const handleSubmit = jest.fn();
-    const { getByLabelText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const radio = getByLabelText(/cut/i);
+    const radio = screen.getByLabelText(/cut/i);
     fireEvent.change(radio, { target: { value: 'cut' } });
 
     expect(radio.value).toBe('cut');
@@ -92,90 +109,37 @@ describe('PersonalDataForm', () => {
 
   test('should be able to enter a formula', () => {
     const handleSubmit = jest.fn();
-    const { getByLabelText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const radio = getByLabelText(/harris/i);
+    const radio = screen.getByLabelText(/harris/i);
     fireEvent.change(radio, { target: { value: 'harris-benedict' } });
 
     expect(radio.value).toBe('harris-benedict');
   });
 
-  test('should submit the form', async () => {
-    const handleSubmit = jest.fn();
-    const { getByTestId, getByLabelText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
-    );
-
-    const ageInput = getByTestId('age');
-    const heightInput = getByTestId('height');
-    const weightInput = getByTestId('weight');
-    const activityLevelInput = getByLabelText(/no exercise/i);
-    const goalInput = getByLabelText(/cut/i);
-    const formulaInput = getByLabelText(/harris/i);
-    const submitButton = getByTestId('submit-button');
-
-    await waitFor(() => {
-      fireEvent.change(ageInput, { target: { value: '35' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.change(heightInput, { target: { value: '180' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.change(weightInput, { target: { value: '90' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.change(activityLevelInput, {
-        target: { value: 'no-exercise' },
-      });
-    });
-
-    await waitFor(() => {
-      fireEvent.change(goalInput, { target: { value: 'cut' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.change(formulaInput, { target: { value: 'harris-benedict' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.click(submitButton);
-    });
-
-    expect(handleSubmit).toBeCalled();
-  });
-
   test('should display error messages by entering incorrect data', async () => {
     const handleSubmit = jest.fn();
-    const { getByTestId, getByText } = render(
-      <PersonalDataForm onSubmitData={handleSubmit} />
+    render(
+      <UserDataProvider>
+        <PersonalDataForm onSubmitData={handleSubmit} />
+      </UserDataProvider>
     );
-    const ageInput = getByTestId('age');
-    const weightInput = getByTestId('weight');
-    const heightInput = getByTestId('height');
-    const submitButton = getByTestId('submit-button');
 
-    await waitFor(() => {
-      fireEvent.change(ageInput, { target: { value: '2000' } });
-    });
+    const ageInput = screen.getByTestId('age');
+    const weightInput = screen.getByTestId('weight');
+    const heightInput = screen.getByTestId('height');
+    const submitButton = screen.getByTestId('submit-button');
 
-    await waitFor(() => {
-      fireEvent.change(weightInput, { target: { value: '-2000' } });
-    });
+    fireEvent.change(ageInput, { target: { value: '2000' } });
+    fireEvent.change(weightInput, { target: { value: '-2000' } });
+    fireEvent.change(heightInput, { target: { value: '2000' } });
+    fireEvent.click(submitButton);
 
-    await waitFor(() => {
-      fireEvent.change(heightInput, { target: { value: '2000' } });
-    });
-
-    await waitFor(() => {
-      fireEvent.click(submitButton);
-    });
-
-    expect(getByText('Please enter valid age')).toBeInTheDocument();
-    expect(getByText('Please enter valid height')).toBeInTheDocument();
-    expect(getByText('Please enter valid weight')).toBeInTheDocument();
+    expect(screen.getByText('Please enter valid age')).toBeInTheDocument();
+    expect(screen.getByText('Please enter valid height')).toBeInTheDocument();
+    expect(screen.getByText('Please enter valid weight')).toBeInTheDocument();
   });
 });

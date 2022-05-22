@@ -1,21 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import {
+  AppShell,
+  Container,
+  MantineProvider,
+  ColorSchemeProvider,
+} from '@mantine/core';
 
+import { UserDataProvider } from 'context/UserDataContext';
 import Header from 'components/Header/Header';
 import PersonalDataForm from 'components/PersonalDataForm/PersonalDataForm';
 import Result from 'components/Result/Result';
 
-import ThemeProvider from 'ThemeProvider';
-import { UserDataProvider } from 'context/UserDataContext';
 import useLocalStorage from 'hooks/useLocalStorage';
 
 const App = () => {
+  const { i18n } = useTranslation(['translation']);
+
+  const [colorScheme, setColorScheme] = useState('light');
+
   const [persistedLang, setPersistedLang] = useLocalStorage(
     'calorikLang',
     'en'
   );
-  const [language, setLanguage] = useState(() => persistedLang || 'en');
-  const { i18n } = useTranslation(['translation']);
+  const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
+
+  const handleToggleColorScheme = (value) =>
+    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
   useEffect(() => {
     if (!persistedLang) {
@@ -32,13 +43,32 @@ const App = () => {
   };
 
   return (
-    <ThemeProvider>
-      <UserDataProvider>
-        <Header language={language} onLanguageSelect={changeLanguage} />
-        <PersonalDataForm />
-        <Result />
-      </UserDataProvider>
-    </ThemeProvider>
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={handleToggleColorScheme}
+    >
+      <MantineProvider
+        theme={{ colorScheme }}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <UserDataProvider>
+          <AppShell
+            header={
+              <Header
+                onLanguageSelect={changeLanguage}
+                language={selectedLanguage}
+              />
+            }
+            footer={<Result />}
+          >
+            <Container size="lg">
+              <PersonalDataForm />
+            </Container>
+          </AppShell>
+        </UserDataProvider>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 };
 

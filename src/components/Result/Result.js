@@ -1,9 +1,8 @@
 import React, { useEffect } from 'react';
-import { Flex, Text } from 'rebass';
-import { useSpring, animated } from 'react-spring';
 import { useTranslation } from 'react-i18next';
+import { Footer, Title } from '@mantine/core';
+import { useSpring, animated } from 'react-spring';
 
-import Container from 'components/shared/Container';
 import { calculateCalories } from 'helpers';
 import { useUserData } from 'context/UserDataContext';
 
@@ -36,17 +35,15 @@ const Result = () => {
 
   return (
     resultCalories > 0 && (
-      <Container>
-        <Flex py={4} justifyContent="center">
-          <Text as="h1" fontSize={[4, 4, 5]} sx={{ textAlign: 'center' }}>
-            {t('You will need')}{' '}
-            <animated.span>
-              {animation.value.interpolate((val) => Math.floor(val))}
-            </animated.span>{' '}
-            {t('kcal to')} {t(userData.goal)}
-          </Text>
-        </Flex>
-      </Container>
+      <Footer style={{ padding: 32 }}>
+        <Title component="h1" align="center">
+          {t('You will need')}{' '}
+          <animated.span>
+            {animation.value.interpolate((val) => Math.floor(val))}
+          </animated.span>{' '}
+          {t('kcal to')} {t(userData.goal)}
+        </Title>
+      </Footer>
     )
   );
 };
