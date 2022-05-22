@@ -25,7 +25,7 @@
     "react/prop-types": [
       "off"
     ],
-    "no-console": "error",
-    "no-unused-vars": "warn",
+    "no-console": "warn",
+    "no-unused-vars": "warn"
   }
 }
