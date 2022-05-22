@@ -1,177 +1,240 @@
 import React from 'react';
-import { Flex, Box, Text } from 'rebass';
-import { Label, Radio, Input } from '@rebass/forms';
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { DevTool } from '@hookform/devtools';
 import { useTranslation } from 'react-i18next';
+import {
+  Box,
+  Button,
+  Grid,
+  Group,
+  NumberInput,
+  RadioGroup,
+  Radio,
+  Title,
+  Stack,
+} from '@mantine/core';
+import { useForm, yupResolver } from '@mantine/form';
 
-import Container from 'components/shared/Container';
-import Column from 'components/shared/Column';
-import Heading from 'components/shared/Heading';
-import Button from 'components/shared/Button';
 import useLocalStorage from 'hooks/useLocalStorage';
 import validationSchema from 'validationSchema';
 
 import { useUserData } from 'context/UserDataContext';
 
-const coreData = [
-  { id: 'age', description: 'Age' },
-  { id: 'height', description: 'Height' },
-  { id: 'weight', description: 'Weight' },
-];
-
-const activityLevelData = [
-  { id: 'no-exercise', description: 'Little / No exercise' },
-  { id: 'light', description: 'Light exercise (1–3 days per week)' },
-  { id: 'moderate', description: 'Moderate exercise (3–5 days per week)' },
-  { id: 'heavy', description: 'Heavy exercise (6–7 days per week)' },
+const activityLevelOptions = [
+  { value: 'no-exercise', label: 'Little / No exercise' },
+  { value: 'light', label: 'Light exercise (1–3 days per week)' },
+  { value: 'moderate', label: 'Moderate exercise (3–5 days per week)' },
+  { value: 'heavy', label: 'Heavy exercise (6–7 days per week)' },
   {
-    id: 'very-heavy',
-    description: 'Very heavy exercise (twice per day, extra heavy workouts)',
+    value: 'very-heavy',
+    label: 'Very heavy exercise (twice per day, extra heavy workouts)',
   },
 ];
 
-const goalData = [
-  { id: 'cut', description: 'Cut (-20%)' },
-  { id: 'maintain', description: 'Maintain' },
-  { id: 'gain', description: 'Gain (+15%)' },
+const goalOptions = [
+  { value: 'cut', label: 'Cut (-20%)' },
+  { value: 'maintain', label: 'Maintain' },
+  { value: 'gain', label: 'Gain (+15%)' },
 ];
 
-const formulaeData = [
+const formulaOptions = [
   {
-    id: 'harris-benedict',
-    description: 'The Original Harris-Benedict Equation',
+    value: 'harris-benedict',
+    label: 'The Original Harris-Benedict Equation',
   },
-  { id: 'mifflin-st-jeor', description: 'The Mifflin St. Jeor Equation' },
+  { value: 'mifflin-st-jeor', label: 'The Mifflin St. Jeor Equation' },
 ];
 
 const PersonalDataForm = () => {
   const { t } = useTranslation();
   const [persistentData, setPersistentData] = useLocalStorage('calorikData');
   const { setUserData } = useUserData();
-  const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors },
-  } = useForm({
-    defaultValues: persistentData,
-    resolver: yupResolver(validationSchema),
+  const form = useForm({
+    initialValues: persistentData || {
+      gender: 'male',
+      age: 35,
+      height: 180,
+      weight: 80,
+      activityLevel: 'no-exercise',
+      goal: 'cut',
+      formula: 'harris-benedict',
+    },
+    schema: yupResolver(validationSchema),
   });
 
-  const onSubmit = (values) => {
+  const handleSubmit = (values) => {
     setPersistentData(values);
     setUserData(values);
   };
 
   return (
-    <Container>
-      <Flex
-        as="form"
-        onSubmit={handleSubmit(onSubmit)}
-        data-testid="form"
-        flexWrap="wrap"
-        sx={{
-          px: 2,
-          paddingTop: 4,
-          paddingBottom: 3,
-          marginBottom: 4,
-          borderTop: '1px solid rgba(51, 62, 238, 0.2)',
-          borderBottom: '1px solid rgba(51, 62, 238, 0.2)',
+    <Box
+      component="form"
+      onSubmit={form.onSubmit(handleSubmit)}
+      data-testid="form"
+    >
+      <Grid
+        style={{
+          marginBottom: '2rem',
         }}
       >
-        <Column width={[1, 1 / 2, 1 / 5]}>
-          <Heading>{t('Your data')}</Heading>
-          <Box width={3 / 4} mb={3}>
-            <Text fontWeight="bold" mb={2}>
-              {t('Gender')}
-            </Text>
-            <Label mb={3}>
-              <Radio value="male" {...register('gender')} />
-              {t('Male')}
-            </Label>
-            <Label mb={3}>
-              <Radio value="female" {...register('gender')} />
-              {t('Female')}
-            </Label>
-          </Box>
-          <Box width={3 / 4} mb={3}></Box>
-          <Box width={3 / 4} mb={3}>
-            {coreData.map(({ id, description }) => (
-              <Box mb={3} key={id}>
-                <Label htmlFor={id} fontWeight="bold" mb="1">
-                  {t(description)}
-                </Label>
-                <Input
-                  type="number"
-                  min={0}
-                  data-testid={id}
-                  {...register(id)}
-                  sx={{
-                    borderRadius: '5px',
-                    padding: '8px 10px',
-                    fontSize: 2,
-                    fontFamily: 'system-ui, sans-serif',
-                  }}
-                />
-                {errors[id] ? (
-                  <Text
-                    sx={{
-                      color: 'deeppink',
-                      fontWeight: 'bold',
-                    }}
-                    py={1}
-                  >
-                    {t(errors[id].message)}
-                  </Text>
-                ) : null}
-              </Box>
+        <Grid.Col
+          sm={6}
+          md={3}
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          <Title
+            order={2}
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
+            {t('Your data')}
+          </Title>
+          <Stack>
+            <RadioGroup
+              {...form.getInputProps('gender')}
+              label={t('Gender')}
+              color="indigo"
+              required
+            >
+              <Radio value="male" label={t('Male')} />
+              <Radio value="female" label={t('Female')} />
+            </RadioGroup>
+            <NumberInput
+              {...form.getInputProps('age')}
+              defaultValue={30}
+              label={t('Age')}
+              required
+              style={{
+                maxWidth: 120,
+              }}
+              data-testid="age"
+            />
+            <NumberInput
+              {...form.getInputProps('height')}
+              defaultValue={180}
+              label={t('Height')}
+              required
+              style={{
+                maxWidth: 120,
+              }}
+              data-testid="height"
+            />
+            <NumberInput
+              {...form.getInputProps('weight')}
+              defaultValue={85}
+              label={t('Weight')}
+              required
+              style={{
+                maxWidth: 120,
+              }}
+              data-testid="weight"
+            />
+          </Stack>
+        </Grid.Col>
+        <Grid.Col
+          sm={6}
+          md={4}
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          <Title
+            order={2}
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
+            {t('Activity Level')}
+          </Title>
+          <RadioGroup
+            {...form.getInputProps('activityLevel')}
+            required
+            orientation="vertical"
+            color="indigo"
+          >
+            {activityLevelOptions.map((item) => (
+              <Radio
+                key={item.value}
+                label={t(item.label)}
+                value={item.value}
+              />
             ))}
-          </Box>
-        </Column>
-
-        <Column width={[1, 1 / 2, 1 / 3]}>
-          <Heading>{t('Activity Level')}</Heading>
-          <Box mb={3}>
-            {activityLevelData.map(({ id, description }) => (
-              <Label key={id} mb={3}>
-                <Radio value={id} {...register('activityLevel')} />
-                {t(description)}
-              </Label>
+          </RadioGroup>
+        </Grid.Col>
+        <Grid.Col
+          sm={6}
+          md={2}
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          <Title
+            order={2}
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
+            {t('Your goal')}
+          </Title>
+          <RadioGroup
+            {...form.getInputProps('goal')}
+            required
+            orientation="vertical"
+            color="indigo"
+          >
+            {goalOptions.map((item) => (
+              <Radio
+                key={item.value}
+                label={t(item.label)}
+                value={item.value}
+              />
             ))}
-          </Box>
-        </Column>
-
-        <Column width={[1, 1 / 2, 1 / 5]}>
-          <Heading>{t('Your goal')}</Heading>
-          {goalData.map(({ id, description }) => (
-            <Label key={id} mb={3}>
-              <Radio value={id} {...register('goal')} />
-              {t(description)}
-            </Label>
-          ))}
-        </Column>
-
-        <Column width={[1, 1 / 2, 1 / 4]}>
-          <Heading>{t('Formula')}</Heading>
-          {formulaeData.map(({ id, description }) => (
-            <Label key={id} mb={3}>
-              <Radio value={id} {...register('formula')} />
-              {t(description)}
-            </Label>
-          ))}
-        </Column>
-      </Flex>
-
-      <Flex justifyContent="center">
-        <Button type="submit" onClick={handleSubmit(onSubmit)}>
+          </RadioGroup>
+        </Grid.Col>
+        <Grid.Col
+          sm={6}
+          md={3}
+          style={{
+            marginBottom: '1rem',
+          }}
+        >
+          <Title
+            order={2}
+            style={{
+              marginBottom: '1rem',
+            }}
+          >
+            {t('Formula')}
+          </Title>
+          <RadioGroup
+            {...form.getInputProps('formula')}
+            required
+            orientation="vertical"
+            color="indigo"
+          >
+            {formulaOptions.map((item) => (
+              <Radio
+                key={item.value}
+                label={t(item.label)}
+                value={item.value}
+              />
+            ))}
+          </RadioGroup>
+        </Grid.Col>
+      </Grid>
+      <Group position="center">
+        <Button
+          type="submit"
+          size="xl"
+          color="indigo"
+          data-testid="submit-button"
+        >
           {t('Calculate')}
         </Button>
-      </Flex>
-
-      <DevTool control={control} />
-    </Container>
+      </Group>
+    </Box>
   );
 };
 
