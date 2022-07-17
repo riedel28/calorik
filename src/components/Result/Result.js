@@ -8,6 +8,7 @@ import { useUserData } from 'context/UserDataContext';
 
 const Result = () => {
   const { t } = useTranslation();
+
   const { userData } = useUserData();
   const resultCalories = calculateCalories(userData);
 
@@ -36,12 +37,15 @@ const Result = () => {
   return (
     resultCalories > 0 && (
       <Footer style={{ padding: 32 }}>
-        <Title component="h1" align="center">
-          {t('You will need')}{' '}
+        <Title component="h1" align="center" sx={{ fontSize: 28 }}>
           <animated.span>
-            {animation.value.interpolate((val) => Math.floor(val))}
-          </animated.span>{' '}
-          {t('kcal to')} {t(userData.goal)}
+            {animation.value.interpolate((val) =>
+              t('result', {
+                calories: Math.floor(val),
+                goal: t(`goal.${userData.goal}.short`),
+              })
+            )}
+          </animated.span>
         </Title>
       </Footer>
     )

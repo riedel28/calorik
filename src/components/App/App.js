@@ -48,7 +48,16 @@ const App = () => {
       toggleColorScheme={handleToggleColorScheme}
     >
       <MantineProvider
-        theme={{ colorScheme }}
+        theme={{
+          colorScheme,
+          fontSizes: {
+            xs: 14,
+            sm: 14,
+            md: 14,
+            lg: 14,
+            xl: 14,
+          },
+        }}
         withGlobalStyles
         withNormalizeCSS
       >
