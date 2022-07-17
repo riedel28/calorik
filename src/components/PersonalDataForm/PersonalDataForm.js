@@ -111,6 +111,7 @@ const PersonalDataForm = () => {
               }}
               data-testid="age"
             />
+
             <NumberInput
               {...form.getInputProps('height')}
               defaultValue={180}
@@ -121,6 +122,7 @@ const PersonalDataForm = () => {
               }}
               data-testid="height"
             />
+
             <NumberInput
               {...form.getInputProps('weight')}
               defaultValue={85}
@@ -230,6 +232,11 @@ const PersonalDataForm = () => {
           size="xl"
           color="indigo"
           data-testid="submit-button"
+          sx={{
+            fontSize: 16,
+            textTransform: 'uppercase',
+            letterSpacing: 2,
+          }}
         >
           {t('Calculate')}
         </Button>
