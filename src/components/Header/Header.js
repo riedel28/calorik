@@ -32,7 +32,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
     i18n.changeLanguage(persistedLang);
   }, [persistedLang, i18n]);
 
-  const changeLanguage = (lang) => {
+  const handleChangeLanguage = (lang) => {
     i18n.changeLanguage(lang);
     setLanguage(lang);
     setPersistedLang(lang);
@@ -47,12 +47,31 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
             size="xs"
             color="indigo"
             variant={selectedLanguage === lang ? 'light' : 'subtle'}
-            onClick={() => changeLanguage(lang)}
+            onClick={() => handleChangeLanguage(lang)}
+            sx={(theme) => ({
+              '&:hover': {
+                backgroundColor:
+                  theme.colorScheme === 'dark'
+                    ? theme.colors.gray[8]
+                    : theme.colors.gray[1],
+              },
+            })}
           >
             {lang.toUpperCase()}
           </Button>
         ))}
-        <ActionIcon color="indigo" onClick={() => toggleColorScheme()}>
+        <ActionIcon
+          color="indigo"
+          onClick={() => toggleColorScheme()}
+          sx={(theme) => ({
+            '&:hover': {
+              backgroundColor:
+                theme.colorScheme === 'dark'
+                  ? theme.colors.gray[8]
+                  : theme.colors.gray[1],
+            },
+          })}
+        >
           {isDark ? <FiMoon /> : <FiSun />}
         </ActionIcon>
       </Group>
