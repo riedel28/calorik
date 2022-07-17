@@ -48,7 +48,7 @@ describe('PersonalDataForm', () => {
       </UserDataProvider>
     );
 
-    const radio = screen.getByLabelText('Male');
+    const radio = screen.getByTestId('gender-male');
     fireEvent.change(radio, { target: { value: 'male' } });
 
     expect(radio.value).toBe('male');
@@ -88,7 +88,7 @@ describe('PersonalDataForm', () => {
         <PersonalDataForm onSubmitData={handleSubmit} />
       </UserDataProvider>
     );
-    const radio = screen.getByLabelText(/no exercise/i);
+    const radio = screen.getByTestId('activity-level-no-exercise');
     fireEvent.change(radio, { target: { value: 'no-exercise' } });
 
     expect(radio.value).toBe('no-exercise');

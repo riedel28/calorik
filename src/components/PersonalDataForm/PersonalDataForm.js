@@ -19,34 +19,36 @@ import validationSchema from 'validationSchema';
 import { useUserData } from 'context/UserDataContext';
 
 const activityLevelOptions = [
-  { value: 'no-exercise', label: 'Little / No exercise' },
-  { value: 'light', label: 'Light exercise (1–3 days per week)' },
-  { value: 'moderate', label: 'Moderate exercise (3–5 days per week)' },
-  { value: 'heavy', label: 'Heavy exercise (6–7 days per week)' },
+  { value: 'no-exercise', label: 'activityLevel.noExercise' },
+  { value: 'light', label: 'activityLevel.lightExercise' },
+  { value: 'moderate', label: 'activityLevel.moderateExercise' },
+  { value: 'heavy', label: 'activityLevel.heavyExercise' },
   {
     value: 'very-heavy',
-    label: 'Very heavy exercise (twice per day, extra heavy workouts)',
+    label: 'activityLevel.veryHeavyExercise',
   },
 ];
 
 const goalOptions = [
-  { value: 'cut', label: 'Cut (-20%)' },
-  { value: 'maintain', label: 'Maintain' },
-  { value: 'gain', label: 'Gain (+15%)' },
+  { value: 'cut', label: 'goal.cut' },
+  { value: 'maintain', label: 'goal.maintain' },
+  { value: 'gain', label: 'goal.gain' },
 ];
 
 const formulaOptions = [
   {
     value: 'harris-benedict',
-    label: 'The Original Harris-Benedict Equation',
+    label: 'formula.harrisBenedict',
   },
-  { value: 'mifflin-st-jeor', label: 'The Mifflin St. Jeor Equation' },
+  { value: 'mifflin-st-jeor', label: 'formula.mifflinStJeor' },
 ];
 
 const PersonalDataForm = () => {
   const { t } = useTranslation();
+
   const [persistentData, setPersistentData] = useLocalStorage('calorikData');
   const { setUserData } = useUserData();
+
   const form = useForm({
     initialValues: persistentData || {
       gender: 'male',
@@ -89,22 +91,26 @@ const PersonalDataForm = () => {
               marginBottom: '1rem',
             }}
           >
-            {t('Your data')}
+            {t('yourData.title')}
           </Title>
           <Stack>
             <RadioGroup
               {...form.getInputProps('gender')}
-              label={t('Gender')}
+              label={t('yourData.gender')}
               color="indigo"
               required
             >
-              <Radio value="male" label={t('Male')} />
-              <Radio value="female" label={t('Female')} />
+              <Radio
+                value="male"
+                label={t('yourData.gender.male')}
+                data-testid="gender-male"
+              />
+              <Radio value="female" label={t('yourData.gender.female')} />
             </RadioGroup>
             <NumberInput
               {...form.getInputProps('age')}
               defaultValue={30}
-              label={t('Age')}
+              label={t('yourData.age')}
               required
               style={{
                 maxWidth: 120,
@@ -115,7 +121,7 @@ const PersonalDataForm = () => {
             <NumberInput
               {...form.getInputProps('height')}
               defaultValue={180}
-              label={t('Height')}
+              label={t('yourData.height')}
               required
               style={{
                 maxWidth: 120,
@@ -126,7 +132,7 @@ const PersonalDataForm = () => {
             <NumberInput
               {...form.getInputProps('weight')}
               defaultValue={85}
-              label={t('Weight')}
+              label={t('yourData.weight')}
               required
               style={{
                 maxWidth: 120,
@@ -148,7 +154,7 @@ const PersonalDataForm = () => {
               marginBottom: '1rem',
             }}
           >
-            {t('Activity Level')}
+            {t('activityLevel.title')}
           </Title>
           <RadioGroup
             {...form.getInputProps('activityLevel')}
@@ -161,6 +167,7 @@ const PersonalDataForm = () => {
                 key={item.value}
                 label={t(item.label)}
                 value={item.value}
+                data-testid={`activity-level-${item.value}`}
               />
             ))}
           </RadioGroup>
@@ -178,7 +185,7 @@ const PersonalDataForm = () => {
               marginBottom: '1rem',
             }}
           >
-            {t('Your goal')}
+            {t('goal.title')}
           </Title>
           <RadioGroup
             {...form.getInputProps('goal')}
@@ -208,7 +215,7 @@ const PersonalDataForm = () => {
               marginBottom: '1rem',
             }}
           >
-            {t('Formula')}
+            {t('formula.title')}
           </Title>
           <RadioGroup
             {...form.getInputProps('formula')}
@@ -238,7 +245,7 @@ const PersonalDataForm = () => {
             letterSpacing: 2,
           }}
         >
-          {t('Calculate')}
+          {t('calculate')}
         </Button>
       </Group>
     </Box>
