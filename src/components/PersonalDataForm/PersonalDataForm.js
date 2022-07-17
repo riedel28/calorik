@@ -79,6 +79,7 @@ const PersonalDataForm = () => {
         }}
       >
         <Grid.Col
+          xs={6}
           sm={6}
           md={3}
           style={{
@@ -142,6 +143,7 @@ const PersonalDataForm = () => {
           </Stack>
         </Grid.Col>
         <Grid.Col
+          xs={6}
           sm={6}
           md={4}
           style={{
@@ -173,6 +175,7 @@ const PersonalDataForm = () => {
           </RadioGroup>
         </Grid.Col>
         <Grid.Col
+          xs={6}
           sm={6}
           md={2}
           style={{
@@ -203,6 +206,7 @@ const PersonalDataForm = () => {
           </RadioGroup>
         </Grid.Col>
         <Grid.Col
+          xs={6}
           sm={6}
           md={3}
           style={{

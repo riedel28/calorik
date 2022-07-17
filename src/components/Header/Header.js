@@ -49,6 +49,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
             variant={selectedLanguage === lang ? 'light' : 'subtle'}
             onClick={() => handleChangeLanguage(lang)}
             sx={(theme) => ({
+              fontSize: 12,
               '&:hover': {
                 backgroundColor:
                   theme.colorScheme === 'dark'
