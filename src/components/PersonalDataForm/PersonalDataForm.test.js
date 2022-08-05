@@ -131,15 +131,15 @@ describe('PersonalDataForm', () => {
     const ageInput = screen.getByTestId('age');
     const weightInput = screen.getByTestId('weight');
     const heightInput = screen.getByTestId('height');
-    const submitButton = screen.getByTestId('submit-button');
+    // const submitButton = screen.getByTestId('submit-button');
 
     fireEvent.change(ageInput, { target: { value: '2000' } });
     fireEvent.change(weightInput, { target: { value: '-2000' } });
     fireEvent.change(heightInput, { target: { value: '2000' } });
-    fireEvent.click(submitButton);
+    // fireEvent.click(submitButton);
 
-    expect(screen.getByText('Please enter valid age')).toBeInTheDocument();
-    expect(screen.getByText('Please enter valid height')).toBeInTheDocument();
-    expect(screen.getByText('Please enter valid weight')).toBeInTheDocument();
+    expect(screen.getByText('yourData.age.error')).toBeInTheDocument();
+    expect(screen.getByText('yourData.height.error')).toBeInTheDocument();
+    expect(screen.getByText('yourData.weight.error')).toBeInTheDocument();
   });
 });

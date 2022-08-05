@@ -1,25 +1,20 @@
 import * as Yup from 'yup';
 
-export default Yup.object({
+export default Yup.object().shape({
   gender: Yup.string().required('Please choose your gender'),
   age: Yup.number()
-    .typeError('Age must be a number')
-    .min(0, 'Please enter valid age')
-    .max(120, 'Please enter valid age')
-    .required('Please enter your age'),
+    .min(0, 'yourData.age.error')
+    .max(120, 'yourData.age.error')
+    .required('yourData.age.placeholder'),
   weight: Yup.number()
-    .typeError('Weight must be a number')
-    .min(0, 'Please enter valid weight')
-    .max(150, 'Please enter valid weight')
-    .required('Please enter your weight'),
+    .min(0, 'yourData.weight.error')
+    .max(300, 'yourData.weight.error')
+    .required('yourData.weight.placeholder'),
   height: Yup.number()
-    .typeError('Height must be a number')
-    .min(0, 'Please enter valid height')
-    .max(300, 'Please enter valid height')
-    .required('Please enter your height'),
-  activityLevel: Yup.string().required('Please choose your activity level'),
-  goal: Yup.string().required('Please choose your goal'),
-  formula: Yup.string().required(
-    'Please choose formula to calculate goal calories'
-  ),
+    .min(0, 'yourData.height.error')
+    .max(250, 'yourData.height.error')
+    .required('yourData.height.placeholder'),
+  activityLevel: Yup.string().required('activityLevel.placeholder'),
+  goal: Yup.string().required('goal.placeholder'),
+  formula: Yup.string().required('formula.placeholder'),
 });

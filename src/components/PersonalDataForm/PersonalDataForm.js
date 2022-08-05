@@ -58,7 +58,8 @@ const PersonalDataForm = () => {
       goal: 'cut',
       formula: 'harris-benedict',
     },
-    schema: yupResolver(validationSchema),
+    validateInputOnChange: true,
+    validate: yupResolver(validationSchema),
   });
 
   const handleSubmit = (values) => {
@@ -112,6 +113,7 @@ const PersonalDataForm = () => {
               defaultValue={30}
               label={t('yourData.age')}
               required
+              error={t(form.errors?.age)}
               style={{
                 maxWidth: 120,
               }}
@@ -122,6 +124,7 @@ const PersonalDataForm = () => {
               {...form.getInputProps('height')}
               defaultValue={180}
               label={t('yourData.height')}
+              error={t(form.errors?.height)}
               required
               style={{
                 maxWidth: 120,
@@ -133,6 +136,7 @@ const PersonalDataForm = () => {
               {...form.getInputProps('weight')}
               defaultValue={85}
               label={t('yourData.weight')}
+              error={t(form.errors?.weight)}
               required
               style={{
                 maxWidth: 120,
@@ -159,6 +163,7 @@ const PersonalDataForm = () => {
           </Title>
           <Radio.Group
             {...form.getInputProps('activityLevel')}
+            error={t(form.errors?.activityLevel)}
             required
             orientation="vertical"
             color="blue"
@@ -191,6 +196,7 @@ const PersonalDataForm = () => {
           </Title>
           <Radio.Group
             {...form.getInputProps('goal')}
+            error={t(form.errors?.goal)}
             required
             orientation="vertical"
             color="blue"
@@ -222,6 +228,7 @@ const PersonalDataForm = () => {
           </Title>
           <Radio.Group
             {...form.getInputProps('formula')}
+            error={t(form.errors?.formula)}
             required
             orientation="vertical"
             color="blue"
