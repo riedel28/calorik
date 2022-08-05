@@ -45,7 +45,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
           <Button
             key={lang}
             size="xs"
-            color="indigo"
+            color="blue"
             variant={selectedLanguage === lang ? 'light' : 'subtle'}
             onClick={() => handleChangeLanguage(lang)}
             sx={(theme) => ({
@@ -62,7 +62,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
           </Button>
         ))}
         <ActionIcon
-          color="indigo"
+          color="blue"
           onClick={() => toggleColorScheme()}
           sx={(theme) => ({
             '&:hover': {

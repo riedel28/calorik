@@ -6,7 +6,6 @@ import {
   Grid,
   Group,
   NumberInput,
-  RadioGroup,
   Radio,
   Title,
   Stack,
@@ -95,10 +94,10 @@ const PersonalDataForm = () => {
             {t('yourData.title')}
           </Title>
           <Stack>
-            <RadioGroup
+            <Radio.Group
               {...form.getInputProps('gender')}
               label={t('yourData.gender')}
-              color="indigo"
+              color="blue"
               required
             >
               <Radio
@@ -107,7 +106,7 @@ const PersonalDataForm = () => {
                 data-testid="gender-male"
               />
               <Radio value="female" label={t('yourData.gender.female')} />
-            </RadioGroup>
+            </Radio.Group>
             <NumberInput
               {...form.getInputProps('age')}
               defaultValue={30}
@@ -158,11 +157,11 @@ const PersonalDataForm = () => {
           >
             {t('activityLevel.title')}
           </Title>
-          <RadioGroup
+          <Radio.Group
             {...form.getInputProps('activityLevel')}
             required
             orientation="vertical"
-            color="indigo"
+            color="blue"
           >
             {activityLevelOptions.map((item) => (
               <Radio
@@ -172,7 +171,7 @@ const PersonalDataForm = () => {
                 data-testid={`activity-level-${item.value}`}
               />
             ))}
-          </RadioGroup>
+          </Radio.Group>
         </Grid.Col>
         <Grid.Col
           xs={6}
@@ -190,11 +189,11 @@ const PersonalDataForm = () => {
           >
             {t('goal.title')}
           </Title>
-          <RadioGroup
+          <Radio.Group
             {...form.getInputProps('goal')}
             required
             orientation="vertical"
-            color="indigo"
+            color="blue"
           >
             {goalOptions.map((item) => (
               <Radio
@@ -203,7 +202,7 @@ const PersonalDataForm = () => {
                 value={item.value}
               />
             ))}
-          </RadioGroup>
+          </Radio.Group>
         </Grid.Col>
         <Grid.Col
           xs={6}
@@ -221,11 +220,11 @@ const PersonalDataForm = () => {
           >
             {t('formula.title')}
           </Title>
-          <RadioGroup
+          <Radio.Group
             {...form.getInputProps('formula')}
             required
             orientation="vertical"
-            color="indigo"
+            color="blue"
           >
             {formulaOptions.map((item) => (
               <Radio
@@ -234,14 +233,14 @@ const PersonalDataForm = () => {
                 value={item.value}
               />
             ))}
-          </RadioGroup>
+          </Radio.Group>
         </Grid.Col>
       </Grid>
       <Group position="center">
         <Button
           type="submit"
           size="xl"
-          color="indigo"
+          color="blue"
           data-testid="submit-button"
           sx={{
             fontSize: 16,
