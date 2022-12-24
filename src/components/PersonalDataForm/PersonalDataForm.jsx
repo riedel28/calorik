@@ -13,7 +13,7 @@ import {
 import { useForm, yupResolver } from '@mantine/form';
 
 import useLocalStorage from 'hooks/useLocalStorage';
-import validationSchema from 'validationSchema';
+import validationSchema from 'components/PersonalDataForm/validationSchema';
 
 import { useUserData } from 'context/UserDataContext';
 
