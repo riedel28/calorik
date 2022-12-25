@@ -3,14 +3,14 @@
 _Simple calorie counter app_</br>
 You can calculate your calorie needs based on your goal.
 
-![Screenshot](https://abload.de/img/screenshot2021-02-07a5qjoj.png)
+![Screenshot](https://abload.de/img/screenshot2022-10-02ar9ckz.png)
 
 ## The project is powered by:
 
-- <img src="https://reactjs.org/logo-180x180.png" width="16" height="16">&nbsp;&nbsp;React - UI Library
-- <img src="https://rebassjs.org/icon.png" width="16" height="16">&nbsp;&nbsp;Rebass - Styling
-- <img src="https://formik.org/images/favicon.png" width="16" height="16">&nbsp;&nbsp;Formik - Managing forms
-- <img src="https://gblobscdn.gitbook.com/spaces%2F-L9iS6WpW81N7RGRTQ-K%2Favatar.png" width="16" height="16">&nbsp;&nbsp;React-i18next - Internationalization
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="16" height="16">&nbsp;&nbsp;React
+- <img src="https://seeklogo.com/images/M/mantine-logo-235E19C978-seeklogo.com.png" width="16" height="16">&nbsp;&nbsp;Mantine
+- <img src="https://avatars.githubusercontent.com/u/53986236?s=280&v=4" width="16" height="16">&nbsp;&nbsp;React Hook Form
+- <img src="https://gblobscdn.gitbook.com/spaces%2F-L9iS6WpW81N7RGRTQ-K%2Favatar.png" width="16" height="16">&nbsp;&nbsp;React-i18next
 
 ## Demo
 
