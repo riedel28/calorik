@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import './i18n';
 
 import './index.css';
-import App from 'components/App/App';
+import App from './components/App/App';
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript

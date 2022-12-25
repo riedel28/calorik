@@ -7,12 +7,12 @@ import {
   ColorSchemeProvider,
 } from '@mantine/core';
 
-import { UserDataProvider } from 'context/UserDataContext';
-import Header from 'components/Header/Header';
-import PersonalDataForm from 'components/PersonalDataForm/PersonalDataForm';
-import Result from 'components/Result/Result';
+import { UserDataProvider } from '../../context/UserDataContext';
+import Header from '../Header/Header';
+import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
+import Result from '../Result/Result';
 
-import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const App = () => {
   const { i18n } = useTranslation(['translation']);

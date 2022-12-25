@@ -9,7 +9,7 @@ import {
 } from '@mantine/core';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
-import useLocalStorage from 'hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const languages = ['en', 'ru', 'de'];
 

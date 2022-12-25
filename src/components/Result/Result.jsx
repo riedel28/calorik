@@ -3,8 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { Footer, Title } from '@mantine/core';
 import { useSpring, animated } from 'react-spring';
 
-import { calculateCalories } from 'helpers';
-import { useUserData } from 'context/UserDataContext';
+import { calculateCalories } from '../../helpers';
+import { useUserData } from '../../context/UserDataContext';
 
 const Result = () => {
   const { t } = useTranslation();
