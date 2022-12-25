@@ -1,10 +1,11 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
+import { vi } from 'vitest';
 import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 
 import Header from './Header';
 
-jest.mock('react-i18next', () => ({
+vi.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => {
     return {
