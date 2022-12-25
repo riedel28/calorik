@@ -1,10 +1,11 @@
 import React from 'react';
+import { vi } from 'vitest';
 import { screen, render, fireEvent } from '@testing-library/react';
 
 import PersonalDataForm from './PersonalDataForm';
 import { UserDataProvider } from 'context/UserDataContext';
 
-jest.mock('react-i18next', () => ({
+vi.mock('react-i18next', () => ({
   // this mock makes sure any components using the translate hook can use it without a warning being shown
   useTranslation: () => {
     return {
@@ -15,7 +16,7 @@ jest.mock('react-i18next', () => ({
 
 describe('PersonalDataForm', () => {
   test('should render PersonalDataForm component', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -27,7 +28,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter an age', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -41,7 +42,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter a gender', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -55,7 +56,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter a weight', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -68,7 +69,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter a height', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -82,7 +83,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter an activity level', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -95,7 +96,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter a goal', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -108,7 +109,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should be able to enter a formula', () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />
@@ -121,7 +122,7 @@ describe('PersonalDataForm', () => {
   });
 
   test('should display error messages by entering incorrect data', async () => {
-    const handleSubmit = jest.fn();
+    const handleSubmit = vi.fn();
     render(
       <UserDataProvider>
         <PersonalDataForm onSubmitData={handleSubmit} />

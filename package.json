@@ -21,15 +21,33 @@
     "web-vitals": "^3.0.2",
     "yup": "^0.32.11"
   },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^3.0.0",
+    "@vitest/coverage-c8": "^0.26.2",
+    "@vitest/ui": "^0.26.2",
+    "c8": "^7.12.0",
+    "eslint": "^8.20.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "happy-dom": "^8.1.1",
+    "husky": "^4.2.3",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "vite": "^4.0.3",
+    "vitest": "^0.26.2"
+  },
   "scripts": {
     "start": "vite",
     "build": "vite build",
     "serve": "vite preview",
-    "test": "react-scripts test",
-    "test-coverage": "npm test -- --coverage --watchAll=false",
+    "test": "vitest",
+    "test:no-watch": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui",
     "lint": "eslint src",
     "prettier": "npx prettier './src/**/*.+(js|jsx|ts|tsx|html|css|json|md)'",
-    "format-check": "npm run prettier -- --check",
+    "format:check": "npm run prettier -- --check",
     "format": "npm run prettier -- --write"
   },
   "browserslist": {
@@ -53,16 +71,5 @@
       "!src/validationSchema.js",
       "!src/i18n.js"
     ]
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^3.0.0",
-    "eslint": "^8.20.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "husky": "^4.2.3",
-    "lint-staged": "^13.0.3",
-    "prettier": "^2.7.1",
-    "vite": "^4.0.3"
   }
 }

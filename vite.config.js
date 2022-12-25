@@ -20,4 +20,13 @@ export default defineConfig({
       helpers: path.resolve(__dirname, 'src/helpers'),
     },
   },
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: 'src/setupTests.js',
+    coverage: {
+      reporter: ['text', 'html'],
+      exclude: ['node_modules/', 'src/setupTests.js'],
+    },
+  },
 });
