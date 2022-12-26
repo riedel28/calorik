@@ -14,7 +14,7 @@ You can calculate your calorie needs based on your goal.
 
 ## Demo
 
-You can play around with the app here: [https://calorik.riedel28.now.sh/](https://calorik.riedel28.now.sh/)
+You can play around with the app here: [https://calorik.netlify.app](https://calorik.netlify.app)
 
 ## Setup
 
