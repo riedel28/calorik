@@ -11,6 +11,13 @@ export default defineConfig({
   build: {
     outDir: 'build',
   },
+  resolve: {
+    alias: {
+      '@components': `${__dirname}/src/components`,
+      '@hooks': `${__dirname}/src/hooks`,
+      '@context': `${__dirname}/src/context`,
+    },
+  },
   test: {
     globals: true,
     environment: 'happy-dom',

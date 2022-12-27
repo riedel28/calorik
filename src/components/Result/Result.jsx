@@ -4,7 +4,7 @@ import { Footer, Title } from '@mantine/core';
 import { useSpring, animated } from 'react-spring';
 
 import { calculateCalories } from '../../helpers';
-import { useUserData } from '../../context/UserDataContext';
+import { useUserData } from '@context/UserDataContext';
 
 const Result = () => {
   const { t } = useTranslation();

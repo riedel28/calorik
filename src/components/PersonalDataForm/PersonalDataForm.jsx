@@ -12,10 +12,9 @@ import {
 } from '@mantine/core';
 import { useForm, yupResolver } from '@mantine/form';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import { useUserData } from '@context/UserDataContext';
+import useLocalStorage from '@hooks/useLocalStorage';
 import validationSchema from './validationSchema';
-
-import { useUserData } from '../../context/UserDataContext';
 
 const activityLevelOptions = [
   { value: 'no-exercise', label: 'activityLevel.noExercise' },
