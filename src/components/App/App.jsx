@@ -12,7 +12,7 @@ import Header from '@components/Header/Header';
 import PersonalDataForm from '@components/PersonalDataForm/PersonalDataForm';
 import Result from '@components/Result/Result';
 
-import useLocalStorage from '../../hooks/useLocalStorage';
+import useLocalStorage from '@hooks/useLocalStorage';
 
 const App = () => {
   const { i18n } = useTranslation(['translation']);
