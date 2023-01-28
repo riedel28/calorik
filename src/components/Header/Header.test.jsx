@@ -1,7 +1,7 @@
 import React from 'react';
+import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 import { screen, render } from '@testing-library/react';
 import { vi } from 'vitest';
-import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
 
 import Header from './Header';
 

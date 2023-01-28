@@ -7,11 +7,10 @@ import {
   ColorSchemeProvider,
 } from '@mantine/core';
 
-import { UserDataProvider } from '@context/UserDataContext';
 import Header from '@components/Header/Header';
 import PersonalDataForm from '@components/PersonalDataForm/PersonalDataForm';
 import Result from '@components/Result/Result';
-
+import { UserDataProvider } from '@context/UserDataContext';
 import useLocalStorage from '@hooks/useLocalStorage';
 
 const App = () => {

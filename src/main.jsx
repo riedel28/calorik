@@ -1,8 +1,9 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import reportWebVitals from './reportWebVitals';
-import './i18n';
 
+import reportWebVitals from './reportWebVitals';
+
+import './i18n';
 import './index.css';
 import App from './components/App/App';
 
