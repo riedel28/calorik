@@ -100,12 +100,14 @@ const PersonalDataForm = () => {
               color="blue"
               required
             >
-              <Radio
-                value="male"
-                label={t('yourData.gender.male')}
-                data-testid="gender-male"
-              />
-              <Radio value="female" label={t('yourData.gender.female')} />
+              <Group mt="xs">
+                <Radio
+                  value="male"
+                  label={t('yourData.gender.male')}
+                  data-testid="gender-male"
+                />
+                <Radio value="female" label={t('yourData.gender.female')} />
+              </Group>
             </Radio.Group>
             <NumberInput
               {...form.getInputProps('age')}
@@ -167,14 +169,16 @@ const PersonalDataForm = () => {
             orientation="vertical"
             color="blue"
           >
-            {activityLevelOptions.map((item) => (
-              <Radio
-                key={item.value}
-                label={t(item.label)}
-                value={item.value}
-                data-testid={`activity-level-${item.value}`}
-              />
-            ))}
+            <Group mt="xs">
+              {activityLevelOptions.map((item) => (
+                <Radio
+                  key={item.value}
+                  label={t(item.label)}
+                  value={item.value}
+                  data-testid={`activity-level-${item.value}`}
+                />
+              ))}
+            </Group>
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
@@ -200,13 +204,15 @@ const PersonalDataForm = () => {
             orientation="vertical"
             color="blue"
           >
-            {goalOptions.map((item) => (
-              <Radio
-                key={item.value}
-                label={t(item.label)}
-                value={item.value}
-              />
-            ))}
+            <Group mt="xs">
+              {goalOptions.map((item) => (
+                <Radio
+                  key={item.value}
+                  label={t(item.label)}
+                  value={item.value}
+                />
+              ))}
+            </Group>
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
@@ -232,13 +238,15 @@ const PersonalDataForm = () => {
             orientation="vertical"
             color="blue"
           >
-            {formulaOptions.map((item) => (
-              <Radio
-                key={item.value}
-                label={t(item.label)}
-                value={item.value}
-              />
-            ))}
+            <Group mt="xs">
+              {formulaOptions.map((item) => (
+                <Radio
+                  key={item.value}
+                  label={t(item.label)}
+                  value={item.value}
+                />
+              ))}
+            </Group>
           </Radio.Group>
         </Grid.Col>
       </Grid>
