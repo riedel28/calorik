@@ -2,5 +2,18 @@
   "tabWidth": 2,
   "useTabs": false,
   "singleQuote": true,
-  "semi": true
+  "semi": true,
+  "importOrder": [
+    "^react",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@mocks/(.*)$",
+    "^@pages/(.*)$",
+    "^@components/(.*)$",
+    "^@context/(.*)$",
+    "^@hooks/(.*)$",
+    "^[./]",
+    ""
+  ],
+  "importOrderSeparation": false
 }

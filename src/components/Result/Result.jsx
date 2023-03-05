@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Footer, Title } from '@mantine/core';
 import { useSpring, animated } from 'react-spring';
+import { Footer, Title } from '@mantine/core';
 
-import { calculateCalories } from '../../helpers';
 import { useUserData } from '@context/UserDataContext';
+import { calculateCalories } from '../../helpers';
 
 const Result = () => {
   const { t } = useTranslation();

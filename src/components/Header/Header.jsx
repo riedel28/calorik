@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { FiMoon, FiSun } from 'react-icons/fi';
 import {
   ActionIcon,
   Group,
@@ -7,7 +8,6 @@ import {
   Button,
   useMantineColorScheme,
 } from '@mantine/core';
-import { FiMoon, FiSun } from 'react-icons/fi';
 
 import useLocalStorage from '@hooks/useLocalStorage';
 
