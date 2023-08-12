@@ -10,6 +10,7 @@
     "@mantine/form": "^6.0.0",
     "@mantine/hooks": "^6.0.0",
     "i18next": "^22.4.10",
+    "next": "^13.4.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^12.2.0",
@@ -19,11 +20,10 @@
     "yup": "^1.0.2"
   },
   "devDependencies": {
-    "prop-types": "^15.8.1",
+    "@ianvs/prettier-plugin-sort-imports": "^3.7.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
-    "@ianvs/prettier-plugin-sort-imports": "^3.7.1",
     "@vitejs/plugin-react": "^3.1.0",
     "@vitest/coverage-c8": "^0.29.2",
     "@vitest/ui": "^0.29.2",
@@ -36,6 +36,7 @@
     "husky": "^8.0.3",
     "lint-staged": "^13.1.2",
     "prettier": "^2.8.4",
+    "prop-types": "^15.8.1",
     "vite": "^4.1.4",
     "vitest": "^0.29.2"
   },
