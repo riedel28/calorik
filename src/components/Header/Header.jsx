@@ -4,7 +4,6 @@ import { FiMoon, FiSun } from 'react-icons/fi';
 import {
   ActionIcon,
   Group,
-  Header as MantineHeader,
   Button,
   useMantineColorScheme,
 } from '@mantine/core';
@@ -39,8 +38,8 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
   };
 
   return (
-    <MantineHeader height={56} p="xs" {...props}>
-      <Group position="right" spacing="xs">
+    <header {...props}>
+      <Group gap="md" justify="end">
         {languages.map((lang) => (
           <Button
             key={lang}
@@ -48,35 +47,15 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
             color="blue"
             variant={selectedLanguage === lang ? 'light' : 'subtle'}
             onClick={() => handleChangeLanguage(lang)}
-            sx={(theme) => ({
-              fontSize: 12,
-              '&:hover': {
-                backgroundColor:
-                  theme.colorScheme === 'dark'
-                    ? theme.colors.gray[8]
-                    : theme.colors.gray[1],
-              },
-            })}
           >
             {lang.toUpperCase()}
           </Button>
         ))}
-        <ActionIcon
-          color="blue"
-          onClick={() => toggleColorScheme()}
-          sx={(theme) => ({
-            '&:hover': {
-              backgroundColor:
-                theme.colorScheme === 'dark'
-                  ? theme.colors.gray[8]
-                  : theme.colors.gray[1],
-            },
-          })}
-        >
+        <ActionIcon color="blue" onClick={() => toggleColorScheme()}>
           {isDark ? <FiMoon /> : <FiSun />}
         </ActionIcon>
       </Group>
-    </MantineHeader>
+    </header>
   );
 };
 

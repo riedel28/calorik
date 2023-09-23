@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useSpring, animated } from 'react-spring';
-import { Footer, Title } from '@mantine/core';
+import { Title } from '@mantine/core';
 
 import { useUserData } from '@context/UserDataContext';
 import { calculateCalories } from '../../helpers';
@@ -36,8 +36,8 @@ const Result = () => {
 
   return (
     resultCalories > 0 && (
-      <Footer style={{ padding: 32 }}>
-        <Title component="h1" align="center" sx={{ fontSize: 28 }}>
+      <footer>
+        <Title component="h1" align="center">
           <animated.span>
             {animation.value.interpolate((val) =>
               t('result', {
@@ -47,7 +47,7 @@ const Result = () => {
             )}
           </animated.span>
         </Title>
-      </Footer>
+      </footer>
     )
   );
 };

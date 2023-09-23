@@ -4,28 +4,28 @@ import {
   AppShell,
   Container,
   MantineProvider,
-  ColorSchemeProvider,
+  createTheme,
 } from '@mantine/core';
 
+import '@mantine/core/styles.css';
 import Header from '@components/Header/Header';
 import PersonalDataForm from '@components/PersonalDataForm/PersonalDataForm';
 import Result from '@components/Result/Result';
 import { UserDataProvider } from '@context/UserDataContext';
 import useLocalStorage from '@hooks/useLocalStorage';
 
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
+
 const App = () => {
   const { i18n } = useTranslation(['translation']);
-
-  const [colorScheme, setColorScheme] = useState('light');
 
   const [persistedLang, setPersistedLang] = useLocalStorage(
     'calorikLang',
     'en'
   );
   const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
-
-  const handleToggleColorScheme = (value) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
 
   useEffect(() => {
     if (!persistedLang) {
@@ -42,41 +42,23 @@ const App = () => {
   };
 
   return (
-    <ColorSchemeProvider
-      colorScheme={colorScheme}
-      toggleColorScheme={handleToggleColorScheme}
-    >
-      <MantineProvider
-        theme={{
-          colorScheme,
-          fontSizes: {
-            xs: 14,
-            sm: 14,
-            md: 14,
-            lg: 14,
-            xl: 14,
-          },
-        }}
-        withGlobalStyles
-        withNormalizeCSS
-      >
-        <UserDataProvider>
-          <AppShell
-            header={
-              <Header
-                onLanguageSelect={changeLanguage}
-                language={selectedLanguage}
-              />
-            }
-            footer={<Result />}
-          >
+    <MantineProvider theme={theme}>
+      <UserDataProvider>
+        <AppShell padding="md" header={{ height: 60 }} footer={{ height: 60 }}>
+          <AppShell.Header height={56} p="md">
+            <Header />
+          </AppShell.Header>
+          <AppShell.Main>
             <Container size="lg">
               <PersonalDataForm />
             </Container>
-          </AppShell>
-        </UserDataProvider>
-      </MantineProvider>
-    </ColorSchemeProvider>
+          </AppShell.Main>
+          <AppShell.Footer p="md">
+            <Result />
+          </AppShell.Footer>
+        </AppShell>
+      </UserDataProvider>
+    </MantineProvider>
   );
 };
 

@@ -256,11 +256,6 @@ const PersonalDataForm = () => {
           size="xl"
           color="blue"
           data-testid="submit-button"
-          sx={{
-            fontSize: 16,
-            textTransform: 'uppercase',
-            letterSpacing: 2,
-          }}
         >
           {t('calculate')}
         </Button>
