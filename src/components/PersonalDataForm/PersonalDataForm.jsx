@@ -72,32 +72,22 @@ const PersonalDataForm = () => {
       onSubmit={form.onSubmit(handleSubmit)}
       data-testid="form"
     >
-      <Grid
-        style={{
-          marginBottom: '2rem',
-        }}
-      >
+      <Grid mb="xl">
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={3}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
+          <Title order={2} mb="md">
             {t('yourData.title')}
           </Title>
           <Stack>
             <Radio.Group
               {...form.getInputProps('gender')}
               label={t('yourData.gender')}
-              color="blue"
               required
             >
               <Group mt="xs">
@@ -115,10 +105,8 @@ const PersonalDataForm = () => {
               label={t('yourData.age')}
               required
               error={t(form.errors?.age)}
-              style={{
-                maxWidth: 120,
-              }}
               data-testid="age"
+              maw={120}
             />
 
             <NumberInput
@@ -127,10 +115,8 @@ const PersonalDataForm = () => {
               label={t('yourData.height')}
               error={t(form.errors?.height)}
               required
-              style={{
-                maxWidth: 120,
-              }}
               data-testid="height"
+              maw={120}
             />
 
             <NumberInput
@@ -139,27 +125,20 @@ const PersonalDataForm = () => {
               label={t('yourData.weight')}
               error={t(form.errors?.weight)}
               required
-              style={{
-                maxWidth: 120,
-              }}
               data-testid="weight"
+              maw={120}
             />
           </Stack>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={4}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
+          <Title order={2} mb="md">
             {t('activityLevel.title')}
           </Title>
           <Radio.Group
@@ -167,7 +146,6 @@ const PersonalDataForm = () => {
             error={t(form.errors?.activityLevel)}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {activityLevelOptions.map((item) => (
@@ -182,19 +160,14 @@ const PersonalDataForm = () => {
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={2}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
+          <Title order={2} mb="md">
             {t('goal.title')}
           </Title>
           <Radio.Group
@@ -202,7 +175,6 @@ const PersonalDataForm = () => {
             error={t(form.errors?.goal)}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {goalOptions.map((item) => (
@@ -216,19 +188,14 @@ const PersonalDataForm = () => {
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={3}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
+          <Title order={2} mb="md">
             {t('formula.title')}
           </Title>
           <Radio.Group
@@ -236,7 +203,6 @@ const PersonalDataForm = () => {
             error={t(form.errors?.formula)}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {formulaOptions.map((item) => (
@@ -250,13 +216,8 @@ const PersonalDataForm = () => {
           </Radio.Group>
         </Grid.Col>
       </Grid>
-      <Group position="center">
-        <Button
-          type="submit"
-          size="xl"
-          color="blue"
-          data-testid="submit-button"
-        >
+      <Group justify="center">
+        <Button type="submit" size="xl" data-testid="submit-button">
           {t('calculate')}
         </Button>
       </Group>

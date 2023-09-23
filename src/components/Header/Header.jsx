@@ -44,14 +44,13 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
           <Button
             key={lang}
             size="xs"
-            color="blue"
             variant={selectedLanguage === lang ? 'light' : 'subtle'}
             onClick={() => handleChangeLanguage(lang)}
           >
             {lang.toUpperCase()}
           </Button>
         ))}
-        <ActionIcon color="blue" onClick={() => toggleColorScheme()}>
+        <ActionIcon variant="subtle" onClick={() => toggleColorScheme()}>
           {isDark ? <FiMoon /> : <FiSun />}
         </ActionIcon>
       </Group>

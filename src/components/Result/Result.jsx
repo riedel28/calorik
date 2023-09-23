@@ -37,7 +37,7 @@ const Result = () => {
   return (
     resultCalories > 0 && (
       <footer>
-        <Title component="h1" align="center">
+        <Title order={1} align="center" p={0} m={0}>
           <animated.span>
             {animation.value.interpolate((val) =>
               t('result', {

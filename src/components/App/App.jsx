@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   AppShell,
@@ -16,16 +16,17 @@ import useLocalStorage from '@hooks/useLocalStorage';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
+  defaultRadius: 'md',
+  primaryColor: 'indigo',
 });
 
 const App = () => {
   const { i18n } = useTranslation(['translation']);
 
-  const [persistedLang, setPersistedLang] = useLocalStorage(
+  const [persistedLang] = useLocalStorage(
     'calorikLang',
     'en'
   );
-  const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
 
   useEffect(() => {
     if (!persistedLang) {
@@ -35,21 +36,17 @@ const App = () => {
     i18n.changeLanguage(persistedLang);
   }, [persistedLang, i18n]);
 
-  const changeLanguage = (lang) => {
-    i18n.changeLanguage(lang);
-    setLanguage(lang);
-    setPersistedLang(lang);
-  };
+
 
   return (
     <MantineProvider theme={theme}>
       <UserDataProvider>
-        <AppShell padding="md" header={{ height: 60 }} footer={{ height: 60 }}>
+        <AppShell padding="md" header={{ height: 60 }} footer={{ height: 80 }}>
           <AppShell.Header height={56} p="md">
             <Header />
           </AppShell.Header>
           <AppShell.Main>
-            <Container size="lg">
+            <Container size="xl">
               <PersonalDataForm />
             </Container>
           </AppShell.Main>
