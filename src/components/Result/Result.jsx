@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useSpring, animated } from 'react-spring';
 import { Title } from '@mantine/core';
 
-import { useUserData } from '@context/UserDataContext';
+import { useUserData } from '../../context/UserDataContext';
 import { calculateCalories } from '../../helpers';
 
 const Result = () => {
@@ -43,7 +43,7 @@ const Result = () => {
               t('result', {
                 calories: Math.floor(val),
                 goal: t(`goal.${userData.goal}.short`),
-              })
+              }),
             )}
           </animated.span>
         </Title>

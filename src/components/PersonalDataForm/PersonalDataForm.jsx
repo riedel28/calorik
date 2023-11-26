@@ -12,8 +12,8 @@ import {
 } from '@mantine/core';
 import { useForm, yupResolver } from '@mantine/form';
 
-import { useUserData } from '@context/UserDataContext';
-import useLocalStorage from '@hooks/useLocalStorage';
+import { useUserData } from '../../context/UserDataContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import validationSchema from './validationSchema';
 
 const activityLevelOptions = [

@@ -8,11 +8,11 @@ import {
 } from '@mantine/core';
 
 import '@mantine/core/styles.css';
-import Header from '@components/Header/Header';
-import PersonalDataForm from '@components/PersonalDataForm/PersonalDataForm';
-import Result from '@components/Result/Result';
-import { UserDataProvider } from '@context/UserDataContext';
-import useLocalStorage from '@hooks/useLocalStorage';
+import Header from '../Header/Header';
+import PersonalDataForm from '../PersonalDataForm/PersonalDataForm';
+import Result from '../Result/Result';
+import { UserDataProvider } from '../../context/UserDataContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -23,20 +23,15 @@ const theme = createTheme({
 const App = () => {
   const { i18n } = useTranslation(['translation']);
 
-  const [persistedLang] = useLocalStorage(
-    'calorikLang',
-    'en'
-  );
+  const [persistedLang] = useLocalStorage('calorikLang', 'en');
 
   useEffect(() => {
     if (!persistedLang) {
       return;
     }
 
-    i18n.changeLanguage(persistedLang);
+    // i18n.changeLanguage(persistedLang);
   }, [persistedLang, i18n]);
-
-
 
   return (
     <MantineProvider theme={theme}>

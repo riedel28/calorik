@@ -1,3 +1,5 @@
+'use client';
+
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiMoon, FiSun } from 'react-icons/fi';
@@ -8,7 +10,7 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 
-import useLocalStorage from '@hooks/useLocalStorage';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const languages = ['en', 'ru', 'de'];
 
@@ -19,7 +21,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
 
   const [persistedLang, setPersistedLang] = useLocalStorage(
     'calorikLang',
-    'en'
+    'en',
   );
   const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
 
@@ -28,7 +30,7 @@ const Header = ({ onLanguageSelect, language, ...props }) => {
       return;
     }
 
-    i18n.changeLanguage(persistedLang);
+    // i18n.changeLanguage(persistedLang);
   }, [persistedLang, i18n]);
 
   const handleChangeLanguage = (lang) => {
