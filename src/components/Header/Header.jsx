@@ -11,8 +11,6 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 
-// import useLocalStorage from '../../hooks/useLocalStorage';
-
 const languages = ['en', 'ru', 'de'];
 
 const Header = ({ ...props }) => {
@@ -21,26 +19,6 @@ const Header = ({ ...props }) => {
 
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
   const isDark = colorScheme === 'dark';
-
-  // const [persistedLang, setPersistedLang] = useLocalStorage(
-  //   'calorikLang',
-  //   'en',
-  // );
-  // const [selectedLanguage, setLanguage] = useState(() => persistedLang || 'en');
-
-  // useEffect(() => {
-  //   if (!persistedLang) {
-  //     return;
-  //   }
-
-  //   // i18n.changeLanguage(persistedLang);
-  // }, [persistedLang, i18n]);
-
-  // const handleChangeLanguage = (lang) => {
-  //   i18n.changeLanguage(lang);
-  //   setLanguage(lang);
-  //   setPersistedLang(lang);
-  // };
 
   return (
     <header>
