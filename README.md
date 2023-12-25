@@ -7,14 +7,15 @@ You can calculate your calorie needs based on your goal.
 
 ## The project is powered by:
 
-- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="16" height="16">&nbsp;&nbsp;React
-- <img src="https://seeklogo.com/images/M/mantine-logo-235E19C978-seeklogo.com.png" width="16" height="16">&nbsp;&nbsp;Mantine
-- <img src="https://avatars.githubusercontent.com/u/53986236?s=280&v=4" width="16" height="16">&nbsp;&nbsp;React Hook Form
-- <img src="https://gblobscdn.gitbook.com/spaces%2F-L9iS6WpW81N7RGRTQ-K%2Favatar.png" width="16" height="16">&nbsp;&nbsp;React-i18next
+- <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png" width="16" height="16">&nbsp;React
+- <img src="https://cdn.worldvectorlogo.com/logos/next-js.svg" width="16" height="16">&nbsp;Next.js
+- <img src="https://seeklogo.com/images/M/mantine-logo-235E19C978-seeklogo.com.png" width="16" height="16">&nbsp;Mantine
+- <img src="https://avatars.githubusercontent.com/u/53986236?s=280&v=4" width="16" height="16">&nbsp;React Hook Form
+
 
 ## Demo
 
-You can play around with the app here: [https://calorik.netlify.app](https://calorik.netlify.app)
+You can play around with the app here: [https://calorik-riedel28.vercel.app/en](https://calorik-riedel28.vercel.app/en)
 
 ## Setup
 
