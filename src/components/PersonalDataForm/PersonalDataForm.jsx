@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import {
   Box,
   Button,
@@ -12,37 +13,35 @@ import {
 } from '@mantine/core';
 import { useForm, yupResolver } from '@mantine/form';
 
-import { useUserData } from '@context/UserDataContext';
-import useLocalStorage from '@hooks/useLocalStorage';
+import { useUserData } from '../../context/UserDataContext';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import validationSchema from './validationSchema';
 
-const activityLevelOptions = [
-  { value: 'no-exercise', label: 'activityLevel.noExercise' },
-  { value: 'light', label: 'activityLevel.lightExercise' },
-  { value: 'moderate', label: 'activityLevel.moderateExercise' },
-  { value: 'heavy', label: 'activityLevel.heavyExercise' },
-  {
-    value: 'very-heavy',
-    label: 'activityLevel.veryHeavyExercise',
-  },
-];
+const PersonalDataForm = ({ dict }) => {
+  const activityLevelOptions = [
+    { value: 'no-exercise', label: dict.activity.noExercise },
+    { value: 'light', label: dict.activity.lightExercise },
+    { value: 'moderate', label: dict.activity.moderateExercise },
+    { value: 'heavy', label: dict.activity.heavyExercise },
+    {
+      value: 'very-heavy',
+      label: dict.activity.veryHeavyExercise,
+    },
+  ];
 
-const goalOptions = [
-  { value: 'cut', label: 'goal.cut' },
-  { value: 'maintain', label: 'goal.maintain' },
-  { value: 'gain', label: 'goal.gain' },
-];
+  const goalOptions = [
+    { value: 'cut', label: dict.goal.cut },
+    { value: 'maintain', label: dict.goal.maintain },
+    { value: 'gain', label: dict.goal.gain },
+  ];
 
-const formulaOptions = [
-  {
-    value: 'harris-benedict',
-    label: 'formula.harrisBenedict',
-  },
-  { value: 'mifflin-st-jeor', label: 'formula.mifflinStJeor' },
-];
-
-const PersonalDataForm = () => {
-  const { t } = useTranslation();
+  const formulaOptions = [
+    {
+      value: 'harris-benedict',
+      label: dict.formula.harrisBenedict,
+    },
+    { value: 'mifflin-st-jeor', label: dict.formula.mifflinStJeor },
+  ];
 
   const [persistentData, setPersistentData] = useLocalStorage('calorikData');
   const { setUserData } = useUserData();
@@ -72,108 +71,86 @@ const PersonalDataForm = () => {
       onSubmit={form.onSubmit(handleSubmit)}
       data-testid="form"
     >
-      <Grid
-        style={{
-          marginBottom: '2rem',
-        }}
-      >
+      <Grid mb="xl">
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={3}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {t('yourData.title')}
+          <Title order={2} mb="md">
+            {dict.yourData.title}
           </Title>
           <Stack>
             <Radio.Group
               {...form.getInputProps('gender')}
-              label={t('yourData.gender')}
-              color="blue"
+              label={dict.yourData.gender.title}
               required
             >
               <Group mt="xs">
                 <Radio
                   value="male"
-                  label={t('yourData.gender.male')}
+                  label={dict.yourData.gender.male}
                   data-testid="gender-male"
                 />
-                <Radio value="female" label={t('yourData.gender.female')} />
+                <Radio value="female" label={dict.yourData.gender.female} />
               </Group>
             </Radio.Group>
             <NumberInput
               {...form.getInputProps('age')}
               defaultValue={30}
-              label={t('yourData.age')}
+              label={dict.yourData.age.title}
               required
-              error={t(form.errors?.age)}
-              style={{
-                maxWidth: 120,
-              }}
+              error={form.errors.age && dict.yourData.age.error}
               data-testid="age"
+              maw={180}
             />
 
             <NumberInput
               {...form.getInputProps('height')}
               defaultValue={180}
-              label={t('yourData.height')}
-              error={t(form.errors?.height)}
+              label={dict.yourData.height.title}
+              error={form.errors.height && dict.yourData.height.error}
               required
-              style={{
-                maxWidth: 120,
-              }}
               data-testid="height"
+              maw={180}
             />
 
             <NumberInput
               {...form.getInputProps('weight')}
               defaultValue={85}
-              label={t('yourData.weight')}
-              error={t(form.errors?.weight)}
+              label={dict.yourData.weight.title}
+              error={form.errors.weight && dict.yourData.weight.error}
               required
-              style={{
-                maxWidth: 120,
-              }}
               data-testid="weight"
+              maw={180}
             />
           </Stack>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={4}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {t('activityLevel.title')}
+          <Title order={2} mb="md">
+            {dict.activity.title}
           </Title>
           <Radio.Group
             {...form.getInputProps('activityLevel')}
-            error={t(form.errors?.activityLevel)}
+            error={form.errors?.activityLevel && dict.activity.error}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {activityLevelOptions.map((item) => (
                 <Radio
                   key={item.value}
-                  label={t(item.label)}
+                  label={item.label}
                   value={item.value}
                   data-testid={`activity-level-${item.value}`}
                 />
@@ -182,87 +159,57 @@ const PersonalDataForm = () => {
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={2}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {t('goal.title')}
+          <Title order={2} mb="md">
+            {dict.goal.title}
           </Title>
           <Radio.Group
             {...form.getInputProps('goal')}
-            error={t(form.errors?.goal)}
+            error={form.errors?.goal && dict.goal.error}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {goalOptions.map((item) => (
-                <Radio
-                  key={item.value}
-                  label={t(item.label)}
-                  value={item.value}
-                />
+                <Radio key={item.value} label={item.label} value={item.value} />
               ))}
             </Group>
           </Radio.Group>
         </Grid.Col>
         <Grid.Col
-          xs={6}
-          sm={6}
-          md={3}
-          style={{
-            marginBottom: '1rem',
+          span={{
+            base: 12,
+            xs: 6,
+            sm: 6,
+            md: 3,
           }}
         >
-          <Title
-            order={2}
-            style={{
-              marginBottom: '1rem',
-            }}
-          >
-            {t('formula.title')}
+          <Title order={2} mb="md">
+            {dict.formula.title}
           </Title>
           <Radio.Group
             {...form.getInputProps('formula')}
-            error={t(form.errors?.formula)}
+            error={form.errors?.formula && dict.formula.error}
             required
             orientation="vertical"
-            color="blue"
           >
             <Group mt="xs">
               {formulaOptions.map((item) => (
-                <Radio
-                  key={item.value}
-                  label={t(item.label)}
-                  value={item.value}
-                />
+                <Radio key={item.value} label={item.label} value={item.value} />
               ))}
             </Group>
           </Radio.Group>
         </Grid.Col>
       </Grid>
-      <Group position="center">
-        <Button
-          type="submit"
-          size="xl"
-          color="blue"
-          data-testid="submit-button"
-          sx={{
-            fontSize: 16,
-            textTransform: 'uppercase',
-            letterSpacing: 2,
-          }}
-        >
-          {t('calculate')}
+      <Group justify="center">
+        <Button type="submit" size="xl" data-testid="submit-button">
+          {dict.calculate}
         </Button>
       </Group>
     </Box>

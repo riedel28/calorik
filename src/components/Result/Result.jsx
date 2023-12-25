@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
-import { useSpring, animated } from 'react-spring';
-import { Footer, Title } from '@mantine/core';
+'use client';
 
-import { useUserData } from '@context/UserDataContext';
+import React, { useEffect } from 'react';
+import { useSpring, animated } from 'react-spring';
+import { Title } from '@mantine/core';
+
+import { useUserData } from '../../context/UserDataContext';
 import { calculateCalories } from '../../helpers';
 
-const Result = () => {
-  const { t } = useTranslation();
-
+const Result = ({ dict }) => {
   const { userData } = useUserData();
   const resultCalories = calculateCalories(userData);
 
@@ -36,18 +35,12 @@ const Result = () => {
 
   return (
     resultCalories > 0 && (
-      <Footer style={{ padding: 32 }}>
-        <Title component="h1" align="center" sx={{ fontSize: 28 }}>
-          <animated.span>
-            {animation.value.interpolate((val) =>
-              t('result', {
-                calories: Math.floor(val),
-                goal: t(`goal.${userData.goal}.short`),
-              })
-            )}
-          </animated.span>
-        </Title>
-      </Footer>
+      <Title order={1} align="center" pt="lg" m={0}>
+        <animated.span>
+          {animation.value.to((val) => Math.floor(resultCalories))}
+        </animated.span>{' '}
+        {dict.result}
+      </Title>
     )
   );
 };

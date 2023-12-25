@@ -1,18 +1,19 @@
 import React from 'react';
-import { MantineProvider, ColorSchemeProvider } from '@mantine/core';
+import { MantineProvider } from '@mantine/core';
 import { screen, render } from '@testing-library/react';
 import { vi } from 'vitest';
 
 import Header from './Header';
 
-vi.mock('react-i18next', () => ({
-  // this mock makes sure any components using the translate hook can use it without a warning being shown
-  useTranslation: () => {
+vi.mock('next/navigation', () => ({
+  useRouter() {
     return {
-      t: (str) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
+      prefetch: () => null,
+    };
+  },
+  useParams() {
+    return {
+      lang: 'en',
     };
   },
 }));
@@ -20,11 +21,9 @@ vi.mock('react-i18next', () => ({
 describe('Header', () => {
   test('should render Header component', async () => {
     render(
-      <ColorSchemeProvider>
-        <MantineProvider>
-          <Header />
-        </MantineProvider>
-      </ColorSchemeProvider>
+      <MantineProvider>
+        <Header />
+      </MantineProvider>,
     );
 
     expect(screen.getByText(/en/i)).toBeInTheDocument();
