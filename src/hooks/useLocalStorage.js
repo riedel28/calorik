@@ -14,11 +14,11 @@ const initialState = {
 
 const useLocalStorage = (key, initialValue = initialState) => {
   const [value, setValue] = useState(() => {
-    return JSON.parse(localStorage.getItem(key)) || initialValue;
+    return JSON.parse(window.localStorage.getItem(key)) || initialValue;
   });
 
   useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
+    window.localStorage.setItem(key, JSON.stringify(value));
   }, [key, value]);
 
   return [value, setValue];
