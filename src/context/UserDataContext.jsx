@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 const UserDataContext = React.createContext();
 
 const UserDataProvider = ({ children }) => {
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState(null);
 
   const value = { userData, setUserData };
 

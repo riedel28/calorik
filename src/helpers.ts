@@ -32,6 +32,10 @@ const goalFactors = {
 } as const;
 
 export const calculateCalories = (data: UserData) => {
+  if (!data) {
+    return 0;
+  }
+
   const { activityLevel, formula, goal } = data;
 
   const bmr = functionsByFormula[formula](data);
