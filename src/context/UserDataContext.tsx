@@ -2,13 +2,19 @@
 
 import React, { useState } from 'react';
 
-const UserDataContext = React.createContext();
+import { UserData } from '@/helpers';
 
-const UserDataProvider = ({ children }) => {
-  const [userData, setUserData] = useState(null);
+interface UserDataContextType {
+  userData: UserData | null;
+  setUserData: (data: UserData) => void;
+}
 
-  const value = { userData, setUserData };
+const UserDataContext = React.createContext({} as UserDataContextType);
 
+const UserDataProvider = ({ children }: { children: React.ReactNode }) => {
+  const [userData, setUserData] = useState<null | UserData>(null);
+
+  const value: UserDataContextType = { userData, setUserData };
   return (
     <UserDataContext.Provider value={value}>
       {children}

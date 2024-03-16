@@ -12,9 +12,17 @@ const initialState = {
   formula: 'harris-benedict',
 };
 
-const useLocalStorage = (key, initialValue = initialState) => {
+interface UseLocalStorageProps {
+  key: string;
+  initialValue?: typeof initialState;
+}
+
+const useLocalStorage = ({
+  key,
+  initialValue = initialState,
+}: UseLocalStorageProps) => {
   const [value, setValue] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(key)) || initialValue;
+    return JSON.parse(window.localStorage.getItem(key) || '') || initialValue;
   });
 
   useEffect(() => {

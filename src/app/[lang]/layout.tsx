@@ -12,8 +12,8 @@ import {
 
 import '@mantine/core/styles.css';
 
-import { UserDataProvider } from '../../context/UserDataContext';
-import Header from '../../components/Header/Header';
+import { UserDataProvider } from '@/context/UserDataContext';
+import Header from '@/components/Header/Header';
 
 const theme = createTheme({
   defaultRadius: 'md',

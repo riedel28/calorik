@@ -1,11 +1,11 @@
 import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
+import { MantineProvider } from '@mantine/core';
 
-import { UserDataProvider } from '../../context/UserDataContext';
+import { UserDataProvider } from '@/context/UserDataContext';
 import PersonalDataForm from './PersonalDataForm';
 
-import dict from '../../dictionaries/en.json';
-import { MantineProvider } from '@mantine/core';
+import dict from '@/dictionaries/en.json';
 
 describe('PersonalDataForm', () => {
   test('should render PersonalDataForm component', () => {

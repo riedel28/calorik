@@ -4,8 +4,8 @@ import React, { useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Title } from '@mantine/core';
 
-import { useUserData } from '../../context/UserDataContext';
-import { calculateCalories } from '../../helpers';
+import { useUserData } from '@/context/UserDataContext';
+import { calculateCalories } from '@/helpers';
 
 const Result = ({ dict }: { dict: any }) => {
   const { userData } = useUserData();

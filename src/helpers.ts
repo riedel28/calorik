@@ -31,7 +31,7 @@ const goalFactors = {
   gain: 1.15,
 } as const;
 
-export const calculateCalories = (data: UserData) => {
+export const calculateCalories = (data: UserData | null) => {
   if (!data) {
     return 0;
   }
