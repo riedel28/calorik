@@ -17,7 +17,7 @@ import { useUserData } from '../../context/UserDataContext';
 import useLocalStorage from '../../hooks/useLocalStorage';
 import validationSchema from './validationSchema';
 
-const PersonalDataForm = ({ dict }) => {
+const PersonalDataForm = ({ dict }: { dict: any }) => {
   const activityLevelOptions = [
     { value: 'no-exercise', label: dict.activity.noExercise },
     { value: 'light', label: dict.activity.lightExercise },
@@ -60,7 +60,7 @@ const PersonalDataForm = ({ dict }) => {
     validate: yupResolver(validationSchema),
   });
 
-  const handleSubmit = (values) => {
+  const handleSubmit = (values: any) => {
     setPersistentData(values);
     setUserData(values);
   };
@@ -144,7 +144,6 @@ const PersonalDataForm = ({ dict }) => {
             {...form.getInputProps('activityLevel')}
             error={form.errors?.activityLevel && dict.activity.error}
             required
-            orientation="vertical"
           >
             <Group mt="xs">
               {activityLevelOptions.map((item) => (
@@ -173,7 +172,6 @@ const PersonalDataForm = ({ dict }) => {
             {...form.getInputProps('goal')}
             error={form.errors?.goal && dict.goal.error}
             required
-            orientation="vertical"
           >
             <Group mt="xs">
               {goalOptions.map((item) => (
@@ -197,7 +195,6 @@ const PersonalDataForm = ({ dict }) => {
             {...form.getInputProps('formula')}
             error={form.errors?.formula && dict.formula.error}
             required
-            orientation="vertical"
           >
             <Group mt="xs">
               {formulaOptions.map((item) => (

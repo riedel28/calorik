@@ -7,7 +7,7 @@ import { Title } from '@mantine/core';
 import { useUserData } from '../../context/UserDataContext';
 import { calculateCalories } from '../../helpers';
 
-const Result = ({ dict }) => {
+const Result = ({ dict }: { dict: any }) => {
   const { userData } = useUserData();
   const resultCalories = calculateCalories(userData);
 
@@ -35,9 +35,9 @@ const Result = ({ dict }) => {
 
   return (
     resultCalories > 0 && (
-      <Title order={1} align="center" pt="lg" m={0}>
+      <Title order={1} pt="lg" m={0}>
         <animated.span>
-          {animation.value.to((val) => Math.floor(resultCalories))}
+          {animation.value.to(() => Math.floor(resultCalories))}
         </animated.span>{' '}
         {dict.result}
       </Title>
