@@ -35,7 +35,7 @@ const Result = ({ dict }: { dict: any }) => {
 
   return (
     resultCalories > 0 && (
-      <Title order={1} pt="lg" m={0}>
+      <Title order={1} pt={100} m={0} ta="center">
         <animated.span>
           {animation.value.to(() => Math.floor(resultCalories))}
         </animated.span>{' '}
