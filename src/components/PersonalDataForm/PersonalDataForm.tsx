@@ -14,7 +14,7 @@ import {
 import { useForm, yupResolver } from '@mantine/form';
 
 import { useUserData } from '@/context/UserDataContext';
-// import useLocalStorage from '@/hooks/useLocalStorage';
+import useLocalStorage from '@/hooks/useLocalStorage';
 import validationSchema from './validationSchema';
 
 const PersonalDataForm = ({ dict }: { dict: any }) => {
@@ -43,27 +43,19 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
     { value: 'mifflin-st-jeor', label: dict.formula.mifflinStJeor },
   ];
 
-  // const [persistentData, setPersistentData] = useLocalStorage({
-  //   key: 'calorikData',
-  // });
+  const [persistentData, setPersistentData] = useLocalStorage({
+    key: 'calorikData',
+  });
   const { setUserData } = useUserData();
 
   const form = useForm({
-    initialValues: {
-      gender: 'male',
-      age: 35,
-      height: 180,
-      weight: 80,
-      activityLevel: 'no-exercise',
-      goal: 'cut',
-      formula: 'harris-benedict',
-    },
+    initialValues: persistentData,
     validateInputOnChange: true,
     validate: yupResolver(validationSchema),
   });
 
   const handleSubmit = (values: any) => {
-    // setPersistentData(values);
+    setPersistentData(values);
     setUserData(values);
   };
 

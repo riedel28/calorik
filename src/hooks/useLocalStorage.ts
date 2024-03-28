@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 
-const initialState = {
-  age: '30',
+import { UserData } from '@/helpers';
+
+const initialState: UserData = {
+  age: 30,
   gender: 'male',
-  height: '180',
-  weight: '80',
+  height: 180,
+  weight: 80,
   activityLevel: 'no-exercise',
   goal: 'cut',
   formula: 'harris-benedict',
@@ -17,10 +19,10 @@ interface UseLocalStorageProps {
   initialValue?: typeof initialState;
 }
 
-const useLocalStorage = ({
+function useLocalStorage({
   key,
   initialValue = initialState,
-}: UseLocalStorageProps) => {
+}: UseLocalStorageProps) {
   const [value, setValue] = useState(() => {
     return JSON.parse(window.localStorage.getItem(key) || '') || initialValue;
   });
@@ -30,6 +32,6 @@ const useLocalStorage = ({
   }, [key, value]);
 
   return [value, setValue];
-};
+}
 
 export default useLocalStorage;
