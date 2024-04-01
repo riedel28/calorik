@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import { UserData } from '@/helpers';
+import { PersonalDataFormValues as UserData } from '@/components/PersonalDataForm/PersonalDataForm';
 
 interface UserDataContextType {
   userData: UserData | null;

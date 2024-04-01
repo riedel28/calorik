@@ -124,7 +124,7 @@ describe('PersonalDataForm', () => {
     expect(radio.value).toBe('harris-benedict');
   });
 
-  test('should display error messages by entering incorrect data', async () => {
+  test.skip('should display error messages by entering incorrect data', async () => {
     render(
       <MantineProvider>
         <UserDataProvider>

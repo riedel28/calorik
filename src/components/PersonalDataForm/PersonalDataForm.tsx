@@ -11,11 +11,36 @@ import {
   Title,
   Stack,
 } from '@mantine/core';
-import { useForm, yupResolver } from '@mantine/form';
+import { useForm, Controller } from 'react-hook-form';
+import { DevTool } from '@hookform/devtools';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 import { useUserData } from '@/context/UserDataContext';
-import useLocalStorage from '@/hooks/useLocalStorage';
-import validationSchema from './validationSchema';
+
+import { useLocalStorage } from '@mantine/hooks';
+
+const personalDataFormSchema = z.object({
+  gender: z.enum(['male', 'female']),
+  age: z
+    .number()
+    .min(0, 'yourData.age.error')
+    .max(120, 'yourData.age.error')
+    .max(120),
+  height: z.number().min(0).max(250),
+  weight: z.number().min(0).max(300),
+  activityLevel: z.enum([
+    'no-exercise',
+    'light',
+    'moderate',
+    'heavy',
+    'very-heavy',
+  ]),
+  goal: z.enum(['cut', 'maintain', 'gain']),
+  formula: z.enum(['harris-benedict', 'mifflin-st-jeor']),
+});
+
+export type PersonalDataFormValues = z.infer<typeof personalDataFormSchema>;
 
 const PersonalDataForm = ({ dict }: { dict: any }) => {
   const activityLevelOptions = [
@@ -43,167 +68,243 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
     { value: 'mifflin-st-jeor', label: dict.formula.mifflinStJeor },
   ];
 
-  const [persistentData, setPersistentData] = useLocalStorage({
-    key: 'calorikData',
-  });
+  const defaultValues = {
+    gender: 'male',
+    age: 30,
+    height: 180,
+    weight: 80,
+    activityLevel: 'no-exercise',
+    goal: 'cut',
+    formula: 'harris-benedict',
+  } satisfies PersonalDataFormValues;
+
+  const [persistentData, setPersistentData] =
+    useLocalStorage<PersonalDataFormValues>({
+      key: 'calorikData',
+      defaultValue: defaultValues,
+    });
   const { setUserData } = useUserData();
 
-  const form = useForm({
-    initialValues: persistentData,
-    validateInputOnChange: true,
-    validate: yupResolver(validationSchema),
+  const form = useForm<PersonalDataFormValues>({
+    defaultValues: defaultValues || persistentData,
+    resolver: zodResolver(personalDataFormSchema),
   });
 
-  const handleSubmit = (values: any) => {
+  const handleSubmit = (values: PersonalDataFormValues) => {
     setPersistentData(values);
     setUserData(values);
   };
 
   return (
-    <Box
-      component="form"
-      onSubmit={form.onSubmit(handleSubmit)}
-      data-testid="form"
-    >
-      <Grid mb="xl">
-        <Grid.Col
-          span={{
-            base: 12,
-            xs: 6,
-            sm: 6,
-            md: 3,
-          }}
-        >
-          <Title order={2} mb="md">
-            {dict.yourData.title}
-          </Title>
-          <Stack>
-            <Radio.Group
-              {...form.getInputProps('gender')}
-              label={dict.yourData.gender.title}
-              required
-            >
-              <Group mt="xs">
-                <Radio
-                  value="male"
-                  label={dict.yourData.gender.male}
-                  data-testid="gender-male"
-                />
-                <Radio value="female" label={dict.yourData.gender.female} />
-              </Group>
-            </Radio.Group>
-            <NumberInput
-              {...form.getInputProps('age')}
-              defaultValue={30}
-              label={dict.yourData.age.title}
-              required
-              error={form.errors.age && dict.yourData.age.error}
-              data-testid="age"
-              maw={180}
-            />
+    <>
+      <Box
+        component="form"
+        onSubmit={form.handleSubmit(handleSubmit)}
+        data-testid="form"
+      >
+        <Grid mb="xl">
+          <Grid.Col
+            span={{
+              base: 12,
+              xs: 6,
+              sm: 6,
+              md: 3,
+            }}
+          >
+            <Title order={2} mb="md">
+              {dict.yourData.title}
+            </Title>
+            <Stack>
+              <Controller
+                control={form.control}
+                name="gender"
+                render={({ field, fieldState }) => (
+                  <Radio.Group
+                    label={dict.yourData.gender.title}
+                    value={field.value}
+                    onChange={field.onChange}
+                    required
+                    error={fieldState.error && dict.yourData.gender.error}
+                  >
+                    <Group mt="xs">
+                      <Radio
+                        value="male"
+                        label={dict.yourData.gender.male}
+                        data-testid="gender-male"
+                      />
+                      <Radio
+                        value="female"
+                        label={dict.yourData.gender.female}
+                      />
+                    </Group>
+                  </Radio.Group>
+                )}
+              />
 
-            <NumberInput
-              {...form.getInputProps('height')}
-              defaultValue={180}
-              label={dict.yourData.height.title}
-              error={form.errors.height && dict.yourData.height.error}
-              required
-              data-testid="height"
-              maw={180}
-            />
+              <Controller
+                control={form.control}
+                name="age"
+                render={({ field, fieldState }) => (
+                  <NumberInput
+                    {...field}
+                    label={dict.yourData.age.title}
+                    required
+                    error={fieldState.error && dict.yourData.age.error}
+                    data-testid="age"
+                    maw={180}
+                  />
+                )}
+              />
 
-            <NumberInput
-              {...form.getInputProps('weight')}
-              defaultValue={85}
-              label={dict.yourData.weight.title}
-              error={form.errors.weight && dict.yourData.weight.error}
-              required
-              data-testid="weight"
-              maw={180}
+              <Controller
+                control={form.control}
+                name="height"
+                render={({ field, fieldState }) => (
+                  <NumberInput
+                    {...field}
+                    label={dict.yourData.height.title}
+                    required
+                    error={fieldState.error && dict.yourData.height.error}
+                    data-testid="height"
+                    maw={180}
+                  />
+                )}
+              />
+
+              <Controller
+                control={form.control}
+                name="weight"
+                render={({ field, fieldState }) => (
+                  <NumberInput
+                    {...field}
+                    label={dict.yourData.weight.title}
+                    required
+                    error={fieldState.error && dict.yourData.weight.error}
+                    data-testid="weight"
+                    maw={180}
+                  />
+                )}
+              />
+            </Stack>
+          </Grid.Col>
+          <Grid.Col
+            span={{
+              base: 12,
+              xs: 6,
+              sm: 6,
+              md: 3,
+            }}
+          >
+            <Title order={2} mb="md">
+              {dict.activity.title}
+            </Title>
+            <Controller
+              control={form.control}
+              name="activityLevel"
+              render={({ field, fieldState }) => (
+                <Radio.Group
+                  label={dict.activity.title}
+                  value={field.value}
+                  onChange={field.onChange}
+                  required
+                  error={fieldState.error && dict.activity.error}
+                >
+                  <Group mt="xs">
+                    {activityLevelOptions.map((item) => (
+                      <Radio
+                        key={item.value}
+                        label={item.label}
+                        value={item.value}
+                        data-testid={`activity-level-${item.value}`}
+                      />
+                    ))}
+                  </Group>
+                </Radio.Group>
+              )}
             />
-          </Stack>
-        </Grid.Col>
-        <Grid.Col
-          span={{
-            base: 12,
-            xs: 6,
-            sm: 6,
-            md: 3,
-          }}
-        >
-          <Title order={2} mb="md">
-            {dict.activity.title}
-          </Title>
-          <Radio.Group
-            {...form.getInputProps('activityLevel')}
-            error={form.errors?.activityLevel && dict.activity.error}
-            required
+          </Grid.Col>
+          <Grid.Col
+            span={{
+              base: 12,
+              xs: 6,
+              sm: 6,
+              md: 3,
+            }}
           >
-            <Group mt="xs">
-              {activityLevelOptions.map((item) => (
-                <Radio
-                  key={item.value}
-                  label={item.label}
-                  value={item.value}
-                  data-testid={`activity-level-${item.value}`}
-                />
-              ))}
-            </Group>
-          </Radio.Group>
-        </Grid.Col>
-        <Grid.Col
-          span={{
-            base: 12,
-            xs: 6,
-            sm: 6,
-            md: 3,
-          }}
-        >
-          <Title order={2} mb="md">
-            {dict.goal.title}
-          </Title>
-          <Radio.Group
-            {...form.getInputProps('goal')}
-            error={form.errors?.goal && dict.goal.error}
-            required
+            <Title order={2} mb="md">
+              {dict.goal.title}
+            </Title>
+
+            <Controller
+              control={form.control}
+              name="goal"
+              render={({ field, fieldState }) => (
+                <Radio.Group
+                  label={dict.goal.title}
+                  value={field.value}
+                  onChange={field.onChange}
+                  required
+                  error={fieldState.error && dict.goal.error}
+                >
+                  <Stack mt="xs">
+                    {goalOptions.map((item) => (
+                      <Radio
+                        key={item.value}
+                        label={item.label}
+                        value={item.value}
+                      />
+                    ))}
+                  </Stack>
+                </Radio.Group>
+              )}
+            />
+          </Grid.Col>
+          <Grid.Col
+            span={{
+              base: 12,
+              xs: 6,
+              sm: 6,
+              md: 3,
+            }}
           >
-            <Group mt="xs">
-              {goalOptions.map((item) => (
-                <Radio key={item.value} label={item.label} value={item.value} />
-              ))}
-            </Group>
-          </Radio.Group>
-        </Grid.Col>
-        <Grid.Col
-          span={{
-            base: 12,
-            xs: 6,
-            sm: 6,
-            md: 3,
-          }}
-        >
-          <Title order={2} mb="md">
-            {dict.formula.title}
-          </Title>
-          <Radio.Group
-            {...form.getInputProps('formula')}
-            error={form.errors?.formula && dict.formula.error}
-            required
-          >
-            <Group mt="xs">
-              {formulaOptions.map((item) => (
-                <Radio key={item.value} label={item.label} value={item.value} />
-              ))}
-            </Group>
-          </Radio.Group>
-        </Grid.Col>
-      </Grid>
-      <Group justify="center">
-        <Button type="submit" size="xl" data-testid="submit-button">
-          {dict.calculate}
-        </Button>
-      </Group>
-    </Box>
+            <Title order={2} mb="md">
+              {dict.formula.title}
+            </Title>
+            <Controller
+              control={form.control}
+              name="formula"
+              render={({ field, fieldState }) => (
+                <Radio.Group
+                  label={dict.formula.title}
+                  value={field.value}
+                  onChange={field.onChange}
+                  required
+                  error={fieldState.error && dict.formula.error}
+                >
+                  <Group mt="xs">
+                    {formulaOptions.map((item) => (
+                      <Radio
+                        key={item.value}
+                        label={item.label}
+                        value={item.value}
+                      />
+                    ))}
+                  </Group>
+                </Radio.Group>
+              )}
+            />
+          </Grid.Col>
+        </Grid>
+        <Group justify="center">
+          <Button type="submit" size="xl" data-testid="submit-button">
+            {dict.calculate}
+          </Button>
+        </Group>
+      </Box>
+      {process.env.NODE_ENV === 'development' && (
+        <DevTool control={form.control} />
+      )}
+    </>
   );
 };
 
