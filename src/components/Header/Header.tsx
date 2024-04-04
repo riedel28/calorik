@@ -13,7 +13,7 @@ import {
 
 const languages = ['en', 'ru', 'de'];
 
-const Header = ({ ...props }) => {
+const Header = () => {
   const params = useParams();
   const router = useRouter();
 

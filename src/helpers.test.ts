@@ -2,28 +2,29 @@ import {
   calculateCalories,
   harrisBenedictBMR,
   mifflinStJeorBMR,
+  UserData,
 } from './helpers';
 
 describe('Helpers', () => {
-  const data1 = {
-    age: '30',
+  const data1: UserData = {
+    age: 30,
     gender: 'male',
-    weight: '90',
-    height: '180',
+    weight: 90,
+    height: 180,
     formula: 'harris-benedict',
     activityLevel: 'no-exercise',
     goal: 'cut',
-  };
+  } satisfies UserData;
 
   const data2 = {
-    age: '38',
+    age: 38,
     gender: 'female',
-    weight: '67',
-    height: '166',
+    weight: 67,
+    height: 166,
     formula: 'mifflin-st-jeor',
     activityLevel: 'light',
     goal: 'cut',
-  };
+  } satisfies UserData;
   test('should calculate calories correctly', () => {
     expect(calculateCalories(data1)).toEqual(1922);
     expect(calculateCalories(data2)).toEqual(1493);
