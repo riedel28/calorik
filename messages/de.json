@@ -1,22 +1,26 @@
 {
   "yourData": {
-    "title": "Deine Daten",
+    "title": "Ihre Daten",
     "gender": {
-      "title": "Geschlect",
+      "title": "Geschlecht",
       "male": "Männlich",
-      "female": "Weiblich"
+      "female": "Weiblich",
+      "placeholder": "Bitte wählen Sie ihr Geschlecht"
     },
     "age": {
-      "title": "Alter (Jahre)",
-      "error": "Bitte geben Sie Ihr Alter ein"
+      "title": "Alter",
+      "error": "Bitte geben Sie korrektes Alter an",
+      "placeholder": "Bitte geben Sie ihr Alter ein"
     },
     "weight": {
       "title": "Gewicht (kg)",
-      "error": "Bitte geben Sie Ihr Gewicht ein"
+      "error": "Bitte geben Sie korrektes Gewicht an",
+      "placeholder": "Bitte geben Sie ihr Gewicht ein"
     },
     "height": {
       "title": "Größe (cm)",
-      "error": "Bitte geben Sie Ihre Größe ein"
+      "error": "Bitte geben Sie korrekte Größe an", 
+      "placeholder": "Bitte geben Sie ihre Größe ein"
     }
   },
   "activity": {
@@ -32,11 +36,11 @@
     "title": "Ziel",
     "placeholder": "Bitte wählen Sie Ihr Ziel aus",
     "cut": "Abnehmen (-20%)",
-    "cut.short": "abzunehmen",
-    "maintain": "Gewicht zu halten",
-    "maintain.short": "Gewicht zu halten",
+    "cut_short": "abzunehmen",
+    "maintain": "Gewicht zu halten", 
+    "maintain_short": "Gewicht zu halten",
     "gain": "Zunehmen (+15%)",
-    "gain.short": "zuzunehmen"
+    "gain_short": "zuzunehmen"
   },
   "formula": {
     "title": "Formel",
@@ -45,5 +49,5 @@
     "mifflinStJeor": "Mifflin-St.Jeor-Formel"
   },
   "calculate": "Berechnen",
-  "result": "Kalorien"
+  "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}"
 }

@@ -12,12 +12,11 @@ import {
   Stack,
 } from '@mantine/core';
 import { useForm, Controller } from 'react-hook-form';
-import { DevTool } from '@hookform/devtools';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 
 import { useUserData } from '@/context/UserDataContext';
-
 import { useLocalStorage } from '@mantine/hooks';
 
 const personalDataFormSchema = z.object({
@@ -42,30 +41,32 @@ const personalDataFormSchema = z.object({
 
 export type PersonalDataFormValues = z.infer<typeof personalDataFormSchema>;
 
-const PersonalDataForm = ({ dict }: { dict: any }) => {
+const PersonalDataForm = () => {
+  const t = useTranslations();
+
   const activityLevelOptions = [
-    { value: 'no-exercise', label: dict.activity.noExercise },
-    { value: 'light', label: dict.activity.lightExercise },
-    { value: 'moderate', label: dict.activity.moderateExercise },
-    { value: 'heavy', label: dict.activity.heavyExercise },
+    { value: 'no-exercise', label: t('activity.noExercise') },
+    { value: 'light', label: t('activity.lightExercise') },
+    { value: 'moderate', label: t('activity.moderateExercise') },
+    { value: 'heavy', label: t('activity.heavyExercise') },
     {
       value: 'very-heavy',
-      label: dict.activity.veryHeavyExercise,
+      label: t('activity.veryHeavyExercise'),
     },
   ];
 
   const goalOptions = [
-    { value: 'cut', label: dict.goal.cut },
-    { value: 'maintain', label: dict.goal.maintain },
-    { value: 'gain', label: dict.goal.gain },
+    { value: 'cut', label: t('goal.cut') },
+    { value: 'maintain', label: t('goal.maintain') },
+    { value: 'gain', label: t('goal.gain') },
   ];
 
   const formulaOptions = [
     {
       value: 'harris-benedict',
-      label: dict.formula.harrisBenedict,
+      label: t('formula.harrisBenedict'),
     },
-    { value: 'mifflin-st-jeor', label: dict.formula.mifflinStJeor },
+    { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
   ];
 
   const defaultValues = {
@@ -112,7 +113,7 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
             }}
           >
             <Title order={2} mb="md">
-              {dict.yourData.title}
+              {t('yourData.title')}
             </Title>
             <Stack>
               <Controller
@@ -120,21 +121,21 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
                 name="gender"
                 render={({ field, fieldState }) => (
                   <Radio.Group
-                    label={dict.yourData.gender.title}
+                    label={t('yourData.gender.title')}
                     value={field.value}
                     onChange={field.onChange}
                     required
-                    error={fieldState.error && dict.yourData.gender.error}
+                    error={fieldState.error && t('yourData.gender.error')}
                   >
                     <Group mt="xs">
                       <Radio
                         value="male"
-                        label={dict.yourData.gender.male}
+                        label={t('yourData.gender.male')}
                         data-testid="gender-male"
                       />
                       <Radio
                         value="female"
-                        label={dict.yourData.gender.female}
+                        label={t('yourData.gender.female')}
                       />
                     </Group>
                   </Radio.Group>
@@ -147,9 +148,9 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
                 render={({ field, fieldState }) => (
                   <NumberInput
                     {...field}
-                    label={dict.yourData.age.title}
+                    label={t('yourData.age.title')}
                     required
-                    error={fieldState.error && dict.yourData.age.error}
+                    error={fieldState.error && t('yourData.age.error')}
                     data-testid="age"
                     maw={180}
                   />
@@ -162,9 +163,9 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
                 render={({ field, fieldState }) => (
                   <NumberInput
                     {...field}
-                    label={dict.yourData.height.title}
+                    label={t('yourData.height.title')}
                     required
-                    error={fieldState.error && dict.yourData.height.error}
+                    error={fieldState.error && t('yourData.height.error')}
                     data-testid="height"
                     maw={180}
                   />
@@ -177,9 +178,9 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
                 render={({ field, fieldState }) => (
                   <NumberInput
                     {...field}
-                    label={dict.yourData.weight.title}
+                    label={t('yourData.weight.title')}
                     required
-                    error={fieldState.error && dict.yourData.weight.error}
+                    error={fieldState.error && t('yourData.weight.error')}
                     data-testid="weight"
                     maw={180}
                   />
@@ -196,18 +197,18 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
             }}
           >
             <Title order={2} mb="md">
-              {dict.activity.title}
+              {t('activity.title')}
             </Title>
             <Controller
               control={form.control}
               name="activityLevel"
               render={({ field, fieldState }) => (
                 <Radio.Group
-                  label={dict.activity.title}
+                  label={t('activity.title')}
                   value={field.value}
                   onChange={field.onChange}
                   required
-                  error={fieldState.error && dict.activity.error}
+                  error={fieldState.error && t('activity.error')}
                 >
                   <Group mt="xs">
                     {activityLevelOptions.map((item) => (
@@ -232,7 +233,7 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
             }}
           >
             <Title order={2} mb="md">
-              {dict.goal.title}
+              {t('goal.title')}
             </Title>
 
             <Controller
@@ -240,11 +241,11 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
               name="goal"
               render={({ field, fieldState }) => (
                 <Radio.Group
-                  label={dict.goal.title}
+                  label={t('goal.title')}
                   value={field.value}
                   onChange={field.onChange}
                   required
-                  error={fieldState.error && dict.goal.error}
+                  error={fieldState.error && t('goal.error')}
                 >
                   <Stack mt="xs">
                     {goalOptions.map((item) => (
@@ -268,18 +269,18 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
             }}
           >
             <Title order={2} mb="md">
-              {dict.formula.title}
+              {t('formula.title')}
             </Title>
             <Controller
               control={form.control}
               name="formula"
               render={({ field, fieldState }) => (
                 <Radio.Group
-                  label={dict.formula.title}
+                  label={t('formula.title')}
                   value={field.value}
                   onChange={field.onChange}
                   required
-                  error={fieldState.error && dict.formula.error}
+                  error={fieldState.error && t('formula.error')}
                 >
                   <Group mt="xs">
                     {formulaOptions.map((item) => (
@@ -297,13 +298,10 @@ const PersonalDataForm = ({ dict }: { dict: any }) => {
         </Grid>
         <Group justify="center">
           <Button type="submit" size="xl" data-testid="submit-button">
-            {dict.calculate}
+            {t('calculate')}
           </Button>
         </Group>
       </Box>
-      {process.env.NODE_ENV === 'development' && (
-        <DevTool control={form.control} />
-      )}
     </>
   );
 };

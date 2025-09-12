@@ -1,18 +1,9 @@
-import { NextResponse } from 'next/server';
-import { match } from '@formatjs/intl-localematcher';
-import Negotiator from 'negotiator';
-import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './src/i18n/routing';
 
-let headers = { 'accept-language': 'en-US,en;q=0.5' };
-let languages = new Negotiator({ headers }).languages();
-let locales = ['en-US', 'de-DE', 'ru-RU'];
-let defaultLocale = 'en-US';
+export default createMiddleware(routing);
 
-match(languages, locales, defaultLocale); // -> 'en-US'
-
-export function middleware(request: NextRequest) {
-  const url = request.nextUrl.clone();
-  if (url.pathname === '/') {
-    return NextResponse.rewrite(new URL('/en', request.url));
-  }
-}
+export const config = {
+  // Match only internationalized pathnames
+  matcher: ['/((?!api|_next|_vercel|.*\\..*).*)']
+};

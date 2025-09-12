@@ -7,7 +7,7 @@ import { Title } from '@mantine/core';
 import { useUserData } from '@/context/UserDataContext';
 import { calculateCalories } from '@/helpers';
 
-const Result = ({ dict }: { dict: any }) => {
+const Result = () => {
   const { userData } = useUserData();
   const resultCalories = calculateCalories(userData);
 
@@ -39,7 +39,7 @@ const Result = ({ dict }: { dict: any }) => {
         <animated.span>
           {animation.value.to(() => Math.floor(resultCalories))}
         </animated.span>{' '}
-        {dict.result}
+        kcal
       </Title>
     )
   );

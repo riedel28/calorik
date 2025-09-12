@@ -4,19 +4,23 @@
     "gender": {
       "title": "Gender",
       "male": "Male",
-      "female": "Female"
+      "female": "Female",
+      "placeholder": "Please choose your gender"
     },
     "age": {
       "title": "Age (years)",
-      "error": "Please enter age"
+      "error": "Please enter valid age",
+      "placeholder": "Please enter your age"
     },
     "weight": {
       "title": "Weight (kg)",
-      "error": "Please enter weight"
+      "error": "Please enter valid weight", 
+      "placeholder": "Please enter your weight"
     },
     "height": {
       "title": "Height (cm)",
-      "error": "Please enter height"
+      "error": "Please enter valid height",
+      "placeholder": "Please enter your height"
     }
   },
   "activity": {
@@ -24,7 +28,7 @@
     "placeholder": "Please choose your activity level",
     "noExercise": "Little / No exercise",
     "lightExercise": "Light exercise (1-3 days per week)",
-    "moderateExercise": "Moderate exercise (3-5 days per week)",
+    "moderateExercise": "Moderate exercise (3-5 days per week)", 
     "heavyExercise": "Heavy exercise (6-7 days per week)",
     "veryHeavyExercise": "Very heavy exercise (twice per day)"
   },
@@ -32,11 +36,11 @@
     "title": "Your goal",
     "placeholder": "Please choose your goal",
     "cut": "Cut (-20%)",
-    "cut.short": "cut weight",
+    "cut_short": "cut weight",
     "maintain": "Maintain",
-    "maintain.short": "maintain weight",
+    "maintain_short": "maintain weight", 
     "gain": "Gain (+15%)",
-    "gain.short": "gain weight"
+    "gain_short": "gain weight"
   },
   "formula": {
     "title": "Formula",
@@ -45,5 +49,5 @@
     "mifflinStJeor": "The Mifflin St. Jeor Equation"
   },
   "calculate": "Calculate",
-  "result": "calories"
+  "result": "You will need to consume {calories} kcal to {goal}"
 }
