@@ -36,11 +36,12 @@
     }
   },
   "include": [
-    "./src",
+    "./build/types/**/*.ts",
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
-    "./build/types/**/*.ts",
-    "setupTests.ts"
+    "./src",
+    "setupTests.ts",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "./node_modules"
