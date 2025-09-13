@@ -2,8 +2,8 @@ import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
 
-import { UserDataProvider } from '@/context/UserDataContext';
-import PersonalDataForm from './PersonalDataForm';
+import { UserDataProvider } from '@/context/user-data-context';
+import PersonalDataForm from './personal-data-form';
 
 import dict from '@/dictionaries/en.json';
 

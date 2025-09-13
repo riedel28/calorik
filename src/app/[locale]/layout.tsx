@@ -15,8 +15,8 @@ import {
 
 import '@mantine/core/styles.css';
 
-import { UserDataProvider } from '@/context/UserDataContext';
-import Header from '@/components/Header/Header';
+import { UserDataProvider } from '@/context/user-data-context';
+import Header from '@/components/header/header';
 import { routing } from '@/i18n/routing';
 
 const theme = createTheme({

@@ -2,12 +2,8 @@
 
 import React from 'react';
 import { FiMoon, FiSun } from 'react-icons/fi';
-import {
-  ActionIcon,
-  Group,
-  useMantineColorScheme,
-} from '@mantine/core';
-import LanguageSwitcher from '@/components/LanguageSwitcher/LanguageSwitcher';
+import { ActionIcon, Group, useMantineColorScheme } from '@mantine/core';
+import LanguageSwitcher from '@/components/language-switcher/language-switcher';
 
 const Header = () => {
   const { colorScheme, toggleColorScheme } = useMantineColorScheme();
