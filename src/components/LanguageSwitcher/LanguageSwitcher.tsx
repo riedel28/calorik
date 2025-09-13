@@ -2,9 +2,11 @@
 
 import React from 'react';
 import { useLocale } from 'next-intl';
+import { Link, usePathname } from '@/i18n/navigation';
 
 const LanguageSwitcher = () => {
   const locale = useLocale();
+  const pathname = usePathname();
 
   const languages = [
     { code: 'en', label: 'EN' },
@@ -12,16 +14,13 @@ const LanguageSwitcher = () => {
     { code: 'ru', label: 'RU' },
   ];
 
-  const handleLanguageChange = (newLocale: string) => {
-    window.location.href = `/${newLocale}`;
-  };
-
   return (
     <div style={{ display: 'flex', gap: '8px' }}>
       {languages.map((lang) => (
-        <button
+        <Link
           key={lang.code}
-          onClick={() => handleLanguageChange(lang.code)}
+          href={pathname || '/'}
+          locale={lang.code}
           style={{
             padding: '4px 8px',
             textDecoration: 'none',
@@ -34,7 +33,7 @@ const LanguageSwitcher = () => {
           }}
         >
           {lang.label}
-        </button>
+        </Link>
       ))}
     </div>
   );

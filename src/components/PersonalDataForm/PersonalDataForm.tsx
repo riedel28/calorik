@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   Box,
   Button,
@@ -17,7 +17,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
 import { useUserData } from '@/context/UserDataContext';
-import { useLocalStorage } from '@mantine/hooks';
+// We avoid useLocalStorage to prevent render loops in StrictMode
 
 const personalDataFormSchema = z.object({
   gender: z.enum(['male', 'female']),
@@ -79,20 +79,39 @@ const PersonalDataForm = () => {
     formula: 'harris-benedict',
   } satisfies PersonalDataFormValues;
 
-  const [persistentData, setPersistentData] =
-    useLocalStorage<PersonalDataFormValues>({
-      key: 'calorikData',
-      defaultValue: defaultValues,
-    });
+  const STORAGE_KEY = 'calorikData';
   const { setUserData } = useUserData();
 
   const form = useForm<PersonalDataFormValues>({
-    defaultValues: defaultValues || persistentData,
+    defaultValues: defaultValues,
     resolver: zodResolver(personalDataFormSchema),
   });
 
+  // Load persisted data once after mount
+  const hasLoadedData = useRef(false);
+  useEffect(() => {
+    if (hasLoadedData.current) return;
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        const saved = JSON.parse(raw) as PersonalDataFormValues;
+        form.reset(saved);
+      } else {
+        form.reset(defaultValues);
+      }
+    } catch {
+      form.reset(defaultValues);
+    }
+    hasLoadedData.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const handleSubmit = (values: PersonalDataFormValues) => {
-    setPersistentData(values);
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    } catch (e) {
+      // ignore persistence errors (private mode, etc.)
+    }
     setUserData(values);
   };
 

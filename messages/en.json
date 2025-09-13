@@ -5,6 +5,7 @@
       "title": "Gender",
       "male": "Male",
       "female": "Female",
+      "error": "Please choose your gender",
       "placeholder": "Please choose your gender"
     },
     "age": {
@@ -26,6 +27,7 @@
   "activity": {
     "title": "Activity level",
     "placeholder": "Please choose your activity level",
+    "error": "Please choose your activity level",
     "noExercise": "Little / No exercise",
     "lightExercise": "Light exercise (1-3 days per week)",
     "moderateExercise": "Moderate exercise (3-5 days per week)", 
@@ -35,6 +37,7 @@
   "goal": {
     "title": "Your goal",
     "placeholder": "Please choose your goal",
+    "error": "Please choose your goal",
     "cut": "Cut (-20%)",
     "cut_short": "cut weight",
     "maintain": "Maintain",
@@ -45,6 +48,7 @@
   "formula": {
     "title": "Formula",
     "placeholder": "Please choose your formula to calculate your calories",
+    "error": "Please choose a formula",
     "harrisBenedict": "The Original Harris-Benedict Equation",
     "mifflinStJeor": "The Mifflin St. Jeor Equation"
   },

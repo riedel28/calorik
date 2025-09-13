@@ -1,7 +1,7 @@
 import * as React from 'react';
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { getMessages, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 import {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   description: 'Calculate your daily caloric needs',
 };
 
-export default async function RootLayout({
+export default async function LocaleLayout({
   children,
   params,
 }: {
@@ -41,39 +41,31 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  
+
   // Validate that the incoming `locale` parameter is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!locale || !routing.locales.includes(locale as any)) {
     notFound();
   }
-  
+
   // Enable static rendering
   setRequestLocale(locale);
-  
-  const messages = await getMessages();
+
+  const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale}>
-      <body>
-        <NextIntlClientProvider messages={messages}>
-          <MantineProvider theme={theme}>
-            <AppShell
-              padding="md"
-              header={{ height: 60 }}
-              footer={{ height: 80 }}
-            >
-              <AppShellHeader p="md">
-                <Header />
-              </AppShellHeader>
-              <AppShellMain>
-                <Container size="xl">
-                  <UserDataProvider>{children}</UserDataProvider>
-                </Container>
-              </AppShellMain>
-            </AppShell>
-          </MantineProvider>
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
+      <MantineProvider theme={theme}>
+        <AppShell padding="md" header={{ height: 60 }} footer={{ height: 80 }}>
+          <AppShellHeader p="md">
+            <Header />
+          </AppShellHeader>
+          <AppShellMain>
+            <Container size="xl">
+              <UserDataProvider>{children}</UserDataProvider>
+            </Container>
+          </AppShellMain>
+        </AppShell>
+      </MantineProvider>
+    </NextIntlClientProvider>
   );
 }

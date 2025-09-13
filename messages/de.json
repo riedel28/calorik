@@ -5,6 +5,7 @@
       "title": "Geschlecht",
       "male": "Männlich",
       "female": "Weiblich",
+      "error": "Bitte wählen Sie ihr Geschlecht",
       "placeholder": "Bitte wählen Sie ihr Geschlecht"
     },
     "age": {
@@ -26,6 +27,7 @@
   "activity": {
     "title": "Aktivität",
     "placeholder": "Bitte wählen Sie Ihr Aktivitätslevel aus",
+    "error": "Bitte wählen Sie Ihr Aktivitätslevel aus",
     "noExercise": "Sitzende Tätigkeit / Kein Training",
     "lightExercise": "Leichtes Training (1-3 mal pro Woche)",
     "moderateExercise": "Moderates Training (3-5 mal pro Woche)",
