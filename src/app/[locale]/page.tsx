@@ -2,8 +2,8 @@ import * as React from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
-import Result from '@/components/result/result';
-import PersonalDataForm from '@/components/personal-data-form/personal-data-form';
+import Result from '../../components/result/result';
+import PersonalDataForm from '../../components/personal-data-form/personal-data-form';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

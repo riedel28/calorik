@@ -16,7 +16,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
-import { useUserData } from '@/context/user-data-context';
+import { useUserData } from '../../context/user-data-context';
 // We avoid useLocalStorage to prevent render loops in StrictMode.
 
 const personalDataFormSchema = z.object({
