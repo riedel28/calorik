@@ -2,7 +2,7 @@ import * as React from 'react';
 import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
-import Result from '../../components/result/result';
+import Result from '../../components/result/Result';
 import PersonalDataForm from '../../components/personal-data-form/personal-data-form';
 
 export function generateStaticParams() {

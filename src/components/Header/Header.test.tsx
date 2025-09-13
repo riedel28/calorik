@@ -2,17 +2,19 @@ import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { screen, render } from '@testing-library/react';
 import { vi } from 'vitest';
-import Header from './header';
+import Header from './Header';
 
 vi.mock('next-intl', () => ({
-  useLocale: () => 'en'
+  useLocale: () => 'en',
 }));
 
 vi.mock('@/i18n/navigation', () => ({
-  Link: ({ children }: { children: React.ReactNode }) => <a>{children}</a>,
+  Link: ({ children }: { children: React.ReactNode }) => (
+    <a href="/">{children}</a>
+  ),
   usePathname: () => '/en',
   useRouter: () => ({ replace: vi.fn() }),
-  redirect: vi.fn()
+  redirect: vi.fn(),
 }));
 
 describe('Header', () => {
