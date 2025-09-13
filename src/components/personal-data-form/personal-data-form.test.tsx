@@ -2,18 +2,20 @@ import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
 import { MantineProvider } from '@mantine/core';
 
+import { NextIntlClientProvider } from 'next-intl';
 import { UserDataProvider } from '@/context/user-data-context';
 import PersonalDataForm from './personal-data-form';
-
-import dict from '@/dictionaries/en.json';
+import messages from '../../../messages/en.json';
 
 describe('PersonalDataForm', () => {
   test('should render PersonalDataForm component', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
     const form = screen.getByTestId('form');
@@ -24,9 +26,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter an age', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
 
@@ -39,9 +43,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter a gender', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
 
@@ -54,9 +60,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter a weight', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
     const weightInput = screen.getByTestId('weight') as HTMLInputElement; // Assert the type as HTMLInputElement
@@ -68,9 +76,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter a height', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
 
@@ -83,9 +93,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter an activity level', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
     const radio = screen.getByTestId(
@@ -99,9 +111,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter a goal', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
     const radio = screen.getByLabelText(/cut/i) as HTMLInputElement;
@@ -113,9 +127,11 @@ describe('PersonalDataForm', () => {
   test('should be able to enter a formula', () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
     const radio = screen.getByLabelText(/harris/i) as HTMLInputElement; // Assert the type as HTMLInputElement
@@ -127,9 +143,11 @@ describe('PersonalDataForm', () => {
   test.skip('should display error messages by entering incorrect data', async () => {
     render(
       <MantineProvider>
-        <UserDataProvider>
-          <PersonalDataForm dict={dict} />
-        </UserDataProvider>
+        <NextIntlClientProvider locale="en" messages={messages}>
+          <UserDataProvider>
+            <PersonalDataForm />
+          </UserDataProvider>
+        </NextIntlClientProvider>
       </MantineProvider>,
     );
 
@@ -141,8 +159,8 @@ describe('PersonalDataForm', () => {
     fireEvent.change(weightInput, { target: { value: '-2000' } });
     fireEvent.change(heightInput, { target: { value: '2000' } });
 
-    expect(screen.getByText(dict.yourData.age.error)).toBeInTheDocument();
-    expect(screen.getByText(dict.yourData.weight.error)).toBeInTheDocument();
-    expect(screen.getByText(dict.yourData.height.error)).toBeInTheDocument();
+    expect(screen.getByText(messages.yourData.age.error)).toBeInTheDocument();
+    expect(screen.getByText(messages.yourData.weight.error)).toBeInTheDocument();
+    expect(screen.getByText(messages.yourData.height.error)).toBeInTheDocument();
   });
 });

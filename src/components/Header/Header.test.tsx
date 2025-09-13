@@ -2,20 +2,17 @@ import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { screen, render } from '@testing-library/react';
 import { vi } from 'vitest';
-
 import Header from './header';
 
-vi.mock('next/navigation', () => ({
-  useRouter() {
-    return {
-      prefetch: () => null,
-    };
-  },
-  useParams() {
-    return {
-      lang: 'en',
-    };
-  },
+vi.mock('next-intl', () => ({
+  useLocale: () => 'en'
+}));
+
+vi.mock('@/i18n/navigation', () => ({
+  Link: ({ children }: { children: React.ReactNode }) => <a>{children}</a>,
+  usePathname: () => '/en',
+  useRouter: () => ({ replace: vi.fn() }),
+  redirect: vi.fn()
 }));
 
 describe('Header', () => {
@@ -26,8 +23,8 @@ describe('Header', () => {
       </MantineProvider>,
     );
 
-    expect(screen.getByText(/en/i)).toBeInTheDocument();
-    expect(screen.getByText(/ru/i)).toBeInTheDocument();
-    expect(screen.getByText(/de/i)).toBeInTheDocument();
+    expect(screen.getByText(/EN/)).toBeInTheDocument();
+    expect(screen.getByText(/RU/)).toBeInTheDocument();
+    expect(screen.getByText(/DE/)).toBeInTheDocument();
   });
 });
