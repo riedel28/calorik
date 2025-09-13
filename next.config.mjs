@@ -13,6 +13,7 @@ const nextConfig = {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
   outputFileTracingRoot: __dirname,
+  distDir: 'build',
 };
 
 export default withNextIntl(nextConfig);
