@@ -5,7 +5,7 @@ import { MantineProvider } from '@mantine/core';
 import { NextIntlClientProvider } from 'next-intl';
 import { UserDataProvider } from '@/context/user-data-context';
 import PersonalDataForm from './personal-data-form';
-import messages from '../../../messages/en.json';
+import messages from '../../../../../messages/en.json';
 
 describe('PersonalDataForm', () => {
   test('should render PersonalDataForm component', () => {
@@ -160,7 +160,11 @@ describe('PersonalDataForm', () => {
     fireEvent.change(heightInput, { target: { value: '2000' } });
 
     expect(screen.getByText(messages.yourData.age.error)).toBeInTheDocument();
-    expect(screen.getByText(messages.yourData.weight.error)).toBeInTheDocument();
-    expect(screen.getByText(messages.yourData.height.error)).toBeInTheDocument();
+    expect(
+      screen.getByText(messages.yourData.weight.error),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(messages.yourData.height.error),
+    ).toBeInTheDocument();
   });
 });

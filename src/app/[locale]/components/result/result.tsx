@@ -4,7 +4,7 @@ import React, { useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Title } from '@mantine/core';
 
-import { useUserData } from '../../context/user-data-context';
+import { useUserData } from '../../../../context/user-data-context';
 import { calculateCalories } from '@/helpers';
 
 const Result = () => {

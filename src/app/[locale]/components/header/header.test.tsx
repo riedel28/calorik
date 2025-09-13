@@ -2,7 +2,7 @@ import React from 'react';
 import { MantineProvider } from '@mantine/core';
 import { screen, render } from '@testing-library/react';
 import { vi } from 'vitest';
-import Header from './Header';
+import Header from './header';
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'en',
