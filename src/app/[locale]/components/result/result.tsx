@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useSpring, animated } from 'react-spring';
-import { Title } from '@mantine/core';
 
-import { useUserData } from '../../../../context/user-data-context';
+import { useUserData } from '@/context/user-data-context';
 import { calculateCalories } from '@/helpers';
 
 const Result = () => {
@@ -13,7 +12,7 @@ const Result = () => {
 
   const animation = useSpring({
     from: { value: 0 },
-    to: { value: isNaN(resultCalories) ? 0 : resultCalories },
+    to: { value: Number.isNaN(resultCalories) ? 0 : resultCalories },
   });
 
   useEffect(() => {
@@ -27,21 +26,27 @@ const Result = () => {
   }, [resultCalories]);
 
   useEffect(() => {
+    if (!resultCalories) return;
+
     window.scroll({
       top: document.body.scrollHeight,
       behavior: 'smooth',
     });
-  }, [userData]);
+  }, [resultCalories]);
+
+  if (!resultCalories || Number.isNaN(resultCalories)) {
+    return null;
+  }
 
   return (
-    resultCalories > 0 && (
-      <Title order={1} pt={100} m={0} ta="center">
-        <animated.span>
+    <section className="pt-24">
+      <h1 className="text-center text-5xl font-bold tracking-tight">
+        <animated.span className="text-primary">
           {animation.value.to(() => Math.floor(resultCalories))}
         </animated.span>{' '}
         kcal
-      </Title>
-    )
+      </h1>
+    </section>
   );
 };
 

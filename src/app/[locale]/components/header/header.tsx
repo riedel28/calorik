@@ -1,22 +1,15 @@
 'use client';
 
-import React from 'react';
-import { FiMoon, FiSun } from 'react-icons/fi';
-import { ActionIcon, Group, useMantineColorScheme } from '@mantine/core';
+import ThemeToggle from '@/components/theme-toggle';
 import LanguageSwitcher from '@/app/[locale]/components/language-switcher/language-switcher';
 
 const Header = () => {
-  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
-  const isDark = colorScheme === 'dark';
-
   return (
-    <header>
-      <Group gap="md" justify="end">
+    <header className="border-b border-border bg-background/80 backdrop-blur">
+      <div className="container flex h-16 items-center justify-end gap-3">
         <LanguageSwitcher />
-        <ActionIcon variant="subtle" onClick={() => toggleColorScheme()}>
-          {isDark ? <FiMoon /> : <FiSun />}
-        </ActionIcon>
-      </Group>
+        <ThemeToggle />
+      </div>
     </header>
   );
 };

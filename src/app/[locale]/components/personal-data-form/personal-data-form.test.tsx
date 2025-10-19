@@ -1,170 +1,75 @@
-import React from 'react';
-import { screen, render, fireEvent } from '@testing-library/react';
-import { MantineProvider } from '@mantine/core';
-
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { NextIntlClientProvider } from 'next-intl';
+
 import { UserDataProvider } from '@/context/user-data-context';
 import PersonalDataForm from './personal-data-form';
 import messages from '../../../../../messages/en.json';
 
-describe('PersonalDataForm', () => {
-  test('should render PersonalDataForm component', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-    const form = screen.getByTestId('form');
+const renderForm = () =>
+  render(
+    <NextIntlClientProvider locale="en" messages={messages}>
+      <UserDataProvider>
+        <PersonalDataForm />
+      </UserDataProvider>
+    </NextIntlClientProvider>,
+  );
 
-    expect(form).toBeInTheDocument();
+describe('PersonalDataForm', () => {
+  beforeEach(() => {
+    window.localStorage.clear();
   });
 
-  test('should be able to enter an age', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
+  test('renders the form', () => {
+    renderForm();
+    expect(screen.getByTestId('form')).toBeInTheDocument();
+  });
+
+  test('allows entering numeric values', () => {
+    renderForm();
 
     const ageInput = screen.getByTestId('age') as HTMLInputElement;
-    fireEvent.change(ageInput, { target: { value: '35' } });
+    fireEvent.input(ageInput, { target: { value: '35' } });
 
     expect(ageInput.value).toBe('35');
-  });
 
-  test('should be able to enter a gender', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-
-    const radio = screen.getByTestId('gender-male') as HTMLInputElement;
-    fireEvent.change(radio, { target: { value: 'male' } });
-
-    expect(radio.value).toBe('male');
-  });
-
-  test('should be able to enter a weight', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-    const weightInput = screen.getByTestId('weight') as HTMLInputElement; // Assert the type as HTMLInputElement
-    fireEvent.change(weightInput, { target: { value: '90' } });
+    const weightInput = screen.getByTestId('weight') as HTMLInputElement;
+    fireEvent.input(weightInput, { target: { value: '90' } });
 
     expect(weightInput.value).toBe('90');
-  });
 
-  test('should be able to enter a height', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-
-    const heightInput = screen.getByTestId('weight') as HTMLInputElement;
-    fireEvent.change(heightInput, { target: { value: '180' } });
+    const heightInput = screen.getByTestId('height') as HTMLInputElement;
+    fireEvent.input(heightInput, { target: { value: '180' } });
 
     expect(heightInput.value).toBe('180');
   });
 
-  test('should be able to enter an activity level', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-    const radio = screen.getByTestId(
-      'activity-level-no-exercise',
-    ) as HTMLInputElement; // Assert the type as HTMLInputElement
-    fireEvent.change(radio, { target: { value: 'no-exercise' } });
+  test('allows selecting radio options', async () => {
+    const user = userEvent.setup();
+    renderForm();
 
-    expect(radio.value).toBe('no-exercise');
-  });
+    const maleOption = screen.getByTestId('gender-male');
+    await user.click(maleOption);
 
-  test('should be able to enter a goal', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-    const radio = screen.getByLabelText(/cut/i) as HTMLInputElement;
-    fireEvent.change(radio, { target: { value: 'cut' } });
+    expect(maleOption).toHaveAttribute('aria-checked', 'true');
 
-    expect(radio.value).toBe('cut');
-  });
+    const activityOption = screen.getByTestId('activity-level-light');
+    await user.click(activityOption);
 
-  test('should be able to enter a formula', () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
-    const radio = screen.getByLabelText(/harris/i) as HTMLInputElement; // Assert the type as HTMLInputElement
-    fireEvent.change(radio, { target: { value: 'harris-benedict' } });
+    expect(activityOption).toHaveAttribute('aria-checked', 'true');
 
-    expect(radio.value).toBe('harris-benedict');
-  });
+    const goalOption = screen.getByRole('radio', {
+      name: messages.goal.maintain,
+    });
+    await user.click(goalOption);
 
-  test.skip('should display error messages by entering incorrect data', async () => {
-    render(
-      <MantineProvider>
-        <NextIntlClientProvider locale="en" messages={messages}>
-          <UserDataProvider>
-            <PersonalDataForm />
-          </UserDataProvider>
-        </NextIntlClientProvider>
-      </MantineProvider>,
-    );
+    expect(goalOption).toHaveAttribute('aria-checked', 'true');
 
-    const ageInput = screen.getByTestId('age');
-    const weightInput = screen.getByTestId('weight');
-    const heightInput = screen.getByTestId('height');
+    const formulaOption = screen.getByRole('radio', {
+      name: messages.formula.mifflinStJeor,
+    });
+    await user.click(formulaOption);
 
-    fireEvent.change(ageInput, { target: { value: '2000' } });
-    fireEvent.change(weightInput, { target: { value: '-2000' } });
-    fireEvent.change(heightInput, { target: { value: '2000' } });
-
-    expect(screen.getByText(messages.yourData.age.error)).toBeInTheDocument();
-    expect(
-      screen.getByText(messages.yourData.weight.error),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText(messages.yourData.height.error),
-    ).toBeInTheDocument();
+    expect(formulaOption).toHaveAttribute('aria-checked', 'true');
   });
 });

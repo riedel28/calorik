@@ -1,58 +1,78 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import {
-  Box,
-  Button,
-  Grid,
-  Group,
-  NumberInput,
-  Radio,
-  Title,
-  Stack,
-} from '@mantine/core';
-import { useForm, Controller } from 'react-hook-form';
+import { useEffect, useRef } from 'react';
+import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useTranslations } from 'next-intl';
 
-import { useUserData } from '../../../../context/user-data-context';
-// We avoid useLocalStorage to prevent render loops in StrictMode.
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useUserData } from '@/context/user-data-context';
 
 const personalDataFormSchema = z.object({
   gender: z.enum(['male', 'female']),
   age: z
-    .number()
+    .number({
+      invalid_type_error: 'yourData.age.error',
+      required_error: 'yourData.age.error',
+    })
     .min(0, 'yourData.age.error')
-    .max(120, 'yourData.age.error')
-    .max(120),
-  height: z.number().min(0).max(250),
-  weight: z.number().min(0).max(300),
-  activityLevel: z.enum([
-    'no-exercise',
-    'light',
-    'moderate',
-    'heavy',
-    'very-heavy',
-  ]),
-  goal: z.enum(['cut', 'maintain', 'gain']),
-  formula: z.enum(['harris-benedict', 'mifflin-st-jeor']),
+    .max(120, 'yourData.age.error'),
+  height: z
+    .number({ invalid_type_error: 'yourData.height.error' })
+    .min(0, 'yourData.height.error')
+    .max(250, 'yourData.height.error'),
+  weight: z
+    .number({ invalid_type_error: 'yourData.weight.error' })
+    .min(0, 'yourData.weight.error')
+    .max(300, 'yourData.weight.error'),
+  activityLevel: z.enum(
+    ['no-exercise', 'light', 'moderate', 'heavy', 'very-heavy'],
+    {
+      required_error: 'activity.error',
+    },
+  ),
+  goal: z.enum(['cut', 'maintain', 'gain'], {
+    required_error: 'goal.error',
+  }),
+  formula: z.enum(['harris-benedict', 'mifflin-st-jeor'], {
+    required_error: 'formula.error',
+  }),
 });
 
 export type PersonalDataFormValues = z.infer<typeof personalDataFormSchema>;
 
 const PersonalDataForm = () => {
   const t = useTranslations();
+  const STORAGE_KEY = 'calorikData';
+  const { setUserData } = useUserData();
+
+  const defaultValues: PersonalDataFormValues = {
+    gender: 'male',
+    age: 30,
+    height: 180,
+    weight: 80,
+    activityLevel: 'no-exercise',
+    goal: 'cut',
+    formula: 'harris-benedict',
+  };
 
   const activityLevelOptions = [
     { value: 'no-exercise', label: t('activity.noExercise') },
     { value: 'light', label: t('activity.lightExercise') },
     { value: 'moderate', label: t('activity.moderateExercise') },
     { value: 'heavy', label: t('activity.heavyExercise') },
-    {
-      value: 'very-heavy',
-      label: t('activity.veryHeavyExercise'),
-    },
+    { value: 'very-heavy', label: t('activity.veryHeavyExercise') },
   ];
 
   const goalOptions = [
@@ -62,266 +82,269 @@ const PersonalDataForm = () => {
   ];
 
   const formulaOptions = [
-    {
-      value: 'harris-benedict',
-      label: t('formula.harrisBenedict'),
-    },
+    { value: 'harris-benedict', label: t('formula.harrisBenedict') },
     { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
   ];
 
-  const defaultValues = {
-    gender: 'male',
-    age: 30,
-    height: 180,
-    weight: 80,
-    activityLevel: 'no-exercise',
-    goal: 'cut',
-    formula: 'harris-benedict',
-  } satisfies PersonalDataFormValues;
-
-  const STORAGE_KEY = 'calorikData';
-  const { setUserData } = useUserData();
-
   const form = useForm<PersonalDataFormValues>({
-    defaultValues: defaultValues,
+    defaultValues,
     resolver: zodResolver(personalDataFormSchema),
   });
 
-  // Load persisted data once after mount
   const hasLoadedData = useRef(false);
+
   useEffect(() => {
     if (hasLoadedData.current) return;
+
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
       if (raw) {
         const saved = JSON.parse(raw) as PersonalDataFormValues;
         form.reset(saved);
-      } else {
-        form.reset(defaultValues);
       }
     } catch {
       form.reset(defaultValues);
     }
+
     hasLoadedData.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [form]);
 
   const handleSubmit = (values: PersonalDataFormValues) => {
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
-    } catch (e) {
-      // ignore persistence errors (private mode, etc.)
+    } catch {
+      // ignore persistence errors
     }
+
     setUserData(values);
   };
 
+  type MessageKey = Parameters<typeof t>[0];
+
+  const renderError = (message?: string) =>
+    message ? <FormMessage>{t(message as MessageKey)}</FormMessage> : null;
+
   return (
-    <>
-      <Box
-        component="form"
+    <Form {...form}>
+      <form
         onSubmit={form.handleSubmit(handleSubmit)}
         data-testid="form"
+        className="space-y-10"
       >
-        <Grid mb="xl">
-          <Grid.Col
-            span={{
-              base: 12,
-              xs: 6,
-              sm: 6,
-              md: 3,
-            }}
-          >
-            <Title order={2} mb="md">
-              {t('yourData.title')}
-            </Title>
-            <Stack>
-              <Controller
+        <div className="grid gap-10 md:grid-cols-2 xl:grid-cols-4">
+          <section className="space-y-6">
+            <h2 className="text-2xl font-semibold">{t('yourData.title')}</h2>
+            <div className="space-y-4">
+              <FormField
                 control={form.control}
                 name="gender"
                 render={({ field, fieldState }) => (
-                  <Radio.Group
-                    label={t('yourData.gender.title')}
-                    value={field.value}
-                    onChange={field.onChange}
-                    required
-                    error={fieldState.error && t('yourData.gender.error')}
-                  >
-                    <Group mt="xs">
-                      <Radio
-                        value="male"
-                        label={t('yourData.gender.male')}
-                        data-testid="gender-male"
-                      />
-                      <Radio
-                        value="female"
-                        label={t('yourData.gender.female')}
-                      />
-                    </Group>
-                  </Radio.Group>
+                  <FormItem>
+                    <FormLabel>{t('yourData.gender.title')}</FormLabel>
+                    <FormControl>
+                      <RadioGroup
+                        value={field.value}
+                        onValueChange={field.onChange}
+                        className="grid grid-cols-2 gap-3"
+                      >
+                        <RadioGroupItem
+                          value="male"
+                          data-testid="gender-male"
+                        >
+                          {t('yourData.gender.male')}
+                        </RadioGroupItem>
+                        <RadioGroupItem value="female">
+                          {t('yourData.gender.female')}
+                        </RadioGroupItem>
+                      </RadioGroup>
+                    </FormControl>
+                    {renderError(fieldState.error?.message)}
+                  </FormItem>
                 )}
               />
 
-              <Controller
+              <FormField
                 control={form.control}
                 name="age"
                 render={({ field, fieldState }) => (
-                  <NumberInput
-                    {...field}
-                    label={t('yourData.age.title')}
-                    required
-                    error={fieldState.error && t('yourData.age.error')}
-                    data-testid="age"
-                    maw={180}
-                  />
+                  <FormItem>
+                    <FormLabel>{t('yourData.age.title')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        data-testid="age"
+                        value={
+                          Number.isFinite(field.value) ? field.value : ''
+                        }
+                        onChange={(event) => {
+                          const numericValue = event.target.value.trim();
+                          field.onChange(
+                            numericValue === ''
+                              ? undefined
+                              : Number(numericValue),
+                          );
+                        }}
+                      />
+                    </FormControl>
+                    {renderError(fieldState.error?.message)}
+                  </FormItem>
                 )}
               />
 
-              <Controller
+              <FormField
                 control={form.control}
                 name="height"
                 render={({ field, fieldState }) => (
-                  <NumberInput
-                    {...field}
-                    label={t('yourData.height.title')}
-                    required
-                    error={fieldState.error && t('yourData.height.error')}
-                    data-testid="height"
-                    maw={180}
-                  />
+                  <FormItem>
+                    <FormLabel>{t('yourData.height.title')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        data-testid="height"
+                        value={
+                          Number.isFinite(field.value) ? field.value : ''
+                        }
+                        onChange={(event) => {
+                          const numericValue = event.target.value.trim();
+                          field.onChange(
+                            numericValue === ''
+                              ? undefined
+                              : Number(numericValue),
+                          );
+                        }}
+                      />
+                    </FormControl>
+                    {renderError(fieldState.error?.message)}
+                  </FormItem>
                 )}
               />
 
-              <Controller
+              <FormField
                 control={form.control}
                 name="weight"
                 render={({ field, fieldState }) => (
-                  <NumberInput
-                    {...field}
-                    label={t('yourData.weight.title')}
-                    required
-                    error={fieldState.error && t('yourData.weight.error')}
-                    data-testid="weight"
-                    maw={180}
-                  />
+                  <FormItem>
+                    <FormLabel>{t('yourData.weight.title')}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        inputMode="numeric"
+                        data-testid="weight"
+                        value={
+                          Number.isFinite(field.value) ? field.value : ''
+                        }
+                        onChange={(event) => {
+                          const numericValue = event.target.value.trim();
+                          field.onChange(
+                            numericValue === ''
+                              ? undefined
+                              : Number(numericValue),
+                          );
+                        }}
+                      />
+                    </FormControl>
+                    {renderError(fieldState.error?.message)}
+                  </FormItem>
                 )}
               />
-            </Stack>
-          </Grid.Col>
-          <Grid.Col
-            span={{
-              base: 12,
-              xs: 6,
-              sm: 6,
-              md: 3,
-            }}
-          >
-            <Title order={2} mb="md">
-              {t('activity.title')}
-            </Title>
-            <Controller
+            </div>
+          </section>
+
+          <section className="space-y-6">
+            <h2 className="text-2xl font-semibold">{t('activity.title')}</h2>
+            <FormField
               control={form.control}
               name="activityLevel"
               render={({ field, fieldState }) => (
-                <Radio.Group
-                  label={t('activity.title')}
-                  value={field.value}
-                  onChange={field.onChange}
-                  required
-                  error={fieldState.error && t('activity.error')}
-                >
-                  <Group mt="xs">
-                    {activityLevelOptions.map((item) => (
-                      <Radio
-                        key={item.value}
-                        label={item.label}
-                        value={item.value}
-                        data-testid={`activity-level-${item.value}`}
-                      />
-                    ))}
-                  </Group>
-                </Radio.Group>
+                <FormItem>
+                  <FormLabel>{t('activity.title')}</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      className="space-y-3"
+                    >
+                      {activityLevelOptions.map((item) => (
+                        <RadioGroupItem
+                          key={item.value}
+                          value={item.value}
+                          data-testid={`activity-level-${item.value}`}
+                        >
+                          {item.label}
+                        </RadioGroupItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  {renderError(fieldState.error?.message)}
+                </FormItem>
               )}
             />
-          </Grid.Col>
-          <Grid.Col
-            span={{
-              base: 12,
-              xs: 6,
-              sm: 6,
-              md: 3,
-            }}
-          >
-            <Title order={2} mb="md">
-              {t('goal.title')}
-            </Title>
+          </section>
 
-            <Controller
+          <section className="space-y-6">
+            <h2 className="text-2xl font-semibold">{t('goal.title')}</h2>
+            <FormField
               control={form.control}
               name="goal"
               render={({ field, fieldState }) => (
-                <Radio.Group
-                  label={t('goal.title')}
-                  value={field.value}
-                  onChange={field.onChange}
-                  required
-                  error={fieldState.error && t('goal.error')}
-                >
-                  <Stack mt="xs">
-                    {goalOptions.map((item) => (
-                      <Radio
-                        key={item.value}
-                        label={item.label}
-                        value={item.value}
-                      />
-                    ))}
-                  </Stack>
-                </Radio.Group>
+                <FormItem>
+                  <FormLabel>{t('goal.title')}</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      className="space-y-3"
+                    >
+                      {goalOptions.map((item) => (
+                        <RadioGroupItem key={item.value} value={item.value}>
+                          {item.label}
+                        </RadioGroupItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  {renderError(fieldState.error?.message)}
+                </FormItem>
               )}
             />
-          </Grid.Col>
-          <Grid.Col
-            span={{
-              base: 12,
-              xs: 6,
-              sm: 6,
-              md: 3,
-            }}
-          >
-            <Title order={2} mb="md">
-              {t('formula.title')}
-            </Title>
-            <Controller
+          </section>
+
+          <section className="space-y-6">
+            <h2 className="text-2xl font-semibold">{t('formula.title')}</h2>
+            <FormField
               control={form.control}
               name="formula"
               render={({ field, fieldState }) => (
-                <Radio.Group
-                  label={t('formula.title')}
-                  value={field.value}
-                  onChange={field.onChange}
-                  required
-                  error={fieldState.error && t('formula.error')}
-                >
-                  <Group mt="xs">
-                    {formulaOptions.map((item) => (
-                      <Radio
-                        key={item.value}
-                        label={item.label}
-                        value={item.value}
-                      />
-                    ))}
-                  </Group>
-                </Radio.Group>
+                <FormItem>
+                  <FormLabel>{t('formula.title')}</FormLabel>
+                  <FormControl>
+                    <RadioGroup
+                      value={field.value}
+                      onValueChange={field.onChange}
+                      className="space-y-3"
+                    >
+                      {formulaOptions.map((item) => (
+                        <RadioGroupItem key={item.value} value={item.value}>
+                          {item.label}
+                        </RadioGroupItem>
+                      ))}
+                    </RadioGroup>
+                  </FormControl>
+                  {renderError(fieldState.error?.message)}
+                </FormItem>
               )}
             />
-          </Grid.Col>
-        </Grid>
-        <Group justify="center">
-          <Button type="submit" size="xl" data-testid="submit-button">
+          </section>
+        </div>
+
+        <div className="flex justify-center">
+          <Button type="submit" size="lg" data-testid="submit-button">
             {t('calculate')}
           </Button>
-        </Group>
-      </Box>
-    </>
+        </div>
+      </form>
+    </Form>
   );
 };
 

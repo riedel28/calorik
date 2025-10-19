@@ -1,32 +1,43 @@
-import React from 'react';
-import { MantineProvider } from '@mantine/core';
-import { screen, render } from '@testing-library/react';
+import type { ReactNode } from 'react';
+import { render, screen } from '@testing-library/react';
 import { vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
+
 import Header from './header';
+import { ThemeProvider } from '@/components/providers/theme-provider';
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'en',
 }));
 
 vi.mock('@/i18n/navigation', () => ({
-  Link: ({ children }: { children: React.ReactNode }) => (
+  Link: ({ children }: { children: ReactNode }) => (
     <a href="/">{children}</a>
   ),
   usePathname: () => '/en',
-  useRouter: () => ({ replace: vi.fn() }),
-  redirect: vi.fn(),
 }));
 
 describe('Header', () => {
-  test('should render Header component', async () => {
+  test('shows language options in dropdown', async () => {
+    const user = userEvent.setup();
+
     render(
-      <MantineProvider>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <Header />
-      </MantineProvider>,
+      </ThemeProvider>,
     );
 
-    expect(screen.getByText(/EN/)).toBeInTheDocument();
-    expect(screen.getByText(/RU/)).toBeInTheDocument();
-    expect(screen.getByText(/DE/)).toBeInTheDocument();
+    const trigger = screen.getByRole('button', { name: /english/i });
+    await user.click(trigger);
+
+    expect(
+      await screen.findByRole('link', { name: /^English$/i }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('link', { name: /^Deutsch$/i }),
+    ).toBeInTheDocument();
+    expect(
+      await screen.findByRole('link', { name: /^Русский$/i }),
+    ).toBeInTheDocument();
   });
 });
