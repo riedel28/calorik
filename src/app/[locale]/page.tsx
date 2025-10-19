@@ -1,15 +1,15 @@
-import { setRequestLocale } from 'next-intl/server';
+import { getTranslations, setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
 import Result from '@/app/[locale]/components/result/result';
 import PersonalDataForm from '@/app/[locale]/components/personal-data-form/personal-data-form';
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return routing.locales.map(locale => ({ locale }));
 }
 
 export default async function HomePage({
-  params,
+  params
 }: {
   params: Promise<{ locale: string }>;
 }) {
@@ -17,11 +17,14 @@ export default async function HomePage({
 
   // Enable static rendering
   setRequestLocale(locale);
+  const t = await getTranslations('page');
 
   return (
-    <>
-      <PersonalDataForm />
-      <Result />
-    </>
+    <div className="space-y-10 md:space-y-12">
+      <div className="grid gap-6 lg:grid-cols-2">
+        <PersonalDataForm />
+        <Result />
+      </div>
+    </div>
   );
 }

@@ -52,6 +52,33 @@
     "harrisBenedict": "The Original Harris-Benedict Equation",
     "mifflinStJeor": "The Mifflin St. Jeor Equation"
   },
-  "calculate": "Calculate",
-  "result": "You will need to consume {calories} kcal to {goal}"
+  "calculate": "Calculate Calories",
+  "result": "You will need to consume {calories} kcal to {goal}",
+  "page": {
+    "title": "Calorie Calculator",
+    "subtitle": "Understand your daily energy needs and take action with confidence.",
+    "formSectionTitle": "Your Information",
+    "formSectionSubtitle": "We'll use this information to tailor your calories.",
+    "resultsSectionTitle": "Your Results",
+    "dailyCalorieTarget": "Daily Calorie Target",
+    "caloriesPerDay": "calories per day",
+    "calorieDistribution": "Calorie Distribution",
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Carbs",
+      "fats": "Fats"
+    },
+    "weeklyWeightChange": "Weekly Weight Change",
+    "weeklyChangeLabels": {
+      "cut": "-1 kg/week",
+      "maintain": "Maintain",
+      "gain": "+1 kg/week"
+    },
+    "weeklyChangeActiveLabel": {
+      "cut": "Losing weight",
+      "maintain": "Maintaining weight",
+      "gain": "Gaining weight"
+    },
+    "emptyState": "Fill in your information to see your personalized calorie breakdown."
+  }
 }

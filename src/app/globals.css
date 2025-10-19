@@ -1,5 +1,3 @@
-/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind directive */
-
 @import 'tailwindcss';
 
 @plugin "tailwindcss-animate";
@@ -43,9 +41,6 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 }
-
-/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind directive */
-/* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind directive */
 
 @layer base {
   :root {
@@ -94,12 +89,10 @@
   }
 
   * {
-    /* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind directive */
     @apply border-border;
   }
 
   body {
-    /* biome-ignore lint/suspicious/noUnknownAtRules: Tailwind directive */
     @apply bg-background text-foreground antialiased;
   }
 }

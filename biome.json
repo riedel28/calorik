@@ -7,7 +7,10 @@
   },
   "linter": {
     "rules": {
-      "recommended": true
+      "recommended": true,
+      "suspicious": {
+        "noUnknownAtRules": "off"
+      }
     }
   },
   "files": {
@@ -16,7 +19,7 @@
       "messages/**/*",
       "next.config.mjs",
       "tailwind.config.ts",
-      "postcss.config.js",
+      "postcss.config.mjs",
       "vitest.config.ts"
     ]
   }

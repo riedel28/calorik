@@ -9,22 +9,22 @@ import Header from '@/app/[locale]/components/header/header';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
+  return routing.locales.map(locale => ({ locale }));
 }
 
 export const metadata: Metadata = {
   title: 'Calorik',
-  description: 'Calculate your daily caloric needs',
+  description: 'Calculate your daily caloric needs'
 };
 
 const isSupportedLocale = (
-  value: string,
+  value: string
 ): value is (typeof routing.locales)[number] =>
   routing.locales.includes(value as (typeof routing.locales)[number]);
 
 export default async function LocaleLayout({
   children,
-  params,
+  params
 }: {
   children: ReactNode;
   params: Promise<{ locale: string }>;
@@ -43,10 +43,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      <div className="flex min-h-screen flex-col bg-background text-foreground">
+      <div className="flex min-h-screen flex-col bg-gradient-to-b from-sky-100/60 via-white to-white text-foreground">
         <Header />
         <main className="flex-1">
-          <div className="container max-w-6xl py-10">
+          <div className="max-w-6xl px-4 py-12 md:py-16 mx-auto">
             <UserDataProvider>{children}</UserDataProvider>
           </div>
         </main>

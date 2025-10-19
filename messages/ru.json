@@ -52,6 +52,33 @@
     "harrisBenedict": "Формула Харриса-Бенедикта",
     "mifflinStJeor": "Формула Миффлина Ст. Джеора"
   },
-  "calculate": "Посчитать",
-  "result": "Вам потребуется потреблять {calories} калорий, чтобы {goal}"
+  "calculate": "Рассчитать калории",
+  "result": "Вам потребуется потреблять {calories} калорий, чтобы {goal}",
+  "page": {
+    "title": "Калькулятор калорий",
+    "subtitle": "Узнайте свою ежедневную потребность в энергии и действуйте уверенно.",
+    "formSectionTitle": "Ваша информация",
+    "formSectionSubtitle": "Мы используем эти данные, чтобы подсчитать вашу норму калорий.",
+    "resultsSectionTitle": "Ваши результаты",
+    "dailyCalorieTarget": "Дневная норма калорий",
+    "caloriesPerDay": "калорий в день",
+    "calorieDistribution": "Распределение калорий",
+    "macros": {
+      "protein": "Белки",
+      "carbs": "Углеводы",
+      "fats": "Жиры"
+    },
+    "weeklyWeightChange": "Еженедельное изменение веса",
+    "weeklyChangeLabels": {
+      "cut": "-1 кг/нед",
+      "maintain": "Поддерживать",
+      "gain": "+1 кг/нед"
+    },
+    "weeklyChangeActiveLabel": {
+      "cut": "Снижение веса",
+      "maintain": "Поддержание веса",
+      "gain": "Набор веса"
+    },
+    "emptyState": "Заполните свои данные, чтобы увидеть персональный расчет калорий."
+  }
 }

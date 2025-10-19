@@ -37,6 +37,7 @@
   "goal": {
     "title": "Ziel",
     "placeholder": "Bitte wählen Sie Ihr Ziel aus",
+    "error": "Bitte wählen Sie Ihr Ziel aus",
     "cut": "Abnehmen (-20%)",
     "cut_short": "abzunehmen",
     "maintain": "Gewicht zu halten", 
@@ -50,6 +51,33 @@
     "harrisBenedict": "Harris-Benedict-Formel",
     "mifflinStJeor": "Mifflin-St.Jeor-Formel"
   },
-  "calculate": "Berechnen",
-  "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}"
+  "calculate": "Kalorien berechnen",
+  "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",
+  "page": {
+    "title": "Kalorienrechner",
+    "subtitle": "Verstehen Sie Ihren täglichen Energiebedarf und handeln Sie selbstbewusst.",
+    "formSectionTitle": "Ihre Informationen",
+    "formSectionSubtitle": "Wir nutzen diese Angaben, um Ihre Kalorien zu berechnen.",
+    "resultsSectionTitle": "Ihre Ergebnisse",
+    "dailyCalorieTarget": "Tägliches Kalorienziel",
+    "caloriesPerDay": "Kalorien pro Tag",
+    "calorieDistribution": "Kalorienverteilung",
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Kohlenhydrate",
+      "fats": "Fette"
+    },
+    "weeklyWeightChange": "Wöchentliche Gewichtsveränderung",
+    "weeklyChangeLabels": {
+      "cut": "-1 kg/Woche",
+      "maintain": "Gewicht halten",
+      "gain": "+1 kg/Woche"
+    },
+    "weeklyChangeActiveLabel": {
+      "cut": "Gewicht reduzieren",
+      "maintain": "Gewicht halten",
+      "gain": "Gewicht zunehmen"
+    },
+    "emptyState": "Füllen Sie Ihre Daten aus, um Ihre persönliche Kalorienübersicht zu sehen."
+  }
 }
