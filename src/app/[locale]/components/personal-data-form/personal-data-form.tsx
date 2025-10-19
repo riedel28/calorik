@@ -20,34 +20,25 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useUserData } from '@/context/user-data-context';
 
 const personalDataFormSchema = z.object({
-  gender: z.enum(['male', 'female']),
+  gender: z.enum(['male', 'female'], 'yourData.gender.error'),
   age: z
-    .number({
-      invalid_type_error: 'yourData.age.error',
-      required_error: 'yourData.age.error',
-    })
+    .number('yourData.age.error')
     .min(0, 'yourData.age.error')
     .max(120, 'yourData.age.error'),
   height: z
-    .number({ invalid_type_error: 'yourData.height.error' })
+    .number('yourData.height.error')
     .min(0, 'yourData.height.error')
     .max(250, 'yourData.height.error'),
   weight: z
-    .number({ invalid_type_error: 'yourData.weight.error' })
+    .number('yourData.weight.error')
     .min(0, 'yourData.weight.error')
     .max(300, 'yourData.weight.error'),
   activityLevel: z.enum(
     ['no-exercise', 'light', 'moderate', 'heavy', 'very-heavy'],
-    {
-      required_error: 'activity.error',
-    },
+    'activity.error',
   ),
-  goal: z.enum(['cut', 'maintain', 'gain'], {
-    required_error: 'goal.error',
-  }),
-  formula: z.enum(['harris-benedict', 'mifflin-st-jeor'], {
-    required_error: 'formula.error',
-  }),
+  goal: z.enum(['cut', 'maintain', 'gain'], 'goal.error'),
+  formula: z.enum(['harris-benedict', 'mifflin-st-jeor'], 'formula.error'),
 });
 
 export type PersonalDataFormValues = z.infer<typeof personalDataFormSchema>;

@@ -42,7 +42,7 @@
     "./src",
     ".next/types/**/*.ts",
     "setupTests.ts",
-    "build/types/**/*.ts"
+    "build/types/**/*.ts",
   ],
   "exclude": [
     "./node_modules"
