@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -28,19 +28,22 @@
         "name": "next"
       }
     ],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
       "@/*": [
-        "*"
+        "src/*"
       ]
     }
   },
   "include": [
-    "./src",
+    "./build/types/**/*.ts",
     "./dist/types/**/*.ts",
     "./next-env.d.ts",
-    "./build/types/**/*.ts",
-    "setupTests.ts"
+    "./src",
+    ".next/types/**/*.ts",
+    "setupTests.ts",
+    "build/types/**/*.ts",
+    "build/dev/types/**/*.ts"
   ],
   "exclude": [
     "./node_modules"

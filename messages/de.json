@@ -1,0 +1,83 @@
+{
+  "yourData": {
+    "title": "Ihre Daten",
+    "gender": {
+      "title": "Geschlecht",
+      "male": "Männlich",
+      "female": "Weiblich",
+      "error": "Bitte wählen Sie ihr Geschlecht",
+      "placeholder": "Bitte wählen Sie ihr Geschlecht"
+    },
+    "age": {
+      "title": "Alter",
+      "error": "Bitte geben Sie korrektes Alter an",
+      "placeholder": "Bitte geben Sie ihr Alter ein"
+    },
+    "weight": {
+      "title": "Gewicht (kg)",
+      "error": "Bitte geben Sie korrektes Gewicht an",
+      "placeholder": "Bitte geben Sie ihr Gewicht ein"
+    },
+    "height": {
+      "title": "Größe (cm)",
+      "error": "Bitte geben Sie korrekte Größe an", 
+      "placeholder": "Bitte geben Sie ihre Größe ein"
+    }
+  },
+  "activity": {
+    "title": "Aktivität",
+    "placeholder": "Bitte wählen Sie Ihr Aktivitätslevel aus",
+    "error": "Bitte wählen Sie Ihr Aktivitätslevel aus",
+    "noExercise": "Sitzende Tätigkeit / Kein Training",
+    "lightExercise": "Leichtes Training (1-3 mal pro Woche)",
+    "moderateExercise": "Moderates Training (3-5 mal pro Woche)",
+    "heavyExercise": "Hartes Training (6-7 mal pro Woche)",
+    "veryHeavyExercise": "Sehr hartes Training (zwei mal täglich)"
+  },
+  "goal": {
+    "title": "Ziel",
+    "placeholder": "Bitte wählen Sie Ihr Ziel aus",
+    "error": "Bitte wählen Sie Ihr Ziel aus",
+    "cut": "Abnehmen (-20%)",
+    "cut_short": "abzunehmen",
+    "maintain": "Gewicht zu halten", 
+    "maintain_short": "Gewicht zu halten",
+    "gain": "Zunehmen (+15%)",
+    "gain_short": "zuzunehmen"
+  },
+  "formula": {
+    "title": "Formel",
+    "placeholder": "Bitte wählen Sie ihre Formel für die Kalorienrechnung aus",
+    "harrisBenedict": "Harris-Benedict-Formel",
+    "mifflinStJeor": "Mifflin-St.Jeor-Formel"
+  },
+  "calculate": "Kalorien berechnen",
+  "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",
+  "page": {
+    "title": "Kalorienrechner",
+    "subtitle": "Verstehen Sie Ihren täglichen Energiebedarf und handeln Sie selbstbewusst.",
+    "formSectionTitle": "Ihre Informationen",
+    "formSectionSubtitle": "Wir nutzen diese Angaben, um Ihre Kalorien zu berechnen.",
+    "resultsSectionTitle": "Ihre Ergebnisse",
+    "dailyCalorieTarget": "Tägliches Kalorienziel",
+    "caloriesPerDay": "Kalorien pro Tag",
+    "calorieDistribution": "Kalorienverteilung",
+    "macros": {
+      "protein": "Protein",
+      "carbs": "Kohlenhydrate",
+      "fats": "Fette"
+    },
+    "weeklyWeightChange": "Wöchentliche Gewichtsveränderung",
+    "weeklyChangeLabels": {
+      "cut": "-1 kg/Woche",
+      "maintain": "Gewicht halten",
+      "gain": "+1 kg/Woche"
+    },
+    "weeklyChangeActiveLabel": {
+      "cut": "Gewicht reduzieren",
+      "maintain": "Gewicht halten",
+      "gain": "Gewicht zunehmen"
+    },
+    "emptyState": "Füllen Sie Ihre Daten aus, um Ihre persönliche Kalorienübersicht zu sehen."
+  }
+}

@@ -2,8 +2,8 @@ import {
   calculateCalories,
   harrisBenedictBMR,
   mifflinStJeorBMR,
-  UserData,
 } from './helpers';
+import type { UserData } from './helpers';
 
 describe('Helpers', () => {
   const data1: UserData = {
