@@ -1,4 +1,4 @@
-import { getTranslations, setRequestLocale } from 'next-intl/server';
+import { setRequestLocale } from 'next-intl/server';
 import { routing } from '@/i18n/routing';
 
 import Result from '@/app/[locale]/components/result/result';
@@ -17,7 +17,6 @@ export default async function HomePage({
 
   // Enable static rendering
   setRequestLocale(locale);
-  const t = await getTranslations('page');
 
   return (
     <div className="space-y-10 md:space-y-12">
