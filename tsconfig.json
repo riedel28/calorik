@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -43,6 +43,7 @@
     ".next/types/**/*.ts",
     "setupTests.ts",
     "build/types/**/*.ts",
+    "build/dev/types/**/*.ts"
   ],
   "exclude": [
     "./node_modules"
