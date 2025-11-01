@@ -1,10 +1,16 @@
+import createNextIntlPlugin from 'next-intl/plugin';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // output: 'export', // Outputs a Single-Page Application (SPA).
-  distDir: './build',
-  experimental: {
-    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
-  },
+  outputFileTracingRoot: __dirname,
+  distDir: 'build',
 };
 
-export default nextConfig;
+export default withNextIntl(nextConfig);
