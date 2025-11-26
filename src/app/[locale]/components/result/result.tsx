@@ -68,9 +68,7 @@ const Result = () => {
   return (
     <section className="rounded-3xl bg-white/90 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md sm:p-8">
       <div className="mb-6 space-y-2">
-        <h2 className="text-2xl font-semibold text-foreground">
-          {pageT('resultsSectionTitle')}
-        </h2>
+        <h2 className="text-2xl font-semibold text-foreground">{pageT('resultsSectionTitle')}</h2>
       </div>
 
       {hasResult ? (
@@ -82,9 +80,7 @@ const Result = () => {
             <animated.p className="text-5xl font-bold text-primary sm:text-6xl">
               {animation.value.to((value) => Math.floor(value))}
             </animated.p>
-            <p className="text-sm text-muted-foreground">
-              {pageT('caloriesPerDay')}
-            </p>
+            <p className="text-sm text-muted-foreground">{pageT('caloriesPerDay')}</p>
           </div>
 
           <div className="space-y-4">
@@ -100,9 +96,7 @@ const Result = () => {
                   <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
                     {pageT(`macros.${macro.key}`)} ({macro.percentage}%)
                   </p>
-                  <p className="mt-2 text-2xl font-semibold text-foreground">
-                    {macro.calories}
-                  </p>
+                  <p className="mt-2 text-2xl font-semibold text-foreground">{macro.calories}</p>
                 </div>
               ))}
             </div>

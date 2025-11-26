@@ -28,7 +28,11 @@ const ThemeToggle = () => {
       onClick={handleToggle}
     >
       {mounted ? (
-        isDark ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />
+        isDark ? (
+          <FiSun className="h-5 w-5" />
+        ) : (
+          <FiMoon className="h-5 w-5" />
+        )
       ) : (
         <FiSun className="h-5 w-5" />
       )}

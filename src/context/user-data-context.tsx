@@ -15,11 +15,7 @@ const UserDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<null | UserData>(null);
 
   const value: UserDataContextType = { userData, setUserData };
-  return (
-    <UserDataContext.Provider value={value}>
-      {children}
-    </UserDataContext.Provider>
-  );
+  return <UserDataContext.Provider value={value}>{children}</UserDataContext.Provider>;
 };
 
 const useUserData = () => {

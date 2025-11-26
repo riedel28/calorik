@@ -20,9 +20,7 @@ type FormFieldContextValue<
   name: TName;
 };
 
-const FormFieldContext = React.createContext<FormFieldContextValue>(
-  {} as FormFieldContextValue,
-);
+const FormFieldContext = React.createContext<FormFieldContextValue>({} as FormFieldContextValue);
 
 const FormField = <
   TFieldValues extends FieldValues = FieldValues,
@@ -63,62 +61,57 @@ type FormItemContextValue = {
   id: string;
 };
 
-const FormItemContext = React.createContext<FormItemContextValue>(
-  {} as FormItemContextValue,
+const FormItemContext = React.createContext<FormItemContextValue>({} as FormItemContextValue);
+
+const FormItem = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ className, ...props }, ref) => {
+    const id = React.useId();
+
+    return (
+      <FormItemContext.Provider value={{ id }}>
+        <div ref={ref} className={cn('space-y-2', className)} {...props} />
+      </FormItemContext.Provider>
+    );
+  },
 );
-
-const FormItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => {
-  const id = React.useId();
-
-  return (
-    <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn('space-y-2', className)} {...props} />
-    </FormItemContext.Provider>
-  );
-});
 FormItem.displayName = 'FormItem';
 
-const FormLabel = React.forwardRef<
-  HTMLLabelElement,
-  React.LabelHTMLAttributes<HTMLLabelElement>
->(({ className, children, ...props }, ref) => {
-  const { formDescriptionId, id } = useFormField();
+const FormLabel = React.forwardRef<HTMLLabelElement, React.LabelHTMLAttributes<HTMLLabelElement>>(
+  ({ className, children, ...props }, ref) => {
+    const { formDescriptionId, id } = useFormField();
 
-  return (
-    <label
-      ref={ref}
-      className={cn(
-        'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-        className,
-      )}
-      htmlFor={id}
-      aria-describedby={formDescriptionId}
-      {...props}
-    >
-      {children}
-    </label>
-  );
-});
+    return (
+      <label
+        ref={ref}
+        className={cn(
+          'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+          className,
+        )}
+        htmlFor={id}
+        aria-describedby={formDescriptionId}
+        {...props}
+      >
+        {children}
+      </label>
+    );
+  },
+);
 FormLabel.displayName = 'FormLabel';
 
-const FormControl = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ ...props }, ref) => {
-  const { id } = useFormField();
+const FormControl = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+  ({ ...props }, ref) => {
+    const { id } = useFormField();
 
-  return (
-    <Slot
-      ref={ref}
-      id={id}
-      aria-describedby={`${id}-form-description ${id}-form-message`}
-      {...props}
-    />
-  );
-});
+    return (
+      <Slot
+        ref={ref}
+        id={id}
+        aria-describedby={`${id}-form-description ${id}-form-message`}
+        {...props}
+      />
+    );
+  },
+);
 FormControl.displayName = 'FormControl';
 
 const FormMessage = React.forwardRef<

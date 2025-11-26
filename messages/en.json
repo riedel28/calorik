@@ -15,7 +15,7 @@
     },
     "weight": {
       "title": "Weight (kg)",
-      "error": "Please enter valid weight", 
+      "error": "Please enter valid weight",
       "placeholder": "Please enter your weight"
     },
     "height": {
@@ -30,7 +30,7 @@
     "error": "Please choose your activity level",
     "noExercise": "Little / No exercise",
     "lightExercise": "Light exercise (1-3 days per week)",
-    "moderateExercise": "Moderate exercise (3-5 days per week)", 
+    "moderateExercise": "Moderate exercise (3-5 days per week)",
     "heavyExercise": "Heavy exercise (6-7 days per week)",
     "veryHeavyExercise": "Very heavy exercise (twice per day)"
   },
@@ -41,7 +41,7 @@
     "cut": "Cut (-20%)",
     "cut_short": "cut weight",
     "maintain": "Maintain",
-    "maintain_short": "maintain weight", 
+    "maintain_short": "maintain weight",
     "gain": "Gain (+15%)",
     "gain_short": "gain weight"
   },

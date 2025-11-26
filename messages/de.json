@@ -20,7 +20,7 @@
     },
     "height": {
       "title": "Größe (cm)",
-      "error": "Bitte geben Sie korrekte Größe an", 
+      "error": "Bitte geben Sie korrekte Größe an",
       "placeholder": "Bitte geben Sie ihre Größe ein"
     }
   },
@@ -40,7 +40,7 @@
     "error": "Bitte wählen Sie Ihr Ziel aus",
     "cut": "Abnehmen (-20%)",
     "cut_short": "abzunehmen",
-    "maintain": "Gewicht zu halten", 
+    "maintain": "Gewicht zu halten",
     "maintain_short": "Gewicht zu halten",
     "gain": "Zunehmen (+15%)",
     "gain_short": "zuzunehmen"

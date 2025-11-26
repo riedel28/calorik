@@ -24,8 +24,7 @@ const LanguageSwitcher = () => {
     { code: 'ru', label: 'Русский', countryCode: 'RU' },
   ];
 
-  const currentLanguage =
-    languages.find((lang) => lang.code === locale) ?? languages[0];
+  const currentLanguage = languages.find((lang) => lang.code === locale) ?? languages[0];
 
   return (
     <DropdownMenu>
@@ -47,9 +46,7 @@ const LanguageSwitcher = () => {
             aria-hidden
             title={currentLanguage.label}
           />
-          <span className="hidden text-sm font-medium sm:inline">
-            {currentLanguage.label}
-          </span>
+          <span className="hidden text-sm font-medium sm:inline">{currentLanguage.label}</span>
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>

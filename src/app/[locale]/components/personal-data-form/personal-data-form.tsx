@@ -13,7 +13,7 @@ import {
   FormField,
   FormItem,
   FormLabel,
-  FormMessage
+  FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
@@ -21,10 +21,7 @@ import { useUserData } from '@/context/user-data-context';
 
 const personalDataFormSchema = z.object({
   gender: z.enum(['male', 'female'], 'yourData.gender.error'),
-  age: z
-    .number('yourData.age.error')
-    .min(0, 'yourData.age.error')
-    .max(120, 'yourData.age.error'),
+  age: z.number('yourData.age.error').min(0, 'yourData.age.error').max(120, 'yourData.age.error'),
   height: z
     .number('yourData.height.error')
     .min(0, 'yourData.height.error')
@@ -35,10 +32,10 @@ const personalDataFormSchema = z.object({
     .max(300, 'yourData.weight.error'),
   activityLevel: z.enum(
     ['no-exercise', 'light', 'moderate', 'heavy', 'very-heavy'],
-    'activity.error'
+    'activity.error',
   ),
   goal: z.enum(['cut', 'maintain', 'gain'], 'goal.error'),
-  formula: z.enum(['harris-benedict', 'mifflin-st-jeor'], 'formula.error')
+  formula: z.enum(['harris-benedict', 'mifflin-st-jeor'], 'formula.error'),
 });
 
 export type PersonalDataFormValues = z.infer<typeof personalDataFormSchema>;
@@ -56,7 +53,7 @@ const PersonalDataForm = () => {
     weight: 80,
     activityLevel: 'no-exercise',
     goal: 'cut',
-    formula: 'harris-benedict'
+    formula: 'harris-benedict',
   };
 
   const activityLevelOptions = [
@@ -64,23 +61,23 @@ const PersonalDataForm = () => {
     { value: 'light', label: t('activity.lightExercise') },
     { value: 'moderate', label: t('activity.moderateExercise') },
     { value: 'heavy', label: t('activity.heavyExercise') },
-    { value: 'very-heavy', label: t('activity.veryHeavyExercise') }
+    { value: 'very-heavy', label: t('activity.veryHeavyExercise') },
   ];
 
   const goalOptions = [
     { value: 'cut', label: t('goal.cut') },
     { value: 'maintain', label: t('goal.maintain') },
-    { value: 'gain', label: t('goal.gain') }
+    { value: 'gain', label: t('goal.gain') },
   ];
 
   const formulaOptions = [
     { value: 'harris-benedict', label: t('formula.harrisBenedict') },
-    { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') }
+    { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
   ];
 
   const form = useForm<PersonalDataFormValues>({
     defaultValues,
-    resolver: zodResolver(personalDataFormSchema)
+    resolver: zodResolver(personalDataFormSchema),
   });
 
   const hasLoadedData = useRef(false);
@@ -119,19 +116,11 @@ const PersonalDataForm = () => {
   return (
     <section className="rounded-3xl bg-white/90 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md sm:p-8">
       <div className="mb-6 space-y-2">
-        <h2 className="text-2xl font-semibold text-foreground">
-          {pageT('formSectionTitle')}
-        </h2>
-        <p className="text-sm text-muted-foreground">
-          {pageT('formSectionSubtitle')}
-        </p>
+        <h2 className="text-2xl font-semibold text-foreground">{pageT('formSectionTitle')}</h2>
+        <p className="text-sm text-muted-foreground">{pageT('formSectionSubtitle')}</p>
       </div>
       <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(handleSubmit)}
-          data-testid="form"
-          className="space-y-8"
-        >
+        <form onSubmit={form.handleSubmit(handleSubmit)} data-testid="form" className="space-y-8">
           <div className="grid gap-6 md:grid-cols-2">
             <FormField
               control={form.control}
@@ -146,11 +135,9 @@ const PersonalDataForm = () => {
                       data-testid="age"
                       className="h-12"
                       value={Number.isFinite(field.value) ? field.value : ''}
-                      onChange={event => {
+                      onChange={(event) => {
                         const numericValue = event.target.value.trim();
-                        field.onChange(
-                          numericValue === '' ? undefined : Number(numericValue)
-                        );
+                        field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
                     />
                   </FormControl>
@@ -174,9 +161,7 @@ const PersonalDataForm = () => {
                       <RadioGroupItem value="male" data-testid="gender-male">
                         {t('yourData.gender.male')}
                       </RadioGroupItem>
-                      <RadioGroupItem value="female">
-                        {t('yourData.gender.female')}
-                      </RadioGroupItem>
+                      <RadioGroupItem value="female">{t('yourData.gender.female')}</RadioGroupItem>
                     </RadioGroup>
                   </FormControl>
                   {renderError(fieldState.error?.message)}
@@ -197,11 +182,9 @@ const PersonalDataForm = () => {
                       data-testid="weight"
                       className="h-12"
                       value={Number.isFinite(field.value) ? field.value : ''}
-                      onChange={event => {
+                      onChange={(event) => {
                         const numericValue = event.target.value.trim();
-                        field.onChange(
-                          numericValue === '' ? undefined : Number(numericValue)
-                        );
+                        field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
                     />
                   </FormControl>
@@ -223,11 +206,9 @@ const PersonalDataForm = () => {
                       data-testid="height"
                       className="h-12"
                       value={Number.isFinite(field.value) ? field.value : ''}
-                      onChange={event => {
+                      onChange={(event) => {
                         const numericValue = event.target.value.trim();
-                        field.onChange(
-                          numericValue === '' ? undefined : Number(numericValue)
-                        );
+                        field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
                     />
                   </FormControl>
@@ -249,7 +230,7 @@ const PersonalDataForm = () => {
                     onValueChange={field.onChange}
                     className="grid gap-3"
                   >
-                    {activityLevelOptions.map(item => (
+                    {activityLevelOptions.map((item) => (
                       <RadioGroupItem
                         key={item.value}
                         value={item.value}
@@ -279,7 +260,7 @@ const PersonalDataForm = () => {
                       onValueChange={field.onChange}
                       className="grid gap-3 md:grid-cols-3"
                     >
-                      {goalOptions.map(item => (
+                      {goalOptions.map((item) => (
                         <RadioGroupItem key={item.value} value={item.value}>
                           {item.label}
                         </RadioGroupItem>
@@ -303,7 +284,7 @@ const PersonalDataForm = () => {
                       onValueChange={field.onChange}
                       className="grid gap-3"
                     >
-                      {formulaOptions.map(item => (
+                      {formulaOptions.map((item) => (
                         <RadioGroupItem key={item.value} value={item.value}>
                           {item.label}
                         </RadioGroupItem>

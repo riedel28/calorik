@@ -11,9 +11,7 @@ vi.mock('next-intl', () => ({
 }));
 
 vi.mock('@/i18n/navigation', () => ({
-  Link: ({ children }: { children: ReactNode }) => (
-    <a href="/">{children}</a>
-  ),
+  Link: ({ children }: { children: ReactNode }) => <a href="/">{children}</a>,
   usePathname: () => '/en',
 }));
 
@@ -30,14 +28,8 @@ describe('Header', () => {
     const trigger = screen.getByRole('button', { name: /english/i });
     await user.click(trigger);
 
-    expect(
-      await screen.findByRole('link', { name: /^English$/i }),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByRole('link', { name: /^Deutsch$/i }),
-    ).toBeInTheDocument();
-    expect(
-      await screen.findByRole('link', { name: /^Русский$/i }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: /^English$/i })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: /^Deutsch$/i })).toBeInTheDocument();
+    expect(await screen.findByRole('link', { name: /^Русский$/i })).toBeInTheDocument();
   });
 });

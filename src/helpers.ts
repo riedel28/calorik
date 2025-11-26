@@ -1,9 +1,4 @@
-type ActivityLevel =
-  | 'no-exercise'
-  | 'light'
-  | 'moderate'
-  | 'heavy'
-  | 'very-heavy';
+type ActivityLevel = 'no-exercise' | 'light' | 'moderate' | 'heavy' | 'very-heavy';
 type Formula = 'harris-benedict' | 'mifflin-st-jeor';
 type Goal = 'cut' | 'maintain' | 'gain';
 
@@ -76,9 +71,7 @@ function calculateHarriesBenedictForFemales({
   weight,
   height,
 }: Pick<UserData, 'age' | 'weight' | 'height'>) {
-  return Math.round(
-    655.0955 + 9.5634 * weight + 1.8496 * height - 4.6756 * age,
-  );
+  return Math.round(655.0955 + 9.5634 * weight + 1.8496 * height - 4.6756 * age);
 }
 
 // The Mifflin St Jeor Equation

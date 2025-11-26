@@ -1,8 +1,4 @@
-import {
-  calculateCalories,
-  harrisBenedictBMR,
-  mifflinStJeorBMR,
-} from './helpers';
+import { calculateCalories, harrisBenedictBMR, mifflinStJeorBMR } from './helpers';
 import type { UserData } from './helpers';
 
 describe('Helpers', () => {
