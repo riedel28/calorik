@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useSpring, animated } from 'react-spring';
 import { useTranslations } from 'next-intl';
+import { useEffect } from 'react';
+import { animated, useSpring } from 'react-spring';
 
 import { useUserData } from '@/context/user-data-context';
 import { calculateCalories } from '@/helpers';

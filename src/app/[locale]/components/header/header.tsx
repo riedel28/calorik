@@ -1,7 +1,7 @@
 'use client';
 
-import ThemeToggle from '@/components/theme-toggle';
 import LanguageSwitcher from '@/app/[locale]/components/language-switcher/language-switcher';
+import ThemeToggle from '@/components/theme-toggle';
 
 const Header = () => {
   return (

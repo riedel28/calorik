@@ -1,10 +1,10 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { NextIntlClientProvider } from 'next-intl';
 
 import { UserDataProvider } from '@/context/user-data-context';
-import PersonalDataForm from './personal-data-form';
 import messages from '../../../../../messages/en.json';
+import PersonalDataForm from './personal-data-form';
 
 const renderForm = () =>
   render(

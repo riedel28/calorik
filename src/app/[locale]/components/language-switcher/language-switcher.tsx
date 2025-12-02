@@ -1,8 +1,8 @@
 'use client';
 
+import { ChevronDown } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import ReactCountryFlag from 'react-country-flag';
-import { ChevronDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {

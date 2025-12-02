@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/2.3.5/schema.json",
+  "$schema": "https://biomejs.dev/schemas/2.3.8/schema.json",
   "formatter": {
     "indentStyle": "space",
     "indentWidth": 2,
@@ -25,14 +25,7 @@
       "quoteStyle": "single"
     }
   },
-  "files": {
-    "includes": [
-      "src/**/*",
-      "messages/**/*",
-      "next.config.mjs",
-      "tailwind.config.ts",
-      "postcss.config.mjs",
-      "vitest.config.ts"
-    ]
+  "assist": {
+    "enabled": true
   }
 }

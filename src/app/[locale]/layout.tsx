@@ -1,11 +1,10 @@
-import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-
-import { UserDataProvider } from '@/context/user-data-context';
+import type { ReactNode } from 'react';
 import Header from '@/app/[locale]/components/header/header';
+import { UserDataProvider } from '@/context/user-data-context';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {

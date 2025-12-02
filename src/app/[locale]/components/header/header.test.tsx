@@ -1,10 +1,9 @@
-import type { ReactNode } from 'react';
 import { render, screen } from '@testing-library/react';
-import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-
-import Header from './header';
+import type { ReactNode } from 'react';
+import { vi } from 'vitest';
 import { ThemeProvider } from '@/components/providers/theme-provider';
+import Header from './header';
 
 vi.mock('next-intl', () => ({
   useLocale: () => 'en',
