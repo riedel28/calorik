@@ -18,7 +18,7 @@ const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      'relative flex cursor-pointer items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm shadow-sm transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=checked]:border-primary data-[state=checked]:bg-primary/10 disabled:cursor-not-allowed disabled:opacity-50',
+      'relative flex cursor-pointer items-center justify-between rounded-sm bg-background text-sm transition hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-[state=checked]:border-primary data-[state=checked]:bg-accent disabled:cursor-not-allowed disabled:opacity-50',
       className,
     )}
     {...props}
@@ -26,7 +26,7 @@ const RadioGroupItem = React.forwardRef<
     <span className="flex items-center justify-between gap-2">
       <span>{children}</span>
     </span>
-    <span className="ml-2 inline-flex h-4 w-4 items-center justify-center rounded-full border border-primary">
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-primary">
       <RadioGroupPrimitive.Indicator className="h-2 w-2 rounded-full bg-primary" />
     </span>
   </RadioGroupPrimitive.Item>

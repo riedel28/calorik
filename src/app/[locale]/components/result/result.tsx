@@ -66,7 +66,7 @@ const Result = () => {
     : [];
 
   return (
-    <section className="rounded-3xl bg-white/90 p-6 shadow-lg ring-1 ring-black/5 backdrop-blur-md sm:p-8">
+    <section className="rounded-lg bg-background p-6 shadow-xs ring-1 ring-black/5 backdrop-blur-md sm:p-8">
       <div className="mb-6 space-y-2">
         <h2 className="text-2xl font-semibold text-foreground">{pageT('resultsSectionTitle')}</h2>
       </div>

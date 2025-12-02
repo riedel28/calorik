@@ -30,8 +30,8 @@ const LanguageSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="outline"
-          className="flex items-center gap-2"
+          variant="ghost"
+          className="flex items-center gap-2 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
           aria-label={currentLanguage.label}
           title={currentLanguage.label}
         >
