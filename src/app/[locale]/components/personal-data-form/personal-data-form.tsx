@@ -105,8 +105,8 @@ const PersonalDataForm = () => {
   ];
 
   const formulaOptions = [
-    { value: 'harris-benedict', label: t('formula.harrisBenedict') },
-    { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
+    { value: 'harris-benedict', label: 'Harris-Benedict' },
+    { value: 'mifflin-st-jeor', label: 'Mifflin St. Jeor' },
   ];
 
   const form = useForm<PersonalDataFormValues>({
@@ -389,13 +389,19 @@ const PersonalDataForm = () => {
                   <RadioGroup
                     value={field.value}
                     onValueChange={field.onChange}
-                    className="grid grid-cols-1 gap-3"
+                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
                     data-slot="radio-group"
                   >
                     {formulaOptions.map((item) => (
                       <FieldLabel key={item.value} htmlFor={`${field.name}-${item.value}`}>
-                        <Field data-invalid={fieldState.invalid} orientation="horizontal">
-                          {item.label}
+                        <Field
+                          data-invalid={fieldState.invalid}
+                          orientation="horizontal"
+                          className="min-h-12"
+                        >
+                          <div className="flex flex-1 flex-col gap-0.5">
+                            <span className="text-sm font-medium">{item.label}</span>
+                          </div>
                           <RadioGroupItem
                             value={item.value}
                             id={`${field.name}-${item.value}`}
@@ -420,7 +426,7 @@ const PersonalDataForm = () => {
               type="submit"
               size="lg"
               data-testid="submit-button"
-              className="w-full sm:w-auto sm:px-10"
+              className="w-full sm:w-auto h-12 text-lg"
             >
               {t('calculate')}
             </Button>
