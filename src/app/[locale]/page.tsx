@@ -16,7 +16,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div className="space-y-10 md:space-y-12">
-      <div className="grid gap-6 lg:grid-cols-2">
+      <div className="grid gap-6 md:grid-cols-2">
         <PersonalDataForm />
         <Result />
       </div>

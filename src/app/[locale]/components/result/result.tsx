@@ -67,7 +67,7 @@ const Result = () => {
 
   return (
     <section className="rounded-lg bg-background p-6 shadow-xs ring-1 ring-black/5 backdrop-blur-md sm:p-8">
-      <div className="mb-6 space-y-2">
+      <div className="mb-6 space-y-1">
         <h2 className="text-2xl font-semibold text-foreground">{pageT('resultsSectionTitle')}</h2>
       </div>
 

@@ -43,7 +43,7 @@ export default async function LocaleLayout({
       <div className="flex min-h-screen flex-col bg-sky-50 text-foreground">
         <Header />
         <main className="flex-1 pt-16">
-          <div className="max-w-6xl px-4 py-4 mx-auto">
+          <div className="max-w-7xl px-4 py-4 mx-auto">
             <UserDataProvider>{children}</UserDataProvider>
           </div>
         </main>
