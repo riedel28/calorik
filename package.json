@@ -38,7 +38,7 @@
     "@vitest/ui": "^4.0.9",
     "happy-dom": "^20.0.10",
     "jsdom": "^27.2.0",
-    "knip": "^5.69.1",
+    "knip": "^5.71.0",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.17",
     "tailwindcss-animate": "^1.0.7",
@@ -57,7 +57,8 @@
     "lint": "biome lint --write",
     "format": "biome format --write",
     "check": "biome check --write",
-    "deps:unused": "knip"
+    "deps:unused": "knip",
+    "knip": "knip"
   },
   "browserslist": {
     "production": [
