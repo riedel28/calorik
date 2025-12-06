@@ -40,7 +40,7 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      <div className="flex min-h-screen flex-col bg-sky-50 text-foreground">
+      <div className="flex min-h-screen flex-col bg-sky-50 dark:bg-sky-950 text-foreground">
         <Header />
         <main className="flex-1 pt-16">
           <div className="max-w-7xl px-4 py-4 mx-auto">
