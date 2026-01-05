@@ -53,20 +53,28 @@ describe('PersonalDataForm', () => {
 
     expect(maleOption).toHaveAttribute('aria-checked', 'true');
 
-    const activityOption = screen.getByTestId('activity-level-light');
+    // Activity level is now a select dropdown
+    const activitySelect = screen.getByTestId('activity-level-select');
+    await user.click(activitySelect);
+
+    // Wait for dropdown to open and find the option
+    const activityOption = await screen.findByTestId('activity-level-light');
     await user.click(activityOption);
 
-    expect(activityOption).toHaveAttribute('aria-checked', 'true');
+    // Wait for dropdown to close
+    await screen.findByTestId('activity-level-select');
 
+    // Find goal option by testid or label text
     const goalOption = screen.getByRole('radio', {
-      name: messages.goal.maintain,
+      name: new RegExp(messages.goal.maintain, 'i'),
     });
     await user.click(goalOption);
 
     expect(goalOption).toHaveAttribute('aria-checked', 'true');
 
+    // Formula options use direct label text, not translation keys
     const formulaOption = screen.getByRole('radio', {
-      name: messages.formula.mifflinStJeor,
+      name: 'Mifflin St. Jeor',
     });
     await user.click(formulaOption);
 

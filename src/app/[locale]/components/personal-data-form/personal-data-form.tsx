@@ -19,6 +19,16 @@ import {
 import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import {
+  Select,
+  SelectItem,
+  SelectList,
+  SelectPopup,
+  SelectPortal,
+  SelectPositioner,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { useUserData } from '@/context/user-data-context';
 
 const personalDataFormSchema = z.object({
@@ -300,43 +310,57 @@ const PersonalDataForm = () => {
             <Controller
               name="activityLevel"
               control={form.control}
-              render={({ field, fieldState }) => (
-                <FieldSet>
-                  <FieldLegend variant="label">{t('activity.title')}</FieldLegend>
-                  <RadioGroup
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    data-slot="radio-group"
-                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
-                  >
-                    {activityLevelOptions.map((item) => (
-                      <FieldLabel key={item.value} htmlFor={`${field.name}-${item.value}`}>
-                        <Field data-invalid={fieldState.invalid} orientation="horizontal">
-                          <div className="flex flex-1 flex-col gap-0.5">
-                            <span className="text-sm font-medium">{item.label}</span>
-                            {item.description && (
-                              <FieldDescription className="text-xs text-muted-foreground">
-                                {item.description}
-                              </FieldDescription>
-                            )}
-                          </div>
-                          <RadioGroupItem
-                            value={item.value}
-                            id={`${field.name}-${item.value}`}
-                            data-testid={`activity-level-${item.value}`}
-                            aria-invalid={fieldState.invalid}
-                          />
-                        </Field>
-                      </FieldLabel>
-                    ))}
-                  </RadioGroup>
-                  {fieldState.invalid && (
-                    <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                      {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
-                    </FieldError>
-                  )}
-                </FieldSet>
-              )}
+              render={({ field, fieldState }) => {
+                const selectedOption = activityLevelOptions.find(
+                  (opt) => opt.value === field.value,
+                );
+                return (
+                  <Field data-invalid={fieldState.invalid}>
+                    <FieldLabel htmlFor={field.name}>{t('activity.title')}</FieldLabel>
+                    <Select value={field.value} onValueChange={field.onChange}>
+                      <SelectTrigger
+                        id={field.name}
+                        data-testid="activity-level-select"
+                        className="h-12"
+                        aria-invalid={fieldState.invalid}
+                      >
+                        <SelectValue>
+                          {selectedOption ? selectedOption.label : t('activity.title')}
+                        </SelectValue>
+                      </SelectTrigger>
+                      <SelectPortal>
+                        <SelectPositioner>
+                          <SelectPopup>
+                            <SelectList>
+                              {activityLevelOptions.map((item) => (
+                                <SelectItem
+                                  key={item.value}
+                                  value={item.value}
+                                  data-testid={`activity-level-${item.value}`}
+                                >
+                                  <div className="flex flex-col items-start py-0.5">
+                                    <span>{item.label}</span>
+                                    {item.description && (
+                                      <span className="text-xs text-muted-foreground mt-0.5">
+                                        {item.description}
+                                      </span>
+                                    )}
+                                  </div>
+                                </SelectItem>
+                              ))}
+                            </SelectList>
+                          </SelectPopup>
+                        </SelectPositioner>
+                      </SelectPortal>
+                    </Select>
+                    {fieldState.invalid && (
+                      <FieldError errors={fieldState.error ? [fieldState.error] : []}>
+                        {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                      </FieldError>
+                    )}
+                  </Field>
+                );
+              }}
             />
 
             <Controller
