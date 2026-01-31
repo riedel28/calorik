@@ -14,25 +14,30 @@
     },
     "age": {
       "title": "Alter",
+      "label": "Alter",
+      "unit": "J.",
       "error": "Bitte geben Sie korrektes Alter an",
       "placeholder": "Bitte geben Sie ihr Alter ein"
     },
     "weight": {
       "title": "Gewicht (kg)",
       "titleImperial": "Gewicht (lbs)",
+      "label": "Gewicht",
       "error": "Bitte geben Sie korrektes Gewicht an",
       "placeholder": "Bitte geben Sie ihr Gewicht ein"
     },
     "height": {
       "title": "Größe (cm)",
       "titleImperial": "Größe (in)",
+      "label": "Größe",
       "error": "Bitte geben Sie korrekte Größe an",
       "placeholder": "Bitte geben Sie ihre Größe ein"
     },
     "bodyFat": {
       "title": "Körperfett (%)",
+      "label": "Körperfett",
       "error": "Bitte geben Sie einen gültigen Körperfettanteil an",
-      "placeholder": "Optional"
+      "placeholder": "Opt."
     }
   },
   "activity": {
@@ -52,8 +57,8 @@
     "custom": "Benutzerdefiniert",
     "customDescription": "Eigenen Multiplikator eingeben",
     "customMultiplier": {
-      "title": "Aktivitätsmultiplikator",
-      "placeholder": "z.B. 1,55",
+      "title": "Multiplikator",
+      "placeholder": "1,55",
       "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein"
     },
     "noExercise": "Sitzende Tätigkeit / Kein Training",
@@ -83,17 +88,21 @@
     "goalWeight": {
       "title": "Zielgewicht (kg)",
       "titleImperial": "Zielgewicht (lbs)",
+      "label": "Zielgewicht",
       "placeholder": "Geben Sie Ihr Zielgewicht ein",
       "error": "Bitte geben Sie ein gültiges Zielgewicht ein"
     },
     "daysUntilGoal": {
       "title": "Tage bis zum Ziel",
+      "label": "Tage",
+      "unit": "Tage",
       "placeholder": "Anzahl der Tage",
       "error": "Bitte geben Sie eine gültige Anzahl von Tagen ein"
     },
     "goalDate": {
       "title": "Zieldatum",
-      "placeholder": "Wählen Sie ein Datum",
+      "label": "Zieldatum",
+      "placeholder": "Datum wählen",
       "error": "Bitte wählen Sie ein gültiges Datum"
     }
   },
@@ -113,8 +122,8 @@
   },
   "goalResults": {
     "title": "Zielprognose",
-    "estimatedBodyFat": "Geschätztes Körperfett am Ziel",
-    "dailyCalories": "Tägliche Kalorien benötigt"
+    "estimatedBodyFat": "Geschätztes KFA",
+    "dailyCalories": "Tägliche Kalorien"
   },
   "calculate": "Kalorien berechnen",
   "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",

@@ -14,25 +14,30 @@
     },
     "age": {
       "title": "Age (years)",
+      "label": "Age",
+      "unit": "yrs",
       "error": "Please enter valid age",
       "placeholder": "Please enter your age"
     },
     "weight": {
       "title": "Weight (kg)",
       "titleImperial": "Weight (lbs)",
+      "label": "Weight",
       "error": "Please enter valid weight",
       "placeholder": "Please enter your weight"
     },
     "height": {
       "title": "Height (cm)",
       "titleImperial": "Height (in)",
+      "label": "Height",
       "error": "Please enter valid height",
       "placeholder": "Please enter your height"
     },
     "bodyFat": {
       "title": "Body Fat (%)",
+      "label": "Body Fat",
       "error": "Please enter valid body fat percentage",
-      "placeholder": "Optional"
+      "placeholder": "Opt."
     }
   },
   "activity": {
@@ -52,8 +57,8 @@
     "custom": "Custom",
     "customDescription": "Enter your own multiplier",
     "customMultiplier": {
-      "title": "Activity Multiplier",
-      "placeholder": "e.g., 1.55",
+      "title": "Multiplier",
+      "placeholder": "1.55",
       "description": "Enter a value between 1.0 and 2.5"
     },
     "noExercise": "Little / No exercise",
@@ -83,17 +88,21 @@
     "goalWeight": {
       "title": "Goal Weight (kg)",
       "titleImperial": "Goal Weight (lbs)",
+      "label": "Goal Weight",
       "placeholder": "Enter your target weight",
       "error": "Please enter a valid goal weight"
     },
     "daysUntilGoal": {
       "title": "Days Until Goal",
+      "label": "Days",
+      "unit": "days",
       "placeholder": "Number of days",
       "error": "Please enter a valid number of days"
     },
     "goalDate": {
       "title": "Goal Date",
-      "placeholder": "Select a date",
+      "label": "Goal Date",
+      "placeholder": "Pick a date",
       "error": "Please select a valid date"
     }
   },
@@ -109,13 +118,13 @@
     "title": "Current Stats",
     "tdee": "TDEE",
     "bmr": "BMR",
-    "lbm": "Lean Body Mass",
+    "lbm": "Lean Mass",
     "fm": "Fat Mass"
   },
   "goalResults": {
     "title": "Goal Projection",
-    "estimatedBodyFat": "Est. Body Fat at Goal",
-    "dailyCalories": "Daily Calories Needed"
+    "estimatedBodyFat": "Est. Body Fat",
+    "dailyCalories": "Daily Calories"
   },
   "calculate": "Calculate Calories",
   "result": "You will need to consume {calories} kcal to {goal}",

@@ -5,14 +5,13 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
   FieldLegend,
   FieldSet,
 } from '@/components/ui/field';
-import { Input } from '@/components/ui/input';
+import { InputWithSuffix } from '@/components/ui/input-with-suffix';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
   Select,
@@ -74,38 +73,36 @@ const UserInputs = () => {
     { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
   ];
 
-  const weightLabel =
-    units === 'metric' ? t('yourData.weight.title') : t('yourData.weight.titleImperial');
-  const heightLabel =
-    units === 'metric' ? t('yourData.height.title') : t('yourData.height.titleImperial');
+  const heightUnit = units === 'metric' ? 'cm' : 'in';
+  const weightUnit = units === 'metric' ? 'kg' : 'lbs';
 
   return (
-    <section className="rounded-lg bg-background p-6 shadow-xs ring-1 ring-black/5 sm:p-8">
-      <div className="mb-6 space-y-1">
-        <h2 className="font-semibold text-2xl text-foreground">{pageT('formSectionTitle')}</h2>
+    <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
+      <div className="mb-4 space-y-0.5">
+        <h2 className="font-semibold text-foreground text-xl">{pageT('formSectionTitle')}</h2>
         <p className="text-muted-foreground text-sm">{pageT('formSectionSubtitle')}</p>
       </div>
 
-      <FieldGroup className="gap-4">
+      <FieldGroup className="gap-3">
         <Controller
           control={control}
           name="gender"
           render={({ field, fieldState }) => (
-            <FieldSet>
+            <FieldSet className="gap-2">
               <FieldLegend variant="label">{t('yourData.gender.title')}</FieldLegend>
               <RadioGroup
-                className="grid grid-cols-1 gap-3 md:grid-cols-2"
+                className="grid grid-cols-2 gap-2"
                 data-slot="radio-group"
                 onValueChange={field.onChange}
                 value={field.value}
               >
                 <FieldLabel htmlFor={`${field.name}-male`}>
                   <Field
-                    className="min-h-12"
+                    className="min-h-9"
                     data-invalid={fieldState.invalid}
                     orientation="horizontal"
                   >
-                    <div className="flex flex-1 flex-col gap-0.5">
+                    <div className="flex flex-1 flex-col">
                       <span className="font-medium text-sm">{t('yourData.gender.male')}</span>
                     </div>
                     <RadioGroupItem
@@ -118,11 +115,11 @@ const UserInputs = () => {
                 </FieldLabel>
                 <FieldLabel htmlFor={`${field.name}-female`}>
                   <Field
-                    className="min-h-12"
+                    className="min-h-9"
                     data-invalid={fieldState.invalid}
                     orientation="horizontal"
                   >
-                    <div className="flex flex-1 flex-col gap-0.5">
+                    <div className="flex flex-1 flex-col">
                       <span className="font-medium text-sm">{t('yourData.gender.female')}</span>
                     </div>
                     <RadioGroupItem
@@ -142,17 +139,17 @@ const UserInputs = () => {
           )}
         />
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
           <Controller
             control={control}
             name="height"
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{heightLabel}</FieldLabel>
-                <Input
+                <FieldLabel htmlFor={field.name}>{t('yourData.height.label')}</FieldLabel>
+                <InputWithSuffix
                   {...field}
                   aria-invalid={fieldState.invalid}
-                  className="h-12"
+                  className="h-9"
                   data-testid="height"
                   id={field.name}
                   inputMode="numeric"
@@ -160,7 +157,8 @@ const UserInputs = () => {
                     const numericValue = event.target.value.trim();
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
-                  placeholder={t('yourData.height.placeholder')}
+                  placeholder="0"
+                  suffix={heightUnit}
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -177,11 +175,11 @@ const UserInputs = () => {
             name="weight"
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{weightLabel}</FieldLabel>
-                <Input
+                <FieldLabel htmlFor={field.name}>{t('yourData.weight.label')}</FieldLabel>
+                <InputWithSuffix
                   {...field}
                   aria-invalid={fieldState.invalid}
-                  className="h-12"
+                  className="h-9"
                   data-testid="weight"
                   id={field.name}
                   inputMode="numeric"
@@ -189,7 +187,8 @@ const UserInputs = () => {
                     const numericValue = event.target.value.trim();
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
-                  placeholder={t('yourData.weight.placeholder')}
+                  placeholder="0"
+                  suffix={weightUnit}
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -200,19 +199,17 @@ const UserInputs = () => {
               </Field>
             )}
           />
-        </div>
 
-        <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <Controller
             control={control}
             name="age"
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('yourData.age.title')}</FieldLabel>
-                <Input
+                <FieldLabel htmlFor={field.name}>{t('yourData.age.label')}</FieldLabel>
+                <InputWithSuffix
                   {...field}
                   aria-invalid={fieldState.invalid}
-                  className="h-12"
+                  className="h-9"
                   data-testid="age"
                   id={field.name}
                   inputMode="numeric"
@@ -220,7 +217,8 @@ const UserInputs = () => {
                     const numericValue = event.target.value.trim();
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
-                  placeholder={t('yourData.age.placeholder')}
+                  placeholder="0"
+                  suffix={t('yourData.age.unit')}
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -237,11 +235,11 @@ const UserInputs = () => {
             name="bodyFat"
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('yourData.bodyFat.title')}</FieldLabel>
-                <Input
+                <FieldLabel htmlFor={field.name}>{t('yourData.bodyFat.label')}</FieldLabel>
+                <InputWithSuffix
                   {...field}
                   aria-invalid={fieldState.invalid}
-                  className="h-12"
+                  className="h-9"
                   data-testid="body-fat"
                   id={field.name}
                   inputMode="numeric"
@@ -250,6 +248,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder={t('yourData.bodyFat.placeholder')}
+                  suffix="%"
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -262,101 +261,107 @@ const UserInputs = () => {
           />
         </div>
 
-        <Controller
-          control={control}
-          name="activityLevel"
-          render={({ field, fieldState }) => {
-            const selectedOption = activityLevelOptions.find((opt) => opt.value === field.value);
-            return (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('activity.title')}</FieldLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger
-                    aria-invalid={fieldState.invalid}
-                    className="h-12"
-                    data-testid="activity-level-select"
-                    id={field.name}
-                  >
-                    <SelectValue>
-                      {selectedOption ? selectedOption.label : t('activity.placeholder')}
-                    </SelectValue>
-                  </SelectTrigger>
-                  <SelectPortal>
-                    <SelectPositioner>
-                      <SelectPopup>
-                        <SelectList>
-                          {activityLevelOptions.map((item) => (
-                            <SelectItem
-                              data-testid={`activity-level-${item.value}`}
-                              key={item.value}
-                              value={item.value}
-                            >
-                              <div className="flex flex-col items-start py-0.5">
-                                <span>{item.label}</span>
-                                {item.description && (
-                                  <span className="mt-0.5 text-muted-foreground text-xs">
-                                    {item.description}
-                                  </span>
-                                )}
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectList>
-                      </SelectPopup>
-                    </SelectPositioner>
-                  </SelectPortal>
-                </Select>
-                {fieldState.invalid && (
-                  <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
-                  </FieldError>
-                )}
-              </Field>
-            );
-          }}
-        />
-
-        {activityLevel === 'custom' && (
+        <div
+          className={`grid gap-2 ${activityLevel === 'custom' ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'}`}
+        >
           <Controller
             control={control}
-            name="customMultiplier"
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('activity.customMultiplier.title')}</FieldLabel>
-                <Input
-                  {...field}
-                  aria-invalid={fieldState.invalid}
-                  className="h-12"
-                  data-testid="custom-multiplier"
-                  id={field.name}
-                  inputMode="decimal"
-                  onChange={(event) => {
-                    const numericValue = event.target.value.trim();
-                    field.onChange(numericValue === '' ? '' : numericValue);
-                  }}
-                  placeholder={t('activity.customMultiplier.placeholder')}
-                  step="0.01"
-                  type="number"
-                />
-                <FieldDescription>{t('activity.customMultiplier.description')}</FieldDescription>
-                {fieldState.invalid && (
-                  <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
-                  </FieldError>
-                )}
-              </Field>
-            )}
+            name="activityLevel"
+            render={({ field, fieldState }) => {
+              const selectedOption = activityLevelOptions.find((opt) => opt.value === field.value);
+              return (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>{t('activity.title')}</FieldLabel>
+                  <Select onValueChange={field.onChange} value={field.value}>
+                    <SelectTrigger
+                      aria-invalid={fieldState.invalid}
+                      className="h-9"
+                      data-testid="activity-level-select"
+                      id={field.name}
+                    >
+                      <SelectValue>
+                        {selectedOption ? selectedOption.label : t('activity.placeholder')}
+                      </SelectValue>
+                    </SelectTrigger>
+                    <SelectPortal>
+                      <SelectPositioner>
+                        <SelectPopup>
+                          <SelectList>
+                            {activityLevelOptions.map((item) => (
+                              <SelectItem
+                                data-testid={`activity-level-${item.value}`}
+                                key={item.value}
+                                value={item.value}
+                              >
+                                <div className="flex flex-col items-start py-0.5">
+                                  <span>{item.label}</span>
+                                  {item.description && (
+                                    <span className="mt-0.5 text-muted-foreground text-xs">
+                                      {item.description}
+                                    </span>
+                                  )}
+                                </div>
+                              </SelectItem>
+                            ))}
+                          </SelectList>
+                        </SelectPopup>
+                      </SelectPositioner>
+                    </SelectPortal>
+                  </Select>
+                  {fieldState.invalid && (
+                    <FieldError errors={fieldState.error ? [fieldState.error] : []}>
+                      {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                    </FieldError>
+                  )}
+                </Field>
+              );
+            }}
           />
-        )}
+
+          {activityLevel === 'custom' && (
+            <Controller
+              control={control}
+              name="customMultiplier"
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel htmlFor={field.name}>
+                    {t('activity.customMultiplier.title')}
+                  </FieldLabel>
+                  <InputWithSuffix
+                    {...field}
+                    aria-invalid={fieldState.invalid}
+                    className="h-9"
+                    data-testid="custom-multiplier"
+                    id={field.name}
+                    inputMode="decimal"
+                    onChange={(event) => {
+                      const numericValue = event.target.value.trim();
+                      field.onChange(numericValue === '' ? '' : numericValue);
+                    }}
+                    placeholder={t('activity.customMultiplier.placeholder')}
+                    step="0.01"
+                    suffix="×"
+                    type="number"
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={fieldState.error ? [fieldState.error] : []}>
+                      {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                    </FieldError>
+                  )}
+                </Field>
+              )}
+            />
+          )}
+        </div>
 
         <Controller
           control={control}
           name="formula"
           render={({ field, fieldState }) => (
-            <FieldSet>
+            <FieldSet className="gap-2">
               <FieldLegend variant="label">{t('formula.title')}</FieldLegend>
               <RadioGroup
-                className="grid grid-cols-1 gap-3 md:grid-cols-2"
+                className="grid grid-cols-2 gap-2"
                 data-slot="radio-group"
                 onValueChange={field.onChange}
                 value={field.value}
@@ -364,11 +369,11 @@ const UserInputs = () => {
                 {formulaOptions.map((item) => (
                   <FieldLabel htmlFor={`${field.name}-${item.value}`} key={item.value}>
                     <Field
-                      className="min-h-12"
+                      className="min-h-9"
                       data-invalid={fieldState.invalid}
                       orientation="horizontal"
                     >
-                      <div className="flex flex-1 flex-col gap-0.5">
+                      <div className="flex flex-1 flex-col">
                         <span className="font-medium text-sm">{item.label}</span>
                       </div>
                       <RadioGroupItem
