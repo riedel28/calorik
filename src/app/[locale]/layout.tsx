@@ -29,7 +29,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Validate that the incoming `locale` parameter is valid
-  if (!locale || !isSupportedLocale(locale)) {
+  if (!(locale && isSupportedLocale(locale))) {
     notFound();
   }
 
@@ -40,10 +40,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      <div className="flex min-h-screen flex-col bg-sky-50 dark:bg-sky-950 text-foreground">
+      <div className="flex min-h-screen flex-col bg-sky-50 text-foreground dark:bg-sky-950">
         <Header />
         <main className="flex-1 pt-16">
-          <div className="max-w-7xl px-4 py-4 mx-auto">
+          <div className="mx-auto max-w-7xl px-4 py-4">
             <UserDataProvider>{children}</UserDataProvider>
           </div>
         </main>

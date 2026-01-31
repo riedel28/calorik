@@ -1,33 +1,31 @@
-import * as RadioGroupPrimitive from '@radix-ui/react-radio-group';
-import * as React from 'react';
+import { Indicator, Item, Root } from '@radix-ui/react-radio-group';
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 
-const RadioGroup = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
->(({ className, ...props }, ref) => (
-  <RadioGroupPrimitive.Root className={cn('grid gap-2', className)} {...props} ref={ref} />
-));
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+const RadioGroup = forwardRef<ElementRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
+  ({ className, ...props }, ref) => (
+    <Root className={cn('grid gap-2', className)} {...props} ref={ref} />
+  )
+);
+RadioGroup.displayName = Root.displayName;
 
-const RadioGroupItem = React.forwardRef<
-  React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, children, ...props }, ref) => (
-  <RadioGroupPrimitive.Item
-    ref={ref}
-    className={cn(
-      'relative flex shrink-0 cursor-pointer items-center justify-center rounded-sm bg-background text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-      className,
-    )}
-    {...props}
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-primary">
-      <RadioGroupPrimitive.Indicator className="h-2 w-2 rounded-full bg-primary" />
-    </span>
-  </RadioGroupPrimitive.Item>
-));
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+const RadioGroupItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithoutRef<typeof Item>>(
+  ({ className, children, ...props }, ref) => (
+    <Item
+      className={cn(
+        'relative flex shrink-0 cursor-pointer items-center justify-center rounded-sm bg-background text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        className
+      )}
+      ref={ref}
+      {...props}
+    >
+      <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-primary">
+        <Indicator className="h-2 w-2 rounded-full bg-primary" />
+      </span>
+    </Item>
+  )
+);
+RadioGroupItem.displayName = Item.displayName;
 
 export { RadioGroup, RadioGroupItem };

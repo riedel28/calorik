@@ -9,12 +9,12 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import {
   Field,
+  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-  FieldSet,
   FieldLegend,
-  FieldDescription,
+  FieldSet,
 } from '@/components/ui/field';
 import { Form } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
@@ -127,7 +127,9 @@ const PersonalDataForm = () => {
   const hasLoadedData = useRef(false);
 
   useEffect(() => {
-    if (hasLoadedData.current) return;
+    if (hasLoadedData.current) {
+      return;
+    }
 
     try {
       const raw = window.localStorage.getItem(STORAGE_KEY);
@@ -157,32 +159,32 @@ const PersonalDataForm = () => {
   return (
     <section className="rounded-lg bg-background p-6 shadow-xs ring-1 ring-black/5 backdrop-blur-md sm:p-8">
       <div className="mb-6 space-y-1">
-        <h2 className="text-2xl font-semibold text-foreground">{pageT('formSectionTitle')}</h2>
-        <p className="text-sm text-muted-foreground">{pageT('formSectionSubtitle')}</p>
+        <h2 className="font-semibold text-2xl text-foreground">{pageT('formSectionTitle')}</h2>
+        <p className="text-muted-foreground text-sm">{pageT('formSectionSubtitle')}</p>
       </div>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} data-testid="form" className="space-y-6">
+        <form className="space-y-6" data-testid="form" onSubmit={form.handleSubmit(onSubmit)}>
           <FieldGroup className="gap-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-3">
               <Controller
-                name="age"
                 control={form.control}
+                name="age"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor={field.name}>{t('yourData.age.title')}</FieldLabel>
                     <Input
                       {...field}
-                      id={field.name}
-                      type="number"
-                      inputMode="numeric"
-                      data-testid="age"
-                      className="h-12"
                       aria-invalid={fieldState.invalid}
-                      value={Number.isFinite(field.value) ? field.value : ''}
+                      className="h-12"
+                      data-testid="age"
+                      id={field.name}
+                      inputMode="numeric"
                       onChange={(event) => {
                         const numericValue = event.target.value.trim();
                         field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
+                      type="number"
+                      value={Number.isFinite(field.value) ? field.value : ''}
                     />
                     {fieldState.invalid && (
                       <FieldError errors={fieldState.error ? [fieldState.error] : []}>
@@ -194,24 +196,24 @@ const PersonalDataForm = () => {
               />
 
               <Controller
-                name="weight"
                 control={form.control}
+                name="weight"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor={field.name}>{t('yourData.weight.title')}</FieldLabel>
                     <Input
                       {...field}
-                      id={field.name}
-                      type="number"
-                      inputMode="numeric"
-                      data-testid="weight"
-                      className="h-12"
                       aria-invalid={fieldState.invalid}
-                      value={Number.isFinite(field.value) ? field.value : ''}
+                      className="h-12"
+                      data-testid="weight"
+                      id={field.name}
+                      inputMode="numeric"
                       onChange={(event) => {
                         const numericValue = event.target.value.trim();
                         field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
+                      type="number"
+                      value={Number.isFinite(field.value) ? field.value : ''}
                     />
                     {fieldState.invalid && (
                       <FieldError errors={fieldState.error ? [fieldState.error] : []}>
@@ -223,24 +225,24 @@ const PersonalDataForm = () => {
               />
 
               <Controller
-                name="height"
                 control={form.control}
+                name="height"
                 render={({ field, fieldState }) => (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor={field.name}>{t('yourData.height.title')}</FieldLabel>
                     <Input
                       {...field}
-                      id={field.name}
-                      type="number"
-                      inputMode="numeric"
-                      data-testid="height"
-                      className="h-12"
                       aria-invalid={fieldState.invalid}
-                      value={Number.isFinite(field.value) ? field.value : ''}
+                      className="h-12"
+                      data-testid="height"
+                      id={field.name}
+                      inputMode="numeric"
                       onChange={(event) => {
                         const numericValue = event.target.value.trim();
                         field.onChange(numericValue === '' ? undefined : Number(numericValue));
                       }}
+                      type="number"
+                      value={Number.isFinite(field.value) ? field.value : ''}
                     />
                     {fieldState.invalid && (
                       <FieldError errors={fieldState.error ? [fieldState.error] : []}>
@@ -253,47 +255,47 @@ const PersonalDataForm = () => {
             </div>
 
             <Controller
-              name="gender"
               control={form.control}
+              name="gender"
               render={({ field, fieldState }) => (
                 <FieldSet>
                   <FieldLegend variant="label">{t('yourData.gender.title')}</FieldLegend>
                   <RadioGroup
-                    value={field.value}
-                    onValueChange={field.onChange}
+                    className="grid grid-cols-1 gap-3 md:grid-cols-2"
                     data-slot="radio-group"
-                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                    onValueChange={field.onChange}
+                    value={field.value}
                   >
                     <FieldLabel htmlFor={`${field.name}-male`}>
                       <Field
+                        className="min-h-12"
                         data-invalid={fieldState.invalid}
                         orientation="horizontal"
-                        className="min-h-12"
                       >
                         <div className="flex flex-1 flex-col gap-0.5">
-                          <span className="text-sm font-medium">{t('yourData.gender.male')}</span>
+                          <span className="font-medium text-sm">{t('yourData.gender.male')}</span>
                         </div>
                         <RadioGroupItem
-                          value="male"
-                          id={`${field.name}-male`}
-                          data-testid="gender-male"
                           aria-invalid={fieldState.invalid}
+                          data-testid="gender-male"
+                          id={`${field.name}-male`}
+                          value="male"
                         />
                       </Field>
                     </FieldLabel>
                     <FieldLabel htmlFor={`${field.name}-female`}>
                       <Field
+                        className="min-h-12"
                         data-invalid={fieldState.invalid}
                         orientation="horizontal"
-                        className="min-h-12"
                       >
                         <div className="flex flex-1 flex-col gap-0.5">
-                          <span className="text-sm font-medium">{t('yourData.gender.female')}</span>
+                          <span className="font-medium text-sm">{t('yourData.gender.female')}</span>
                         </div>
                         <RadioGroupItem
-                          value="female"
-                          id={`${field.name}-female`}
                           aria-invalid={fieldState.invalid}
+                          id={`${field.name}-female`}
+                          value="female"
                         />
                       </Field>
                     </FieldLabel>
@@ -308,21 +310,21 @@ const PersonalDataForm = () => {
             />
 
             <Controller
-              name="activityLevel"
               control={form.control}
+              name="activityLevel"
               render={({ field, fieldState }) => {
                 const selectedOption = activityLevelOptions.find(
-                  (opt) => opt.value === field.value,
+                  (opt) => opt.value === field.value
                 );
                 return (
                   <Field data-invalid={fieldState.invalid}>
                     <FieldLabel htmlFor={field.name}>{t('activity.title')}</FieldLabel>
-                    <Select value={field.value} onValueChange={field.onChange}>
+                    <Select onValueChange={field.onChange} value={field.value}>
                       <SelectTrigger
-                        id={field.name}
-                        data-testid="activity-level-select"
-                        className="h-12"
                         aria-invalid={fieldState.invalid}
+                        className="h-12"
+                        data-testid="activity-level-select"
+                        id={field.name}
                       >
                         <SelectValue>
                           {selectedOption ? selectedOption.label : t('activity.title')}
@@ -334,14 +336,14 @@ const PersonalDataForm = () => {
                             <SelectList>
                               {activityLevelOptions.map((item) => (
                                 <SelectItem
+                                  data-testid={`activity-level-${item.value}`}
                                   key={item.value}
                                   value={item.value}
-                                  data-testid={`activity-level-${item.value}`}
                                 >
                                   <div className="flex flex-col items-start py-0.5">
                                     <span>{item.label}</span>
                                     {item.description && (
-                                      <span className="text-xs text-muted-foreground mt-0.5">
+                                      <span className="mt-0.5 text-muted-foreground text-xs">
                                         {item.description}
                                       </span>
                                     )}
@@ -364,32 +366,32 @@ const PersonalDataForm = () => {
             />
 
             <Controller
-              name="goal"
               control={form.control}
+              name="goal"
               render={({ field, fieldState }) => (
                 <FieldSet>
                   <FieldLegend variant="label">{t('goal.title')}</FieldLegend>
                   <RadioGroup
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    className="grid grid-cols-1 md:grid-cols-3 gap-3"
+                    className="grid grid-cols-1 gap-3 md:grid-cols-3"
                     data-slot="radio-group"
+                    onValueChange={field.onChange}
+                    value={field.value}
                   >
                     {goalOptions.map((item) => (
-                      <FieldLabel key={item.value} htmlFor={`${field.name}-${item.value}`}>
+                      <FieldLabel htmlFor={`${field.name}-${item.value}`} key={item.value}>
                         <Field data-invalid={fieldState.invalid} orientation="horizontal">
                           <div className="flex flex-1 flex-col gap-0.5">
-                            <span className="text-sm font-medium">{item.label}</span>
+                            <span className="font-medium text-sm">{item.label}</span>
                             {item.description && (
-                              <FieldDescription className="text-xs text-muted-foreground">
+                              <FieldDescription className="text-muted-foreground text-xs">
                                 {item.description}
                               </FieldDescription>
                             )}
                           </div>
                           <RadioGroupItem
-                            value={item.value}
-                            id={`${field.name}-${item.value}`}
                             aria-invalid={fieldState.invalid}
+                            id={`${field.name}-${item.value}`}
+                            value={item.value}
                           />
                         </Field>
                       </FieldLabel>
@@ -405,31 +407,31 @@ const PersonalDataForm = () => {
             />
 
             <Controller
-              name="formula"
               control={form.control}
+              name="formula"
               render={({ field, fieldState }) => (
                 <FieldSet>
                   <FieldLegend variant="label">{t('formula.title')}</FieldLegend>
                   <RadioGroup
-                    value={field.value}
-                    onValueChange={field.onChange}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-3"
+                    className="grid grid-cols-1 gap-3 md:grid-cols-2"
                     data-slot="radio-group"
+                    onValueChange={field.onChange}
+                    value={field.value}
                   >
                     {formulaOptions.map((item) => (
-                      <FieldLabel key={item.value} htmlFor={`${field.name}-${item.value}`}>
+                      <FieldLabel htmlFor={`${field.name}-${item.value}`} key={item.value}>
                         <Field
+                          className="min-h-12"
                           data-invalid={fieldState.invalid}
                           orientation="horizontal"
-                          className="min-h-12"
                         >
                           <div className="flex flex-1 flex-col gap-0.5">
-                            <span className="text-sm font-medium">{item.label}</span>
+                            <span className="font-medium text-sm">{item.label}</span>
                           </div>
                           <RadioGroupItem
-                            value={item.value}
-                            id={`${field.name}-${item.value}`}
                             aria-invalid={fieldState.invalid}
+                            id={`${field.name}-${item.value}`}
+                            value={item.value}
                           />
                         </Field>
                       </FieldLabel>
@@ -447,10 +449,10 @@ const PersonalDataForm = () => {
 
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
             <Button
-              type="submit"
-              size="lg"
+              className="h-12 w-full text-lg sm:w-auto"
               data-testid="submit-button"
-              className="w-full sm:w-auto h-12 text-lg"
+              size="lg"
+              type="submit"
             >
               {t('calculate')}
             </Button>

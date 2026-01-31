@@ -22,20 +22,14 @@ const ThemeToggle = () => {
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       onClick={handleToggle}
+      size="icon"
+      variant="ghost"
     >
-      {mounted ? (
-        isDark ? (
-          <FiSun className="h-5 w-5" />
-        ) : (
-          <FiMoon className="h-5 w-5" />
-        )
-      ) : (
-        <FiSun className="h-5 w-5" />
-      )}
+      {mounted && isDark && <FiSun className="h-5 w-5" />}
+      {mounted && !isDark && <FiMoon className="h-5 w-5" />}
+      {!mounted && <FiSun className="h-5 w-5" />}
     </Button>
   );
 };

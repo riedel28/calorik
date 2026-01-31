@@ -30,51 +30,51 @@ const LanguageSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          variant="ghost"
-          className="flex items-center gap-2 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
           aria-label={currentLanguage.label}
+          className="flex items-center gap-2 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
           title={currentLanguage.label}
+          variant="ghost"
         >
           <ReactCountryFlag
-            svg
+            aria-hidden
             countryCode={currentLanguage.countryCode}
             style={{
               width: '1.25rem',
               height: '1rem',
               borderRadius: '2px',
             }}
-            aria-hidden
+            svg
             title={currentLanguage.label}
           />
-          <span className="hidden text-sm font-medium sm:inline">{currentLanguage.label}</span>
+          <span className="hidden font-medium text-sm sm:inline">{currentLanguage.label}</span>
           <ChevronDown className="h-4 w-4" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-44">
         {languages.map((lang) => (
           <DropdownMenuItem
-            key={lang.code}
             asChild
             className={cn(
               'flex items-center gap-2',
-              locale === lang.code && 'bg-accent text-accent-foreground',
+              locale === lang.code && 'bg-accent text-accent-foreground'
             )}
+            key={lang.code}
           >
             <Link
+              className="flex flex-1 items-center gap-2"
               href={pathname || '/'}
               locale={lang.code}
-              className="flex flex-1 items-center gap-2"
               role="menuitem"
             >
               <ReactCountryFlag
-                svg
+                aria-hidden
                 countryCode={lang.countryCode}
                 style={{
                   width: '1.25rem',
                   height: '1rem',
                   borderRadius: '2px',
                 }}
-                aria-hidden
+                svg
                 title={lang.label}
               />
               <span className="text-sm">{lang.label}</span>

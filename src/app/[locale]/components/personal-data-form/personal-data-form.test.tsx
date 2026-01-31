@@ -12,7 +12,7 @@ const renderForm = () =>
       <UserDataProvider>
         <PersonalDataForm />
       </UserDataProvider>
-    </NextIntlClientProvider>,
+    </NextIntlClientProvider>
   );
 
 describe('PersonalDataForm', () => {
