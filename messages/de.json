@@ -1,4 +1,8 @@
 {
+  "units": {
+    "imperial": "Imperial",
+    "metric": "Metrisch"
+  },
   "yourData": {
     "title": "Ihre Daten",
     "gender": {
@@ -15,19 +19,43 @@
     },
     "weight": {
       "title": "Gewicht (kg)",
+      "titleImperial": "Gewicht (lbs)",
       "error": "Bitte geben Sie korrektes Gewicht an",
       "placeholder": "Bitte geben Sie ihr Gewicht ein"
     },
     "height": {
       "title": "Größe (cm)",
+      "titleImperial": "Größe (in)",
       "error": "Bitte geben Sie korrekte Größe an",
       "placeholder": "Bitte geben Sie ihre Größe ein"
+    },
+    "bodyFat": {
+      "title": "Körperfett (%)",
+      "error": "Bitte geben Sie einen gültigen Körperfettanteil an",
+      "placeholder": "Optional"
     }
   },
   "activity": {
     "title": "Aktivität",
     "placeholder": "Bitte wählen Sie Ihr Aktivitätslevel aus",
     "error": "Bitte wählen Sie Ihr Aktivitätslevel aus",
+    "none": "Keine",
+    "noneDescription": "Sitzende Tätigkeit, Bürojob",
+    "low": "Niedrig",
+    "lowDescription": "Leichtes Training 1-2 Tage/Woche",
+    "moderate": "Moderat",
+    "moderateDescription": "Moderates Training 3-5 Tage/Woche",
+    "active": "Aktiv",
+    "activeDescription": "Hartes Training 6-7 Tage/Woche",
+    "veryActive": "Sehr aktiv",
+    "veryActiveDescription": "Intensives Training, körperliche Arbeit",
+    "custom": "Benutzerdefiniert",
+    "customDescription": "Eigenen Multiplikator eingeben",
+    "customMultiplier": {
+      "title": "Aktivitätsmultiplikator",
+      "placeholder": "z.B. 1,55",
+      "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein"
+    },
     "noExercise": "Sitzende Tätigkeit / Kein Training",
     "noExerciseDescription": "Sitzende Lebensweise",
     "lightExercise": "Leichtes Training",
@@ -40,7 +68,7 @@
     "veryHeavyExerciseDescription": "Zwei mal täglich"
   },
   "goal": {
-    "title": "Ziel",
+    "title": "Ihr Ziel",
     "placeholder": "Bitte wählen Sie Ihr Ziel aus",
     "error": "Bitte wählen Sie Ihr Ziel aus",
     "cut": "Abnehmen",
@@ -51,13 +79,42 @@
     "maintain_short": "Gewicht zu halten",
     "gain": "Zunehmen",
     "gainDescription": "+15%",
-    "gain_short": "zuzunehmen"
+    "gain_short": "zuzunehmen",
+    "goalWeight": {
+      "title": "Zielgewicht (kg)",
+      "titleImperial": "Zielgewicht (lbs)",
+      "placeholder": "Geben Sie Ihr Zielgewicht ein",
+      "error": "Bitte geben Sie ein gültiges Zielgewicht ein"
+    },
+    "daysUntilGoal": {
+      "title": "Tage bis zum Ziel",
+      "placeholder": "Anzahl der Tage",
+      "error": "Bitte geben Sie eine gültige Anzahl von Tagen ein"
+    },
+    "goalDate": {
+      "title": "Zieldatum",
+      "placeholder": "Wählen Sie ein Datum",
+      "error": "Bitte wählen Sie ein gültiges Datum"
+    }
   },
   "formula": {
     "title": "Formel",
     "placeholder": "Bitte wählen Sie ihre Formel für die Kalorienrechnung aus",
-    "harrisBenedict": "Harris-Benedict-Formel",
-    "mifflinStJeor": "Mifflin-St.Jeor-Formel"
+    "katchMcArdle": "Katch-McArdle",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "harrisBenedict": "Harris-Benedict-Formel"
+  },
+  "currentStats": {
+    "title": "Aktuelle Werte",
+    "tdee": "TDEE",
+    "bmr": "Grundumsatz",
+    "lbm": "Magermasse",
+    "fm": "Fettmasse"
+  },
+  "goalResults": {
+    "title": "Zielprognose",
+    "estimatedBodyFat": "Geschätztes Körperfett am Ziel",
+    "dailyCalories": "Tägliche Kalorien benötigt"
   },
   "calculate": "Kalorien berechnen",
   "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",

@@ -1,7 +1,6 @@
 import { setRequestLocale } from 'next-intl/server';
-import PersonalDataForm from '@/app/[locale]/components/personal-data-form/personal-data-form';
 
-import Result from '@/app/[locale]/components/result/result';
+import ProjectionForm from '@/app/[locale]/components/projection-form/projection-form';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {
@@ -16,10 +15,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   return (
     <div className="space-y-10 md:space-y-12">
-      <div className="grid gap-6 md:grid-cols-2">
-        <PersonalDataForm />
-        <Result />
-      </div>
+      <ProjectionForm />
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 
-import type { PersonalDataFormValues as UserData } from '@/app/[locale]/components/personal-data-form/personal-data-form';
+import type { ProjectionFormValues as UserData } from '@/app/[locale]/components/projection-form/projection-form';
 
 interface UserDataContextType {
   userData: UserData | null;

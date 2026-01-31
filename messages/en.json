@@ -1,4 +1,8 @@
 {
+  "units": {
+    "imperial": "Imperial",
+    "metric": "Metric"
+  },
   "yourData": {
     "title": "Your data",
     "gender": {
@@ -15,19 +19,43 @@
     },
     "weight": {
       "title": "Weight (kg)",
+      "titleImperial": "Weight (lbs)",
       "error": "Please enter valid weight",
       "placeholder": "Please enter your weight"
     },
     "height": {
       "title": "Height (cm)",
+      "titleImperial": "Height (in)",
       "error": "Please enter valid height",
       "placeholder": "Please enter your height"
+    },
+    "bodyFat": {
+      "title": "Body Fat (%)",
+      "error": "Please enter valid body fat percentage",
+      "placeholder": "Optional"
     }
   },
   "activity": {
     "title": "Activity level",
     "placeholder": "Please choose your activity level",
     "error": "Please choose your activity level",
+    "none": "None",
+    "noneDescription": "Sedentary, desk job",
+    "low": "Low",
+    "lowDescription": "Light exercise 1-2 days/week",
+    "moderate": "Moderate",
+    "moderateDescription": "Moderate exercise 3-5 days/week",
+    "active": "Active",
+    "activeDescription": "Hard exercise 6-7 days/week",
+    "veryActive": "Very Active",
+    "veryActiveDescription": "Intense exercise, physical job",
+    "custom": "Custom",
+    "customDescription": "Enter your own multiplier",
+    "customMultiplier": {
+      "title": "Activity Multiplier",
+      "placeholder": "e.g., 1.55",
+      "description": "Enter a value between 1.0 and 2.5"
+    },
     "noExercise": "Little / No exercise",
     "noExerciseDescription": "Sedentary lifestyle",
     "lightExercise": "Light exercise",
@@ -40,7 +68,7 @@
     "veryHeavyExerciseDescription": "Twice per day"
   },
   "goal": {
-    "title": "Your goal",
+    "title": "Your Goal",
     "placeholder": "Please choose your goal",
     "error": "Please choose your goal",
     "cut": "Cut",
@@ -51,14 +79,43 @@
     "maintain_short": "maintain weight",
     "gain": "Gain",
     "gainDescription": "+15%",
-    "gain_short": "gain weight"
+    "gain_short": "gain weight",
+    "goalWeight": {
+      "title": "Goal Weight (kg)",
+      "titleImperial": "Goal Weight (lbs)",
+      "placeholder": "Enter your target weight",
+      "error": "Please enter a valid goal weight"
+    },
+    "daysUntilGoal": {
+      "title": "Days Until Goal",
+      "placeholder": "Number of days",
+      "error": "Please enter a valid number of days"
+    },
+    "goalDate": {
+      "title": "Goal Date",
+      "placeholder": "Select a date",
+      "error": "Please select a valid date"
+    }
   },
   "formula": {
     "title": "Formula",
     "placeholder": "Please choose your formula to calculate your calories",
     "error": "Please choose a formula",
-    "harrisBenedict": "The Original Harris-Benedict Equation",
-    "mifflinStJeor": "The Mifflin St. Jeor Equation"
+    "katchMcArdle": "Katch-McArdle",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "harrisBenedict": "The Original Harris-Benedict Equation"
+  },
+  "currentStats": {
+    "title": "Current Stats",
+    "tdee": "TDEE",
+    "bmr": "BMR",
+    "lbm": "Lean Body Mass",
+    "fm": "Fat Mass"
+  },
+  "goalResults": {
+    "title": "Goal Projection",
+    "estimatedBodyFat": "Est. Body Fat at Goal",
+    "dailyCalories": "Daily Calories Needed"
   },
   "calculate": "Calculate Calories",
   "result": "You will need to consume {calories} kcal to {goal}",
