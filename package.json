@@ -34,7 +34,7 @@
     "@vitejs/plugin-react": "^5.1.0",
     "@vitest/coverage-v8": "^4.0.3",
     "@vitest/ui": "^4.0.3",
-    "happy-dom": "^20.0.8",
+    "happy-dom": "^20.8.9",
     "jsdom": "^27.0.1",
     "knip": "^5.66.3",
     "postcss": "^8.5.6",
