@@ -12,7 +12,7 @@ function FieldSet({ className, ...props }: React.ComponentProps<'fieldset'>) {
       className={cn(
         'flex flex-col gap-6',
         'has-[>[data-slot=checkbox-group]]:gap-3 has-[>[data-slot=radio-group]]:gap-3',
-        className
+        className,
       )}
       data-slot="field-set"
       {...props}
@@ -31,7 +31,7 @@ function FieldLegend({
         'mb-1 font-medium',
         'data-[variant=legend]:text-base',
         'data-[variant=label]:text-sm',
-        className
+        className,
       )}
       data-slot="field-legend"
       data-variant={variant}
@@ -45,7 +45,7 @@ function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       className={cn(
         'group/field-group @container/field-group flex w-full flex-col gap-7 data-[slot=checkbox-group]:gap-3 *:data-[slot=field-group]:gap-4',
-        className
+        className,
       )}
       data-slot="field-group"
       {...props}
@@ -54,9 +54,11 @@ function FieldGroup({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 const fieldVariants = cva('group/field flex w-full gap-1 data-[invalid=true]:text-destructive', {
+  defaultVariants: {
+    orientation: 'vertical',
+  },
   variants: {
     orientation: {
-      vertical: ['flex-col [&>*]:w-full [&>.sr-only]:w-auto'],
       horizontal: [
         'flex-row items-center',
         '[&>[data-slot=field-label]]:flex-auto',
@@ -68,10 +70,8 @@ const fieldVariants = cva('group/field flex w-full gap-1 data-[invalid=true]:tex
         '@md/field-group:[&>[data-slot=field-label]]:flex-auto',
         '@md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
       ],
+      vertical: ['flex-col [&>*]:w-full [&>.sr-only]:w-auto'],
     },
-  },
-  defaultVariants: {
-    orientation: 'vertical',
   },
 });
 
@@ -109,7 +109,7 @@ function FieldLabel({ className, ...props }: React.ComponentProps<typeof Label>)
         'has-data-[state=checked]:border-primary has-data-[state=checked]:bg-primary/5 dark:has-data-[state=checked]:bg-primary/10',
         'has-[button[role=radio]]:transition-colors',
         'overflow-hidden',
-        className
+        className,
       )}
       data-slot="field-label"
       {...props}
@@ -122,7 +122,7 @@ function FieldTitle({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       className={cn(
         'flex w-fit items-center gap-2 font-medium text-sm leading-snug group-data-[disabled=true]/field:opacity-50',
-        className
+        className,
       )}
       data-slot="field-label"
       {...props}
@@ -137,7 +137,7 @@ function FieldDescription({ className, ...props }: React.ComponentProps<'p'>) {
         'font-normal text-muted-foreground text-sm leading-normal group-has-data-[orientation=horizontal]/field:text-balance',
         'nth-last-2:-mt-1 last:mt-0 [[data-variant=legend]+&]:-mt-1.5',
         '[&>a:hover]:text-primary [&>a]:underline [&>a]:underline-offset-4',
-        className
+        className,
       )}
       data-slot="field-description"
       {...props}
@@ -156,7 +156,7 @@ function FieldSeparator({
     <div
       className={cn(
         'relative -my-2 h-5 text-sm group-data-[variant=outline]/field-group:-mb-2',
-        className
+        className,
       )}
       data-content={!!children}
       data-slot="field-separator"
@@ -198,10 +198,7 @@ function FieldError({
 
     return (
       <ul className="ml-4 flex list-disc flex-col gap-1">
-        {errors.map(
-          (error, index) =>
-            error?.message && <li key={`${error.message}-${index}`}>{error.message}</li>
-        )}
+        {errors.map((error) => error?.message && <li key={error.message}>{error.message}</li>)}
       </ul>
     );
   }, [children, errors]);
@@ -224,13 +221,13 @@ function FieldError({
 
 export {
   Field,
-  FieldLabel,
+  FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
+  FieldLabel,
   FieldLegend,
   FieldSeparator,
   FieldSet,
-  FieldContent,
   FieldTitle,
 };
