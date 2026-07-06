@@ -16,6 +16,7 @@
 next-env.d.ts
 
 # misc
+.claude/settings.local.json
 .DS_Store
 .env.local
 .env.development.local

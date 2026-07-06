@@ -1,14 +1,13 @@
-# Ultracite Code Standards
+# Code Standards
 
-This project uses **Ultracite**, a zero-config preset that enforces strict code quality standards through automated formatting and linting.
+This project uses **Biome** for formatting and linting.
 
 ## Quick Reference
 
-- **Format code**: `bun x ultracite fix`
-- **Check for issues**: `bun x ultracite check`
-- **Diagnose setup**: `bun x ultracite doctor`
+- **Format & fix code**: `npm run fix`
+- **Check for issues**: `npm run check`
 
-Biome (the underlying engine) provides robust linting and formatting. Most issues are automatically fixable.
+Most issues are automatically fixable.
 
 ---
 
@@ -120,4 +119,4 @@ Biome's linter will catch most issues automatically. Focus your attention on:
 
 ---
 
-Most formatting and common issues are automatically fixed by Biome. Run `bun x ultracite fix` before committing to ensure compliance.
+Most formatting and common issues are automatically fixed by Biome. Run `npm run fix` before committing to ensure compliance.

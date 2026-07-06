@@ -9,8 +9,8 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  outputFileTracingRoot: __dirname,
   distDir: 'build',
+  outputFileTracingRoot: __dirname,
 };
 
 export default withNextIntl(nextConfig);
