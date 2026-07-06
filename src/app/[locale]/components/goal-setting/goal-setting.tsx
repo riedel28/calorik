@@ -1,8 +1,17 @@
 'use client';
 
-import { format } from 'date-fns';
+import {
+  addDays,
+  differenceInCalendarDays,
+  format,
+  isBefore,
+  type Locale,
+  parseISO,
+  startOfToday,
+} from 'date-fns';
+import { de, ru } from 'date-fns/locale';
 import { CalendarIcon } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -10,16 +19,21 @@ import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { InputWithSuffix } from '@/components/ui/input-with-suffix';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { LIMITS } from '@/lib/calculations';
 import { cn } from '@/lib/utils';
 
 import type { ProjectionFormValues } from '../projection-form/projection-form';
 
 type MessageKey = Parameters<ReturnType<typeof useTranslations>>[0];
 
+const DATE_FNS_LOCALES: Record<string, Locale> = { de, ru };
+
 const GoalSetting = () => {
   const t = useTranslations('goal');
   const tErrors = useTranslations();
-  const { control } = useFormContext<ProjectionFormValues>();
+  const locale = useLocale();
+  const dateLocale = DATE_FNS_LOCALES[locale];
+  const { control, setValue } = useFormContext<ProjectionFormValues>();
 
   return (
     <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
@@ -75,6 +89,17 @@ const GoalSetting = () => {
                   onChange={(event) => {
                     const numericValue = event.target.value.trim();
                     field.onChange(numericValue === '' ? '' : numericValue);
+                    const days = Number(numericValue);
+                    const isValidDays =
+                      numericValue !== '' &&
+                      Number.isInteger(days) &&
+                      days >= LIMITS.daysUntilGoal.min &&
+                      days <= LIMITS.daysUntilGoal.max;
+                    setValue(
+                      'goalDate',
+                      isValidDays ? format(addDays(startOfToday(), days), 'yyyy-MM-dd') : '',
+                      { shouldValidate: true },
+                    );
                   }}
                   placeholder="0"
                   suffix={t('daysUntilGoal.unit')}
@@ -93,7 +118,7 @@ const GoalSetting = () => {
             control={control}
             name="goalDate"
             render={({ field, fieldState }) => {
-              const selectedDate = field.value ? new Date(field.value) : undefined;
+              const selectedDate = field.value ? parseISO(field.value) : undefined;
               return (
                 <Field className="col-span-2 md:col-span-1" data-invalid={fieldState.invalid}>
                   <FieldLabel>{t('goalDate.label')}</FieldLabel>
@@ -109,21 +134,23 @@ const GoalSetting = () => {
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
                         {field.value
-                          ? format(new Date(field.value), 'PPP')
+                          ? format(selectedDate as Date, 'PPP', { locale: dateLocale })
                           : t('goalDate.placeholder')}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto overflow-hidden p-0">
                       <Calendar
                         defaultMonth={selectedDate}
-                        disabled={(date) => {
-                          const today = new Date();
-                          today.setHours(0, 0, 0, 0);
-                          return date < today;
-                        }}
+                        disabled={(date) => isBefore(date, addDays(startOfToday(), 1))}
+                        locale={dateLocale}
                         mode="single"
                         onSelect={(date) => {
                           field.onChange(date ? format(date, 'yyyy-MM-dd') : '');
+                          setValue(
+                            'daysUntilGoal',
+                            date ? String(differenceInCalendarDays(date, startOfToday())) : '',
+                            { shouldValidate: true },
+                          );
                         }}
                         selected={selectedDate}
                       />
