@@ -64,13 +64,15 @@ const GoalSetting = () => {
   ];
 
   return (
-    <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
-      <div className="mb-4 space-y-0.5">
-        <h2 className="font-semibold text-foreground text-xl">{t('title')}</h2>
+    <section className="rounded-xl border bg-card p-5 sm:p-6">
+      <div className="mb-5">
+        <h2 className="font-display font-semibold text-foreground text-lg tracking-tight">
+          {t('title')}
+        </h2>
       </div>
 
       <FieldGroup className="gap-3">
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+        <div className="grid grid-cols-2 gap-2 md:grid-cols-[1fr_0.75fr_1.25fr]">
           <Controller
             control={control}
             name="goalWeight"
@@ -148,22 +150,27 @@ const GoalSetting = () => {
             render={({ field, fieldState }) => {
               const selectedDate = field.value ? parseISO(field.value) : undefined;
               return (
-                <Field className="col-span-2 md:col-span-1" data-invalid={fieldState.invalid}>
+                <Field
+                  className="col-span-2 min-w-0 md:col-span-1"
+                  data-invalid={fieldState.invalid}
+                >
                   <FieldLabel>{t('goalDate.label')}</FieldLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <Button
                         className={cn(
-                          'h-9 w-full justify-start bg-transparent text-left font-normal shadow-none',
+                          'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none',
                           !field.value && 'text-muted-foreground',
                         )}
                         data-testid="goal-date"
                         variant="outline"
                       >
                         <CalendarIcon className="mr-2 h-4 w-4" />
-                        {field.value
-                          ? format(selectedDate as Date, 'PPP', { locale: dateLocale })
-                          : t('goalDate.placeholder')}
+                        <span className="truncate">
+                          {field.value
+                            ? format(selectedDate as Date, 'PP', { locale: dateLocale })
+                            : t('goalDate.placeholder')}
+                        </span>
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto overflow-hidden p-0">

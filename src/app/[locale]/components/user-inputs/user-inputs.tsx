@@ -81,9 +81,11 @@ const UserInputs = () => {
   ];
 
   return (
-    <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
-      <div className="mb-4 space-y-0.5">
-        <h2 className="font-semibold text-foreground text-xl">{pageT('formSectionTitle')}</h2>
+    <section className="rounded-xl border bg-card p-5 sm:p-6">
+      <div className="mb-5 space-y-1">
+        <h2 className="font-display font-semibold text-foreground text-lg tracking-tight">
+          {pageT('formSectionTitle')}
+        </h2>
         <p className="text-muted-foreground text-sm">{pageT('formSectionSubtitle')}</p>
       </div>
 

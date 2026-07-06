@@ -55,12 +55,12 @@ const ProjectionForm = () => {
   return (
     <Form {...form}>
       <form className="space-y-4">
-        <div className="grid gap-4 lg:grid-cols-2">
-          <div className="space-y-4">
+        <div className="grid gap-4 lg:grid-cols-2 lg:gap-5">
+          <div className="animate-fade-up space-y-4 lg:space-y-5 [animation-delay:80ms]">
             <UserInputs />
             <CurrentStats />
           </div>
-          <div className="space-y-4">
+          <div className="animate-fade-up space-y-4 lg:space-y-5 [animation-delay:160ms]">
             <GoalSetting />
             <GoalResults />
           </div>
