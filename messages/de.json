@@ -95,7 +95,9 @@
     "title": "Formel",
     "placeholder": "Bitte wählen Sie ihre Formel für die Kalorienrechnung aus",
     "katchMcArdle": "Katch-McArdle",
-    "mifflinStJeor": "Mifflin-St. Jeor"
+    "katchMcArdleDescription": "Basiert auf der Magermasse, genauer bei bekanntem KFA",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "mifflinStJeorDescription": "Basiert auf Gewicht, Größe und Alter"
   },
   "currentStats": {
     "title": "Aktuelle Werte",

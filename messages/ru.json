@@ -96,7 +96,9 @@
     "placeholder": "Пожалуйста укажите формулу для подсчета калорий",
     "error": "Пожалуйста выберите формулу",
     "katchMcArdle": "Кэтч-Макардл",
-    "mifflinStJeor": "Миффлина-Сан Жеора"
+    "katchMcArdleDescription": "На основе сухой массы, точнее при известном % жира",
+    "mifflinStJeor": "Миффлина-Сан Жеора",
+    "mifflinStJeorDescription": "На основе веса, роста и возраста"
   },
   "currentStats": {
     "title": "Текущие показатели",

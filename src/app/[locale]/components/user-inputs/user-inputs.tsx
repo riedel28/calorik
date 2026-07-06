@@ -68,8 +68,16 @@ const UserInputs = () => {
   ];
 
   const formulaOptions = [
-    { label: t('formula.katchMcArdle'), value: 'katch-mcardle' },
-    { label: t('formula.mifflinStJeor'), value: 'mifflin-st-jeor' },
+    {
+      description: t('formula.katchMcArdleDescription'),
+      label: t('formula.katchMcArdle'),
+      value: 'katch-mcardle',
+    },
+    {
+      description: t('formula.mifflinStJeorDescription'),
+      label: t('formula.mifflinStJeor'),
+      value: 'mifflin-st-jeor',
+    },
   ];
 
   return (
@@ -371,6 +379,9 @@ const UserInputs = () => {
                     >
                       <div className="flex flex-1 flex-col">
                         <span className="font-medium text-sm">{item.label}</span>
+                        <span className="mt-0.5 text-muted-foreground text-xs">
+                          {item.description}
+                        </span>
                       </div>
                       <RadioGroupItem
                         aria-invalid={fieldState.invalid}

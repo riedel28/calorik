@@ -96,7 +96,9 @@
     "placeholder": "Please choose your formula to calculate your calories",
     "error": "Please choose a formula",
     "katchMcArdle": "Katch-McArdle",
-    "mifflinStJeor": "Mifflin-St. Jeor"
+    "katchMcArdleDescription": "Based on lean body mass, more precise with a known body fat %",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "mifflinStJeorDescription": "Based on weight, height, and age"
   },
   "currentStats": {
     "title": "Current Stats",
