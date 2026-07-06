@@ -19,6 +19,16 @@ import { Calendar } from '@/components/ui/calendar';
 import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
 import { InputWithSuffix } from '@/components/ui/input-with-suffix';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import {
+  Select,
+  SelectItem,
+  SelectList,
+  SelectPopup,
+  SelectPortal,
+  SelectPositioner,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import { LIMITS } from '@/lib/calculations';
 import { cn } from '@/lib/utils';
 
@@ -34,6 +44,24 @@ const GoalSetting = () => {
   const locale = useLocale();
   const dateLocale = DATE_FNS_LOCALES[locale];
   const { control, setValue } = useFormContext<ProjectionFormValues>();
+
+  const goalQualityOptions = [
+    {
+      description: t('quality.optimalDescription'),
+      label: t('quality.optimal'),
+      value: 'optimal',
+    },
+    {
+      description: t('quality.moderateDescription'),
+      label: t('quality.moderate'),
+      value: 'moderate',
+    },
+    {
+      description: t('quality.poorDescription'),
+      label: t('quality.poor'),
+      value: 'poor',
+    },
+  ];
 
   return (
     <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
@@ -166,6 +194,51 @@ const GoalSetting = () => {
             }}
           />
         </div>
+
+        <Controller
+          control={control}
+          name="goalQuality"
+          render={({ field, fieldState }) => {
+            const selectedOption = goalQualityOptions.find((opt) => opt.value === field.value);
+            return (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel htmlFor={field.name}>{t('quality.label')}</FieldLabel>
+                <Select onValueChange={field.onChange} value={field.value}>
+                  <SelectTrigger
+                    aria-invalid={fieldState.invalid}
+                    className="h-9"
+                    data-testid="goal-quality-select"
+                    id={field.name}
+                  >
+                    <SelectValue>{selectedOption?.label}</SelectValue>
+                  </SelectTrigger>
+                  <SelectPortal>
+                    <SelectPositioner>
+                      <SelectPopup>
+                        <SelectList>
+                          {goalQualityOptions.map((item) => (
+                            <SelectItem
+                              data-testid={`goal-quality-${item.value}`}
+                              key={item.value}
+                              value={item.value}
+                            >
+                              <div className="flex flex-col items-start py-0.5">
+                                <span>{item.label}</span>
+                                <span className="mt-0.5 text-muted-foreground text-xs">
+                                  {item.description}
+                                </span>
+                              </div>
+                            </SelectItem>
+                          ))}
+                        </SelectList>
+                      </SelectPopup>
+                    </SelectPositioner>
+                  </SelectPortal>
+                </Select>
+              </Field>
+            );
+          }}
+        />
       </FieldGroup>
     </section>
   );

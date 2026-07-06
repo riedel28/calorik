@@ -80,6 +80,15 @@
       "label": "Goal Date",
       "placeholder": "Pick a date",
       "error": "Please select a valid date"
+    },
+    "quality": {
+      "label": "Process quality",
+      "optimal": "Training + protein",
+      "optimalDescription": "Strength training, enough protein (~80% fat loss / ~50% fat gain)",
+      "moderate": "No training",
+      "moderateDescription": "Diet only, no strength training (~70% fat)",
+      "poor": "Aggressive / uncontrolled",
+      "poorDescription": "Crash diet or uncontrolled surplus (~60% fat loss / ~80% fat gain)"
     }
   },
   "formula": {
@@ -99,6 +108,7 @@
   "goalResults": {
     "title": "Goal Projection",
     "estimatedBodyFat": "Est. Body Fat",
+    "leanMassAtGoal": "Est. Lean Mass",
     "dailyCalories": "Daily Calories",
     "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
   },

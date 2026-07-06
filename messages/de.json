@@ -80,6 +80,15 @@
       "label": "Zieldatum",
       "placeholder": "Datum wählen",
       "error": "Bitte wählen Sie ein gültiges Datum"
+    },
+    "quality": {
+      "label": "Prozessqualität",
+      "optimal": "Training + Protein",
+      "optimalDescription": "Krafttraining, ausreichend Protein (~80% Fettverlust / ~50% Fettzunahme)",
+      "moderate": "Ohne Training",
+      "moderateDescription": "Nur Diät, kein Krafttraining (~70% Fett)",
+      "poor": "Aggressiv / unkontrolliert",
+      "poorDescription": "Crash-Diät oder unkontrollierter Überschuss (~60% Fettverlust / ~80% Fettzunahme)"
     }
   },
   "formula": {
@@ -98,6 +107,7 @@
   "goalResults": {
     "title": "Zielprognose",
     "estimatedBodyFat": "Geschätztes KFA",
+    "leanMassAtGoal": "Progn. Magermasse",
     "dailyCalories": "Tägliche Kalorien",
     "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage."
   },

@@ -10,8 +10,14 @@ import { useProjection } from '../projection-form/use-projection';
 const GoalResults = () => {
   const t = useTranslations('goalResults');
   const tRoot = useTranslations();
-  const { bmr, bodyFatIsEstimated, dailyCalories, dailyCaloriesBelowBmr, goalBodyFatPct } =
-    useProjection();
+  const {
+    bmr,
+    bodyFatIsEstimated,
+    dailyCalories,
+    dailyCaloriesBelowBmr,
+    goalBodyFatPct,
+    goalLeanMassKg,
+  } = useProjection();
 
   const results = [
     {
@@ -22,6 +28,15 @@ const GoalResults = () => {
         goalBodyFatPct === null
           ? '—'
           : `${bodyFatIsEstimated ? '~' : ''}${goalBodyFatPct.toFixed(1)}`,
+    },
+    {
+      caption: bodyFatIsEstimated && goalLeanMassKg !== null ? tRoot('estimated') : null,
+      label: t('leanMassAtGoal'),
+      unit: 'kg',
+      value:
+        goalLeanMassKg === null
+          ? '—'
+          : `${bodyFatIsEstimated ? '~' : ''}${goalLeanMassKg.toFixed(1)}`,
     },
     {
       caption: null,
@@ -37,7 +52,7 @@ const GoalResults = () => {
         <CardTitle className="text-base">{t('title')}</CardTitle>
       </CardHeader>
       <CardContent className="px-4 pb-4 sm:px-5">
-        <div className="grid grid-cols-2 gap-2">
+        <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {results.map((result) => (
             <div className="rounded-xl bg-muted/50 p-3 text-center" key={result.label}>
               <p className="font-medium text-[10px] text-muted-foreground uppercase tracking-wide">
