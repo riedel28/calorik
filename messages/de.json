@@ -59,7 +59,8 @@
     "customMultiplier": {
       "title": "Multiplikator",
       "placeholder": "1,55",
-      "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein"
+      "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein",
+      "error": "Bitte geben Sie einen Multiplikator zwischen 1,0 und 2,5 ein"
     },
     "noExercise": "Sitzende Tätigkeit / Kein Training",
     "noExerciseDescription": "Sitzende Lebensweise",

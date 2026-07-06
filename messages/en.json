@@ -59,7 +59,8 @@
     "customMultiplier": {
       "title": "Multiplier",
       "placeholder": "1.55",
-      "description": "Enter a value between 1.0 and 2.5"
+      "description": "Enter a value between 1.0 and 2.5",
+      "error": "Please enter a multiplier between 1.0 and 2.5"
     },
     "noExercise": "Little / No exercise",
     "noExerciseDescription": "Sedentary lifestyle",

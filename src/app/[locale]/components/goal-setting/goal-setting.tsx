@@ -18,6 +18,7 @@ type MessageKey = Parameters<ReturnType<typeof useTranslations>>[0];
 
 const GoalSetting = () => {
   const t = useTranslations('goal');
+  const tErrors = useTranslations();
   const { control } = useFormContext<ProjectionFormValues>();
 
   return (
@@ -51,7 +52,7 @@ const GoalSetting = () => {
                 />
                 {fieldState.invalid && (
                   <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                    {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
                   </FieldError>
                 )}
               </Field>
@@ -81,7 +82,7 @@ const GoalSetting = () => {
                 />
                 {fieldState.invalid && (
                   <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                    {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
                   </FieldError>
                 )}
               </Field>
@@ -130,7 +131,7 @@ const GoalSetting = () => {
                   </Popover>
                   {fieldState.invalid && (
                     <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                      {fieldState.error?.message && t(fieldState.error.message as MessageKey)}
+                      {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
                     </FieldError>
                   )}
                 </Field>
