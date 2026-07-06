@@ -42,7 +42,14 @@ const SelectPositioner = forwardRef<
   ElementRef<typeof BaseSelect.Positioner>,
   ComponentPropsWithoutRef<typeof BaseSelect.Positioner>
 >(({ className, ...props }, ref) => (
-  <BaseSelect.Positioner className={cn('z-50', className)} ref={ref} sideOffset={4} {...props} />
+  <BaseSelect.Positioner
+    alignItemWithTrigger={false}
+    className={cn('z-50', className)}
+    ref={ref}
+    side="bottom"
+    sideOffset={4}
+    {...props}
+  />
 ));
 SelectPositioner.displayName = 'SelectPositioner';
 

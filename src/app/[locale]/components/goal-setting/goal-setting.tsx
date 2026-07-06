@@ -154,7 +154,7 @@ const GoalSetting = () => {
                     <PopoverTrigger asChild>
                       <Button
                         className={cn(
-                          'h-9 w-full justify-start text-left font-normal',
+                          'h-9 w-full justify-start bg-transparent text-left font-normal shadow-none',
                           !field.value && 'text-muted-foreground',
                         )}
                         data-testid="goal-date"
