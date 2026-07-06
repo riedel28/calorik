@@ -1,8 +1,4 @@
 {
-  "units": {
-    "imperial": "Imperial",
-    "metric": "Metric"
-  },
   "yourData": {
     "title": "Your data",
     "gender": {
@@ -61,31 +57,10 @@
       "placeholder": "1.55",
       "description": "Enter a value between 1.0 and 2.5",
       "error": "Please enter a multiplier between 1.0 and 2.5"
-    },
-    "noExercise": "Little / No exercise",
-    "noExerciseDescription": "Sedentary lifestyle",
-    "lightExercise": "Light exercise",
-    "lightExerciseDescription": "1-3 days per week",
-    "moderateExercise": "Moderate exercise",
-    "moderateExerciseDescription": "3-5 days per week",
-    "heavyExercise": "Heavy exercise",
-    "heavyExerciseDescription": "6-7 days per week",
-    "veryHeavyExercise": "Very heavy exercise",
-    "veryHeavyExerciseDescription": "Twice per day"
+    }
   },
   "goal": {
     "title": "Your Goal",
-    "placeholder": "Please choose your goal",
-    "error": "Please choose your goal",
-    "cut": "Cut",
-    "cutDescription": "-20%",
-    "cut_short": "cut weight",
-    "maintain": "Maintain",
-    "maintainDescription": "Current weight",
-    "maintain_short": "maintain weight",
-    "gain": "Gain",
-    "gainDescription": "+15%",
-    "gain_short": "gain weight",
     "goalWeight": {
       "title": "Goal Weight (kg)",
       "titleImperial": "Goal Weight (lbs)",
@@ -112,8 +87,7 @@
     "placeholder": "Please choose your formula to calculate your calories",
     "error": "Please choose a formula",
     "katchMcArdle": "Katch-McArdle",
-    "mifflinStJeor": "Mifflin-St. Jeor",
-    "harrisBenedict": "The Original Harris-Benedict Equation"
+    "mifflinStJeor": "Mifflin-St. Jeor"
   },
   "currentStats": {
     "title": "Current Stats",
@@ -129,33 +103,10 @@
     "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
   },
   "estimated": "est.",
-  "calculate": "Calculate Calories",
-  "result": "You will need to consume {calories} kcal to {goal}",
   "page": {
     "title": "Calorie Calculator",
     "subtitle": "Understand your daily energy needs and take action with confidence.",
     "formSectionTitle": "Your Information",
-    "formSectionSubtitle": "We'll use this information to tailor your calories.",
-    "resultsSectionTitle": "Your Results",
-    "dailyCalorieTarget": "Daily Calorie Target",
-    "caloriesPerDay": "calories per day",
-    "calorieDistribution": "Calorie Distribution",
-    "macros": {
-      "protein": "Protein",
-      "carbs": "Carbs",
-      "fats": "Fats"
-    },
-    "weeklyWeightChange": "Weekly Weight Change",
-    "weeklyChangeLabels": {
-      "cut": "-1 kg/week",
-      "maintain": "Maintain",
-      "gain": "+1 kg/week"
-    },
-    "weeklyChangeActiveLabel": {
-      "cut": "Losing weight",
-      "maintain": "Maintaining weight",
-      "gain": "Gaining weight"
-    },
-    "emptyState": "Fill in your information to see your personalized calorie breakdown."
+    "formSectionSubtitle": "We'll use this information to tailor your calories."
   }
 }
