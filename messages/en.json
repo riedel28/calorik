@@ -125,8 +125,10 @@
   "goalResults": {
     "title": "Goal Projection",
     "estimatedBodyFat": "Est. Body Fat",
-    "dailyCalories": "Daily Calories"
+    "dailyCalories": "Daily Calories",
+    "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
   },
+  "estimated": "est.",
   "calculate": "Calculate Calories",
   "result": "You will need to consume {calories} kcal to {goal}",
   "page": {

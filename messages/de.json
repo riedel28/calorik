@@ -124,8 +124,10 @@
   "goalResults": {
     "title": "Zielprognose",
     "estimatedBodyFat": "Geschätztes KFA",
-    "dailyCalories": "Tägliche Kalorien"
+    "dailyCalories": "Tägliche Kalorien",
+    "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage."
   },
+  "estimated": "gesch.",
   "calculate": "Kalorien berechnen",
   "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",
   "page": {

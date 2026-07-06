@@ -1,15 +1,34 @@
 'use client';
 
+import { TriangleAlert } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+import { useProjection } from '../projection-form/use-projection';
+
 const GoalResults = () => {
   const t = useTranslations('goalResults');
+  const tRoot = useTranslations();
+  const { bmr, bodyFatIsEstimated, dailyCalories, dailyCaloriesBelowBmr, goalBodyFatPct } =
+    useProjection();
 
   const results = [
-    { label: t('estimatedBodyFat'), unit: '%', value: '12' },
-    { label: t('dailyCalories'), unit: 'kcal/day', value: '1800' },
+    {
+      caption: bodyFatIsEstimated && goalBodyFatPct !== null ? tRoot('estimated') : null,
+      label: t('estimatedBodyFat'),
+      unit: '%',
+      value:
+        goalBodyFatPct === null
+          ? '—'
+          : `${bodyFatIsEstimated ? '~' : ''}${goalBodyFatPct.toFixed(1)}`,
+    },
+    {
+      caption: null,
+      label: t('dailyCalories'),
+      unit: 'kcal/day',
+      value: dailyCalories === null ? '—' : String(Math.round(dailyCalories)),
+    },
   ];
 
   return (
@@ -25,10 +44,19 @@ const GoalResults = () => {
                 {result.label}
               </p>
               <p className="font-semibold text-foreground text-lg">{result.value}</p>
-              <p className="text-muted-foreground text-xs">{result.unit}</p>
+              <p className="text-muted-foreground text-xs">
+                {result.unit}
+                {result.caption && ` (${result.caption})`}
+              </p>
             </div>
           ))}
         </div>
+        {dailyCaloriesBelowBmr && bmr !== null && (
+          <p className="mt-3 flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-amber-800 text-sm dark:bg-amber-950 dark:text-amber-200">
+            <TriangleAlert aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
+            {t('belowBmrWarning', { bmr: Math.round(bmr) })}
+          </p>
+        )}
       </CardContent>
     </Card>
   );

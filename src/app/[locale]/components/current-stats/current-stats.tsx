@@ -4,14 +4,22 @@ import { useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
+import { useProjection } from '../projection-form/use-projection';
+
+const formatCalories = (value: number | null) => (value === null ? '—' : String(Math.round(value)));
+
+const formatMass = (value: number | null, isEstimated: boolean) =>
+  value === null ? '—' : `${isEstimated ? '~' : ''}${value.toFixed(1)}`;
+
 const CurrentStats = () => {
   const t = useTranslations('currentStats');
+  const { bmr, bodyFatIsEstimated, fatMassKg, leanMassKg, tdee } = useProjection();
 
   const stats = [
-    { label: t('tdee'), unit: 'kcal', value: '2000' },
-    { label: t('bmr'), unit: 'kcal', value: '1600' },
-    { label: t('lbm'), unit: 'kg', value: '68' },
-    { label: t('fm'), unit: 'kg', value: '12' },
+    { label: t('tdee'), unit: 'kcal', value: formatCalories(tdee) },
+    { label: t('bmr'), unit: 'kcal', value: formatCalories(bmr) },
+    { label: t('lbm'), unit: 'kg', value: formatMass(leanMassKg, bodyFatIsEstimated) },
+    { label: t('fm'), unit: 'kg', value: formatMass(fatMassKg, bodyFatIsEstimated) },
   ];
 
   return (
