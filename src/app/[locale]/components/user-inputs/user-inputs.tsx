@@ -37,40 +37,40 @@ const UserInputs = () => {
 
   const activityLevelOptions = [
     {
-      value: 'none',
-      label: t('activity.none'),
       description: t('activity.noneDescription'),
+      label: t('activity.none'),
+      value: 'none',
     },
     {
-      value: 'low',
-      label: t('activity.low'),
       description: t('activity.lowDescription'),
+      label: t('activity.low'),
+      value: 'low',
     },
     {
-      value: 'moderate',
-      label: t('activity.moderate'),
       description: t('activity.moderateDescription'),
+      label: t('activity.moderate'),
+      value: 'moderate',
     },
     {
-      value: 'active',
-      label: t('activity.active'),
       description: t('activity.activeDescription'),
+      label: t('activity.active'),
+      value: 'active',
     },
     {
-      value: 'veryActive',
-      label: t('activity.veryActive'),
       description: t('activity.veryActiveDescription'),
+      label: t('activity.veryActive'),
+      value: 'veryActive',
     },
     {
-      value: 'custom',
-      label: t('activity.custom'),
       description: t('activity.customDescription'),
+      label: t('activity.custom'),
+      value: 'custom',
     },
   ];
 
   const formulaOptions = [
-    { value: 'katch-mcardle', label: t('formula.katchMcArdle') },
-    { value: 'mifflin-st-jeor', label: t('formula.mifflinStJeor') },
+    { label: t('formula.katchMcArdle'), value: 'katch-mcardle' },
+    { label: t('formula.mifflinStJeor'), value: 'mifflin-st-jeor' },
   ];
 
   const heightUnit = units === 'metric' ? 'cm' : 'in';

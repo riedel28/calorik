@@ -12,8 +12,8 @@ export function generateStaticParams() {
 }
 
 export const metadata: Metadata = {
-  title: 'Calorik',
   description: 'Calculate your daily caloric needs',
+  title: 'Calorik',
 };
 
 const isSupportedLocale = (value: string): value is (typeof routing.locales)[number] =>

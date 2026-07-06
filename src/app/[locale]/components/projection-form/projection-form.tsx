@@ -11,35 +11,35 @@ import UnitToggle from '../unit-toggle/unit-toggle';
 import UserInputs from '../user-inputs/user-inputs';
 
 export interface ProjectionFormValues {
-  units: 'imperial' | 'metric';
-  gender: 'male' | 'female';
-  height: string;
-  weight: string;
-  age: string;
   activityLevel: 'none' | 'low' | 'moderate' | 'active' | 'veryActive' | 'custom';
-  customMultiplier: string;
-  formula: 'katch-mcardle' | 'mifflin-st-jeor';
+  age: string;
   bodyFat: string;
-  goalWeight: string;
+  customMultiplier: string;
   daysUntilGoal: string;
+  formula: 'katch-mcardle' | 'mifflin-st-jeor';
+  gender: 'male' | 'female';
   goalDate: string;
+  goalWeight: string;
+  height: string;
+  units: 'imperial' | 'metric';
+  weight: string;
 }
 
 const ProjectionForm = () => {
   const form = useForm<ProjectionFormValues>({
     defaultValues: {
-      units: 'metric',
-      gender: 'male',
-      height: '',
-      weight: '',
-      age: '',
       activityLevel: 'moderate',
-      customMultiplier: '',
-      formula: 'mifflin-st-jeor',
+      age: '',
       bodyFat: '',
-      goalWeight: '',
+      customMultiplier: '',
       daysUntilGoal: '',
+      formula: 'mifflin-st-jeor',
+      gender: 'male',
       goalDate: '',
+      goalWeight: '',
+      height: '',
+      units: 'metric',
+      weight: '',
     },
   });
 

@@ -5,10 +5,10 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   plugins: [tsconfigPaths(), react()],
   test: {
-    include: ['**/*.test.tsx', '**/*.test.ts', '**/*.test.js', '**/*.test.jsx'],
+    environment: 'jsdom',
     exclude: ['**/node_modules/**'],
     globals: true,
-    environment: 'jsdom',
+    include: ['**/*.test.tsx', '**/*.test.ts', '**/*.test.js', '**/*.test.jsx'],
     setupFiles: './setup-tests.ts',
   },
 });

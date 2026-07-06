@@ -3,23 +3,23 @@ import { calculateCalories, harrisBenedictBMR, mifflinStJeorBMR } from './helper
 
 describe('Helpers', () => {
   const data1: UserData = {
-    age: 30,
-    gender: 'male',
-    weight: 90,
-    height: 180,
-    formula: 'harris-benedict',
     activityLevel: 'no-exercise',
+    age: 30,
+    formula: 'harris-benedict',
+    gender: 'male',
     goal: 'cut',
+    height: 180,
+    weight: 90,
   } satisfies UserData;
 
   const data2 = {
-    age: 38,
-    gender: 'female',
-    weight: 67,
-    height: 166,
-    formula: 'mifflin-st-jeor',
     activityLevel: 'light',
+    age: 38,
+    formula: 'mifflin-st-jeor',
+    gender: 'female',
     goal: 'cut',
+    height: 166,
+    weight: 67,
   } satisfies UserData;
   test('should calculate calories correctly', () => {
     expect(calculateCalories(data1)).toEqual(1922);

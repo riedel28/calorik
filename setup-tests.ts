@@ -6,17 +6,17 @@ import { vi } from 'vitest';
 import '@testing-library/jest-dom';
 
 Object.defineProperty(window, 'matchMedia', {
-  writable: true,
   value: vi.fn().mockImplementation((query) => ({
+    addEventListener: vi.fn(),
+    addListener: vi.fn(), // deprecated
+    dispatchEvent: vi.fn(),
     matches: false,
     media: query,
     onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
     removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
+    removeListener: vi.fn(), // deprecated
   })),
+  writable: true,
 });
 
 class ResizeObserverMock {
@@ -32,8 +32,8 @@ class ResizeObserverMock {
 }
 
 Object.defineProperty(window, 'ResizeObserver', {
-  writable: true,
   value: ResizeObserverMock,
+  writable: true,
 });
 
 vi.mock('JSON', () => ({

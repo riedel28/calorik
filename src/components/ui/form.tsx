@@ -34,13 +34,11 @@ const FormField = <
   TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>,
 >({
   ...props
-}: ControllerProps<TFieldValues, TName>) => {
-  return (
-    <FormFieldContext.Provider value={{ name: props.name }}>
-      <Controller {...props} />
-    </FormFieldContext.Provider>
-  );
-};
+}: ControllerProps<TFieldValues, TName>) => (
+  <FormFieldContext.Provider value={{ name: props.name }}>
+    <Controller {...props} />
+  </FormFieldContext.Provider>
+);
 
 const useFormField = () => {
   const fieldContext = useContext(FormFieldContext);
@@ -56,10 +54,10 @@ const useFormField = () => {
   const { id } = itemContext;
 
   return {
+    formDescriptionId: `${id}-form-description`,
+    formMessageId: `${id}-form-message`,
     id,
     name: fieldContext.name,
-    formMessageId: `${id}-form-message`,
-    formDescriptionId: `${id}-form-description`,
     ...fieldState,
   };
 };
@@ -79,7 +77,7 @@ const FormItem = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         <div className={cn('space-y-2', className)} ref={ref} {...props} />
       </FormItemContext.Provider>
     );
-  }
+  },
 );
 FormItem.displayName = 'FormItem';
 
@@ -92,7 +90,7 @@ const FormLabel = forwardRef<HTMLLabelElement, LabelHTMLAttributes<HTMLLabelElem
         aria-describedby={formDescriptionId}
         className={cn(
           'font-medium text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
-          className
+          className,
         )}
         htmlFor={id}
         ref={ref}
@@ -101,7 +99,7 @@ const FormLabel = forwardRef<HTMLLabelElement, LabelHTMLAttributes<HTMLLabelElem
         {children}
       </label>
     );
-  }
+  },
 );
 FormLabel.displayName = 'FormLabel';
 
@@ -117,7 +115,7 @@ const FormControl = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         {...props}
       />
     );
-  }
+  },
 );
 FormControl.displayName = 'FormControl';
 
@@ -140,8 +138,8 @@ const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagrap
         {children ?? body}
       </p>
     );
-  }
+  },
 );
 FormMessage.displayName = 'FormMessage';
 
-export { Form, FormItem, FormLabel, FormControl, FormMessage, FormField };
+export { Form, FormControl, FormField, FormItem, FormLabel, FormMessage };

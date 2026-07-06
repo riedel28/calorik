@@ -5,8 +5,8 @@ import React, { useState } from 'react';
 import type { ProjectionFormValues as UserData } from '@/app/[locale]/components/projection-form/projection-form';
 
 interface UserDataContextType {
-  userData: UserData | null;
   setUserData: (data: UserData) => void;
+  userData: UserData | null;
 }
 
 const UserDataContext = React.createContext({} as UserDataContextType);
@@ -14,7 +14,7 @@ const UserDataContext = React.createContext({} as UserDataContextType);
 const UserDataProvider = ({ children }: { children: React.ReactNode }) => {
   const [userData, setUserData] = useState<null | UserData>(null);
 
-  const value: UserDataContextType = { userData, setUserData };
+  const value: UserDataContextType = { setUserData, userData };
   return <UserDataContext.Provider value={value}>{children}</UserDataContext.Provider>;
 };
 

@@ -3,27 +3,27 @@ type Formula = 'harris-benedict' | 'mifflin-st-jeor';
 type Goal = 'cut' | 'maintain' | 'gain';
 
 export interface UserData {
-  age: number;
-  weight: number;
-  height: number;
-  gender: 'male' | 'female';
   activityLevel: ActivityLevel;
-  goal: Goal;
+  age: number;
   formula: Formula;
+  gender: 'male' | 'female';
+  goal: Goal;
+  height: number;
+  weight: number;
 }
 
 const activityFactors = {
-  'no-exercise': 1.2,
+  heavy: 1.725,
   light: 1.375,
   moderate: 1.55,
-  heavy: 1.725,
+  'no-exercise': 1.2,
   'very-heavy': 1.9,
 } as const;
 
 const goalFactors = {
   cut: 0.8,
-  maintain: 1,
   gain: 1.15,
+  maintain: 1,
 } as const;
 
 export const calculateCalories = (data: UserData | null) => {
@@ -50,12 +50,12 @@ const functionsByFormula = {
 export function harrisBenedictBMR(data: UserData) {
   const { age, gender, weight, height } = data;
 
-  return harrisBenedictFormulasByGender[gender]({ age, weight, height });
+  return harrisBenedictFormulasByGender[gender]({ age, height, weight });
 }
 
 const harrisBenedictFormulasByGender = {
-  male: calculateHarriesBenedictForMales,
   female: calculateHarriesBenedictForFemales,
+  male: calculateHarriesBenedictForMales,
 };
 
 function calculateHarriesBenedictForMales({
@@ -80,12 +80,12 @@ function calculateHarriesBenedictForFemales({
 export function mifflinStJeorBMR(data: UserData) {
   const { age, gender, weight, height } = data;
 
-  return mifflinStJeorFormulasByGender[gender]({ age, weight, height });
+  return mifflinStJeorFormulasByGender[gender]({ age, height, weight });
 }
 
 const mifflinStJeorFormulasByGender = {
-  male: calculateMifflinStJeorForMales,
   female: calculateMifflinStJeorForFemales,
+  male: calculateMifflinStJeorForMales,
 };
 
 function calculateMifflinStJeorForMales({

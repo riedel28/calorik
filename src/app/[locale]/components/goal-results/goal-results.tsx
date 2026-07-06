@@ -8,8 +8,8 @@ const GoalResults = () => {
   const t = useTranslations('goalResults');
 
   const results = [
-    { label: t('estimatedBodyFat'), value: '12', unit: '%' },
-    { label: t('dailyCalories'), value: '1800', unit: 'kcal/day' },
+    { label: t('estimatedBodyFat'), unit: '%', value: '12' },
+    { label: t('dailyCalories'), unit: 'kcal/day', value: '1800' },
   ];
 
   return (

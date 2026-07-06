@@ -104,7 +104,7 @@ const GoalSetting = () => {
                       <Button
                         className={cn(
                           'h-9 w-full justify-start text-left font-normal',
-                          !field.value && 'text-muted-foreground'
+                          !field.value && 'text-muted-foreground',
                         )}
                         data-testid="goal-date"
                         variant="outline"

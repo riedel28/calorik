@@ -26,7 +26,7 @@ describe('Header', () => {
     render(
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
         <Header />
-      </ThemeProvider>
+      </ThemeProvider>,
     );
 
     const trigger = screen.getByRole('button', { name: ENGLISH_REGEX });

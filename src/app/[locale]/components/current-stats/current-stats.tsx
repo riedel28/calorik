@@ -15,10 +15,10 @@ const CurrentStats = () => {
   const massUnit = units === 'metric' ? 'kg' : 'lbs';
 
   const stats = [
-    { label: t('tdee'), value: '2000', unit: 'kcal' },
-    { label: t('bmr'), value: '1600', unit: 'kcal' },
-    { label: t('lbm'), value: '68', unit: massUnit },
-    { label: t('fm'), value: '12', unit: massUnit },
+    { label: t('tdee'), unit: 'kcal', value: '2000' },
+    { label: t('bmr'), unit: 'kcal', value: '1600' },
+    { label: t('lbm'), unit: massUnit, value: '68' },
+    { label: t('fm'), unit: massUnit, value: '12' },
   ];
 
   return (

@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 const RadioGroup = forwardRef<ElementRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
   ({ className, ...props }, ref) => (
     <Root className={cn('grid gap-2', className)} {...props} ref={ref} />
-  )
+  ),
 );
 RadioGroup.displayName = Root.displayName;
 
@@ -15,7 +15,7 @@ const RadioGroupItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithout
     <Item
       className={cn(
         'relative flex shrink-0 cursor-pointer items-center justify-center rounded-sm bg-background text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
-        className
+        className,
       )}
       ref={ref}
       {...props}
@@ -24,7 +24,7 @@ const RadioGroupItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithout
         <Indicator className="h-2 w-2 rounded-full bg-primary" />
       </span>
     </Item>
-  )
+  ),
 );
 RadioGroupItem.displayName = Item.displayName;
 

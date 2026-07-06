@@ -19,9 +19,9 @@ const LanguageSwitcher = () => {
   const pathname = usePathname();
 
   const languages = [
-    { code: 'en', label: 'English', countryCode: 'GB' },
-    { code: 'de', label: 'Deutsch', countryCode: 'DE' },
-    { code: 'ru', label: 'Русский', countryCode: 'RU' },
+    { code: 'en', countryCode: 'GB', label: 'English' },
+    { code: 'de', countryCode: 'DE', label: 'Deutsch' },
+    { code: 'ru', countryCode: 'RU', label: 'Русский' },
   ];
 
   const currentLanguage = languages.find((lang) => lang.code === locale) ?? languages[0];
@@ -39,9 +39,9 @@ const LanguageSwitcher = () => {
             aria-hidden
             countryCode={currentLanguage.countryCode}
             style={{
-              width: '1.25rem',
-              height: '1rem',
               borderRadius: '2px',
+              height: '1rem',
+              width: '1.25rem',
             }}
             svg
             title={currentLanguage.label}
@@ -56,7 +56,7 @@ const LanguageSwitcher = () => {
             asChild
             className={cn(
               'flex items-center gap-2',
-              locale === lang.code && 'bg-accent text-accent-foreground'
+              locale === lang.code && 'bg-accent text-accent-foreground',
             )}
             key={lang.code}
           >
@@ -70,9 +70,9 @@ const LanguageSwitcher = () => {
                 aria-hidden
                 countryCode={lang.countryCode}
                 style={{
-                  width: '1.25rem',
-                  height: '1rem',
                   borderRadius: '2px',
+                  height: '1rem',
+                  width: '1.25rem',
                 }}
                 svg
                 title={lang.label}

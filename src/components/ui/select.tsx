@@ -15,7 +15,7 @@ const SelectTrigger = forwardRef<
   <BaseSelect.Trigger
     className={cn(
       'flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background focus:outline-none focus:ring-1 focus:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
-      className
+      className,
     )}
     ref={ref}
     {...props}
@@ -53,7 +53,7 @@ const SelectPopup = forwardRef<
   <BaseSelect.Popup
     className={cn(
       'relative z-50 max-h-96 w-[var(--anchor-width)] overflow-auto rounded-md border bg-popover text-popover-foreground',
-      className
+      className,
     )}
     ref={ref}
     {...props}
@@ -76,7 +76,7 @@ const SelectItem = forwardRef<
   <BaseSelect.Item
     className={cn(
       'relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pr-8 pl-2 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
-      className
+      className,
     )}
     ref={ref}
     {...props}
@@ -93,11 +93,11 @@ SelectItem.displayName = 'SelectItem';
 
 export {
   Select,
-  SelectTrigger,
-  SelectValue,
+  SelectItem,
+  SelectList,
+  SelectPopup,
   SelectPortal,
   SelectPositioner,
-  SelectPopup,
-  SelectList,
-  SelectItem,
+  SelectTrigger,
+  SelectValue,
 };
