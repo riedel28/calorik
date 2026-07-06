@@ -1,24 +1,17 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useFormContext } from 'react-hook-form';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-import type { ProjectionFormValues } from '../projection-form/projection-form';
-
 const CurrentStats = () => {
   const t = useTranslations('currentStats');
-  const { watch } = useFormContext<ProjectionFormValues>();
-  const units = watch('units');
-
-  const massUnit = units === 'metric' ? 'kg' : 'lbs';
 
   const stats = [
     { label: t('tdee'), unit: 'kcal', value: '2000' },
     { label: t('bmr'), unit: 'kcal', value: '1600' },
-    { label: t('lbm'), unit: massUnit, value: '68' },
-    { label: t('fm'), unit: massUnit, value: '12' },
+    { label: t('lbm'), unit: 'kg', value: '68' },
+    { label: t('fm'), unit: 'kg', value: '12' },
   ];
 
   return (

@@ -4,7 +4,6 @@ import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
 import Header from '@/app/[locale]/components/header/header';
-import { UserDataProvider } from '@/context/user-data-context';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {
@@ -43,9 +42,7 @@ export default async function LocaleLayout({
       <div className="flex min-h-screen flex-col bg-sky-50 text-foreground dark:bg-sky-950">
         <Header />
         <main className="flex-1 pt-16">
-          <div className="mx-auto max-w-7xl px-4 py-4">
-            <UserDataProvider>{children}</UserDataProvider>
-          </div>
+          <div className="mx-auto max-w-7xl px-4 py-4">{children}</div>
         </main>
       </div>
     </NextIntlClientProvider>

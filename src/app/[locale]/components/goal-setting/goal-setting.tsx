@@ -18,10 +18,7 @@ type MessageKey = Parameters<ReturnType<typeof useTranslations>>[0];
 
 const GoalSetting = () => {
   const t = useTranslations('goal');
-  const { control, watch } = useFormContext<ProjectionFormValues>();
-  const units = watch('units');
-
-  const weightUnit = units === 'metric' ? 'kg' : 'lbs';
+  const { control } = useFormContext<ProjectionFormValues>();
 
   return (
     <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
@@ -49,7 +46,7 @@ const GoalSetting = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix={weightUnit}
+                  suffix="kg"
                   type="number"
                 />
                 {fieldState.invalid && (

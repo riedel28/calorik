@@ -7,7 +7,6 @@ import { Form } from '@/components/ui/form';
 import CurrentStats from '../current-stats/current-stats';
 import GoalResults from '../goal-results/goal-results';
 import GoalSetting from '../goal-setting/goal-setting';
-import UnitToggle from '../unit-toggle/unit-toggle';
 import UserInputs from '../user-inputs/user-inputs';
 
 export interface ProjectionFormValues {
@@ -21,7 +20,6 @@ export interface ProjectionFormValues {
   goalDate: string;
   goalWeight: string;
   height: string;
-  units: 'imperial' | 'metric';
   weight: string;
 }
 
@@ -38,7 +36,6 @@ const ProjectionForm = () => {
       goalDate: '',
       goalWeight: '',
       height: '',
-      units: 'metric',
       weight: '',
     },
   });
@@ -46,7 +43,6 @@ const ProjectionForm = () => {
   return (
     <Form {...form}>
       <form className="space-y-4">
-        <UnitToggle />
         <div className="grid gap-4 lg:grid-cols-2">
           <div className="space-y-4">
             <UserInputs />

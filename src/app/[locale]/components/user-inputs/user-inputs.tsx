@@ -33,7 +33,6 @@ const UserInputs = () => {
   const pageT = useTranslations('page');
   const { control, watch } = useFormContext<ProjectionFormValues>();
   const activityLevel = watch('activityLevel');
-  const units = watch('units');
 
   const activityLevelOptions = [
     {
@@ -72,9 +71,6 @@ const UserInputs = () => {
     { label: t('formula.katchMcArdle'), value: 'katch-mcardle' },
     { label: t('formula.mifflinStJeor'), value: 'mifflin-st-jeor' },
   ];
-
-  const heightUnit = units === 'metric' ? 'cm' : 'in';
-  const weightUnit = units === 'metric' ? 'kg' : 'lbs';
 
   return (
     <section className="rounded-lg bg-background p-4 shadow-xs ring-1 ring-black/5 sm:p-5">
@@ -158,7 +154,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix={heightUnit}
+                  suffix="cm"
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -188,7 +184,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix={weightUnit}
+                  suffix="kg"
                   type="number"
                 />
                 {fieldState.invalid && (
