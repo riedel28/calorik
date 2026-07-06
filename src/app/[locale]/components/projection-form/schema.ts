@@ -37,6 +37,7 @@ export const projectionFormSchema = z.object({
       (value) => value === '' || !isBefore(parseISO(value), addDays(startOfToday(), 1)),
       'goal.goalDate.error',
     ),
+  goalQuality: z.enum(['optimal', 'moderate', 'poor']),
   goalWeight: numericString(LIMITS.goalWeight, 'goal.goalWeight.error'),
   height: numericString(LIMITS.height, 'yourData.height.error'),
   weight: numericString(LIMITS.weight, 'yourData.weight.error'),

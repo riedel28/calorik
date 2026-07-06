@@ -8,6 +8,7 @@ import {
   tdee as calculateTdee,
   deurenbergBodyFat,
   fatMass,
+  GOAL_QUALITY_PARTITION,
   katchMcArdleBMR,
   LIMITS,
   leanMass,
@@ -26,6 +27,7 @@ export interface ProjectionResult {
   dailyCaloriesBelowBmr: boolean;
   fatMassKg: number | null;
   goalBodyFatPct: number | null;
+  goalLeanMassKg: number | null;
   leanMassKg: number | null;
   tdee: number | null;
 }
@@ -89,14 +91,32 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
       ? requiredDailyCalories({ currentWeightKg: weightKg, days, goalWeightKg, tdee })
       : null;
 
+  const partition = values.goalQuality ? GOAL_QUALITY_PARTITION[values.goalQuality] : null;
+  const fatShareOfChange =
+    partition !== null && weightKg !== null && goalWeightKg !== null
+      ? goalWeightKg < weightKg
+        ? partition.lossFatShare
+        : partition.gainFatShare
+      : null;
+
   const goalBodyFatPct =
-    weightKg !== null && bodyFatPct !== null && goalWeightKg !== null && gender !== null
+    weightKg !== null &&
+    bodyFatPct !== null &&
+    goalWeightKg !== null &&
+    gender !== null &&
+    fatShareOfChange !== null
       ? projectedBodyFatAtGoal({
           currentBodyFatPct: bodyFatPct,
           currentWeightKg: weightKg,
+          fatShareOfChange,
           gender,
           goalWeightKg,
         })
+      : null;
+
+  const goalLeanMassKg =
+    goalWeightKg !== null && goalBodyFatPct !== null
+      ? leanMass(goalWeightKg, goalBodyFatPct)
       : null;
 
   return {
@@ -107,6 +127,7 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
     dailyCaloriesBelowBmr: bmr !== null && dailyCalories !== null && dailyCalories < bmr,
     fatMassKg,
     goalBodyFatPct,
+    goalLeanMassKg,
     leanMassKg,
     tdee,
   };

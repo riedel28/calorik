@@ -1,5 +1,6 @@
 export type Gender = 'male' | 'female';
 export type ActivityLevel = 'none' | 'low' | 'moderate' | 'active' | 'veryActive' | 'custom';
+export type GoalQuality = 'optimal' | 'moderate' | 'poor';
 
 export const ACTIVITY_MULTIPLIERS: Record<Exclude<ActivityLevel, 'custom'>, number> = {
   active: 1.725,
@@ -10,6 +11,17 @@ export const ACTIVITY_MULTIPLIERS: Record<Exclude<ActivityLevel, 'custom'>, numb
 };
 
 const KCAL_PER_KG = 7700;
+
+// Fat share of the weight change (P-ratio): how much of each lost/gained
+// kilogram is fat mass, depending on training and diet quality.
+export const GOAL_QUALITY_PARTITION: Record<
+  GoalQuality,
+  { gainFatShare: number; lossFatShare: number }
+> = {
+  moderate: { gainFatShare: 0.7, lossFatShare: 0.7 },
+  optimal: { gainFatShare: 0.5, lossFatShare: 0.8 },
+  poor: { gainFatShare: 0.8, lossFatShare: 0.6 },
+};
 
 const ESSENTIAL_BODY_FAT_PCT: Record<Gender, number> = {
   female: 12,
@@ -73,15 +85,19 @@ export const requiredDailyCalories = ({
 export const projectedBodyFatAtGoal = ({
   currentBodyFatPct,
   currentWeightKg,
+  fatShareOfChange,
   gender,
   goalWeightKg,
 }: {
   currentBodyFatPct: number;
   currentWeightKg: number;
+  fatShareOfChange: number;
   gender: Gender;
   goalWeightKg: number;
 }): number => {
-  const leanMassKg = leanMass(currentWeightKg, currentBodyFatPct);
-  const raw = ((goalWeightKg - leanMassKg) / goalWeightKg) * 100;
+  const fatMassAtGoal =
+    fatMass(currentWeightKg, currentBodyFatPct) -
+    fatShareOfChange * (currentWeightKg - goalWeightKg);
+  const raw = (fatMassAtGoal / goalWeightKg) * 100;
   return Math.min(Math.max(raw, ESSENTIAL_BODY_FAT_PCT[gender]), LIMITS.bodyFat.max);
 };

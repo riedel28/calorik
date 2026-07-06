@@ -24,6 +24,7 @@ const ProjectionForm = () => {
       formula: 'mifflin-st-jeor',
       gender: 'male',
       goalDate: '',
+      goalQuality: 'optimal',
       goalWeight: '',
       height: '',
       weight: '',

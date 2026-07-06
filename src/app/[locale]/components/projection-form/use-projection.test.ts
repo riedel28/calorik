@@ -12,6 +12,7 @@ const baseValues: Partial<ProjectionFormValues> = {
   formula: 'mifflin-st-jeor',
   gender: 'male',
   goalDate: '',
+  goalQuality: 'optimal',
   goalWeight: '',
   height: '180',
   weight: '90',
@@ -29,6 +30,7 @@ describe('deriveProjection', () => {
       dailyCaloriesBelowBmr: false,
       fatMassKg: null,
       goalBodyFatPct: null,
+      goalLeanMassKg: null,
       leanMassKg: null,
       tdee: null,
     });
@@ -45,6 +47,7 @@ describe('deriveProjection', () => {
     expect(result.tdee).toBeCloseTo(2914);
     expect(result.dailyCalories).toBeNull();
     expect(result.goalBodyFatPct).toBeNull();
+    expect(result.goalLeanMassKg).toBeNull();
   });
 
   it('estimates body fat via Deurenberg when not provided', () => {
@@ -102,9 +105,33 @@ describe('deriveProjection', () => {
 
     // tdee 2914 - (10 * 7700) / 100
     expect(result.dailyCalories).toBeCloseTo(2144);
-    // LBM 67.5, goal 80 -> 12.5 / 80
-    expect(result.goalBodyFatPct).toBeCloseTo(15.625);
+    // optimal loss: FM 22.5 - 0.8 * 10 = 14.5 -> 14.5 / 80
+    expect(result.goalBodyFatPct).toBeCloseTo(18.125);
+    // 80 * (1 - 0.18125)
+    expect(result.goalLeanMassKg).toBeCloseTo(65.5);
     expect(result.dailyCaloriesBelowBmr).toBe(false);
+  });
+
+  it('uses the loss fat share of the selected goal quality', () => {
+    const result = deriveProjection({
+      ...baseValues,
+      goalQuality: 'poor',
+      goalWeight: '80',
+    });
+
+    // poor loss: FM 22.5 - 0.6 * 10 = 16.5 -> 16.5 / 80
+    expect(result.goalBodyFatPct).toBeCloseTo(20.625);
+  });
+
+  it('uses the gain fat share when the goal weight is above the current weight', () => {
+    const result = deriveProjection({
+      ...baseValues,
+      goalWeight: '100',
+    });
+
+    // optimal gain: FM 22.5 + 0.5 * 10 = 27.5 -> 27.5 / 100
+    expect(result.goalBodyFatPct).toBeCloseTo(27.5);
+    expect(result.goalLeanMassKg).toBeCloseTo(72.5);
   });
 
   it('flags required calories below BMR', () => {

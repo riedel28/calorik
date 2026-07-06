@@ -4,6 +4,7 @@ import {
   ACTIVITY_MULTIPLIERS,
   deurenbergBodyFat,
   fatMass,
+  GOAL_QUALITY_PARTITION,
   katchMcArdleBMR,
   leanMass,
   mifflinStJeorBMR,
@@ -90,12 +91,26 @@ describe('requiredDailyCalories', () => {
 });
 
 describe('projectedBodyFatAtGoal', () => {
-  it('projects body fat assuming lean mass is preserved', () => {
-    // LBM 67.5 kg, goal 75 kg -> fat 7.5 kg -> 10%
+  it('partitions weight loss between fat and lean mass', () => {
+    // FM 24.64 kg, loss 11 kg at k=0.8 -> FM 15.84 kg / 77 kg -> 20.57%
+    expect(
+      projectedBodyFatAtGoal({
+        currentBodyFatPct: 28,
+        currentWeightKg: 88,
+        fatShareOfChange: 0.8,
+        gender: 'male',
+        goalWeightKg: 77,
+      }),
+    ).toBeCloseTo(20.57, 1);
+  });
+
+  it('reproduces the fat-only model with a share of 1', () => {
+    // LBM 67.5 kg preserved, goal 75 kg -> fat 7.5 kg -> 10%
     expect(
       projectedBodyFatAtGoal({
         currentBodyFatPct: 25,
         currentWeightKg: 90,
+        fatShareOfChange: 1,
         gender: 'male',
         goalWeightKg: 75,
       }),
@@ -107,18 +122,33 @@ describe('projectedBodyFatAtGoal', () => {
       projectedBodyFatAtGoal({
         currentBodyFatPct: 25,
         currentWeightKg: 90,
+        fatShareOfChange: 0.8,
         gender: 'male',
         goalWeightKg: 90,
       }),
     ).toBeCloseTo(25);
   });
 
+  it('adds the fat share of gained weight on weight gain', () => {
+    // FM 20 kg + 0.5 * 10 kg = 25 kg / 90 kg -> 27.78%
+    expect(
+      projectedBodyFatAtGoal({
+        currentBodyFatPct: 25,
+        currentWeightKg: 80,
+        fatShareOfChange: 0.5,
+        gender: 'male',
+        goalWeightKg: 90,
+      }),
+    ).toBeCloseTo(27.78, 1);
+  });
+
   it('clamps at essential body fat for males', () => {
-    // goal 65 kg is below the 67.5 kg lean mass
+    // FM 22.5 - 1 * 25 kg lost goes negative
     expect(
       projectedBodyFatAtGoal({
         currentBodyFatPct: 25,
         currentWeightKg: 90,
+        fatShareOfChange: 1,
         gender: 'male',
         goalWeightKg: 65,
       }),
@@ -130,6 +160,7 @@ describe('projectedBodyFatAtGoal', () => {
       projectedBodyFatAtGoal({
         currentBodyFatPct: 25,
         currentWeightKg: 70,
+        fatShareOfChange: 1,
         gender: 'female',
         goalWeightKg: 50,
       }),
@@ -137,14 +168,23 @@ describe('projectedBodyFatAtGoal', () => {
   });
 
   it('clamps at the upper body fat limit for extreme gains', () => {
-    // LBM 45 kg, goal 150 kg -> raw 70% -> clamped to 60
+    // FM 15 kg + 1 * 90 kg -> raw 70% -> clamped to 60
     expect(
       projectedBodyFatAtGoal({
         currentBodyFatPct: 25,
         currentWeightKg: 60,
+        fatShareOfChange: 1,
         gender: 'female',
         goalWeightKg: 150,
       }),
     ).toBe(60);
+  });
+});
+
+describe('GOAL_QUALITY_PARTITION', () => {
+  it('defines fat shares for every quality preset', () => {
+    expect(GOAL_QUALITY_PARTITION.optimal).toEqual({ gainFatShare: 0.5, lossFatShare: 0.8 });
+    expect(GOAL_QUALITY_PARTITION.moderate).toEqual({ gainFatShare: 0.7, lossFatShare: 0.7 });
+    expect(GOAL_QUALITY_PARTITION.poor).toEqual({ gainFatShare: 0.8, lossFatShare: 0.6 });
   });
 });
