@@ -1,34 +1,47 @@
 'use client';
 
-import { Anchor, Content, Portal, Root, Trigger } from '@radix-ui/react-popover';
-import type { ComponentProps } from 'react';
+import { Popover as PopoverPrimitive } from '@base-ui/react/popover';
+import type { ReactNode } from 'react';
 
 import { cn } from '@/lib/utils';
 
-const Popover = Root;
+const Popover = PopoverPrimitive.Root;
 
-const PopoverTrigger = Trigger;
+const PopoverTrigger = PopoverPrimitive.Trigger;
 
-const PopoverAnchor = Anchor;
+// Base UI has no Anchor part (anchoring is done via the `anchor` prop on
+// Positioner); this passthrough only preserves the public API shape.
+function PopoverAnchor({ children }: { children?: ReactNode }) {
+  return <>{children}</>;
+}
 
 function PopoverContent({
   className,
   align = 'center',
+  alignOffset = 0,
+  side = 'bottom',
   sideOffset = 4,
   ...props
-}: ComponentProps<typeof Content>) {
+}: PopoverPrimitive.Popup.Props &
+  Pick<PopoverPrimitive.Positioner.Props, 'align' | 'alignOffset' | 'side' | 'sideOffset'>) {
   return (
-    <Portal>
-      <Content
+    <PopoverPrimitive.Portal>
+      <PopoverPrimitive.Positioner
         align={align}
-        className={cn(
-          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 origin-[--radix-popover-content-transform-origin] rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-[state=closed]:animate-out data-[state=open]:animate-in',
-          className,
-        )}
+        alignOffset={alignOffset}
+        className="isolate z-50"
+        side={side}
         sideOffset={sideOffset}
-        {...props}
-      />
-    </Portal>
+      >
+        <PopoverPrimitive.Popup
+          className={cn(
+            'data-closed:fade-out-0 data-open:fade-in-0 data-closed:zoom-out-95 data-open:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 z-50 w-72 origin-(--transform-origin) rounded-md border bg-popover p-4 text-popover-foreground shadow-md outline-none data-closed:animate-out data-open:animate-in',
+            className,
+          )}
+          {...props}
+        />
+      </PopoverPrimitive.Positioner>
+    </PopoverPrimitive.Portal>
   );
 }
 
