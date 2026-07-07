@@ -28,57 +28,59 @@ const LanguageSwitcher = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          aria-label={currentLanguage.label}
-          className="flex items-center gap-2 data-[state=open]:bg-accent data-[state=open]:text-accent-foreground"
-          title={currentLanguage.label}
-          variant="ghost"
-        >
-          <ReactCountryFlag
-            aria-hidden
-            countryCode={currentLanguage.countryCode}
-            style={{
-              borderRadius: '2px',
-              height: '1rem',
-              width: '1.25rem',
-            }}
-            svg
+      <DropdownMenuTrigger
+        render={
+          <Button
+            aria-label={currentLanguage.label}
+            className="flex items-center gap-2 data-popup-open:bg-accent data-popup-open:text-accent-foreground"
             title={currentLanguage.label}
+            variant="ghost"
           />
-          <span className="hidden font-medium text-sm sm:inline">{currentLanguage.label}</span>
-          <ChevronDown className="h-4 w-4" />
-        </Button>
+        }
+      >
+        <ReactCountryFlag
+          aria-hidden
+          countryCode={currentLanguage.countryCode}
+          style={{
+            borderRadius: '2px',
+            height: '1rem',
+            width: '1.25rem',
+          }}
+          svg
+          title={currentLanguage.label}
+        />
+        <span className="hidden font-medium text-sm sm:inline">{currentLanguage.label}</span>
+        <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-44">
         {languages.map((lang) => (
           <DropdownMenuItem
-            asChild
             className={cn(
               'flex items-center gap-2',
               locale === lang.code && 'bg-accent text-accent-foreground',
             )}
             key={lang.code}
-          >
-            <Link
-              className="flex flex-1 items-center gap-2"
-              href={pathname || '/'}
-              locale={lang.code}
-              role="menuitem"
-            >
-              <ReactCountryFlag
-                aria-hidden
-                countryCode={lang.countryCode}
-                style={{
-                  borderRadius: '2px',
-                  height: '1rem',
-                  width: '1.25rem',
-                }}
-                svg
-                title={lang.label}
+            render={
+              <Link
+                className="flex flex-1 items-center gap-2"
+                href={pathname || '/'}
+                locale={lang.code}
+                role="menuitem"
               />
-              <span className="text-sm">{lang.label}</span>
-            </Link>
+            }
+          >
+            <ReactCountryFlag
+              aria-hidden
+              countryCode={lang.countryCode}
+              style={{
+                borderRadius: '2px',
+                height: '1rem',
+                width: '1.25rem',
+              }}
+              svg
+              title={lang.label}
+            />
+            <span className="text-sm">{lang.label}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
