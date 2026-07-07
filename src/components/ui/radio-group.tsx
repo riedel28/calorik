@@ -1,31 +1,32 @@
-import { Indicator, Item, Root } from '@radix-ui/react-radio-group';
-import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
+import { Radio } from '@base-ui/react/radio';
+import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group';
+import { type ComponentPropsWithoutRef, forwardRef } from 'react';
 
 import { cn } from '@/lib/utils';
 
-const RadioGroup = forwardRef<ElementRef<typeof Root>, ComponentPropsWithoutRef<typeof Root>>(
+const RadioGroup = forwardRef<HTMLDivElement, ComponentPropsWithoutRef<typeof RadioGroupPrimitive>>(
   ({ className, ...props }, ref) => (
-    <Root className={cn('grid gap-2', className)} {...props} ref={ref} />
+    <RadioGroupPrimitive className={cn('grid gap-2', className)} {...props} ref={ref} />
   ),
 );
-RadioGroup.displayName = Root.displayName;
+RadioGroup.displayName = 'RadioGroup';
 
-const RadioGroupItem = forwardRef<ElementRef<typeof Item>, ComponentPropsWithoutRef<typeof Item>>(
+const RadioGroupItem = forwardRef<HTMLSpanElement, ComponentPropsWithoutRef<typeof Radio.Root>>(
   ({ className, children, ...props }, ref) => (
-    <Item
+    <Radio.Root
       className={cn(
-        'relative flex shrink-0 cursor-pointer items-center justify-center rounded-sm bg-background text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50',
+        'relative flex shrink-0 cursor-pointer items-center justify-center rounded-sm bg-background text-sm transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 data-disabled:cursor-not-allowed data-disabled:opacity-50',
         className,
       )}
       ref={ref}
       {...props}
     >
       <span className="inline-flex h-4 w-4 items-center justify-center rounded-full border border-primary">
-        <Indicator className="h-2 w-2 rounded-full bg-primary" />
+        <Radio.Indicator className="h-2 w-2 rounded-full bg-primary" />
       </span>
-    </Item>
+    </Radio.Root>
   ),
 );
-RadioGroupItem.displayName = Item.displayName;
+RadioGroupItem.displayName = 'RadioGroupItem';
 
 export { RadioGroup, RadioGroupItem };
