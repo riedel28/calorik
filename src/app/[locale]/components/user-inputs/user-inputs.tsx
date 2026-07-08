@@ -78,6 +78,11 @@ const UserInputs = () => {
       label: t('formula.mifflinStJeor'),
       value: 'mifflin-st-jeor',
     },
+    {
+      description: t('formula.harrisBenedictDescription'),
+      label: t('formula.harrisBenedict'),
+      value: 'harris-benedict',
+    },
   ];
 
   return (

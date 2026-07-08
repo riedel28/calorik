@@ -9,6 +9,7 @@ import {
   deurenbergBodyFat,
   fatMass,
   GOAL_QUALITY_PARTITION,
+  harrisBenedictBMR,
   katchMcArdleBMR,
   LIMITS,
   leanMass,
@@ -77,6 +78,8 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
     bmr = leanMassKg !== null ? katchMcArdleBMR(leanMassKg) : null;
   } else if (values.formula === 'mifflin-st-jeor') {
     bmr = metrics ? mifflinStJeorBMR(metrics) : null;
+  } else if (values.formula === 'harris-benedict') {
+    bmr = metrics ? harrisBenedictBMR(metrics) : null;
   }
 
   const activityMultiplier = resolveActivityMultiplier(values);

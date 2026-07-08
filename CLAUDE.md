@@ -21,7 +21,7 @@ Tailwind v4 + Base UI (@base-ui/react) with shadcn-style components in src/compo
 
 - `src/app/[locale]/` - routes; `components/` - page-specific components
 - `src/components/ui/` - shadcn-style components built on `@base-ui/react`
-- `src/lib/calculations.ts` (+ `.test.ts`) - calorie formulas (Mifflin-St Jeor, Katch-McArdle, Deurenberg body-fat estimate)
+- `src/lib/calculations.ts` (+ `.test.ts`) - calorie formulas (Mifflin-St Jeor, Katch-McArdle, Harris-Benedict, Deurenberg body-fat estimate)
 - `src/app/[locale]/components/projection-form/` - form schema, localStorage persistence (`form-storage.ts`), live projection hook (`use-projection.ts`)
 - `@/*` maps to `src/*`
 

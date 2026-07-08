@@ -98,7 +98,9 @@
     "katchMcArdle": "Кэтч-Макардл",
     "katchMcArdleDescription": "На основе сухой массы, точнее при известном % жира",
     "mifflinStJeor": "Миффлина-Сан Жеора",
-    "mifflinStJeorDescription": "На основе веса, роста и возраста"
+    "mifflinStJeorDescription": "На основе веса, роста и возраста",
+    "harrisBenedict": "Харриса-Бенедикта",
+    "harrisBenedictDescription": "Классическая формула (редакция 1984), на основе веса, роста и возраста"
   },
   "currentStats": {
     "title": "Текущие показатели",

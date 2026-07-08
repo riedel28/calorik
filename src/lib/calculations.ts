@@ -45,12 +45,18 @@ export interface BodyMetrics {
   weightKg: number;
 }
 
+// Revised Harris-Benedict equation (Roza & Shizgal, 1984).
+export const harrisBenedictBMR = ({ age, gender, heightCm, weightKg }: BodyMetrics): number =>
+  gender === 'male'
+    ? 88.362 + 13.397 * weightKg + 4.799 * heightCm - 5.677 * age
+    : 447.593 + 9.247 * weightKg + 3.098 * heightCm - 4.33 * age;
+
+export const katchMcArdleBMR = (leanMassKg: number): number => 370 + 21.6 * leanMassKg;
+
 export const mifflinStJeorBMR = ({ age, gender, heightCm, weightKg }: BodyMetrics): number => {
   const base = 10 * weightKg + 6.25 * heightCm - 5 * age;
   return gender === 'male' ? base + 5 : base - 161;
 };
-
-export const katchMcArdleBMR = (leanMassKg: number): number => 370 + 21.6 * leanMassKg;
 
 export const deurenbergBodyFat = ({ age, gender, heightCm, weightKg }: BodyMetrics): number => {
   const bmi = weightKg / (heightCm / 100) ** 2;

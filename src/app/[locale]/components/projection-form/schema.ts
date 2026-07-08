@@ -29,7 +29,7 @@ export const projectionFormSchema = z.object({
   daysUntilGoal: numericString(LIMITS.daysUntilGoal, 'goal.daysUntilGoal.error', {
     integer: true,
   }),
-  formula: z.enum(['katch-mcardle', 'mifflin-st-jeor']),
+  formula: z.enum(['harris-benedict', 'katch-mcardle', 'mifflin-st-jeor']),
   gender: z.enum(['male', 'female']),
   goalDate: z
     .string()

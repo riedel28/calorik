@@ -5,6 +5,7 @@ import {
   deurenbergBodyFat,
   fatMass,
   GOAL_QUALITY_PARTITION,
+  harrisBenedictBMR,
   katchMcArdleBMR,
   leanMass,
   mifflinStJeorBMR,
@@ -23,6 +24,18 @@ describe('mifflinStJeorBMR', () => {
 
   it('calculates BMR for females', () => {
     expect(mifflinStJeorBMR(female)).toBeCloseTo(1356.5);
+  });
+});
+
+describe('harrisBenedictBMR', () => {
+  it('calculates BMR for males', () => {
+    expect(harrisBenedictBMR(male)).toBeCloseTo(1987.6, 1);
+  });
+
+  it('calculates BMR for females', () => {
+    expect(
+      harrisBenedictBMR({ age: 30, gender: 'female', heightCm: 180, weightKg: 90 }),
+    ).toBeCloseTo(1707.56, 1);
   });
 });
 

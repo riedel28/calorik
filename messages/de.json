@@ -97,7 +97,9 @@
     "katchMcArdle": "Katch-McArdle",
     "katchMcArdleDescription": "Basiert auf der Magermasse, genauer bei bekanntem KFA",
     "mifflinStJeor": "Mifflin-St. Jeor",
-    "mifflinStJeorDescription": "Basiert auf Gewicht, Größe und Alter"
+    "mifflinStJeorDescription": "Basiert auf Gewicht, Größe und Alter",
+    "harrisBenedict": "Harris-Benedict",
+    "harrisBenedictDescription": "Klassische Formel (Revision 1984), basiert auf Gewicht, Größe und Alter"
   },
   "currentStats": {
     "title": "Aktuelle Werte",

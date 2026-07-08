@@ -98,7 +98,9 @@
     "katchMcArdle": "Katch-McArdle",
     "katchMcArdleDescription": "Based on lean body mass, more precise with a known body fat %",
     "mifflinStJeor": "Mifflin-St. Jeor",
-    "mifflinStJeorDescription": "Based on weight, height, and age"
+    "mifflinStJeorDescription": "Based on weight, height, and age",
+    "harrisBenedict": "Harris-Benedict",
+    "harrisBenedictDescription": "Classic formula (1984 revision), based on weight, height, and age"
   },
   "currentStats": {
     "title": "Current Stats",

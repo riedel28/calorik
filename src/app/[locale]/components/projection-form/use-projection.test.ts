@@ -72,6 +72,18 @@ describe('deriveProjection', () => {
     expect(result.bmr).not.toBeNull();
   });
 
+  it('uses Harris-Benedict BMR from body metrics when selected', () => {
+    const result = deriveProjection({ ...baseValues, formula: 'harris-benedict' });
+
+    expect(result.bmr).toBeCloseTo(1987.6, 1);
+  });
+
+  it('returns null BMR for Harris-Benedict without complete body metrics', () => {
+    const result = deriveProjection({ ...baseValues, age: '', formula: 'harris-benedict' });
+
+    expect(result.bmr).toBeNull();
+  });
+
   it('drops out-of-range values from the calculation', () => {
     const result = deriveProjection({ ...baseValues, age: '500' });
 
