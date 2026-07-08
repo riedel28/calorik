@@ -1,5 +1,7 @@
-import { Slot } from '@radix-ui/react-slot';
+import { mergeProps } from '@base-ui/react/merge-props';
+import { useRender } from '@base-ui/react/use-render';
 import {
+  type ComponentProps,
   createContext,
   forwardRef,
   type HTMLAttributes,
@@ -103,21 +105,21 @@ const FormLabel = forwardRef<HTMLLabelElement, LabelHTMLAttributes<HTMLLabelElem
 );
 FormLabel.displayName = 'FormLabel';
 
-const FormControl = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
-  ({ ...props }, ref) => {
-    const { id } = useFormField();
+function FormControl({ render, ...props }: useRender.ComponentProps<'div'>) {
+  const { id } = useFormField();
 
-    return (
-      <Slot
-        aria-describedby={`${id}-form-description ${id}-form-message`}
-        id={id}
-        ref={ref}
-        {...props}
-      />
-    );
-  },
-);
-FormControl.displayName = 'FormControl';
+  return useRender({
+    defaultTagName: 'div',
+    props: mergeProps<'div'>(
+      {
+        'aria-describedby': `${id}-form-description ${id}-form-message`,
+        id,
+      } as ComponentProps<'div'>,
+      props,
+    ),
+    render,
+  });
+}
 
 const FormMessage = forwardRef<HTMLParagraphElement, HTMLAttributes<HTMLParagraphElement>>(
   ({ className, children, ...props }, ref) => {

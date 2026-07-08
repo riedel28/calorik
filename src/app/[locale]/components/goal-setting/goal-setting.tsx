@@ -156,22 +156,24 @@ const GoalSetting = () => {
                 >
                   <FieldLabel>{t('goalDate.label')}</FieldLabel>
                   <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        className={cn(
-                          'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none',
-                          !field.value && 'text-muted-foreground',
-                        )}
-                        data-testid="goal-date"
-                        variant="outline"
-                      >
-                        <CalendarIcon className="mr-2 h-4 w-4" />
-                        <span className="truncate">
-                          {field.value
-                            ? format(selectedDate as Date, 'PP', { locale: dateLocale })
-                            : t('goalDate.placeholder')}
-                        </span>
-                      </Button>
+                    <PopoverTrigger
+                      render={
+                        <Button
+                          className={cn(
+                            'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none',
+                            !field.value && 'text-muted-foreground',
+                          )}
+                          data-testid="goal-date"
+                          variant="outline"
+                        />
+                      }
+                    >
+                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      <span className="truncate">
+                        {field.value
+                          ? format(selectedDate as Date, 'PP', { locale: dateLocale })
+                          : t('goalDate.placeholder')}
+                      </span>
                     </PopoverTrigger>
                     <PopoverContent align="start" className="w-auto overflow-hidden p-0">
                       <Calendar
