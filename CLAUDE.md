@@ -11,17 +11,18 @@ Calorik: calorie counter / daily-calorie-projection app. Next.js 16 (App Router)
 - `npm run dev` / `npm run build` (outputs to `/build`, not `.next`) / `npm run start`
 - `npm run test:no-watch` - run tests once
 - `npm run check` - Biome lint + format (replaces ESLint/Prettier)
+- `npm run typecheck` - TypeScript, no emit
 
 ## Stack
 
-Tailwind + ShadCN/Radix UI, React Hook Form + Zod, next-intl, Vitest.
+Tailwind v4 + Base UI (@base-ui/react) with shadcn-style components in src/components/ui/, React Hook Form + Zod, next-intl, Vitest, Biome.
 
 ## Structure
 
 - `src/app/[locale]/` - routes; `components/` - page-specific components
-- `src/components/ui/` - ShadCN components
-- `src/context/` - form state (`UserDataProvider`)
-- `src/helpers.ts` (+ `.test.ts`) - calorie formulas (Harris-Benedict, Mifflin-St-Jeor)
+- `src/components/ui/` - shadcn-style components built on `@base-ui/react`
+- `src/lib/calculations.ts` (+ `.test.ts`) - calorie formulas (Mifflin-St Jeor, Katch-McArdle, Deurenberg body-fat estimate)
+- `src/app/[locale]/components/projection-form/` - form schema, localStorage persistence (`form-storage.ts`), live projection hook (`use-projection.ts`)
 - `@/*` maps to `src/*`
 
 ## Notes
