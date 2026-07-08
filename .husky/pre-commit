@@ -23,7 +23,7 @@ STASHED=$?
 # Run formatter on the staged files only (not the whole project)
 FORMAT_EXIT_CODE=0
 if [ -n "$STAGED_FILES" ]; then
-  printf '%s\n' "$STAGED_FILES" | tr '\n' '\0' | xargs -0 bun x biome check --write --no-errors-on-unmatched || FORMAT_EXIT_CODE=$?
+  printf '%s\n' "$STAGED_FILES" | tr '\n' '\0' | xargs -0 npx biome check --write --no-errors-on-unmatched || FORMAT_EXIT_CODE=$?
 fi
 
 # Restore working directory state
