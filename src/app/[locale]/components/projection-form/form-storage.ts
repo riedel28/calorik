@@ -1,3 +1,4 @@
+import { addDays, differenceInCalendarDays, isBefore, parseISO, startOfToday } from 'date-fns';
 import { z } from 'zod';
 
 import { type ProjectionFormValues, projectionFormSchema } from './schema';
@@ -23,6 +24,23 @@ const storedValuesSchema = z.object({
   weight: z.string(),
 });
 
+// The goal date is an absolute point in time, so it wins over the stored
+// relative day count: days-until-goal is recomputed against today, and an
+// expired date clears both fields instead of restoring as a validation error.
+export const reconcileGoalTimeline = (
+  values: ProjectionFormValues,
+  today: Date,
+): ProjectionFormValues => {
+  if (values.goalDate === '') {
+    return values;
+  }
+  const goalDate = parseISO(values.goalDate);
+  if (!Number.isNaN(goalDate.getTime()) && !isBefore(goalDate, addDays(today, 1))) {
+    return { ...values, daysUntilGoal: String(differenceInCalendarDays(goalDate, today)) };
+  }
+  return { ...values, daysUntilGoal: '', goalDate: '' };
+};
+
 export const loadStoredFormValues = (): ProjectionFormValues | null => {
   if (typeof window === 'undefined') {
     return null;
@@ -33,7 +51,7 @@ export const loadStoredFormValues = (): ProjectionFormValues | null => {
   }
   try {
     const result = storedValuesSchema.safeParse(JSON.parse(raw));
-    return result.success ? result.data : null;
+    return result.success ? reconcileGoalTimeline(result.data, startOfToday()) : null;
   } catch {
     return null;
   }
