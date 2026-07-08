@@ -50,6 +50,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "typecheck": "tsc --noEmit",
     "test": "vitest",
     "test:no-watch": "vitest run",
     "test:coverage": "vitest run --coverage",
