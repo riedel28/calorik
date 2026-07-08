@@ -25,18 +25,14 @@
         "name": "next"
       }
     ],
-    "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
-    "./build/types/**/*.ts",
-    "./dist/types/**/*.ts",
     "./next-env.d.ts",
     "./src",
-    ".next/types/**/*.ts",
-    "setupTests.ts",
+    "./setup-tests.ts",
     "build/types/**/*.ts",
     "build/dev/types/**/*.ts"
   ],
