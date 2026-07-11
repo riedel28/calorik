@@ -10,75 +10,127 @@
     },
     "age": {
       "title": "Age (years)",
+      "label": "Age",
+      "unit": "yrs",
       "error": "Please enter valid age",
       "placeholder": "Please enter your age"
     },
     "weight": {
       "title": "Weight (kg)",
-      "error": "Please enter valid weight", 
+      "titleImperial": "Weight (lbs)",
+      "label": "Weight",
+      "unit": "kg",
+      "error": "Please enter valid weight",
       "placeholder": "Please enter your weight"
     },
     "height": {
       "title": "Height (cm)",
+      "titleImperial": "Height (in)",
+      "label": "Height",
+      "unit": "cm",
       "error": "Please enter valid height",
       "placeholder": "Please enter your height"
+    },
+    "bodyFat": {
+      "title": "Body Fat (%)",
+      "label": "Body Fat",
+      "unit": "%",
+      "error": "Please enter valid body fat percentage",
+      "placeholder": "Opt."
     }
   },
   "activity": {
     "title": "Activity level",
     "placeholder": "Please choose your activity level",
     "error": "Please choose your activity level",
-    "noExercise": "Little / No exercise",
-    "lightExercise": "Light exercise (1-3 days per week)",
-    "moderateExercise": "Moderate exercise (3-5 days per week)", 
-    "heavyExercise": "Heavy exercise (6-7 days per week)",
-    "veryHeavyExercise": "Very heavy exercise (twice per day)"
+    "none": "None",
+    "noneDescription": "Sedentary, desk job",
+    "low": "Low",
+    "lowDescription": "Light exercise 1-2 days/week",
+    "moderate": "Moderate",
+    "moderateDescription": "Moderate exercise 3-5 days/week",
+    "active": "Active",
+    "activeDescription": "Hard exercise 6-7 days/week",
+    "veryActive": "Very Active",
+    "veryActiveDescription": "Intense exercise, physical job",
+    "custom": "Custom",
+    "customDescription": "Enter your own multiplier",
+    "customMultiplier": {
+      "title": "Multiplier",
+      "placeholder": "1.55",
+      "description": "Enter a value between 1.0 and 2.5",
+      "error": "Please enter a multiplier between 1.0 and 2.5"
+    }
   },
   "goal": {
-    "title": "Your goal",
-    "placeholder": "Please choose your goal",
-    "error": "Please choose your goal",
-    "cut": "Cut (-20%)",
-    "cut_short": "cut weight",
-    "maintain": "Maintain",
-    "maintain_short": "maintain weight", 
-    "gain": "Gain (+15%)",
-    "gain_short": "gain weight"
+    "title": "Your Goal",
+    "goalWeight": {
+      "title": "Goal Weight (kg)",
+      "titleImperial": "Goal Weight (lbs)",
+      "label": "Goal Weight",
+      "unit": "kg",
+      "placeholder": "Enter your target weight",
+      "error": "Please enter a valid goal weight"
+    },
+    "daysUntilGoal": {
+      "title": "Days Until Goal",
+      "label": "Days",
+      "unit": "days",
+      "placeholder": "Number of days",
+      "error": "Please enter a valid number of days"
+    },
+    "goalDate": {
+      "title": "Goal Date",
+      "label": "Goal Date",
+      "placeholder": "Pick a date",
+      "error": "Please select a valid date"
+    },
+    "quality": {
+      "label": "Process quality",
+      "optimal": "Training + protein",
+      "optimalDescription": "Strength training, enough protein (~80% fat loss / ~50% fat gain)",
+      "moderate": "No training",
+      "moderateDescription": "Diet only, no strength training (~70% fat)",
+      "poor": "Aggressive / uncontrolled",
+      "poorDescription": "Crash diet or uncontrolled surplus (~60% fat loss / ~80% fat gain)"
+    }
   },
   "formula": {
     "title": "Formula",
     "placeholder": "Please choose your formula to calculate your calories",
     "error": "Please choose a formula",
-    "harrisBenedict": "The Original Harris-Benedict Equation",
-    "mifflinStJeor": "The Mifflin St. Jeor Equation"
+    "katchMcArdle": "Katch-McArdle",
+    "katchMcArdleDescription": "Based on lean body mass, more precise with a known body fat %",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "mifflinStJeorDescription": "Based on weight, height, and age",
+    "harrisBenedict": "Harris-Benedict",
+    "harrisBenedictDescription": "Classic formula (1984 revision), based on weight, height, and age"
   },
-  "calculate": "Calculate Calories",
-  "result": "You will need to consume {calories} kcal to {goal}",
+  "currentStats": {
+    "title": "Current Stats",
+    "tdee": "TDEE",
+    "bmr": "BMR",
+    "lbm": "Lean Mass",
+    "fm": "Fat Mass"
+  },
+  "goalResults": {
+    "title": "Goal Projection",
+    "estimatedBodyFat": "Est. Body Fat",
+    "leanMassAtGoal": "Est. Lean Mass",
+    "dailyCalories": "Daily Calories",
+    "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
+  },
+  "units": {
+    "kcal": "kcal",
+    "kcalPerDay": "kcal/day",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "estimated": "est.",
   "page": {
     "title": "Calorie Calculator",
-    "subtitle": "Understand your daily energy needs and take action with confidence.",
+    "subtitle": "Calculate how many calories you need per day to reach your goal weight.",
     "formSectionTitle": "Your Information",
-    "formSectionSubtitle": "We'll use this information to tailor your calories.",
-    "resultsSectionTitle": "Your Results",
-    "dailyCalorieTarget": "Daily Calorie Target",
-    "caloriesPerDay": "calories per day",
-    "calorieDistribution": "Calorie Distribution",
-    "macros": {
-      "protein": "Protein",
-      "carbs": "Carbs",
-      "fats": "Fats"
-    },
-    "weeklyWeightChange": "Weekly Weight Change",
-    "weeklyChangeLabels": {
-      "cut": "-1 kg/week",
-      "maintain": "Maintain",
-      "gain": "+1 kg/week"
-    },
-    "weeklyChangeActiveLabel": {
-      "cut": "Losing weight",
-      "maintain": "Maintaining weight",
-      "gain": "Gaining weight"
-    },
-    "emptyState": "Fill in your information to see your personalized calorie breakdown."
+    "formSectionSubtitle": "We'll use this information to tailor your calories."
   }
 }

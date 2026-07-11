@@ -1,30 +1,26 @@
-import type { ReactNode } from 'react';
 import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 import { NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
-import { notFound } from 'next/navigation';
-
-import { UserDataProvider } from '@/context/user-data-context';
+import type { ReactNode } from 'react';
 import Header from '@/app/[locale]/components/header/header';
 import { routing } from '@/i18n/routing';
 
 export function generateStaticParams() {
-  return routing.locales.map(locale => ({ locale }));
+  return routing.locales.map((locale) => ({ locale }));
 }
 
 export const metadata: Metadata = {
+  description: 'Calculate your daily caloric needs',
   title: 'Calorik',
-  description: 'Calculate your daily caloric needs'
 };
 
-const isSupportedLocale = (
-  value: string
-): value is (typeof routing.locales)[number] =>
+const isSupportedLocale = (value: string): value is (typeof routing.locales)[number] =>
   routing.locales.includes(value as (typeof routing.locales)[number]);
 
 export default async function LocaleLayout({
   children,
-  params
+  params,
 }: {
   children: ReactNode;
   params: Promise<{ locale: string }>;
@@ -32,7 +28,7 @@ export default async function LocaleLayout({
   const { locale } = await params;
 
   // Validate that the incoming `locale` parameter is valid
-  if (!locale || !isSupportedLocale(locale)) {
+  if (!(locale && isSupportedLocale(locale))) {
     notFound();
   }
 
@@ -43,12 +39,10 @@ export default async function LocaleLayout({
 
   return (
     <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      <div className="flex min-h-screen flex-col bg-gradient-to-b from-sky-100/60 via-white to-white text-foreground">
+      <div className="flex min-h-screen flex-col text-foreground">
         <Header />
-        <main className="flex-1">
-          <div className="max-w-6xl px-4 py-12 md:py-16 mx-auto">
-            <UserDataProvider>{children}</UserDataProvider>
-          </div>
+        <main className="flex-1 pt-14">
+          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-10">{children}</div>
         </main>
       </div>
     </NextIntlClientProvider>

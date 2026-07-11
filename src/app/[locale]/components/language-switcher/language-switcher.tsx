@@ -1,8 +1,8 @@
 'use client';
 
+import { ChevronDown } from 'lucide-react';
 import { useLocale } from 'next-intl';
 import ReactCountryFlag from 'react-country-flag';
-import { ChevronDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -19,69 +19,65 @@ const LanguageSwitcher = () => {
   const pathname = usePathname();
 
   const languages = [
-    { code: 'en', label: 'English', countryCode: 'GB' },
-    { code: 'de', label: 'Deutsch', countryCode: 'DE' },
-    { code: 'ru', label: 'Русский', countryCode: 'RU' },
+    { code: 'en', countryCode: 'GB', label: 'English' },
+    { code: 'de', countryCode: 'DE', label: 'Deutsch' },
+    { code: 'ru', countryCode: 'RU', label: 'Русский' },
   ];
 
-  const currentLanguage =
-    languages.find((lang) => lang.code === locale) ?? languages[0];
+  const currentLanguage = languages.find((lang) => lang.code === locale) ?? languages[0];
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button
-          variant="outline"
-          className="flex items-center gap-2"
-          aria-label={currentLanguage.label}
-          title={currentLanguage.label}
-        >
-          <ReactCountryFlag
-            svg
-            countryCode={currentLanguage.countryCode}
-            style={{
-              width: '1.25rem',
-              height: '1rem',
-              borderRadius: '2px',
-            }}
-            aria-hidden
+      <DropdownMenuTrigger
+        render={
+          <Button
+            aria-label={currentLanguage.label}
+            className="flex items-center gap-2 data-popup-open:bg-accent data-popup-open:text-accent-foreground"
             title={currentLanguage.label}
+            variant="ghost"
           />
-          <span className="hidden text-sm font-medium sm:inline">
-            {currentLanguage.label}
-          </span>
-          <ChevronDown className="h-4 w-4" />
-        </Button>
+        }
+      >
+        <ReactCountryFlag
+          aria-hidden
+          countryCode={currentLanguage.countryCode}
+          style={{
+            borderRadius: '3px',
+            height: '1rem',
+            width: '1.25rem',
+          }}
+          svg
+          title={currentLanguage.label}
+        />
+        <span className="hidden font-medium text-sm sm:inline">{currentLanguage.label}</span>
+        <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-44">
+      <DropdownMenuContent align="end" className="w-44 gap-4">
         {languages.map((lang) => (
           <DropdownMenuItem
+            className={cn('flex items-center gap-2')}
             key={lang.code}
-            asChild
-            className={cn(
-              'flex items-center gap-2',
-              locale === lang.code && 'bg-accent text-accent-foreground',
-            )}
-          >
-            <Link
-              href={pathname || '/'}
-              locale={lang.code}
-              className="flex flex-1 items-center gap-2"
-              role="menuitem"
-            >
-              <ReactCountryFlag
-                svg
-                countryCode={lang.countryCode}
-                style={{
-                  width: '1.25rem',
-                  height: '1rem',
-                  borderRadius: '2px',
-                }}
-                aria-hidden
-                title={lang.label}
+            render={
+              <Link
+                className="flex flex-1 items-center gap-2"
+                href={pathname || '/'}
+                locale={lang.code}
+                role="menuitem"
               />
-              <span className="text-sm">{lang.label}</span>
-            </Link>
+            }
+          >
+            <ReactCountryFlag
+              aria-hidden
+              countryCode={lang.countryCode}
+              style={{
+                borderRadius: '3px',
+                height: '1rem',
+                width: '1.25rem',
+              }}
+              svg
+              title={lang.label}
+            />
+            <span className="text-sm">{lang.label}</span>
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>

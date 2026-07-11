@@ -10,74 +10,126 @@
     },
     "age": {
       "title": "Alter",
+      "label": "Alter",
+      "unit": "J.",
       "error": "Bitte geben Sie korrektes Alter an",
       "placeholder": "Bitte geben Sie ihr Alter ein"
     },
     "weight": {
       "title": "Gewicht (kg)",
+      "titleImperial": "Gewicht (lbs)",
+      "label": "Gewicht",
+      "unit": "kg",
       "error": "Bitte geben Sie korrektes Gewicht an",
       "placeholder": "Bitte geben Sie ihr Gewicht ein"
     },
     "height": {
       "title": "Größe (cm)",
-      "error": "Bitte geben Sie korrekte Größe an", 
+      "titleImperial": "Größe (in)",
+      "label": "Größe",
+      "unit": "cm",
+      "error": "Bitte geben Sie korrekte Größe an",
       "placeholder": "Bitte geben Sie ihre Größe ein"
+    },
+    "bodyFat": {
+      "title": "Körperfett (%)",
+      "label": "Körperfett",
+      "unit": "%",
+      "error": "Bitte geben Sie einen gültigen Körperfettanteil an",
+      "placeholder": "Opt."
     }
   },
   "activity": {
     "title": "Aktivität",
     "placeholder": "Bitte wählen Sie Ihr Aktivitätslevel aus",
     "error": "Bitte wählen Sie Ihr Aktivitätslevel aus",
-    "noExercise": "Sitzende Tätigkeit / Kein Training",
-    "lightExercise": "Leichtes Training (1-3 mal pro Woche)",
-    "moderateExercise": "Moderates Training (3-5 mal pro Woche)",
-    "heavyExercise": "Hartes Training (6-7 mal pro Woche)",
-    "veryHeavyExercise": "Sehr hartes Training (zwei mal täglich)"
+    "none": "Keine",
+    "noneDescription": "Sitzende Tätigkeit, Bürojob",
+    "low": "Niedrig",
+    "lowDescription": "Leichtes Training 1-2 Tage/Woche",
+    "moderate": "Moderat",
+    "moderateDescription": "Moderates Training 3-5 Tage/Woche",
+    "active": "Aktiv",
+    "activeDescription": "Hartes Training 6-7 Tage/Woche",
+    "veryActive": "Sehr aktiv",
+    "veryActiveDescription": "Intensives Training, körperliche Arbeit",
+    "custom": "Benutzerdefiniert",
+    "customDescription": "Eigenen Multiplikator eingeben",
+    "customMultiplier": {
+      "title": "Multiplikator",
+      "placeholder": "1,55",
+      "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein",
+      "error": "Bitte geben Sie einen Multiplikator zwischen 1,0 und 2,5 ein"
+    }
   },
   "goal": {
-    "title": "Ziel",
-    "placeholder": "Bitte wählen Sie Ihr Ziel aus",
-    "error": "Bitte wählen Sie Ihr Ziel aus",
-    "cut": "Abnehmen (-20%)",
-    "cut_short": "abzunehmen",
-    "maintain": "Gewicht zu halten", 
-    "maintain_short": "Gewicht zu halten",
-    "gain": "Zunehmen (+15%)",
-    "gain_short": "zuzunehmen"
+    "title": "Ihr Ziel",
+    "goalWeight": {
+      "title": "Zielgewicht (kg)",
+      "titleImperial": "Zielgewicht (lbs)",
+      "label": "Zielgewicht",
+      "unit": "kg",
+      "placeholder": "Geben Sie Ihr Zielgewicht ein",
+      "error": "Bitte geben Sie ein gültiges Zielgewicht ein"
+    },
+    "daysUntilGoal": {
+      "title": "Tage bis zum Ziel",
+      "label": "Tage",
+      "unit": "Tage",
+      "placeholder": "Anzahl der Tage",
+      "error": "Bitte geben Sie eine gültige Anzahl von Tagen ein"
+    },
+    "goalDate": {
+      "title": "Zieldatum",
+      "label": "Zieldatum",
+      "placeholder": "Datum wählen",
+      "error": "Bitte wählen Sie ein gültiges Datum"
+    },
+    "quality": {
+      "label": "Prozessqualität",
+      "optimal": "Training + Protein",
+      "optimalDescription": "Krafttraining, ausreichend Protein (~80% Fettverlust / ~50% Fettzunahme)",
+      "moderate": "Ohne Training",
+      "moderateDescription": "Nur Diät, kein Krafttraining (~70% Fett)",
+      "poor": "Aggressiv / unkontrolliert",
+      "poorDescription": "Crash-Diät oder unkontrollierter Überschuss (~60% Fettverlust / ~80% Fettzunahme)"
+    }
   },
   "formula": {
     "title": "Formel",
     "placeholder": "Bitte wählen Sie ihre Formel für die Kalorienrechnung aus",
-    "harrisBenedict": "Harris-Benedict-Formel",
-    "mifflinStJeor": "Mifflin-St.Jeor-Formel"
+    "katchMcArdle": "Katch-McArdle",
+    "katchMcArdleDescription": "Basiert auf der Magermasse, genauer bei bekanntem KFA",
+    "mifflinStJeor": "Mifflin-St. Jeor",
+    "mifflinStJeorDescription": "Basiert auf Gewicht, Größe und Alter",
+    "harrisBenedict": "Harris-Benedict",
+    "harrisBenedictDescription": "Klassische Formel (Revision 1984), basiert auf Gewicht, Größe und Alter"
   },
-  "calculate": "Kalorien berechnen",
-  "result": "Sie müssen {calories} Kalorien konsumieren, um {goal}",
+  "currentStats": {
+    "title": "Aktuelle Werte",
+    "tdee": "TDEE",
+    "bmr": "Grundumsatz",
+    "lbm": "Magermasse",
+    "fm": "Fettmasse"
+  },
+  "goalResults": {
+    "title": "Zielprognose",
+    "estimatedBodyFat": "Geschätztes KFA",
+    "leanMassAtGoal": "Progn. Magermasse",
+    "dailyCalories": "Tägliche Kalorien",
+    "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage."
+  },
+  "units": {
+    "kcal": "kcal",
+    "kcalPerDay": "kcal/Tag",
+    "kg": "kg",
+    "percent": "%"
+  },
+  "estimated": "gesch.",
   "page": {
     "title": "Kalorienrechner",
-    "subtitle": "Verstehen Sie Ihren täglichen Energiebedarf und handeln Sie selbstbewusst.",
+    "subtitle": "Berechnen Sie, wie viele Kalorien Sie täglich brauchen, um Ihr Zielgewicht zu erreichen.",
     "formSectionTitle": "Ihre Informationen",
-    "formSectionSubtitle": "Wir nutzen diese Angaben, um Ihre Kalorien zu berechnen.",
-    "resultsSectionTitle": "Ihre Ergebnisse",
-    "dailyCalorieTarget": "Tägliches Kalorienziel",
-    "caloriesPerDay": "Kalorien pro Tag",
-    "calorieDistribution": "Kalorienverteilung",
-    "macros": {
-      "protein": "Protein",
-      "carbs": "Kohlenhydrate",
-      "fats": "Fette"
-    },
-    "weeklyWeightChange": "Wöchentliche Gewichtsveränderung",
-    "weeklyChangeLabels": {
-      "cut": "-1 kg/Woche",
-      "maintain": "Gewicht halten",
-      "gain": "+1 kg/Woche"
-    },
-    "weeklyChangeActiveLabel": {
-      "cut": "Gewicht reduzieren",
-      "maintain": "Gewicht halten",
-      "gain": "Gewicht zunehmen"
-    },
-    "emptyState": "Füllen Sie Ihre Daten aus, um Ihre persönliche Kalorienübersicht zu sehen."
+    "formSectionSubtitle": "Wir nutzen diese Angaben, um Ihre Kalorien zu berechnen."
   }
 }

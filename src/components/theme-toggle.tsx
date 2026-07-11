@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import { FiMoon, FiSun } from 'react-icons/fi';
+import { Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/ui/button';
 
@@ -22,16 +22,14 @@ const ThemeToggle = () => {
 
   return (
     <Button
-      variant="ghost"
-      size="icon"
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
       onClick={handleToggle}
+      size="icon"
+      variant="ghost"
     >
-      {mounted ? (
-        isDark ? <FiSun className="h-5 w-5" /> : <FiMoon className="h-5 w-5" />
-      ) : (
-        <FiSun className="h-5 w-5" />
-      )}
+      {mounted && isDark && <Sun className="h-5 w-5" />}
+      {mounted && !isDark && <Moon className="h-5 w-5" />}
+      {!mounted && <Sun className="h-5 w-5" />}
     </Button>
   );
 };
