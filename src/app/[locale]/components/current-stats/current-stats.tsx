@@ -31,9 +31,7 @@ const CurrentStats = () => {
         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
           {stats.map((stat) => (
             <div key={stat.label}>
-              <p className="font-medium text-[11px] text-muted-foreground uppercase tracking-[0.12em]">
-                {stat.label}
-              </p>
+              <p className="font-medium text-[13px] text-muted-foreground ">{stat.label}</p>
               <p className="mt-1 font-display font-semibold text-2xl text-foreground tabular-nums tracking-tight">
                 {stat.value}
                 <span className="ml-1 font-normal font-sans text-muted-foreground text-sm">

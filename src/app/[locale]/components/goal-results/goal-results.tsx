@@ -55,9 +55,7 @@ const GoalResults = () => {
         <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
           {results.map((result) => (
             <div key={result.label}>
-              <p className="font-medium text-[11px] text-muted-foreground uppercase tracking-[0.12em]">
-                {result.label}
-              </p>
+              <p className="font-medium text-[13px] text-muted-foreground">{result.label}</p>
               <p className="mt-1 font-display font-semibold text-2xl text-foreground tabular-nums tracking-tight">
                 {result.value}
                 <span className="ml-1 font-normal font-sans text-muted-foreground text-sm">

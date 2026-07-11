@@ -42,7 +42,7 @@ const LanguageSwitcher = () => {
           aria-hidden
           countryCode={currentLanguage.countryCode}
           style={{
-            borderRadius: '2px',
+            borderRadius: '3px',
             height: '1rem',
             width: '1.25rem',
           }}
@@ -52,13 +52,10 @@ const LanguageSwitcher = () => {
         <span className="hidden font-medium text-sm sm:inline">{currentLanguage.label}</span>
         <ChevronDown className="h-4 w-4" />
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-44">
+      <DropdownMenuContent align="end" className="w-44 gap-4">
         {languages.map((lang) => (
           <DropdownMenuItem
-            className={cn(
-              'flex items-center gap-2',
-              locale === lang.code && 'bg-accent text-accent-foreground',
-            )}
+            className={cn('flex items-center gap-2')}
             key={lang.code}
             render={
               <Link
@@ -73,7 +70,7 @@ const LanguageSwitcher = () => {
               aria-hidden
               countryCode={lang.countryCode}
               style={{
-                borderRadius: '2px',
+                borderRadius: '3px',
                 height: '1rem',
                 width: '1.25rem',
               }}

@@ -372,7 +372,7 @@ const UserInputs = () => {
             <FieldSet className="gap-2">
               <FieldLegend variant="label">{t('formula.title')}</FieldLegend>
               <RadioGroup
-                className="grid grid-cols-2 gap-2"
+                className="flex flex-col gap-2"
                 data-slot="radio-group"
                 onValueChange={field.onChange}
                 value={field.value}

@@ -160,7 +160,7 @@ const GoalSetting = () => {
                       render={
                         <Button
                           className={cn(
-                            'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none',
+                            'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none p-3',
                             !field.value && 'text-muted-foreground',
                           )}
                           data-testid="goal-date"
@@ -168,7 +168,7 @@ const GoalSetting = () => {
                         />
                       }
                     >
-                      <CalendarIcon className="mr-2 h-4 w-4" />
+                      <CalendarIcon className="mr-1 h-4 w-4 text-muted-foreground" />
                       <span className="truncate">
                         {field.value
                           ? format(selectedDate as Date, 'PP', { locale: dateLocale })
