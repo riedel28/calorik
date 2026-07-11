@@ -5,8 +5,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: var(--font-golos), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-onest), var(--font-golos), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-onest), ui-sans-serif, system-ui, sans-serif;
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -34,25 +34,25 @@
 @layer base {
   :root {
     --radius: 0.625rem;
-    /* Warm paper neutrals with a single deep-moss accent */
+    /* Warm paper neutrals with a single deep-blue accent */
     --background: oklch(0.977 0.004 91);
     --foreground: oklch(0.245 0.012 91);
     --card: oklch(0.995 0.002 91);
     --card-foreground: oklch(0.245 0.012 91);
     --popover: oklch(0.995 0.002 91);
     --popover-foreground: oklch(0.245 0.012 91);
-    --primary: oklch(0.46 0.09 155);
+    --primary: oklch(0.46 0.12 255);
     --primary-foreground: oklch(0.985 0.003 91);
     --secondary: oklch(0.955 0.005 91);
     --secondary-foreground: oklch(0.3 0.012 91);
     --muted: oklch(0.95 0.005 91);
     --muted-foreground: oklch(0.52 0.014 91);
-    --accent: oklch(0.945 0.008 130);
-    --accent-foreground: oklch(0.3 0.03 155);
+    --accent: oklch(0.945 0.008 255);
+    --accent-foreground: oklch(0.3 0.03 255);
     --destructive: oklch(0.577 0.245 27.325);
     --border: oklch(0.902 0.007 91);
     --input: oklch(0.874 0.008 91);
-    --ring: oklch(0.46 0.09 155);
+    --ring: oklch(0.46 0.12 255);
   }
 
   .dark {
@@ -62,18 +62,18 @@
     --card-foreground: oklch(0.93 0.004 91);
     --popover: oklch(0.235 0.007 91);
     --popover-foreground: oklch(0.93 0.004 91);
-    --primary: oklch(0.74 0.11 155);
+    --primary: oklch(0.74 0.11 255);
     --primary-foreground: oklch(0.195 0.006 91);
     --secondary: oklch(0.28 0.007 91);
     --secondary-foreground: oklch(0.93 0.004 91);
     --muted: oklch(0.275 0.007 91);
     --muted-foreground: oklch(0.68 0.008 91);
-    --accent: oklch(0.29 0.015 145);
-    --accent-foreground: oklch(0.86 0.06 155);
+    --accent: oklch(0.29 0.015 255);
+    --accent-foreground: oklch(0.86 0.06 255);
     --destructive: oklch(0.704 0.191 22.216);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 16%);
-    --ring: oklch(0.74 0.11 155);
+    --ring: oklch(0.74 0.11 255);
   }
 
   * {
