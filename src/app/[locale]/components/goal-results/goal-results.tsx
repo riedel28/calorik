@@ -9,6 +9,7 @@ import { useProjection } from '../projection-form/use-projection';
 
 const GoalResults = () => {
   const t = useTranslations('goalResults');
+  const tUnits = useTranslations('units');
   const tRoot = useTranslations();
   const {
     bmr,
@@ -23,7 +24,7 @@ const GoalResults = () => {
     {
       caption: bodyFatIsEstimated && goalBodyFatPct !== null ? tRoot('estimated') : null,
       label: t('estimatedBodyFat'),
-      unit: '%',
+      unit: tUnits('percent'),
       value:
         goalBodyFatPct === null
           ? '—'
@@ -32,7 +33,7 @@ const GoalResults = () => {
     {
       caption: bodyFatIsEstimated && goalLeanMassKg !== null ? tRoot('estimated') : null,
       label: t('leanMassAtGoal'),
-      unit: 'kg',
+      unit: tUnits('kg'),
       value:
         goalLeanMassKg === null
           ? '—'
@@ -41,7 +42,7 @@ const GoalResults = () => {
     {
       caption: null,
       label: t('dailyCalories'),
-      unit: 'kcal/day',
+      unit: tUnits('kcalPerDay'),
       value: dailyCalories === null ? '—' : String(Math.round(dailyCalories)),
     },
   ];

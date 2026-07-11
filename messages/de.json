@@ -19,6 +19,7 @@
       "title": "Gewicht (kg)",
       "titleImperial": "Gewicht (lbs)",
       "label": "Gewicht",
+      "unit": "kg",
       "error": "Bitte geben Sie korrektes Gewicht an",
       "placeholder": "Bitte geben Sie ihr Gewicht ein"
     },
@@ -26,12 +27,14 @@
       "title": "Größe (cm)",
       "titleImperial": "Größe (in)",
       "label": "Größe",
+      "unit": "cm",
       "error": "Bitte geben Sie korrekte Größe an",
       "placeholder": "Bitte geben Sie ihre Größe ein"
     },
     "bodyFat": {
       "title": "Körperfett (%)",
       "label": "Körperfett",
+      "unit": "%",
       "error": "Bitte geben Sie einen gültigen Körperfettanteil an",
       "placeholder": "Opt."
     }
@@ -65,6 +68,7 @@
       "title": "Zielgewicht (kg)",
       "titleImperial": "Zielgewicht (lbs)",
       "label": "Zielgewicht",
+      "unit": "kg",
       "placeholder": "Geben Sie Ihr Zielgewicht ein",
       "error": "Bitte geben Sie ein gültiges Zielgewicht ein"
     },
@@ -114,6 +118,12 @@
     "leanMassAtGoal": "Progn. Magermasse",
     "dailyCalories": "Tägliche Kalorien",
     "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage."
+  },
+  "units": {
+    "kcal": "kcal",
+    "kcalPerDay": "kcal/Tag",
+    "kg": "kg",
+    "percent": "%"
   },
   "estimated": "gesch.",
   "page": {

@@ -13,13 +13,14 @@ const formatMass = (value: number | null, isEstimated: boolean) =>
 
 const CurrentStats = () => {
   const t = useTranslations('currentStats');
+  const tUnits = useTranslations('units');
   const { bmr, bodyFatIsEstimated, fatMassKg, leanMassKg, tdee } = useProjection();
 
   const stats = [
-    { label: t('tdee'), unit: 'kcal', value: formatCalories(tdee) },
-    { label: t('bmr'), unit: 'kcal', value: formatCalories(bmr) },
-    { label: t('lbm'), unit: 'kg', value: formatMass(leanMassKg, bodyFatIsEstimated) },
-    { label: t('fm'), unit: 'kg', value: formatMass(fatMassKg, bodyFatIsEstimated) },
+    { label: t('tdee'), unit: tUnits('kcal'), value: formatCalories(tdee) },
+    { label: t('bmr'), unit: tUnits('kcal'), value: formatCalories(bmr) },
+    { label: t('lbm'), unit: tUnits('kg'), value: formatMass(leanMassKg, bodyFatIsEstimated) },
+    { label: t('fm'), unit: tUnits('kg'), value: formatMass(fatMassKg, bodyFatIsEstimated) },
   ];
 
   return (

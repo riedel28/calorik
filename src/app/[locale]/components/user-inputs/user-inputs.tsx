@@ -169,7 +169,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix="cm"
+                  suffix={t('yourData.height.unit')}
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -199,7 +199,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix="kg"
+                  suffix={t('yourData.weight.unit')}
                   type="number"
                 />
                 {fieldState.invalid && (
@@ -259,7 +259,7 @@ const UserInputs = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder={t('yourData.bodyFat.placeholder')}
-                  suffix="%"
+                  suffix={t('yourData.bodyFat.unit')}
                   type="number"
                 />
                 {fieldState.invalid && (

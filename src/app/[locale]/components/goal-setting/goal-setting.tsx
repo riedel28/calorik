@@ -91,7 +91,7 @@ const GoalSetting = () => {
                     field.onChange(numericValue === '' ? '' : numericValue);
                   }}
                   placeholder="0"
-                  suffix="kg"
+                  suffix={t('goalWeight.unit')}
                   type="number"
                 />
                 {fieldState.invalid && (
