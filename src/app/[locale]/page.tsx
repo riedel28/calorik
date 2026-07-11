@@ -21,7 +21,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <h1 className="font-display font-semibold text-2xl text-foreground tracking-tight md:text-3xl">
           {t('title')}
         </h1>
-        <p className="max-w-xl text-base text-muted-foreground">{t('subtitle')}</p>
+        <p className="max-w-2xl text-base text-muted-foreground">{t('subtitle')}</p>
       </div>
       <ProjectionForm />
     </div>
