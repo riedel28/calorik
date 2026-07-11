@@ -16,9 +16,9 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
   const t = await getTranslations({ locale, namespace: 'page' });
 
   return (
-    <div className="space-y-8 md:space-y-10">
+    <div className="space-y-6 md:space-y-6">
       <div className="animate-fade-up space-y-2">
-        <h1 className="font-display font-semibold text-3xl text-foreground tracking-tight md:text-4xl">
+        <h1 className="font-display font-semibold text-2xl text-foreground tracking-tight md:text-3xl">
           {t('title')}
         </h1>
         <p className="max-w-xl text-base text-muted-foreground">{t('subtitle')}</p>
