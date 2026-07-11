@@ -15,7 +15,7 @@ Enter your body data and a goal weight — Calorik calculates your BMR and TDEE,
 ## Stack
 
 - [Next.js 16](https://nextjs.org/) (App Router) + React 19 + TypeScript
-- [Tailwind CSS v4](https://tailwindcss.com/) + [Base UI](https://base-ui.com/) (shadcn-style components)
+- [Tailwind CSS v4](https://tailwindcss.com/) + [shadcn/ui](https://ui.shadcn.com/)
 - [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
 - [next-intl](https://next-intl.dev/) for internationalization
 - [Vitest](https://vitest.dev/) for tests, [Biome](https://biomejs.dev/) for linting and formatting
