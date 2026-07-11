@@ -1,20 +1,27 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { useProjection } from '../projection-form/use-projection';
 
-const formatCalories = (value: number | null) => (value === null ? '—' : String(Math.round(value)));
-
-const formatMass = (value: number | null, isEstimated: boolean) =>
-  value === null ? '—' : `${isEstimated ? '~' : ''}${value.toFixed(1)}`;
-
 const CurrentStats = () => {
   const t = useTranslations('currentStats');
   const tUnits = useTranslations('units');
+  const format = useFormatter();
   const { bmr, bodyFatIsEstimated, fatMassKg, leanMassKg, tdee } = useProjection();
+
+  const formatCalories = (value: number | null) =>
+    value === null ? '—' : format.number(Math.round(value), { useGrouping: false });
+
+  const formatMass = (value: number | null, isEstimated: boolean) =>
+    value === null
+      ? '—'
+      : `${isEstimated ? '~' : ''}${format.number(value, {
+          maximumFractionDigits: 1,
+          minimumFractionDigits: 1,
+        })}`;
 
   const stats = [
     { label: t('tdee'), unit: tUnits('kcal'), value: formatCalories(tdee) },

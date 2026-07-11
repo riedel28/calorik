@@ -1,7 +1,7 @@
 'use client';
 
 import { TriangleAlert } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -11,6 +11,7 @@ const GoalResults = () => {
   const t = useTranslations('goalResults');
   const tUnits = useTranslations('units');
   const tRoot = useTranslations();
+  const format = useFormatter();
   const {
     bmr,
     bodyFatIsEstimated,
@@ -20,30 +21,33 @@ const GoalResults = () => {
     goalLeanMassKg,
   } = useProjection();
 
+  const formatDecimal = (value: number, isEstimated: boolean) =>
+    `${isEstimated ? '~' : ''}${format.number(value, {
+      maximumFractionDigits: 1,
+      minimumFractionDigits: 1,
+    })}`;
+
   const results = [
     {
       caption: bodyFatIsEstimated && goalBodyFatPct !== null ? tRoot('estimated') : null,
       label: t('estimatedBodyFat'),
       unit: tUnits('percent'),
-      value:
-        goalBodyFatPct === null
-          ? '—'
-          : `${bodyFatIsEstimated ? '~' : ''}${goalBodyFatPct.toFixed(1)}`,
+      value: goalBodyFatPct === null ? '—' : formatDecimal(goalBodyFatPct, bodyFatIsEstimated),
     },
     {
       caption: bodyFatIsEstimated && goalLeanMassKg !== null ? tRoot('estimated') : null,
       label: t('leanMassAtGoal'),
       unit: tUnits('kg'),
-      value:
-        goalLeanMassKg === null
-          ? '—'
-          : `${bodyFatIsEstimated ? '~' : ''}${goalLeanMassKg.toFixed(1)}`,
+      value: goalLeanMassKg === null ? '—' : formatDecimal(goalLeanMassKg, bodyFatIsEstimated),
     },
     {
       caption: null,
       label: t('dailyCalories'),
       unit: tUnits('kcalPerDay'),
-      value: dailyCalories === null ? '—' : String(Math.round(dailyCalories)),
+      value:
+        dailyCalories === null
+          ? '—'
+          : format.number(Math.round(dailyCalories), { useGrouping: false }),
     },
   ];
 
