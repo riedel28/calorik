@@ -1,15 +1,24 @@
 # Calorik
 
-_Simple calorie counter app_</br>
-You can calculate your calorie needs based on your goal. Available in English, German, and Russian.
+_Calorie calculator and daily-calorie projection app._
 
-## The project is powered by:
+Enter your body data and a goal weight — Calorik calculates your BMR and TDEE, projects your body composition at the goal, and tells you how many calories to eat per day to get there. Available in English, German, and Russian.
 
-- React
-- Next.js
-- Tailwind CSS
-- Base UI
-- React Hook Form
+## Features
+
+- **BMR formulas**: Mifflin-St Jeor, Katch-McArdle (lean-mass based), and revised Harris-Benedict (1984)
+- **Body-fat estimate** via Deurenberg when you don't know your percentage
+- **Goal projection**: daily calorie target, projected body fat % and lean mass at goal weight, with a warning when the pace drops below your BMR
+- **Live results** — everything recalculates as you type; the form is persisted to localStorage
+- **i18n** (en / de / ru) with locale-aware number formatting, plus light/dark theme
+
+## Stack
+
+- [Next.js 16](https://nextjs.org/) (App Router) + React 19 + TypeScript
+- [Tailwind CSS v4](https://tailwindcss.com/) + [Base UI](https://base-ui.com/) (shadcn-style components)
+- [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- [next-intl](https://next-intl.dev/) for internationalization
+- [Vitest](https://vitest.dev/) for tests, [Biome](https://biomejs.dev/) for linting and formatting
 
 ## Demo
 
@@ -17,16 +26,20 @@ You can play around with the app here: [https://calorik-riedel28.vercel.app/en](
 
 ## Setup
 
-To get started with the app locally run following commands:
-
 ```
 git clone https://github.com/riedel28/calorik.git
-
 cd calorik
-
 npm install
-
 npm run dev
 ```
 
-Run tests once with `npm run test:no-watch`, and lint/format with `npm run check`.
+## Commands
+
+| Command                 | Description                        |
+| ----------------------- | ---------------------------------- |
+| `npm run dev`           | Start the dev server               |
+| `npm run build`         | Production build (outputs to `/build`) |
+| `npm run test:no-watch` | Run tests once                     |
+| `npm run typecheck`     | TypeScript check, no emit          |
+| `npm run check`         | Biome lint + format check          |
+| `npm run fix`           | Auto-fix lint and formatting       |
