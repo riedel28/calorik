@@ -35,7 +35,7 @@
     "husky": "^9.1.7",
     "jsdom": "^29.1.1",
     "knip": "^6.24.0",
-    "postcss": "^8.5.16",
+    "postcss": "^8.5.18",
     "shadcn": "^4.13.0",
     "tailwindcss": "^4.3.2",
     "tailwindcss-animate": "^1.0.7",
