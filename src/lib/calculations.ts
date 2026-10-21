@@ -1,6 +1,19 @@
-export type Gender = 'male' | 'female';
-export type ActivityLevel = 'none' | 'low' | 'moderate' | 'active' | 'veryActive' | 'custom';
-export type GoalQuality = 'optimal' | 'moderate' | 'poor';
+// Option lists in display order. The form schema and the UI derive from these.
+export const GENDERS = ['male', 'female'] as const;
+export const ACTIVITY_LEVELS = [
+  'none',
+  'low',
+  'moderate',
+  'active',
+  'veryActive',
+  'custom',
+] as const;
+export const BMR_FORMULAS = ['mifflin-st-jeor', 'harris-benedict', 'katch-mcardle'] as const;
+export const GOAL_QUALITIES = ['optimal', 'moderate', 'poor'] as const;
+
+export type Gender = (typeof GENDERS)[number];
+export type ActivityLevel = (typeof ACTIVITY_LEVELS)[number];
+export type GoalQuality = (typeof GOAL_QUALITIES)[number];
 
 export const ACTIVITY_MULTIPLIERS: Record<Exclude<ActivityLevel, 'custom'>, number> = {
   active: 1.725,
@@ -106,4 +119,40 @@ export const projectedBodyFatAtGoal = ({
     fatShareOfChange * (currentWeightKg - goalWeightKg);
   const raw = (fatMassAtGoal / goalWeightKg) * 100;
   return Math.min(Math.max(raw, ESSENTIAL_BODY_FAT_PCT[gender]), LIMITS.bodyFat.max);
+};
+
+// Weekly pace limits, as % of current body weight.
+const MAX_SAFE_LOSS_PCT_PER_WEEK = 1;
+const MAX_SAFE_GAIN_PCT_PER_WEEK = 0.5;
+const MAINTAIN_EPSILON_KG = 0.05;
+
+export type GoalStatus = 'maintain' | 'belowBmr' | 'tooFastLoss' | 'tooFastGain' | 'ok';
+
+export const goalStatus = ({
+  bmr,
+  currentWeightKg,
+  dailyCalories,
+  goalWeightKg,
+  weeklyChangePct,
+}: {
+  bmr: number;
+  currentWeightKg: number;
+  dailyCalories: number;
+  goalWeightKg: number;
+  weeklyChangePct: number;
+}): GoalStatus => {
+  const changeKg = goalWeightKg - currentWeightKg;
+  if (Math.abs(changeKg) < MAINTAIN_EPSILON_KG) {
+    return 'maintain';
+  }
+  if (dailyCalories < bmr) {
+    return 'belowBmr';
+  }
+  if (changeKg < 0 && weeklyChangePct > MAX_SAFE_LOSS_PCT_PER_WEEK) {
+    return 'tooFastLoss';
+  }
+  if (changeKg > 0 && weeklyChangePct > MAX_SAFE_GAIN_PCT_PER_WEEK) {
+    return 'tooFastGain';
+  }
+  return 'ok';
 };

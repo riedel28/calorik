@@ -1,54 +1,41 @@
 'use client';
 
 import { useFormatter, useTranslations } from 'next-intl';
-import { Controller, useFormContext } from 'react-hook-form';
+import { Controller, useFormContext, useWatch } from 'react-hook-form';
 
 import { FieldLegend, FieldSet } from '@/components/ui/field';
 import { OptionDot, OptionRadio, OptionText, SegmentRadio } from '@/components/ui/option-radio';
+import { Panel } from '@/components/ui/panel';
 import { RadioGroup } from '@/components/ui/radio-group';
-import { ACTIVITY_MULTIPLIERS } from '@/lib/calculations';
+import { ACTIVITY_LEVELS, ACTIVITY_MULTIPLIERS, BMR_FORMULAS, GENDERS } from '@/lib/calculations';
 
 import { FIELD_LABEL_CLASS, NumberField } from '../projection-form/number-field';
 import type { ProjectionFormValues } from '../projection-form/schema';
 
-const ACTIVITY_LEVELS = ['none', 'low', 'moderate', 'active', 'veryActive', 'custom'] as const;
-
-const FORMULAS = [
-  { key: 'mifflinStJeor', value: 'mifflin-st-jeor' },
-  { key: 'harrisBenedict', value: 'harris-benedict' },
-  { key: 'katchMcArdle', value: 'katch-mcardle' },
-] as const;
-
 const UserInputs = () => {
   const t = useTranslations();
   const format = useFormatter();
-  const { control, watch } = useFormContext<ProjectionFormValues>();
-  const activityLevel = watch('activityLevel');
+  const { control } = useFormContext<ProjectionFormValues>();
+  const activityLevel = useWatch({ control, name: 'activityLevel' });
 
   return (
-    <section
-      aria-labelledby="your-data-title"
-      className="flex min-w-0 flex-[1_1_340px] flex-col gap-[18px] rounded-xl border bg-card p-5"
-    >
-      <h2 className="font-semibold text-[17px]" id="your-data-title">
-        {t('yourData.title')}
-      </h2>
-
+    <Panel className="min-w-0 flex-[1_1_340px]" title={t('yourData.title')}>
       <Controller
         control={control}
         name="gender"
         render={({ field }) => (
           <FieldSet className="gap-2">
-            <FieldLegend className={FIELD_LABEL_CLASS} variant="label">
-              {t('yourData.gender.title')}
-            </FieldLegend>
+            <FieldLegend className={FIELD_LABEL_CLASS}>{t('yourData.gender.title')}</FieldLegend>
             <RadioGroup
               className="grid grid-cols-2 gap-1.5 rounded-lg bg-secondary p-1"
               onValueChange={field.onChange}
               value={field.value}
             >
-              <SegmentRadio value="male">{t('yourData.gender.male')}</SegmentRadio>
-              <SegmentRadio value="female">{t('yourData.gender.female')}</SegmentRadio>
+              {GENDERS.map((gender) => (
+                <SegmentRadio key={gender} value={gender}>
+                  {t(`yourData.gender.${gender}`)}
+                </SegmentRadio>
+              ))}
             </RadioGroup>
           </FieldSet>
         )}
@@ -82,9 +69,7 @@ const UserInputs = () => {
         name="activityLevel"
         render={({ field }) => (
           <FieldSet className="gap-2">
-            <FieldLegend className={FIELD_LABEL_CLASS} variant="label">
-              {t('activity.title')}
-            </FieldLegend>
+            <FieldLegend className={FIELD_LABEL_CLASS}>{t('activity.title')}</FieldLegend>
             <RadioGroup
               className="flex flex-col gap-1.5"
               onValueChange={field.onChange}
@@ -123,20 +108,18 @@ const UserInputs = () => {
         name="formula"
         render={({ field }) => (
           <FieldSet className="gap-2">
-            <FieldLegend className={FIELD_LABEL_CLASS} variant="label">
-              {t('formula.title')}
-            </FieldLegend>
+            <FieldLegend className={FIELD_LABEL_CLASS}>{t('formula.title')}</FieldLegend>
             <RadioGroup
               className="flex flex-col gap-1.5"
               onValueChange={field.onChange}
               value={field.value}
             >
-              {FORMULAS.map(({ key, value }) => (
-                <OptionRadio key={value} value={value}>
+              {BMR_FORMULAS.map((formula) => (
+                <OptionRadio key={formula} value={formula}>
                   <OptionDot />
                   <OptionText
-                    description={t(`formula.${key}Description`)}
-                    label={t(`formula.${key}`)}
+                    description={t(`formula.options.${formula}.description`)}
+                    label={t(`formula.options.${formula}.label`)}
                   />
                 </OptionRadio>
               ))}
@@ -144,7 +127,7 @@ const UserInputs = () => {
           </FieldSet>
         )}
       />
-    </section>
+    </Panel>
   );
 };
 

@@ -1,5 +1,6 @@
 'use client';
 
+import { startOfToday } from 'date-fns';
 import { useMemo } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
@@ -9,6 +10,8 @@ import {
   deurenbergBodyFat,
   fatMass,
   GOAL_QUALITY_PARTITION,
+  type GoalStatus,
+  goalStatus,
   harrisBenedictBMR,
   katchMcArdleBMR,
   LIMITS,
@@ -18,22 +21,43 @@ import {
   requiredDailyCalories,
 } from '@/lib/calculations';
 
+import { daysUntilGoal } from './goal-timeline';
 import type { ProjectionFormValues } from './schema';
+
+/** Defined together: a weight plus a measured or estimated body fat %. */
+interface BodyComposition {
+  bodyFatPct: number;
+  fatMassKg: number;
+  isEstimated: boolean;
+  leanMassKg: number;
+  weightKg: number;
+}
+
+/** Defined only when TDEE, body composition, goal weight and goal date are all known. */
+export interface GoalProjection {
+  bmr: number;
+  bodyFatChangePct: number;
+  bodyFatIsEstimated: boolean;
+  bodyFatPct: number;
+  /** Required intake minus maintenance (negative = deficit). */
+  caloriesVsTdee: number;
+  currentWeightKg: number;
+  dailyCalories: number;
+  days: number;
+  goalWeightKg: number;
+  leanMassChangeKg: number;
+  leanMassKg: number;
+  status: GoalStatus;
+  weeklyChangeKg: number;
+  /** Absolute weekly change as % of current body weight. */
+  weeklyChangePct: number;
+}
 
 export interface ProjectionResult {
   bmr: number | null;
-  bodyFatIsEstimated: boolean;
-  bodyFatPct: number | null;
-  dailyCalories: number | null;
-  dailyCaloriesBelowBmr: boolean;
-  fatMassKg: number | null;
-  goalBodyFatPct: number | null;
-  goalLeanMassKg: number | null;
-  goalWeightKg: number | null;
-  leanMassKg: number | null;
+  body: BodyComposition | null;
+  goal: GoalProjection | null;
   tdee: number | null;
-  weeklyChangeKg: number | null;
-  weightKg: number | null;
 }
 
 const DAYS_PER_WEEK = 7;
@@ -56,7 +80,74 @@ const resolveActivityMultiplier = (values: Partial<ProjectionFormValues>): numbe
   return values.activityLevel ? ACTIVITY_MULTIPLIERS[values.activityLevel] : null;
 };
 
-export const deriveProjection = (values: Partial<ProjectionFormValues>): ProjectionResult => {
+const deriveGoal = ({
+  bmr,
+  body,
+  days,
+  goalWeightKg,
+  quality,
+  gender,
+  tdee,
+}: {
+  bmr: number;
+  body: BodyComposition;
+  days: number;
+  gender: ProjectionFormValues['gender'];
+  goalWeightKg: number;
+  quality: ProjectionFormValues['goalQuality'];
+  tdee: number;
+}): GoalProjection | null => {
+  const { weightKg } = body;
+  const dailyCalories = requiredDailyCalories({
+    currentWeightKg: weightKg,
+    days,
+    goalWeightKg,
+    tdee,
+  });
+  if (dailyCalories === null) {
+    return null;
+  }
+
+  const partition = GOAL_QUALITY_PARTITION[quality];
+  const bodyFatPct = projectedBodyFatAtGoal({
+    currentBodyFatPct: body.bodyFatPct,
+    currentWeightKg: weightKg,
+    fatShareOfChange: goalWeightKg < weightKg ? partition.lossFatShare : partition.gainFatShare,
+    gender,
+    goalWeightKg,
+  });
+  const leanMassKg = leanMass(goalWeightKg, bodyFatPct);
+  const weeklyChangeKg = ((goalWeightKg - weightKg) / days) * DAYS_PER_WEEK;
+  const weeklyChangePct = (Math.abs(weeklyChangeKg) / weightKg) * 100;
+
+  return {
+    bmr,
+    bodyFatChangePct: bodyFatPct - body.bodyFatPct,
+    bodyFatIsEstimated: body.isEstimated,
+    bodyFatPct,
+    caloriesVsTdee: dailyCalories - tdee,
+    currentWeightKg: weightKg,
+    dailyCalories,
+    days,
+    goalWeightKg,
+    leanMassChangeKg: leanMassKg - body.leanMassKg,
+    leanMassKg,
+    status: goalStatus({
+      bmr,
+      currentWeightKg: weightKg,
+      dailyCalories,
+      goalWeightKg,
+      weeklyChangePct,
+    }),
+    weeklyChangeKg,
+    weeklyChangePct,
+  };
+};
+
+export const deriveProjection = (
+  values: Partial<ProjectionFormValues>,
+  today: Date = startOfToday(),
+): ProjectionResult => {
   const age = toNum(values.age, LIMITS.age);
   const heightCm = toNum(values.height, LIMITS.height);
   const weightKg = toNum(values.weight, LIMITS.weight);
@@ -72,15 +163,20 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
     ? Math.min(Math.max(deurenbergBodyFat(metrics), LIMITS.bodyFat.min), LIMITS.bodyFat.max)
     : null;
   const bodyFatPct = measuredBodyFat ?? estimatedBodyFat;
-  const bodyFatIsEstimated = measuredBodyFat === null && estimatedBodyFat !== null;
-
-  const leanMassKg =
-    weightKg !== null && bodyFatPct !== null ? leanMass(weightKg, bodyFatPct) : null;
-  const fatMassKg = weightKg !== null && bodyFatPct !== null ? fatMass(weightKg, bodyFatPct) : null;
+  const body: BodyComposition | null =
+    weightKg !== null && bodyFatPct !== null
+      ? {
+          bodyFatPct,
+          fatMassKg: fatMass(weightKg, bodyFatPct),
+          isEstimated: measuredBodyFat === null,
+          leanMassKg: leanMass(weightKg, bodyFatPct),
+          weightKg,
+        }
+      : null;
 
   let bmr: number | null = null;
   if (values.formula === 'katch-mcardle') {
-    bmr = leanMassKg !== null ? katchMcArdleBMR(leanMassKg) : null;
+    bmr = body ? katchMcArdleBMR(body.leanMassKg) : null;
   } else if (values.formula === 'mifflin-st-jeor') {
     bmr = metrics ? mifflinStJeorBMR(metrics) : null;
   } else if (values.formula === 'harris-benedict') {
@@ -92,59 +188,20 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
     bmr !== null && activityMultiplier !== null ? calculateTdee(bmr, activityMultiplier) : null;
 
   const goalWeightKg = toNum(values.goalWeight, LIMITS.goalWeight);
-  const days = toNum(values.daysUntilGoal, LIMITS.daysUntilGoal);
+  const days = values.goalDate ? daysUntilGoal(values.goalDate, today) : null;
 
-  const dailyCalories =
-    tdee !== null && weightKg !== null && goalWeightKg !== null && days !== null
-      ? requiredDailyCalories({ currentWeightKg: weightKg, days, goalWeightKg, tdee })
-      : null;
-
-  const partition = values.goalQuality ? GOAL_QUALITY_PARTITION[values.goalQuality] : null;
-  const fatShareOfChange =
-    partition !== null && weightKg !== null && goalWeightKg !== null
-      ? goalWeightKg < weightKg
-        ? partition.lossFatShare
-        : partition.gainFatShare
-      : null;
-
-  const goalBodyFatPct =
-    weightKg !== null &&
-    bodyFatPct !== null &&
-    goalWeightKg !== null &&
+  const goal =
+    bmr !== null &&
+    tdee !== null &&
+    body !== null &&
     gender !== null &&
-    fatShareOfChange !== null
-      ? projectedBodyFatAtGoal({
-          currentBodyFatPct: bodyFatPct,
-          currentWeightKg: weightKg,
-          fatShareOfChange,
-          gender,
-          goalWeightKg,
-        })
+    goalWeightKg !== null &&
+    days !== null &&
+    values.goalQuality
+      ? deriveGoal({ bmr, body, days, gender, goalWeightKg, quality: values.goalQuality, tdee })
       : null;
 
-  const goalLeanMassKg =
-    goalWeightKg !== null && goalBodyFatPct !== null
-      ? leanMass(goalWeightKg, goalBodyFatPct)
-      : null;
-
-  return {
-    bmr,
-    bodyFatIsEstimated,
-    bodyFatPct,
-    dailyCalories,
-    dailyCaloriesBelowBmr: bmr !== null && dailyCalories !== null && dailyCalories < bmr,
-    fatMassKg,
-    goalBodyFatPct,
-    goalLeanMassKg,
-    goalWeightKg,
-    leanMassKg,
-    tdee,
-    weeklyChangeKg:
-      weightKg !== null && goalWeightKg !== null && days !== null
-        ? ((goalWeightKg - weightKg) / days) * DAYS_PER_WEEK
-        : null,
-    weightKg,
-  };
+  return { bmr, body, goal, tdee };
 };
 
 export const useProjection = (): ProjectionResult => {

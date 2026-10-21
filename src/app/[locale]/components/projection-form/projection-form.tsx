@@ -1,10 +1,11 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from 'next-intl';
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 
-import { Form } from '@/components/ui/form';
+import { Panel } from '@/components/ui/panel';
 
 import CurrentStats from '../current-stats/current-stats';
 import GoalResults from '../goal-results/goal-results';
@@ -13,24 +14,24 @@ import UserInputs from '../user-inputs/user-inputs';
 import { loadStoredFormValues, saveFormValues } from './form-storage';
 import { type ProjectionFormValues, projectionFormSchema } from './schema';
 
-export type { ProjectionFormValues } from './schema';
+const DEFAULT_VALUES: ProjectionFormValues = {
+  activityLevel: 'moderate',
+  age: '',
+  bodyFat: '',
+  customMultiplier: '',
+  formula: 'mifflin-st-jeor',
+  gender: 'male',
+  goalDate: '',
+  goalQuality: 'optimal',
+  goalWeight: '',
+  height: '',
+  weight: '',
+};
 
 const ProjectionForm = () => {
+  const t = useTranslations('goal');
   const form = useForm<ProjectionFormValues>({
-    defaultValues: {
-      activityLevel: 'moderate',
-      age: '',
-      bodyFat: '',
-      customMultiplier: '',
-      daysUntilGoal: '',
-      formula: 'mifflin-st-jeor',
-      gender: 'male',
-      goalDate: '',
-      goalQuality: 'optimal',
-      goalWeight: '',
-      height: '',
-      weight: '',
-    },
+    defaultValues: DEFAULT_VALUES,
     mode: 'onChange',
     resolver: zodResolver(projectionFormSchema),
   });
@@ -46,28 +47,23 @@ const ProjectionForm = () => {
   }, [form]);
 
   useEffect(() => {
-    const subscription = form.watch((values) => {
-      saveFormValues(values as ProjectionFormValues);
-    });
+    const subscription = form.watch(() => saveFormValues(form.getValues()));
     return () => subscription.unsubscribe();
   }, [form]);
 
   return (
-    <Form {...form}>
+    <FormProvider {...form}>
       <form className="flex flex-wrap items-start gap-6">
         <UserInputs />
         <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
           <CurrentStats />
-          <section
-            aria-labelledby="goal-title"
-            className="flex flex-col gap-[18px] rounded-xl border bg-card p-5"
-          >
+          <Panel title={t('title')}>
             <GoalSetting />
             <GoalResults />
-          </section>
+          </Panel>
         </div>
       </form>
-    </Form>
+    </FormProvider>
   );
 };
 

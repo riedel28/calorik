@@ -5,6 +5,7 @@ import {
   deurenbergBodyFat,
   fatMass,
   GOAL_QUALITY_PARTITION,
+  goalStatus,
   harrisBenedictBMR,
   katchMcArdleBMR,
   leanMass,
@@ -199,5 +200,32 @@ describe('GOAL_QUALITY_PARTITION', () => {
     expect(GOAL_QUALITY_PARTITION.optimal).toEqual({ gainFatShare: 0.5, lossFatShare: 0.8 });
     expect(GOAL_QUALITY_PARTITION.moderate).toEqual({ gainFatShare: 0.7, lossFatShare: 0.7 });
     expect(GOAL_QUALITY_PARTITION.poor).toEqual({ gainFatShare: 0.8, lossFatShare: 0.6 });
+  });
+});
+
+describe('goalStatus', () => {
+  const base = { bmr: 1800, currentWeightKg: 90, dailyCalories: 2200, goalWeightKg: 85 };
+
+  it('is maintain when the goal equals the current weight', () => {
+    expect(goalStatus({ ...base, dailyCalories: 1000, goalWeightKg: 90, weeklyChangePct: 0 })).toBe(
+      'maintain',
+    );
+  });
+
+  it('is belowBmr before checking the pace', () => {
+    expect(goalStatus({ ...base, dailyCalories: 1500, weeklyChangePct: 2 })).toBe('belowBmr');
+  });
+
+  it('flags losing more than 1% of body weight per week', () => {
+    expect(goalStatus({ ...base, weeklyChangePct: 1.2 })).toBe('tooFastLoss');
+  });
+
+  it('flags gaining more than 0.5% of body weight per week', () => {
+    expect(goalStatus({ ...base, goalWeightKg: 95, weeklyChangePct: 0.6 })).toBe('tooFastGain');
+  });
+
+  it('is ok at a sustainable pace', () => {
+    expect(goalStatus({ ...base, weeklyChangePct: 0.8 })).toBe('ok');
+    expect(goalStatus({ ...base, goalWeightKg: 95, weeklyChangePct: 0.4 })).toBe('ok');
   });
 });

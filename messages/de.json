@@ -4,35 +4,24 @@
     "gender": {
       "title": "Geschlecht",
       "male": "Männlich",
-      "female": "Weiblich",
-      "error": "Bitte wählen Sie ihr Geschlecht",
-      "placeholder": "Bitte wählen Sie ihr Geschlecht"
+      "female": "Weiblich"
     },
     "age": {
-      "title": "Alter",
       "label": "Alter",
       "unit": "J.",
-      "error": "Bitte geben Sie korrektes Alter an",
-      "placeholder": "Bitte geben Sie ihr Alter ein"
+      "error": "Bitte geben Sie korrektes Alter an"
     },
     "weight": {
-      "title": "Gewicht (kg)",
-      "titleImperial": "Gewicht (lbs)",
       "label": "Gewicht",
       "unit": "kg",
-      "error": "Bitte geben Sie korrektes Gewicht an",
-      "placeholder": "Bitte geben Sie ihr Gewicht ein"
+      "error": "Bitte geben Sie korrektes Gewicht an"
     },
     "height": {
-      "title": "Größe (cm)",
-      "titleImperial": "Größe (in)",
       "label": "Größe",
       "unit": "cm",
-      "error": "Bitte geben Sie korrekte Größe an",
-      "placeholder": "Bitte geben Sie ihre Größe ein"
+      "error": "Bitte geben Sie korrekte Größe an"
     },
     "bodyFat": {
-      "title": "Körperfett (%)",
       "label": "Körperfett",
       "unit": "%",
       "error": "Bitte geben Sie einen gültigen Körperfettanteil an",
@@ -41,8 +30,6 @@
   },
   "activity": {
     "title": "Aktivität",
-    "placeholder": "Bitte wählen Sie Ihr Aktivitätslevel aus",
-    "error": "Bitte wählen Sie Ihr Aktivitätslevel aus",
     "none": "Keine",
     "noneDescription": "Sitzende Tätigkeit, Bürojob",
     "low": "Niedrig",
@@ -58,29 +45,21 @@
     "customMultiplier": {
       "title": "Multiplikator",
       "placeholder": "1,55",
-      "description": "Geben Sie einen Wert zwischen 1,0 und 2,5 ein",
       "error": "Bitte geben Sie einen Multiplikator zwischen 1,0 und 2,5 ein"
     }
   },
   "goal": {
     "title": "Ziel",
     "goalWeight": {
-      "title": "Zielgewicht (kg)",
-      "titleImperial": "Zielgewicht (lbs)",
       "label": "Zielgewicht",
       "unit": "kg",
-      "placeholder": "Geben Sie Ihr Zielgewicht ein",
       "error": "Bitte geben Sie ein gültiges Zielgewicht ein"
     },
     "daysUntilGoal": {
-      "title": "Tage bis zum Ziel",
       "label": "Tage",
-      "unit": "Tage",
-      "placeholder": "Anzahl der Tage",
       "error": "Bitte geben Sie eine gültige Anzahl von Tagen ein"
     },
     "goalDate": {
-      "title": "Zieldatum",
       "label": "Zieldatum",
       "placeholder": "Datum wählen",
       "error": "Bitte wählen Sie ein gültiges Datum"
@@ -99,13 +78,20 @@
   },
   "formula": {
     "title": "Formel",
-    "placeholder": "Bitte wählen Sie ihre Formel für die Kalorienrechnung aus",
-    "katchMcArdle": "Katch-McArdle",
-    "katchMcArdleDescription": "Basiert auf der Magermasse, genauer bei bekanntem KFA",
-    "mifflinStJeor": "Mifflin-St. Jeor",
-    "mifflinStJeorDescription": "Basiert auf Gewicht, Größe und Alter",
-    "harrisBenedict": "Harris-Benedict",
-    "harrisBenedictDescription": "Klassische Formel (Revision 1984), basiert auf Gewicht, Größe und Alter"
+    "options": {
+      "mifflin-st-jeor": {
+        "label": "Mifflin-St. Jeor",
+        "description": "Basiert auf Gewicht, Größe und Alter"
+      },
+      "harris-benedict": {
+        "label": "Harris-Benedict",
+        "description": "Klassische Formel (Revision 1984), basiert auf Gewicht, Größe und Alter"
+      },
+      "katch-mcardle": {
+        "label": "Katch-McArdle",
+        "description": "Basiert auf der Magermasse, genauer bei bekanntem KFA"
+      }
+    }
   },
   "currentStats": {
     "title": "Deine Werte",
@@ -120,11 +106,9 @@
     "missingData": "Gib Alter, Gewicht und Größe ein, um deine Werte zu sehen."
   },
   "goalResults": {
-    "title": "Zielprognose",
     "estimatedBodyFat": "Körperfett am Ziel",
     "leanMassAtGoal": "Magermasse am Ziel",
     "dailyCalories": "Tägliche Zufuhr fürs Ziel",
-    "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage.",
     "belowMaintenance": "{value} kcal/Tag unter dem Erhaltungsbedarf",
     "aboveMaintenance": "{value} kcal/Tag über dem Erhaltungsbedarf",
     "atMaintenance": "Entspricht dem Erhaltungsbedarf",
@@ -132,22 +116,22 @@
     "perWeek": "kg/Wo.",
     "ofBodyWeight": "{value} % des Körpergewichts / Wo.",
     "percentPoints": "Pp.",
-    "statusOk": "Nachhaltiges Tempo — gut durchzuhalten.",
-    "statusMaintain": "Das Ziel entspricht deinem aktuellen Gewicht — iss auf Erhaltungsniveau.",
-    "statusTooFastLoss": "Mehr als 1 % des Körpergewichts pro Woche — plane lieber mehr Zeit ein.",
-    "statusTooFastGain": "Mehr als 0,5 % Zunahme pro Woche ist überwiegend Fett.",
-    "statusMissingGoal": "Gib ein Zielgewicht und ein Datum in der Zukunft ein.",
     "trajectory": "Gewichtsverlauf",
     "today": "Heute",
-    "note": "Annahmen: 7.700 kcal pro kg Körpergewicht, Fettanteil der Veränderung je nach gewählter Prozessqualität. Keine medizinische Beratung."
+    "note": "Annahmen: 7.700 kcal pro kg Körpergewicht, Fettanteil der Veränderung je nach gewählter Prozessqualität. Keine medizinische Beratung.",
+    "status": {
+      "missingGoal": "Gib ein Zielgewicht und ein Datum in der Zukunft ein.",
+      "maintain": "Das Ziel entspricht deinem aktuellen Gewicht — iss auf Erhaltungsniveau.",
+      "belowBmr": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage.",
+      "tooFastLoss": "Mehr als 1 % des Körpergewichts pro Woche — plane lieber mehr Zeit ein.",
+      "tooFastGain": "Mehr als 0,5 % Zunahme pro Woche ist überwiegend Fett.",
+      "ok": "Nachhaltiges Tempo — gut durchzuhalten."
+    }
   },
   "units": {
-    "kcal": "kcal",
     "kcalPerDay": "kcal/Tag",
-    "kg": "kg",
-    "percent": "%"
+    "kg": "kg"
   },
-  "estimated": "gesch.",
   "page": {
     "title": "Kalorienplaner",
     "subtitle": "Berechne deinen Tagesbedarf und plane dein Zielgewicht."
