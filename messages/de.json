@@ -63,7 +63,7 @@
     }
   },
   "goal": {
-    "title": "Ihr Ziel",
+    "title": "Ziel",
     "goalWeight": {
       "title": "Zielgewicht (kg)",
       "titleImperial": "Zielgewicht (lbs)",
@@ -93,7 +93,9 @@
       "moderateDescription": "Nur Diät, kein Krafttraining (~70% Fett)",
       "poor": "Aggressiv / unkontrolliert",
       "poorDescription": "Crash-Diät oder unkontrollierter Überschuss (~60% Fettverlust / ~80% Fettzunahme)"
-    }
+    },
+    "duration": "Zeitraum",
+    "syncHint": "Ändere eins von beiden — das andere passt sich automatisch an."
   },
   "formula": {
     "title": "Formel",
@@ -106,18 +108,38 @@
     "harrisBenedictDescription": "Klassische Formel (Revision 1984), basiert auf Gewicht, Größe und Alter"
   },
   "currentStats": {
-    "title": "Aktuelle Werte",
-    "tdee": "TDEE",
+    "title": "Deine Werte",
+    "tdee": "Erhaltungsbedarf",
     "bmr": "Grundumsatz",
     "lbm": "Magermasse",
-    "fm": "Fettmasse"
+    "bodyFat": "Körperfett",
+    "bodyFatEstimated": "geschätzt",
+    "bodyFatMeasured": "deine Angabe",
+    "fatMassSub": "Fettmasse {value} kg",
+    "formulaLine": "Formel: {formula}",
+    "missingData": "Gib Alter, Gewicht und Größe ein, um deine Werte zu sehen."
   },
   "goalResults": {
     "title": "Zielprognose",
-    "estimatedBodyFat": "Geschätztes KFA",
-    "leanMassAtGoal": "Progn. Magermasse",
-    "dailyCalories": "Tägliche Kalorien",
-    "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage."
+    "estimatedBodyFat": "Körperfett am Ziel",
+    "leanMassAtGoal": "Magermasse am Ziel",
+    "dailyCalories": "Tägliche Zufuhr fürs Ziel",
+    "belowBmrWarning": "Die erforderliche Zufuhr liegt unter Ihrem Grundumsatz ({bmr} kcal) – dieses Tempo ist wahrscheinlich nicht sicher. Erwägen Sie mehr Tage.",
+    "belowMaintenance": "{value} kcal/Tag unter dem Erhaltungsbedarf",
+    "aboveMaintenance": "{value} kcal/Tag über dem Erhaltungsbedarf",
+    "atMaintenance": "Entspricht dem Erhaltungsbedarf",
+    "pace": "Tempo",
+    "perWeek": "kg/Wo.",
+    "ofBodyWeight": "{value} % des Körpergewichts / Wo.",
+    "percentPoints": "Pp.",
+    "statusOk": "Nachhaltiges Tempo — gut durchzuhalten.",
+    "statusMaintain": "Das Ziel entspricht deinem aktuellen Gewicht — iss auf Erhaltungsniveau.",
+    "statusTooFastLoss": "Mehr als 1 % des Körpergewichts pro Woche — plane lieber mehr Zeit ein.",
+    "statusTooFastGain": "Mehr als 0,5 % Zunahme pro Woche ist überwiegend Fett.",
+    "statusMissingGoal": "Gib ein Zielgewicht und ein Datum in der Zukunft ein.",
+    "trajectory": "Gewichtsverlauf",
+    "today": "Heute",
+    "note": "Annahmen: 7.700 kcal pro kg Körpergewicht, Fettanteil der Veränderung je nach gewählter Prozessqualität. Keine medizinische Beratung."
   },
   "units": {
     "kcal": "kcal",
@@ -127,9 +149,7 @@
   },
   "estimated": "gesch.",
   "page": {
-    "title": "Kalorienrechner",
-    "subtitle": "Berechnen Sie, wie viele Kalorien Sie täglich brauchen, um Ihr Zielgewicht zu erreichen.",
-    "formSectionTitle": "Ihre Informationen",
-    "formSectionSubtitle": "Wir nutzen diese Angaben, um Ihre Kalorien zu berechnen."
+    "title": "Kalorienplaner",
+    "subtitle": "Berechne deinen Tagesbedarf und plane dein Zielgewicht."
   }
 }

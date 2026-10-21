@@ -54,16 +54,17 @@ const ProjectionForm = () => {
 
   return (
     <Form {...form}>
-      <form className="space-y-4">
-        <div className="grid gap-4 lg:grid-cols-2 lg:gap-5">
-          <div className="animate-fade-up space-y-4 lg:space-y-5 [animation-delay:80ms]">
-            <UserInputs />
-            <CurrentStats />
-          </div>
-          <div className="animate-fade-up space-y-4 lg:space-y-5 [animation-delay:160ms]">
+      <form className="flex flex-wrap items-start gap-6">
+        <UserInputs />
+        <div className="flex min-w-0 flex-[999_1_560px] flex-col gap-6">
+          <CurrentStats />
+          <section
+            aria-labelledby="goal-title"
+            className="flex flex-col gap-[18px] rounded-xl border bg-card p-5"
+          >
             <GoalSetting />
             <GoalResults />
-          </div>
+          </section>
         </div>
       </form>
     </Form>

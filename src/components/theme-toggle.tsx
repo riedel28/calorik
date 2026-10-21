@@ -23,9 +23,10 @@ const ThemeToggle = () => {
   return (
     <Button
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+      className="size-[46px] rounded-lg bg-card shadow-none"
       onClick={handleToggle}
       size="icon"
-      variant="ghost"
+      variant="outline"
     >
       {mounted && isDark && <Sun className="h-5 w-5" />}
       {mounted && !isDark && <Moon className="h-5 w-5" />}

@@ -29,9 +29,14 @@ export interface ProjectionResult {
   fatMassKg: number | null;
   goalBodyFatPct: number | null;
   goalLeanMassKg: number | null;
+  goalWeightKg: number | null;
   leanMassKg: number | null;
   tdee: number | null;
+  weeklyChangeKg: number | null;
+  weightKg: number | null;
 }
+
+const DAYS_PER_WEEK = 7;
 
 const toNum = (
   value: string | undefined,
@@ -131,8 +136,14 @@ export const deriveProjection = (values: Partial<ProjectionFormValues>): Project
     fatMassKg,
     goalBodyFatPct,
     goalLeanMassKg,
+    goalWeightKg,
     leanMassKg,
     tdee,
+    weeklyChangeKg:
+      weightKg !== null && goalWeightKg !== null && days !== null
+        ? ((goalWeightKg - weightKg) / days) * DAYS_PER_WEEK
+        : null,
+    weightKg,
   };
 };
 

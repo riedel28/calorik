@@ -63,7 +63,7 @@
     }
   },
   "goal": {
-    "title": "Your Goal",
+    "title": "Goal",
     "goalWeight": {
       "title": "Goal Weight (kg)",
       "titleImperial": "Goal Weight (lbs)",
@@ -93,7 +93,9 @@
       "moderateDescription": "Diet only, no strength training (~70% fat)",
       "poor": "Aggressive / uncontrolled",
       "poorDescription": "Crash diet or uncontrolled surplus (~60% fat loss / ~80% fat gain)"
-    }
+    },
+    "duration": "Duration",
+    "syncHint": "Change either one — the other adjusts automatically."
   },
   "formula": {
     "title": "Formula",
@@ -107,18 +109,38 @@
     "harrisBenedictDescription": "Classic formula (1984 revision), based on weight, height, and age"
   },
   "currentStats": {
-    "title": "Current Stats",
-    "tdee": "TDEE",
-    "bmr": "BMR",
+    "title": "Your stats",
+    "tdee": "Maintenance (TDEE)",
+    "bmr": "Basal metabolic rate",
     "lbm": "Lean Mass",
-    "fm": "Fat Mass"
+    "bodyFat": "Body fat",
+    "bodyFatEstimated": "estimated",
+    "bodyFatMeasured": "from your input",
+    "fatMassSub": "fat mass {value} kg",
+    "formulaLine": "Formula: {formula}",
+    "missingData": "Fill in age, weight and height to see your numbers."
   },
   "goalResults": {
     "title": "Goal Projection",
-    "estimatedBodyFat": "Est. Body Fat",
-    "leanMassAtGoal": "Est. Lean Mass",
-    "dailyCalories": "Daily Calories",
-    "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
+    "estimatedBodyFat": "Body fat at goal",
+    "leanMassAtGoal": "Lean mass at goal",
+    "dailyCalories": "Eat per day to reach your goal",
+    "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days.",
+    "belowMaintenance": "{value} kcal/day below maintenance",
+    "aboveMaintenance": "{value} kcal/day above maintenance",
+    "atMaintenance": "Same as maintenance",
+    "pace": "Pace",
+    "perWeek": "kg/wk",
+    "ofBodyWeight": "{value}% of body weight / wk",
+    "percentPoints": "pp",
+    "statusOk": "Sustainable pace — easy to keep up.",
+    "statusMaintain": "Target equals your current weight — eat at maintenance.",
+    "statusTooFastLoss": "Faster than 1% of body weight per week — consider giving yourself more time.",
+    "statusTooFastGain": "Gaining faster than 0.5% of body weight per week adds mostly fat.",
+    "statusMissingGoal": "Enter a target weight and a date in the future.",
+    "trajectory": "Weight trajectory",
+    "today": "Today",
+    "note": "Estimates assume 7,700 kcal per kg of body weight and a fat share of the change based on the chosen process quality. Not medical advice."
   },
   "units": {
     "kcal": "kcal",
@@ -128,9 +150,7 @@
   },
   "estimated": "est.",
   "page": {
-    "title": "Calorie Calculator",
-    "subtitle": "Calculate how many calories you need per day to reach your goal weight.",
-    "formSectionTitle": "Your Information",
-    "formSectionSubtitle": "We'll use this information to tailor your calories."
+    "title": "Calorie Planner",
+    "subtitle": "Estimate your daily energy needs and plan a target weight."
   }
 }

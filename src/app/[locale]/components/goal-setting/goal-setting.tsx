@@ -10,246 +10,189 @@ import {
   startOfToday,
 } from 'date-fns';
 import { de, ru } from 'date-fns/locale';
-import { CalendarIcon } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field';
-import { InputWithSuffix } from '@/components/ui/input-with-suffix';
+import { FieldError, FieldLegend, FieldSet } from '@/components/ui/field';
+import { OptionDot, OptionRadio, OptionText } from '@/components/ui/option-radio';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import {
-  Select,
-  SelectItem,
-  SelectList,
-  SelectPopup,
-  SelectPortal,
-  SelectPositioner,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
+import { RadioGroup } from '@/components/ui/radio-group';
 import { LIMITS } from '@/lib/calculations';
-import { cn } from '@/lib/utils';
 
-import type { ProjectionFormValues } from '../projection-form/projection-form';
+import { FIELD_LABEL_CLASS, NumberField } from '../projection-form/number-field';
+import type { ProjectionFormValues } from '../projection-form/schema';
 
 type MessageKey = Parameters<ReturnType<typeof useTranslations>>[0];
 
 const DATE_FNS_LOCALES: Record<string, Locale> = { de, ru };
+const GOAL_QUALITIES = ['optimal', 'moderate', 'poor'] as const;
+
+const INNER_LABEL_CLASS =
+  'pointer-events-none absolute top-1.5 left-3 font-semibold text-[11px] text-muted-foreground uppercase tracking-[0.04em]';
+const INNER_FIELD_CLASS =
+  'h-12 w-full rounded-[10px] bg-card px-3 pt-[17px] text-left font-medium tabular-nums focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-ring';
 
 const GoalSetting = () => {
   const t = useTranslations('goal');
-  const tErrors = useTranslations();
+  const tRoot = useTranslations();
   const locale = useLocale();
   const dateLocale = DATE_FNS_LOCALES[locale];
-  const { control, setValue } = useFormContext<ProjectionFormValues>();
-
-  const goalQualityOptions = [
-    {
-      description: t('quality.optimalDescription'),
-      label: t('quality.optimal'),
-      value: 'optimal',
-    },
-    {
-      description: t('quality.moderateDescription'),
-      label: t('quality.moderate'),
-      value: 'moderate',
-    },
-    {
-      description: t('quality.poorDescription'),
-      label: t('quality.poor'),
-      value: 'poor',
-    },
-  ];
+  const { control, formState, setValue } = useFormContext<ProjectionFormValues>();
+  const durationErrors = [formState.errors.daysUntilGoal, formState.errors.goalDate]
+    .map((error) => error?.message)
+    .filter((message): message is string => Boolean(message));
 
   return (
-    <section className="rounded-xl border bg-card p-5 sm:p-6">
-      <div className="mb-5">
-        <h2 className="font-display font-semibold text-foreground text-lg tracking-tight">
-          {t('title')}
-        </h2>
-      </div>
+    <>
+      <h2 className="font-semibold text-[17px]" id="goal-title">
+        {t('title')}
+      </h2>
 
-      <FieldGroup className="gap-3">
-        <div className="grid grid-cols-2 gap-2 md:grid-cols-[1fr_0.75fr_1.25fr]">
-          <Controller
-            control={control}
-            name="goalWeight"
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('goalWeight.label')}</FieldLabel>
-                <InputWithSuffix
-                  {...field}
-                  aria-invalid={fieldState.invalid}
-                  className="h-9"
-                  data-testid="goal-weight"
-                  id={field.name}
-                  inputMode="numeric"
-                  onChange={(event) => {
-                    const numericValue = event.target.value.trim();
-                    field.onChange(numericValue === '' ? '' : numericValue);
-                  }}
-                  placeholder="0"
-                  suffix={t('goalWeight.unit')}
-                  type="number"
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
-                  </FieldError>
-                )}
-              </Field>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="daysUntilGoal"
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('daysUntilGoal.label')}</FieldLabel>
-                <InputWithSuffix
-                  {...field}
-                  aria-invalid={fieldState.invalid}
-                  className="h-9"
-                  data-testid="days-until-goal"
-                  id={field.name}
-                  inputMode="numeric"
-                  onChange={(event) => {
-                    const numericValue = event.target.value.trim();
-                    field.onChange(numericValue === '' ? '' : numericValue);
-                    const days = Number(numericValue);
-                    const isValidDays =
-                      numericValue !== '' &&
-                      Number.isInteger(days) &&
-                      days >= LIMITS.daysUntilGoal.min &&
-                      days <= LIMITS.daysUntilGoal.max;
-                    setValue(
-                      'goalDate',
-                      isValidDays ? format(addDays(startOfToday(), days), 'yyyy-MM-dd') : '',
-                      { shouldValidate: true },
-                    );
-                  }}
-                  placeholder="0"
-                  suffix={t('daysUntilGoal.unit')}
-                  type="number"
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                    {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
-                  </FieldError>
-                )}
-              </Field>
-            )}
-          />
-
-          <Controller
-            control={control}
-            name="goalDate"
-            render={({ field, fieldState }) => {
-              const selectedDate = field.value ? parseISO(field.value) : undefined;
-              return (
-                <Field
-                  className="col-span-2 min-w-0 md:col-span-1"
-                  data-invalid={fieldState.invalid}
-                >
-                  <FieldLabel>{t('goalDate.label')}</FieldLabel>
-                  <Popover>
-                    <PopoverTrigger
-                      render={
-                        <Button
-                          className={cn(
-                            'h-9 w-full justify-start overflow-hidden bg-transparent text-left font-normal shadow-none p-3',
-                            !field.value && 'text-muted-foreground',
-                          )}
-                          data-testid="goal-date"
-                          variant="outline"
-                        />
-                      }
-                    >
-                      <CalendarIcon className="mr-1 h-4 w-4 text-muted-foreground" />
-                      <span className="truncate">
-                        {field.value
-                          ? format(selectedDate as Date, 'PP', { locale: dateLocale })
-                          : t('goalDate.placeholder')}
-                      </span>
-                    </PopoverTrigger>
-                    <PopoverContent align="start" className="w-auto overflow-hidden p-0">
-                      <Calendar
-                        defaultMonth={selectedDate}
-                        disabled={(date) => isBefore(date, addDays(startOfToday(), 1))}
-                        locale={dateLocale}
-                        mode="single"
-                        onSelect={(date) => {
-                          field.onChange(date ? format(date, 'yyyy-MM-dd') : '');
-                          setValue(
-                            'daysUntilGoal',
-                            date ? String(differenceInCalendarDays(date, startOfToday())) : '',
-                            { shouldValidate: true },
-                          );
-                        }}
-                        selected={selectedDate}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  {fieldState.invalid && (
-                    <FieldError errors={fieldState.error ? [fieldState.error] : []}>
-                      {fieldState.error?.message && tErrors(fieldState.error.message as MessageKey)}
-                    </FieldError>
-                  )}
-                </Field>
-              );
-            }}
-          />
-        </div>
-
-        <Controller
-          control={control}
-          name="goalQuality"
-          render={({ field, fieldState }) => {
-            const selectedOption = goalQualityOptions.find((opt) => opt.value === field.value);
-            return (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor={field.name}>{t('quality.label')}</FieldLabel>
-                <Select onValueChange={field.onChange} value={field.value}>
-                  <SelectTrigger
-                    aria-invalid={fieldState.invalid}
-                    className="h-9"
-                    data-testid="goal-quality-select"
-                    id={field.name}
-                  >
-                    <SelectValue>{selectedOption?.label}</SelectValue>
-                  </SelectTrigger>
-                  <SelectPortal>
-                    <SelectPositioner>
-                      <SelectPopup>
-                        <SelectList>
-                          {goalQualityOptions.map((item) => (
-                            <SelectItem
-                              data-testid={`goal-quality-${item.value}`}
-                              key={item.value}
-                              value={item.value}
-                            >
-                              <div className="flex flex-col items-start py-0.5">
-                                <span>{item.label}</span>
-                                <span className="mt-0.5 text-muted-foreground text-xs">
-                                  {item.description}
-                                </span>
-                              </div>
-                            </SelectItem>
-                          ))}
-                        </SelectList>
-                      </SelectPopup>
-                    </SelectPositioner>
-                  </SelectPortal>
-                </Select>
-              </Field>
-            );
-          }}
+      <div className="flex flex-wrap items-start gap-3.5">
+        <NumberField
+          className="flex-[1_1_150px]"
+          label={t('goalWeight.label')}
+          name="goalWeight"
+          step="0.1"
+          suffix={t('goalWeight.unit')}
         />
-      </FieldGroup>
-    </section>
+
+        <fieldset className="flex min-w-0 flex-[2_1_300px] flex-col gap-2">
+          <legend className={`mb-2 ${FIELD_LABEL_CLASS}`}>{t('duration')}</legend>
+          <div className="flex items-center gap-2 rounded-[14px] border bg-secondary p-1">
+            <Controller
+              control={control}
+              name="daysUntilGoal"
+              render={({ field, fieldState }) => (
+                <div className="relative min-w-0 flex-1">
+                  <label className={INNER_LABEL_CLASS} htmlFor={field.name}>
+                    {t('daysUntilGoal.label')}
+                  </label>
+                  <input
+                    {...field}
+                    aria-invalid={fieldState.invalid}
+                    className={`${INNER_FIELD_CLASS} text-[17px] [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none`}
+                    id={field.name}
+                    inputMode="numeric"
+                    onChange={(event) => {
+                      const value = event.target.value.trim();
+                      field.onChange(value);
+                      const days = Number(value);
+                      const isValidDays =
+                        value !== '' &&
+                        Number.isInteger(days) &&
+                        days >= LIMITS.daysUntilGoal.min &&
+                        days <= LIMITS.daysUntilGoal.max;
+                      setValue(
+                        'goalDate',
+                        isValidDays ? format(addDays(startOfToday(), days), 'yyyy-MM-dd') : '',
+                        { shouldValidate: true },
+                      );
+                    }}
+                    type="number"
+                  />
+                </div>
+              )}
+            />
+
+            <span className="flex text-primary">
+              <svg
+                aria-hidden="true"
+                fill="none"
+                height="22"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+                width="22"
+              >
+                <path d="M4 9h15l-4-4M20 15H5l4 4" />
+              </svg>
+            </span>
+
+            <Controller
+              control={control}
+              name="goalDate"
+              render={({ field }) => {
+                const selectedDate = field.value ? parseISO(field.value) : undefined;
+                return (
+                  <div className="relative min-w-0 flex-[1.4_1_0]">
+                    <span className={INNER_LABEL_CLASS} id="goal-date-label">
+                      {t('goalDate.label')}
+                    </span>
+                    <Popover>
+                      <PopoverTrigger
+                        aria-labelledby="goal-date-label goal-date-value"
+                        className={`${INNER_FIELD_CLASS} cursor-pointer truncate text-[15px]`}
+                      >
+                        <span
+                          className={selectedDate ? undefined : 'text-muted-foreground'}
+                          id="goal-date-value"
+                        >
+                          {selectedDate
+                            ? format(selectedDate, 'PP', { locale: dateLocale })
+                            : t('goalDate.placeholder')}
+                        </span>
+                      </PopoverTrigger>
+                      <PopoverContent align="end" className="w-auto overflow-hidden p-0">
+                        <Calendar
+                          defaultMonth={selectedDate}
+                          disabled={(date) => isBefore(date, addDays(startOfToday(), 1))}
+                          locale={dateLocale}
+                          mode="single"
+                          onSelect={(date) => {
+                            field.onChange(date ? format(date, 'yyyy-MM-dd') : '');
+                            setValue(
+                              'daysUntilGoal',
+                              date ? String(differenceInCalendarDays(date, startOfToday())) : '',
+                              { shouldValidate: true },
+                            );
+                          }}
+                          selected={selectedDate}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                );
+              }}
+            />
+          </div>
+          {durationErrors.map((message) => (
+            <FieldError key={message}>{tRoot(message as MessageKey)}</FieldError>
+          ))}
+        </fieldset>
+      </div>
+      <p className="-mt-2.5 text-[13px] text-muted-foreground">{t('syncHint')}</p>
+
+      <Controller
+        control={control}
+        name="goalQuality"
+        render={({ field }) => (
+          <FieldSet className="gap-2">
+            <FieldLegend className={FIELD_LABEL_CLASS} variant="label">
+              {t('quality.label')}
+            </FieldLegend>
+            <RadioGroup
+              className="flex flex-col gap-1.5"
+              onValueChange={field.onChange}
+              value={field.value}
+            >
+              {GOAL_QUALITIES.map((quality) => (
+                <OptionRadio key={quality} value={quality}>
+                  <OptionDot />
+                  <OptionText
+                    description={t(`quality.${quality}Description`)}
+                    label={t(`quality.${quality}`)}
+                  />
+                </OptionRadio>
+              ))}
+            </RadioGroup>
+          </FieldSet>
+        )}
+      />
+    </>
   );
 };
 

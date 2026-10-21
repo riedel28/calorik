@@ -13,7 +13,7 @@ const InputWithSuffix = forwardRef<HTMLInputElement, InputWithSuffixProps>(
     <div className="relative flex items-center">
       <input
         className={cn(
-          'flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm [appearance:textfield] file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
+          'flex h-11 w-full rounded-lg border border-input bg-secondary px-3.5 font-medium text-[17px] tabular-nums [appearance:textfield] file:border-0 file:bg-transparent file:font-medium file:text-sm placeholder:font-normal placeholder:text-[15px] placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:-outline-offset-1 focus-visible:outline-ring disabled:cursor-not-allowed disabled:opacity-50 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none',
           suffix && 'pr-12',
           className,
         )}
@@ -22,7 +22,7 @@ const InputWithSuffix = forwardRef<HTMLInputElement, InputWithSuffixProps>(
         {...props}
       />
       {suffix && (
-        <span className="pointer-events-none absolute right-3 select-none text-muted-foreground text-sm">
+        <span className="pointer-events-none absolute right-3.5 select-none text-[13px] text-muted-foreground">
           {suffix}
         </span>
       )}

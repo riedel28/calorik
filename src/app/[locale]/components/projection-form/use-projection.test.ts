@@ -31,8 +31,11 @@ describe('deriveProjection', () => {
       fatMassKg: null,
       goalBodyFatPct: null,
       goalLeanMassKg: null,
+      goalWeightKg: null,
       leanMassKg: null,
       tdee: null,
+      weeklyChangeKg: null,
+      weightKg: null,
     });
   });
 
@@ -122,6 +125,8 @@ describe('deriveProjection', () => {
     // 80 * (1 - 0.18125)
     expect(result.goalLeanMassKg).toBeCloseTo(65.5);
     expect(result.dailyCaloriesBelowBmr).toBe(false);
+    // -10 kg over 100 days
+    expect(result.weeklyChangeKg).toBeCloseTo(-0.7);
   });
 
   it('uses the loss fat share of the selected goal quality', () => {
