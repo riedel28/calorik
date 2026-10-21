@@ -1,8 +1,9 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { NextIntlClientProvider } from 'next-intl';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import type { ReactNode } from 'react';
+
 import Header from '@/app/[locale]/components/header/header';
 import { routing } from '@/i18n/routing';
 
@@ -15,9 +16,6 @@ export const metadata: Metadata = {
   title: 'Calorik',
 };
 
-const isSupportedLocale = (value: string): value is (typeof routing.locales)[number] =>
-  routing.locales.includes(value as (typeof routing.locales)[number]);
-
 export default async function LocaleLayout({
   children,
   params,
@@ -26,24 +24,18 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-
-  // Validate that the incoming `locale` parameter is valid
-  if (!(locale && isSupportedLocale(locale))) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   // Enable static rendering
   setRequestLocale(locale);
 
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
-
   return (
-    <NextIntlClientProvider key={locale} locale={locale} messages={messages}>
-      <div className="flex min-h-screen flex-col text-foreground">
+    <NextIntlClientProvider>
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-7 px-[clamp(16px,4vw,40px)] pt-7 pb-14">
         <Header />
-        <main className="flex-1 pt-14">
-          <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-10">{children}</div>
-        </main>
+        <main>{children}</main>
       </div>
     </NextIntlClientProvider>
   );

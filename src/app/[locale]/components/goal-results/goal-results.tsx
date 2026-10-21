@@ -1,84 +1,135 @@
 'use client';
 
-import { TriangleAlert } from 'lucide-react';
-import { useFormatter, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import type { GoalStatus } from '@/lib/calculations';
+import { cn } from '@/lib/utils';
 
-import { useProjection } from '../projection-form/use-projection';
+import { useNumberFormat } from '../projection-form/use-number-format';
+import { type GoalProjection, useProjection } from '../projection-form/use-projection';
+import { StatTile } from '../stat-tile/stat-tile';
+import { WeightTrajectory } from './weight-trajectory';
+
+const DASH = '—';
+const ICON_CHECK = 'M8 12.5l2.8 2.8L16.5 9.5';
+const ICON_ALERT = 'M12 7.5v5.5M12 16.5v.01';
+const OK_STATUSES: ReadonlySet<GoalStatus> = new Set(['maintain', 'ok']);
+
+const StatusNote = ({ isOk, text }: { isOk: boolean; text: string }) => (
+  <div
+    className={cn(
+      'flex items-start gap-2.5 rounded-lg px-3.5 py-3',
+      isOk ? 'bg-ok-soft text-ok' : 'bg-warn-soft text-warn',
+    )}
+    role="status"
+  >
+    <svg
+      aria-hidden="true"
+      className="mt-px shrink-0"
+      fill="none"
+      height="18"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2.2"
+      viewBox="0 0 24 24"
+      width="18"
+    >
+      <circle cx="12" cy="12" r="9" />
+      <path d={isOk ? ICON_CHECK : ICON_ALERT} />
+    </svg>
+    <span className="font-medium text-sm leading-[1.45]">{text}</span>
+  </div>
+);
 
 const GoalResults = () => {
   const t = useTranslations('goalResults');
   const tUnits = useTranslations('units');
-  const tRoot = useTranslations();
-  const format = useFormatter();
-  const {
-    bmr,
-    bodyFatIsEstimated,
-    dailyCalories,
-    dailyCaloriesBelowBmr,
-    goalBodyFatPct,
-    goalLeanMassKg,
-  } = useProjection();
+  const n = useNumberFormat();
+  const { goal } = useProjection();
+  const kg = tUnits('kg');
 
-  const formatDecimal = (value: number, isEstimated: boolean) =>
-    `${isEstimated ? '~' : ''}${format.number(value, {
-      maximumFractionDigits: 1,
-      minimumFractionDigits: 1,
-    })}`;
-
-  const results = [
-    {
-      caption: bodyFatIsEstimated && goalBodyFatPct !== null ? tRoot('estimated') : null,
-      label: t('estimatedBodyFat'),
-      unit: tUnits('percent'),
-      value: goalBodyFatPct === null ? '—' : formatDecimal(goalBodyFatPct, bodyFatIsEstimated),
-    },
-    {
-      caption: bodyFatIsEstimated && goalLeanMassKg !== null ? tRoot('estimated') : null,
-      label: t('leanMassAtGoal'),
-      unit: tUnits('kg'),
-      value: goalLeanMassKg === null ? '—' : formatDecimal(goalLeanMassKg, bodyFatIsEstimated),
-    },
-    {
-      caption: null,
-      label: t('dailyCalories'),
-      unit: tUnits('kcalPerDay'),
-      value:
-        dailyCalories === null
-          ? '—'
-          : format.number(Math.round(dailyCalories), { useGrouping: false }),
-    },
-  ];
+  const maintenanceLine = (projection: GoalProjection) => {
+    const diff = Math.round(projection.caloriesVsTdee / 10) * 10;
+    const value = n.kcal(Math.abs(diff));
+    if (diff === 0) {
+      return t('atMaintenance');
+    }
+    return diff < 0 ? t('belowMaintenance', { value }) : t('aboveMaintenance', { value });
+  };
 
   return (
-    <Card className="shadow-none">
-      <CardHeader className="px-5 pt-5 pb-3 sm:px-6">
-        <CardTitle className="font-display text-lg tracking-tight">{t('title')}</CardTitle>
-      </CardHeader>
-      <CardContent className="px-5 pb-5 sm:px-6 sm:pb-6">
-        <div className="grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-3">
-          {results.map((result) => (
-            <div key={result.label}>
-              <p className="font-medium text-[13px] text-muted-foreground">{result.label}</p>
-              <p className="mt-1 font-display font-semibold text-2xl text-foreground tabular-nums tracking-tight">
-                {result.value}
-                <span className="ml-1 font-normal font-sans text-muted-foreground text-sm">
-                  {result.unit}
-                  {result.caption && ` (${result.caption})`}
-                </span>
-              </p>
+    <div className="flex flex-col gap-[18px]">
+      <div className="flex flex-col gap-3.5 rounded-[14px] bg-secondary p-4">
+        <div className="flex flex-wrap items-end justify-between gap-x-4 gap-y-1.5">
+          <div className="flex flex-col gap-1">
+            <span className="font-semibold text-muted-foreground text-xs">
+              {t('dailyCalories')}
+            </span>
+            <div className="flex items-baseline gap-2">
+              <span className="font-bold text-4xl text-accent-foreground tabular-nums leading-[1.05] tracking-[-0.02em]">
+                {goal ? n.kcalRounded(goal.dailyCalories) : DASH}
+              </span>
+              <span className="font-semibold text-muted-foreground text-sm">
+                {tUnits('kcalPerDay')}
+              </span>
             </div>
-          ))}
+          </div>
+          <span className="pb-1 font-medium text-[13px] text-muted-foreground">
+            {goal ? maintenanceLine(goal) : ''}
+          </span>
         </div>
-        {dailyCaloriesBelowBmr && bmr !== null && (
-          <p className="mt-5 flex items-start gap-2 rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 text-amber-800 text-sm dark:text-amber-200">
-            <TriangleAlert aria-hidden="true" className="mt-0.5 h-4 w-4 shrink-0" />
-            {t('belowBmrWarning', { bmr: Math.round(bmr) })}
-          </p>
-        )}
-      </CardContent>
-    </Card>
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+          <StatTile
+            className="bg-card"
+            label={t('estimatedBodyFat')}
+            size="md"
+            sub={goal ? `${n.signed(goal.bodyFatChangePct)} ${t('percentPoints')}` : ''}
+            value={goal ? n.approx(`${n.fixed(goal.bodyFatPct)}%`, goal.bodyFatIsEstimated) : DASH}
+          />
+          <StatTile
+            className="bg-card"
+            label={t('leanMassAtGoal')}
+            size="md"
+            sub={goal ? `${n.signed(goal.leanMassChangeKg)} ${kg}` : ''}
+            value={
+              goal ? n.approx(`${n.fixed(goal.leanMassKg)} ${kg}`, goal.bodyFatIsEstimated) : DASH
+            }
+          />
+          <StatTile
+            className="bg-card"
+            label={t('pace')}
+            size="md"
+            sub={goal ? t('ofBodyWeight', { value: n.fixed(goal.weeklyChangePct, 2) }) : ''}
+            value={goal ? `${n.signed(goal.weeklyChangeKg, 2)} ${t('perWeek')}` : DASH}
+          />
+        </div>
+      </div>
+
+      {goal ? (
+        <StatusNote
+          isOk={OK_STATUSES.has(goal.status)}
+          text={t(`status.${goal.status}`, { bmr: n.kcal(goal.bmr) })}
+        />
+      ) : (
+        <StatusNote isOk={false} text={t('status.missingGoal')} />
+      )}
+
+      {goal && (
+        <div className="flex flex-col gap-2.5">
+          <span className="font-semibold text-[13px] text-muted-foreground">{t('trajectory')}</span>
+          <WeightTrajectory
+            days={goal.days}
+            goalKg={goal.goalWeightKg}
+            startKg={goal.currentWeightKg}
+            todayLabel={t('today')}
+            unit={kg}
+          />
+        </div>
+      )}
+
+      <p className="text-muted-foreground text-xs leading-normal">{t('note')}</p>
+    </div>
   );
 };
 

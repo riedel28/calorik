@@ -1,12 +1,13 @@
-import { addDays, format, parseISO } from 'date-fns';
+import { addDays, parseISO } from 'date-fns';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import {
+  dropExpiredGoalDate,
   FORM_STORAGE_KEY,
   loadStoredFormValues,
-  reconcileGoalTimeline,
   saveFormValues,
 } from './form-storage';
+import { toIsoDate } from './goal-timeline';
 import type { ProjectionFormValues } from './schema';
 
 const validValues: ProjectionFormValues = {
@@ -14,7 +15,6 @@ const validValues: ProjectionFormValues = {
   age: '30',
   bodyFat: '25',
   customMultiplier: '',
-  daysUntilGoal: '100',
   formula: 'mifflin-st-jeor',
   gender: 'male',
   goalDate: '',
@@ -70,61 +70,38 @@ describe('form storage', () => {
     expect(loadStoredFormValues()).toEqual(stored);
   });
 
-  it('reconciles a stale stored goal date on restore', () => {
-    const stored = {
-      ...validValues,
-      daysUntilGoal: '30',
-      goalDate: format(addDays(today, -5), 'yyyy-MM-dd'),
-    };
+  it('clears an expired stored goal date on restore', () => {
+    const stored = { ...validValues, goalDate: '2000-01-01' };
     localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify(stored));
 
-    expect(loadStoredFormValues()).toEqual({ ...stored, daysUntilGoal: '', goalDate: '' });
+    expect(loadStoredFormValues()).toEqual({ ...stored, goalDate: '' });
+  });
+
+  it('drops the legacy daysUntilGoal field from older snapshots', () => {
+    localStorage.setItem(FORM_STORAGE_KEY, JSON.stringify({ ...validValues, daysUntilGoal: '30' }));
+
+    expect(loadStoredFormValues()).toEqual(validValues);
   });
 });
 
-describe('reconcileGoalTimeline', () => {
+describe('dropExpiredGoalDate', () => {
   it('returns values unchanged when goalDate is empty', () => {
-    expect(reconcileGoalTimeline(validValues, today)).toEqual(validValues);
+    expect(dropExpiredGoalDate(validValues, today)).toEqual(validValues);
   });
 
-  it('recomputes daysUntilGoal from a future goalDate', () => {
-    const values = { ...validValues, goalDate: format(addDays(today, 30), 'yyyy-MM-dd') };
+  it('keeps a future goal date', () => {
+    const values = { ...validValues, goalDate: toIsoDate(addDays(today, 30)) };
 
-    expect(reconcileGoalTimeline(values, today)).toEqual({ ...values, daysUntilGoal: '30' });
+    expect(dropExpiredGoalDate(values, today)).toEqual(values);
   });
 
-  it('yields daysUntilGoal of 1 for tomorrow', () => {
-    const values = { ...validValues, goalDate: format(addDays(today, 1), 'yyyy-MM-dd') };
-
-    expect(reconcileGoalTimeline(values, today)).toEqual({ ...values, daysUntilGoal: '1' });
-  });
-
-  it('clears both fields when goalDate is today', () => {
-    const values = { ...validValues, goalDate: format(today, 'yyyy-MM-dd') };
-
-    expect(reconcileGoalTimeline(values, today)).toEqual({
-      ...values,
-      daysUntilGoal: '',
-      goalDate: '',
-    });
-  });
-
-  it('clears both fields when goalDate is in the past', () => {
-    const values = { ...validValues, goalDate: format(addDays(today, -10), 'yyyy-MM-dd') };
-
-    expect(reconcileGoalTimeline(values, today)).toEqual({
-      ...values,
-      daysUntilGoal: '',
-      goalDate: '',
-    });
-  });
-
-  it('clears both fields when goalDate is not a valid date', () => {
-    const values = { ...validValues, goalDate: 'not-a-date' };
-
-    expect(reconcileGoalTimeline(values, today)).toEqual({
-      ...values,
-      daysUntilGoal: '',
+  it.each([
+    ['today', toIsoDate(today)],
+    ['in the past', toIsoDate(addDays(today, -10))],
+    ['not a valid date', 'not-a-date'],
+  ])('clears a goal date that is %s', (_label, goalDate) => {
+    expect(dropExpiredGoalDate({ ...validValues, goalDate }, today)).toEqual({
+      ...validValues,
       goalDate: '',
     });
   });

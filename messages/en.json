@@ -4,35 +4,24 @@
     "gender": {
       "title": "Gender",
       "male": "Male",
-      "female": "Female",
-      "error": "Please choose your gender",
-      "placeholder": "Please choose your gender"
+      "female": "Female"
     },
     "age": {
-      "title": "Age (years)",
       "label": "Age",
       "unit": "yrs",
-      "error": "Please enter valid age",
-      "placeholder": "Please enter your age"
+      "error": "Please enter valid age"
     },
     "weight": {
-      "title": "Weight (kg)",
-      "titleImperial": "Weight (lbs)",
       "label": "Weight",
       "unit": "kg",
-      "error": "Please enter valid weight",
-      "placeholder": "Please enter your weight"
+      "error": "Please enter valid weight"
     },
     "height": {
-      "title": "Height (cm)",
-      "titleImperial": "Height (in)",
       "label": "Height",
       "unit": "cm",
-      "error": "Please enter valid height",
-      "placeholder": "Please enter your height"
+      "error": "Please enter valid height"
     },
     "bodyFat": {
-      "title": "Body Fat (%)",
       "label": "Body Fat",
       "unit": "%",
       "error": "Please enter valid body fat percentage",
@@ -41,8 +30,6 @@
   },
   "activity": {
     "title": "Activity level",
-    "placeholder": "Please choose your activity level",
-    "error": "Please choose your activity level",
     "none": "None",
     "noneDescription": "Sedentary, desk job",
     "low": "Low",
@@ -58,29 +45,21 @@
     "customMultiplier": {
       "title": "Multiplier",
       "placeholder": "1.55",
-      "description": "Enter a value between 1.0 and 2.5",
       "error": "Please enter a multiplier between 1.0 and 2.5"
     }
   },
   "goal": {
-    "title": "Your Goal",
+    "title": "Goal",
     "goalWeight": {
-      "title": "Goal Weight (kg)",
-      "titleImperial": "Goal Weight (lbs)",
       "label": "Goal Weight",
       "unit": "kg",
-      "placeholder": "Enter your target weight",
       "error": "Please enter a valid goal weight"
     },
     "daysUntilGoal": {
-      "title": "Days Until Goal",
       "label": "Days",
-      "unit": "days",
-      "placeholder": "Number of days",
       "error": "Please enter a valid number of days"
     },
     "goalDate": {
-      "title": "Goal Date",
       "label": "Goal Date",
       "placeholder": "Pick a date",
       "error": "Please select a valid date"
@@ -93,44 +72,68 @@
       "moderateDescription": "Diet only, no strength training (~70% fat)",
       "poor": "Aggressive / uncontrolled",
       "poorDescription": "Crash diet or uncontrolled surplus (~60% fat loss / ~80% fat gain)"
-    }
+    },
+    "duration": "Duration",
+    "syncHint": "Change either one — the other adjusts automatically."
   },
   "formula": {
     "title": "Formula",
-    "placeholder": "Please choose your formula to calculate your calories",
-    "error": "Please choose a formula",
-    "katchMcArdle": "Katch-McArdle",
-    "katchMcArdleDescription": "Based on lean body mass, more precise with a known body fat %",
-    "mifflinStJeor": "Mifflin-St. Jeor",
-    "mifflinStJeorDescription": "Based on weight, height, and age",
-    "harrisBenedict": "Harris-Benedict",
-    "harrisBenedictDescription": "Classic formula (1984 revision), based on weight, height, and age"
+    "options": {
+      "mifflin-st-jeor": {
+        "label": "Mifflin-St. Jeor",
+        "description": "Based on weight, height, and age"
+      },
+      "harris-benedict": {
+        "label": "Harris-Benedict",
+        "description": "Classic formula (1984 revision), based on weight, height, and age"
+      },
+      "katch-mcardle": {
+        "label": "Katch-McArdle",
+        "description": "Based on lean body mass, more precise with a known body fat %"
+      }
+    }
   },
   "currentStats": {
-    "title": "Current Stats",
-    "tdee": "TDEE",
-    "bmr": "BMR",
+    "title": "Your stats",
+    "tdee": "Maintenance (TDEE)",
+    "bmr": "Basal metabolic rate",
     "lbm": "Lean Mass",
-    "fm": "Fat Mass"
+    "bodyFat": "Body fat",
+    "bodyFatEstimated": "estimated",
+    "bodyFatMeasured": "from your input",
+    "fatMassSub": "fat mass {value} kg",
+    "formulaLine": "Formula: {formula}",
+    "missingData": "Fill in age, weight and height to see your numbers."
   },
   "goalResults": {
-    "title": "Goal Projection",
-    "estimatedBodyFat": "Est. Body Fat",
-    "leanMassAtGoal": "Est. Lean Mass",
-    "dailyCalories": "Daily Calories",
-    "belowBmrWarning": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days."
+    "estimatedBodyFat": "Body fat at goal",
+    "leanMassAtGoal": "Lean mass at goal",
+    "dailyCalories": "Eat per day to reach your goal",
+    "belowMaintenance": "{value} kcal/day below maintenance",
+    "aboveMaintenance": "{value} kcal/day above maintenance",
+    "atMaintenance": "Same as maintenance",
+    "pace": "Pace",
+    "perWeek": "kg/wk",
+    "ofBodyWeight": "{value}% of body weight / wk",
+    "percentPoints": "pp",
+    "trajectory": "Weight trajectory",
+    "today": "Today",
+    "note": "Estimates assume 7,700 kcal per kg of body weight and a fat share of the change based on the chosen process quality. Not medical advice.",
+    "status": {
+      "missingGoal": "Enter a target weight and a date in the future.",
+      "maintain": "Target equals your current weight — eat at maintenance.",
+      "belowBmr": "Required intake is below your BMR ({bmr} kcal) — this pace is likely unsafe. Consider more days.",
+      "tooFastLoss": "Faster than 1% of body weight per week — consider giving yourself more time.",
+      "tooFastGain": "Gaining faster than 0.5% of body weight per week adds mostly fat.",
+      "ok": "Sustainable pace — easy to keep up."
+    }
   },
   "units": {
-    "kcal": "kcal",
     "kcalPerDay": "kcal/day",
-    "kg": "kg",
-    "percent": "%"
+    "kg": "kg"
   },
-  "estimated": "est.",
   "page": {
-    "title": "Calorie Calculator",
-    "subtitle": "Calculate how many calories you need per day to reach your goal weight.",
-    "formSectionTitle": "Your Information",
-    "formSectionSubtitle": "We'll use this information to tailor your calories."
+    "title": "Calorie Planner",
+    "subtitle": "Estimate your daily energy needs and plan a target weight."
   }
 }
