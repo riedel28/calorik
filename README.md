@@ -22,7 +22,7 @@ Enter your body data and a goal weight — Calorik calculates your BMR and TDEE,
 
 ## Demo
 
-You can play around with the app here: [https://calorik-riedel28.vercel.app/en](https://calorik-riedel28.vercel.app/en)
+You can play around with the app here: [https://calorik.vercel.app/en](https://calorik.vercel.app/en)
 
 ## Setup
 
